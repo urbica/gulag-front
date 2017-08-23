@@ -5,6 +5,9 @@ import { injectGlobal } from 'styled-components';
 injectGlobal`
   * {
     box-sizing: border-box;
+  }
+
+  body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }

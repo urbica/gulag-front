@@ -11,7 +11,7 @@ const initState = {
 
 const LOAD_DATA = 'LOAD_DATA';
 
-export const loadData = data => ({ type: LOAD_DATA, payload: data });
+const loadData = data => ({ type: LOAD_DATA, payload: data });
 
 export const fetchData = () => (
   (dispatch) => {

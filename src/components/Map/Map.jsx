@@ -1,11 +1,12 @@
 /* global mapboxgl */
-/* eslint-disable react/require-default-props */
 import React, { PureComponent } from 'react';
 // import ReactDom from 'react-dom';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 // import { withRouter } from 'react-router-dom';
-import styled from 'styled-components';
-import { mapToken } from '../config/tokens';
+import { mapToken } from '../../config/tokens';
+import { fetchData } from '../../reducers/data';
+import Container from './Container';
 
 // import Controls from './ControlsStyle';
 // import Popup from './Popup';
@@ -14,26 +15,15 @@ import { mapToken } from '../config/tokens';
 // import minus from './icons/btn-minus.svg';
 // import allCities from '../../utils/newCities.geojson';
 
-const Wrap = styled.div`
-  position: fixed;
-  top: ${({ slideUp }) => (slideUp ? '-30%' : '0')};
-  bottom: 0;
-  width: 100%;
-  transition: .4s;
-  z-index: 0;
-  & .mapboxgl-ctrl-attrib {
-    opacity: 0.3;
-    background-color: inherit;
-  }
-`;
 
 class Map extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      slideUp: false
-    };
     this.onLoad = this.onLoad.bind(this);
+  }
+
+  componentWillMount() {
+    this.props.fetchData();
   }
 
   componentDidMount() {
@@ -268,12 +258,10 @@ class Map extends PureComponent {
   }
 
   render() {
-    const { slideUp } = this.state;
-
     return (
-      <Wrap
+      <Container
         id='map'
-        slideUp={slideUp}
+        slideUp={this.props.currentPrison}
       >
         {/* <Controls slideUp={slideUp}> */}
         {/* <MapButton onClick={() => this.map.zoomIn()}> */}
@@ -283,12 +271,14 @@ class Map extends PureComponent {
         {/* <img src={minus} alt='minus' /> */}
         {/* </MapButton> */}
         {/* </Controls> */}
-      </Wrap>
+      </Container>
     );
   }
 }
 
 Map.propTypes = {
+  fetchData: PropTypes.func.isRequired,
+  currentPrison: PropTypes.number.isRequired,
   features: PropTypes.arrayOf(
     PropTypes.shape({
       properties: PropTypes.shape({
@@ -301,15 +291,18 @@ Map.propTypes = {
         })
       })
     })
-  ),
-  openCard: PropTypes.func,
-  currentYear: PropTypes.number,
-  location: PropTypes.object,
-  centerCoordinates: PropTypes.arrayOf(
-    PropTypes.string
-  ),
-  openedPrisonId: PropTypes.number,
-  closeCard: PropTypes.func
+  ).isRequired,
+  currentYear: PropTypes.number.isRequired
 };
 
-export default Map;
+Map.defaultProps = {};
+
+export default connect(
+  state => ({
+    prisons: state.data.prisons,
+    currentYear: state.ui.currentYear,
+    currentPrison: state.ui.currentPrison,
+    isShowAllPrisons: state.ui.isShowAllPrisons
+  }),
+  { fetchData }
+)(Map);

@@ -10,10 +10,11 @@ import HeaderCenterGroup from './HeaderCenterGroup';
 import Desc from './Desc';
 // import Amount from './Amount';
 import Group from './Group';
+import HeaderButton from '../Buttons/HeaderButton';
 
-// import { HeaderButton } from '../StyledButtons';
-// import search from '../icons/btn-search.svg';
-// import info from '../icons/btn-info.svg';
+// icons
+import search from '../../icons/btn-search.svg';
+import info from '../../icons/btn-info.svg';
 // import data from '../../../utils/prisonersAmountByYears';
 // import { splitDigits } from '../../../utils/utils';
 
@@ -22,9 +23,8 @@ import Group from './Group';
 // data.map(d => (formatedData[d.year] = d));
 
 const Header = (props) => {
-  const { currentYear } = props;
+  const { currentYear, isShowAllPrisons } = props;
 
-  const showAmountsGroup = currentYear !== 'all';
   // const dataSearchingStr = 'данные уточняются';
   const notMobilePrisoners = true;
   const notMobileDead = true;
@@ -41,9 +41,9 @@ const Header = (props) => {
 
   return (
     <Container>
-      {/* <HeaderButton onClick={openSearchCard}> */}
-      {/* <img src={search} alt='loupe-icon' /> */}
-      {/* </HeaderButton> */}
+      <HeaderButton>
+        <img src={search} alt='loupe-icon' />
+      </HeaderButton>
       <HeaderCenterGroup>
         <Group>
           <div>
@@ -52,7 +52,7 @@ const Header = (props) => {
           </div>
         </Group>
         {
-          showAmountsGroup &&
+          isShowAllPrisons &&
           notMobilePrisoners &&
           <Group>
             <svg xmlns='http://www.w3.org/2000/svg' width='22' height='37'>
@@ -68,7 +68,7 @@ const Header = (props) => {
           </Group>
         }
         {
-          showAmountsGroup &&
+          isShowAllPrisons &&
           notMobileDead &&
           <Group>
             <svg xmlns='http://www.w3.org/2000/svg' width='22' height='37'>
@@ -84,7 +84,7 @@ const Header = (props) => {
           </Group>
         }
         {
-          !showAmountsGroup &&
+          !isShowAllPrisons &&
           <Group>
             <svg xmlns='http://www.w3.org/2000/svg' width='35' height='35' viewBox='0 0 35 35'>
               <g fill='#E53F02' fillRule='evenodd'>
@@ -99,9 +99,9 @@ const Header = (props) => {
           </Group>
         }
       </HeaderCenterGroup>
-      {/* <HeaderButton onClick={openInfoCard}> */}
-      {/* <img src={info} alt='info-sign' /> */}
-      {/* </HeaderButton> */}
+      <HeaderButton>
+        <img src={info} alt='info-sign' />
+      </HeaderButton>
     </Container>
   );
 };
@@ -112,6 +112,7 @@ Header.propTypes = {
 
 export default connect(
   state => ({
-    currentYear: state.ui.currentYear
+    currentYear: state.ui.currentYear,
+    isShowAllPrisons: state.ui.isShowAllPrisons
   })
 )(Header);

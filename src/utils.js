@@ -2,7 +2,7 @@ import { dataToken } from './config/tokens';
 
 const options = { headers: { Authorization: `Bearer ${dataToken}` } };
 
-const groupById = arr => (
+export const groupById = arr => (
   arr.reduce((acc, curr) => {
     acc[curr.id] = curr;
     return acc;

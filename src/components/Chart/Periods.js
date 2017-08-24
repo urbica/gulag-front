@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/require-default-props */
 import React from 'react';
-// import { values } from 'ramda';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { changeCurrentPeriod } from '../../reducers/ui';
 
 const Wrap = styled.div`
   pointer-events: auto;
@@ -60,12 +61,13 @@ const Periods = (props) => {
       left={margin.left}
     >
       {
+        periods &&
         periods.map(period => (
           <Period
             key={period.id}
             id={period.id}
             width={getWidth(xScale, period.year_end, period.year_start)}
-            // onClick={onClick.bind(null, period.id)}
+            onClick={props.dispatch.bind(null, changeCurrentPeriod(period.id))}
           >
             <Year>{period.year_start}</Year>
             <div>{period.name.ru}</div>
@@ -103,4 +105,8 @@ Periods.propTypes = {
   })
 };
 
-export default Periods;
+export default connect(
+  state => ({
+    periods: state.data.periods
+  })
+)(Periods);

@@ -2,6 +2,13 @@ import { dataToken } from './config/tokens';
 
 const options = { headers: { Authorization: `Bearer ${dataToken}` } };
 
+const groupById = arr => (
+  arr.reduce((acc, curr) => {
+    acc[curr.id] = curr;
+    return acc;
+  }, {})
+);
+
 // eslint-disable-next-line import/prefer-default-export
 export const getData = () => (
   Promise.all([
@@ -13,11 +20,11 @@ export const getData = () => (
     fetch('http://gulag.urbica.co/api/public/periods.json', options).then(r => r.json())
   ])
     .then(([prisons, photos, activities, places, types, periods]) => ({
-      prisons,
+      prisons: groupById(prisons),
       photos,
-      activities,
-      places,
-      types,
+      activities: groupById(activities),
+      places: groupById(places),
+      types: groupById(types),
       periods
     }))
 );

@@ -9,20 +9,20 @@ const initState = {
   types: null
 };
 
-const LOAD_DATA = 'LOAD_DATA';
+const DATA_FETCH_SUCCESS = 'DATA_FETCH_SUCCESS';
 
-const loadData = data => ({ type: LOAD_DATA, payload: data });
+const dataLoaded = data => ({ type: DATA_FETCH_SUCCESS, payload: data });
 
 export const fetchData = () => (
   (dispatch) => {
     getData()
-      .then(data => dispatch(loadData(data)));
+      .then(data => dispatch(dataLoaded(data)));
   }
 );
 
 export default (state = initState, action) => {
   switch (action.type) {
-    case LOAD_DATA:
+    case DATA_FETCH_SUCCESS:
       return { ...state, ...action.payload };
     default:
       return state;

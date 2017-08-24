@@ -2,8 +2,11 @@
 /* eslint-disable react/require-default-props */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { select } from 'd3-selection';
 import styled from 'styled-components';
+
+import { changeCurrentYear } from '../../reducers/ui';
 
 const G = styled.g`
   pointer-events: auto;
@@ -101,7 +104,7 @@ class PrisonersArea extends PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { xScale, yScale, width, height, onClick } = nextProps;
+    const { xScale, yScale, width, height } = nextProps;
     const barWidth = Math.round(width / 42) - 2;
 
     this.deadRect
@@ -146,7 +149,7 @@ class PrisonersArea extends PureComponent {
       // .attr('height', height)
       .attr('height', height - yScale(250000))
       .attr('fill', 'url(#Gradient)')
-      .on('click', d => onClick(d.year));
+      .on('click', d => this.props.dispatch(changeCurrentYear(d.year)));
 
     this.prisonersRect
       .attr('x', (d) => {
@@ -156,7 +159,7 @@ class PrisonersArea extends PureComponent {
       .attr('y', d => yScale(d.prisoners))
       .attr('width', barWidth)
       .attr('height', d => height - yScale(d.prisoners))
-      .on('click', d => onClick(d.year));
+      .on('click', d => this.props.dispatch(changeCurrentYear(d.year)));
 
     this.prisonersLine
       .attr('fill', 'none')
@@ -208,8 +211,7 @@ PrisonersArea.propTypes = {
       dead: PropTypes.number,
       year: PropTypes.number
     })
-  ),
-  onClick: PropTypes.func
+  )
 };
 
-export default PrisonersArea;
+export default connect()(PrisonersArea);

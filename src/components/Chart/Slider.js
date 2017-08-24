@@ -2,9 +2,12 @@
 /* eslint-disable react/require-default-props */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { select, event } from 'd3-selection';
 import { drag } from 'd3-drag';
 import styled from 'styled-components';
+
+import { changeCurrentYear } from '../../reducers/ui';
 
 const G = styled.g`
   display: ${({ isVisible }) => (isVisible ? 'block' : 'none')};
@@ -168,7 +171,7 @@ class Slider extends Component {
   }
 
   setYear() {
-    this.props.setYear(this.props.xScale.invert(event.x).getFullYear());
+    this.props.dispatch(changeCurrentYear(this.props.xScale.invert(event.x).getFullYear()));
   }
 
   render() {
@@ -189,7 +192,6 @@ class Slider extends Component {
 Slider.propTypes = {
   xScale: PropTypes.func,
   yScale: PropTypes.func,
-  setYear: PropTypes.func,
   width: PropTypes.number,
   height: PropTypes.number,
   margin: PropTypes.shape({
@@ -208,4 +210,8 @@ Slider.propTypes = {
   isVisible: PropTypes.bool
 };
 
-export default Slider;
+export default connect(
+  state => ({
+    currentYear: state.ui.currentYear
+  })
+)(Slider);

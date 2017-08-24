@@ -52,7 +52,7 @@ const Header = (props) => {
           </div>
         </Group>
         {
-          isShowAllPrisons &&
+          !isShowAllPrisons &&
           notMobilePrisoners &&
           <Group>
             <svg xmlns='http://www.w3.org/2000/svg' width='22' height='37'>
@@ -68,7 +68,7 @@ const Header = (props) => {
           </Group>
         }
         {
-          isShowAllPrisons &&
+          !isShowAllPrisons &&
           notMobileDead &&
           <Group>
             <svg xmlns='http://www.w3.org/2000/svg' width='22' height='37'>
@@ -84,7 +84,7 @@ const Header = (props) => {
           </Group>
         }
         {
-          !isShowAllPrisons &&
+          isShowAllPrisons &&
           <Group>
             <svg xmlns='http://www.w3.org/2000/svg' width='35' height='35' viewBox='0 0 35 35'>
               <g fill='#E53F02' fillRule='evenodd'>

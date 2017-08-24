@@ -31,7 +31,7 @@ const margin = {
 const height = 300 - margin.top - margin.bottom;
 
 const Chart = (props) => {
-  const { periods, currentYear, setYear, openPeriod, showAllYears } = props;
+  const { periods, openPeriod, showAllYears } = props;
   const innerWidth = window.innerWidth;
   let width;
   if (innerWidth < 1024) {
@@ -101,7 +101,6 @@ const Chart = (props) => {
           xScale={xScale}
           yScale={yScale}
           data={data}
-          onClick={setYear}
           showAllYears={showAllYears}
         />
         <Axis
@@ -117,9 +116,7 @@ const Chart = (props) => {
           xScale={xScale}
           yScale={yScale}
           data={data}
-          currentYear={currentYear}
-          setYear={setYear}
-          isVisible={currentYear !== 'all'}
+          isVisible={!props.isShowAllPrisons}
         />
       </svg>
       {
@@ -139,13 +136,12 @@ const Chart = (props) => {
 
 Chart.propTypes = {
   periods: PropTypes.object,
-  currentYear: PropTypes.number,
-  setYear: PropTypes.func,
   openPeriod: PropTypes.func
 };
 
 export default connect(
   state => ({
-    periods: state.data.periods
+    periods: state.data.periods,
+    isShowAllPrisons: state.ui.isShowAllPrisons
   })
 )(Chart);

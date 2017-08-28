@@ -9,7 +9,6 @@ export const groupById = arr => (
   }, {})
 );
 
-// eslint-disable-next-line import/prefer-default-export
 export const getData = () => (
   Promise.all([
     fetch('http://gulag.urbica.co/api/public/camps.json', options).then(res => res.json()),

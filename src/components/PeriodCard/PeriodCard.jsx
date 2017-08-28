@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { groupById } from '../../utils';
 import { changeCurrentPeriod } from '../../reducers/ui';
 
 import CardButton from '../Buttons/CardButton';
@@ -35,7 +34,7 @@ PeriodCard.propTypes = {
 
 export default connect(
   state => ({
-    period: state.ui.currentPeriod ? groupById(state.data.periods)[state.ui.currentPeriod] : null,
+    period: state.ui.currentPeriod ? state.data.periods[state.ui.currentPeriod] : null,
     currentPeriod: state.ui.currentPeriod
   })
 )(PeriodCard);

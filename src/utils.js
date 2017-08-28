@@ -24,6 +24,6 @@ export const getData = () => (
       activities: groupById(activities),
       places: groupById(places),
       types: groupById(types),
-      periods
+      periods: groupById(periods)
     }))
 );

@@ -52,7 +52,6 @@ const getWidth = (scale, endYear, startYear) => {
 
 const Periods = (props) => {
   const { width, height, margin, xScale, periods } = props;
-  // const { width, height, margin, xScale, onClick, periods } = props;
 
   return (
     <Wrap
@@ -62,15 +61,15 @@ const Periods = (props) => {
     >
       {
         periods &&
-        periods.map(period => (
+        Object.keys(periods).map(id => (
           <Period
-            key={period.id}
-            id={period.id}
-            width={getWidth(xScale, period.year_end, period.year_start)}
-            onClick={props.dispatch.bind(null, changeCurrentPeriod(period.id))}
+            key={periods[id].id}
+            id={periods[id].id}
+            width={getWidth(xScale, periods[id].year_end, periods[id].year_start)}
+            onClick={props.dispatch.bind(null, changeCurrentPeriod(id))}
           >
-            <Year>{period.year_start}</Year>
-            <div>{period.name.ru}</div>
+            <Year>{periods[id].year_start}</Year>
+            <div>{periods[id].name.ru}</div>
           </Period>
         ))
       }

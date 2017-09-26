@@ -1,5 +1,3 @@
-import { getData } from '../utils';
-
 const initState = {
   prisons: null,
   periods: null,
@@ -9,16 +7,11 @@ const initState = {
   types: null
 };
 
-const DATA_FETCH_SUCCESS = 'DATA_FETCH_SUCCESS';
+export const DATA_FETCH_REQUEST = 'DATA_FETCH_REQUEST';
+export const DATA_FETCH_SUCCESS = 'DATA_FETCH_SUCCESS';
+export const DATA_FETCH_FAILURE = 'DATA_FETCH_FAILURE';
 
-const dataLoaded = data => ({ type: DATA_FETCH_SUCCESS, payload: data });
-
-export const fetchData = () => (
-  (dispatch) => {
-    getData()
-      .then(data => dispatch(dataLoaded(data)));
-  }
-);
+export const fetchData = url => ({ type: DATA_FETCH_REQUEST, payload: url });
 
 export default (state = initState, action) => {
   switch (action.type) {

@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 // import { withRouter } from 'react-router-dom';
 import { mapToken } from '../../config/tokens';
-import { fetchData } from '../../reducers/data';
 import Container from './Container';
 
 // import Controls from './ControlsStyle';
@@ -20,10 +19,6 @@ class Map extends PureComponent {
   constructor(props) {
     super(props);
     this.onLoad = this.onLoad.bind(this);
-  }
-
-  componentWillMount() {
-    this.props.fetchData();
   }
 
   componentDidMount() {
@@ -277,7 +272,6 @@ class Map extends PureComponent {
 }
 
 Map.propTypes = {
-  fetchData: PropTypes.func.isRequired,
   currentPrison: PropTypes.number.isRequired,
   features: PropTypes.arrayOf(
     PropTypes.shape({
@@ -303,6 +297,5 @@ export default connect(
     currentYear: state.ui.currentYear,
     currentPrison: state.ui.currentPrison,
     isShowAllPrisons: state.ui.isShowAllPrisons
-  }),
-  { fetchData }
+  })
 )(Map);

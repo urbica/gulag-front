@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchData } from '../../reducers/data';
+import { fetchData } from './reducer';
 import { toggleAllPrisons, changeCurrentYear, toggleDemo } from '../../reducers/ui';
 
 import Header from '../Header/Header';
@@ -17,10 +17,6 @@ class App extends PureComponent {
   constructor(props) {
     super(props);
     this.demo = this.demo.bind(this);
-  }
-
-  componentWillMount() {
-    this.props.fetchData();
   }
 
   demo() {
@@ -62,7 +58,6 @@ class App extends PureComponent {
 App.propTypes = {
   isDemoPlay: PropTypes.bool.isRequired,
   currentYear: PropTypes.number.isRequired,
-  fetchData: PropTypes.func.isRequired,
   toggleAllPrisons: PropTypes.func.isRequired,
   toggleDemo: PropTypes.func.isRequired,
   changeCurrentYear: PropTypes.func.isRequired

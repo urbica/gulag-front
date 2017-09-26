@@ -79,8 +79,8 @@ App.propTypes = {
 
 export default connect(
   state => ({
-    isDemoPlay: state.ui.isDemoPlay,
-    currentYear: state.ui.currentYear
+    isDemoPlay: state.toJS().ui.isDemoPlay,
+    currentYear: state.toJS().ui.currentYear
   }),
   { toggleAllPrisons, changeCurrentYear, toggleDemo }
 )(App);

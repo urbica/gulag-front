@@ -276,9 +276,9 @@ Map.propTypes = {
 
 export default connect(
   state => ({
-    prisons: state.data.prisons,
-    currentYear: state.ui.currentYear,
-    currentPrison: state.ui.currentPrison,
-    isShowAllPrisons: state.ui.isShowAllPrisons
+    prisons: state.toJS().data.prisons,
+    currentYear: state.toJS().ui.currentYear,
+    currentPrison: state.toJS().ui.currentPrison,
+    isShowAllPrisons: state.toJS().ui.isShowAllPrisons
   })
 )(Map);

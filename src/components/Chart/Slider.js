@@ -212,6 +212,6 @@ Slider.propTypes = {
 
 export default connect(
   state => ({
-    currentYear: state.ui.currentYear
+    currentYear: state.toJS().ui.currentYear
   })
 )(Slider);

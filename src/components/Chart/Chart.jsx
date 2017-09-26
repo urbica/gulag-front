@@ -141,7 +141,7 @@ Chart.propTypes = {
 
 export default connect(
   state => ({
-    periods: state.data.periods,
-    isShowAllPrisons: state.ui.isShowAllPrisons
+    periods: state.toJS().data.periods,
+    isShowAllPrisons: state.toJS().ui.isShowAllPrisons
   })
 )(Chart);

@@ -106,6 +106,6 @@ Periods.propTypes = {
 
 export default connect(
   state => ({
-    periods: state.data.periods
+    periods: state.toJS().data.periods
   })
 )(Periods);

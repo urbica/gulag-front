@@ -1,6 +1,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { ConnectedRouter } from 'react-router-redux';
+import { Route, Switch } from 'react-router-dom';
+
 import { toggleAllPrisons, changeCurrentYear, toggleDemo } from '../../reducers/ui';
 
 import Header from '../Header/Header';
@@ -9,8 +12,8 @@ import ChartWrap from './ChartWrap';
 import PlayButton from '../Buttons/PlayButton';
 import Chart from '../Chart/Chart';
 import ShowAllButton from '../Buttons/ShowAllButton';
-// import PrisonCard from '../PrisonCard/PrisonCard';
-// import PeriodCard from '../PeriodCard/PeriodCard';
+import PrisonCard from '../PrisonCard/PrisonCard';
+import PeriodCard from '../PeriodCard/PeriodCard';
 
 class App extends PureComponent {
   constructor(props) {
@@ -36,25 +39,37 @@ class App extends PureComponent {
 
   render() {
     return (
-      <div>
-        <Header />
-        <Map />
-        <ChartWrap>
-          <PlayButton
-            isDemoPlayed={this.props.isDemoPlay}
-            onClick={this.demo}
+      <ConnectedRouter history={this.props.history}>
+        <div>
+          <Route
+            path='/'
+            render={() => (
+              <div>
+                <Header />
+                <Map />
+                <ChartWrap>
+                  <PlayButton
+                    isDemoPlayed={this.props.isDemoPlay}
+                    onClick={this.demo}
+                  />
+                  <Chart />
+                  <ShowAllButton onClick={this.props.toggleAllPrisons} />
+                </ChartWrap>
+              </div>
+            )}
           />
-          <Chart />
-          <ShowAllButton onClick={this.props.toggleAllPrisons} />
-        </ChartWrap>
-        {/* <PrisonCard /> */}
-        {/* <PeriodCard /> */}
-      </div>
+          <Switch>
+            <Route path='/prison' component={PrisonCard} />
+            <Route path='/period' component={PeriodCard} />
+          </Switch>
+        </div>
+      </ConnectedRouter>
     );
   }
 }
 
 App.propTypes = {
+  history: PropTypes.object.isRequired,
   isDemoPlay: PropTypes.bool.isRequired,
   currentYear: PropTypes.number.isRequired,
   toggleAllPrisons: PropTypes.func.isRequired,

@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import createHistory from 'history/createBrowserHistory';
 import { combineReducers, createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import { routerMiddleware } from 'react-router-redux';
 import createSagaMiddleware from 'redux-saga';
 import { createLogger } from 'redux-logger';
 
@@ -16,13 +18,23 @@ import uiReducer from './reducers/ui';
 
 let middleware;
 const sagaMiddleware = createSagaMiddleware();
+const history = createHistory();
+const routersMiddleware = routerMiddleware(history);
+
 
 if (process.env.NODE_ENV === 'development') {
   const loggerMiddleware = createLogger({ collapsed: true });
 
-  middleware = applyMiddleware(sagaMiddleware, loggerMiddleware);
+  middleware = applyMiddleware(
+    sagaMiddleware,
+    routersMiddleware,
+    loggerMiddleware
+  );
 } else {
-  middleware = applyMiddleware(sagaMiddleware);
+  middleware = applyMiddleware(
+    sagaMiddleware,
+    routersMiddleware
+  );
 }
 
 const reducer = combineReducers({
@@ -33,9 +45,11 @@ const reducer = combineReducers({
 const store = createStore(reducer, middleware);
 sagaMiddleware.run(Saga);
 
+// const history = syncHistoryWithStore(browserHistory, store);
+
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <App history={history} />
   </Provider>, document.getElementById('root')
 );
 registerServiceWorker();

@@ -17,12 +17,15 @@
     }
   },
   "dependencies": {
+    "@urbica/react-map-gl": "0.2.2",
     "d3-array": "1.2.0",
     "d3-axis": "1.0.8",
     "d3-drag": "1.1.1",
     "d3-scale": "1.0.6",
     "d3-selection": "1.1.0",
+    "immutable": "4.0.0-rc.2",
     "isomorphic-fetch": "2.2.1",
+    "mapbox-gl": "0.40.1",
     "normalize.css": "7.0.0",
     "prop-types": "15.5.10",
     "react": "15.6.1",

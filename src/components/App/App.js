@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchData } from './reducer';
 import { toggleAllPrisons, changeCurrentYear, toggleDemo } from '../../reducers/ui';
 
 import Header from '../Header/Header';
@@ -10,8 +9,8 @@ import ChartWrap from './ChartWrap';
 import PlayButton from '../Buttons/PlayButton';
 import Chart from '../Chart/Chart';
 import ShowAllButton from '../Buttons/ShowAllButton';
-import PrisonCard from '../PrisonCard/PrisonCard';
-import PeriodCard from '../PeriodCard/PeriodCard';
+// import PrisonCard from '../PrisonCard/PrisonCard';
+// import PeriodCard from '../PeriodCard/PeriodCard';
 
 class App extends PureComponent {
   constructor(props) {
@@ -48,8 +47,8 @@ class App extends PureComponent {
           <Chart />
           <ShowAllButton onClick={this.props.toggleAllPrisons} />
         </ChartWrap>
-        <PrisonCard />
-        <PeriodCard />
+        {/* <PrisonCard /> */}
+        {/* <PeriodCard /> */}
       </div>
     );
   }
@@ -68,5 +67,5 @@ export default connect(
     isDemoPlay: state.ui.isDemoPlay,
     currentYear: state.ui.currentYear
   }),
-  { fetchData, toggleAllPrisons, changeCurrentYear, toggleDemo }
+  { toggleAllPrisons, changeCurrentYear, toggleDemo }
 )(App);

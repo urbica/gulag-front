@@ -1,6 +1,5 @@
-/* global mapboxgl */
 import React, { PureComponent } from 'react';
-// import ReactDom from 'react-dom';
+import MapGL from '@urbica/react-map-gl';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 // import { withRouter } from 'react-router-dom';
@@ -22,23 +21,23 @@ class Map extends PureComponent {
   }
 
   componentDidMount() {
-    mapboxgl.accessToken = mapToken;
-    this.map = new mapboxgl.Map({
-      container: 'map',
-      style: 'mapbox://styles/gulagmap/ciqkwvqfs001ngdnl7tyvutwl',
-      drag: true,
-      zoom: 2.5,
-      center: [90, 60],
-      maxBounds: [
-        [-94, -14],
-        [238, 85]
-      ]
-      // scrollZoom: false
-    });
-
-    this.map.dragRotate.disable();
-    this.map.touchZoomRotate.disableRotation();
-    this.map.on('load', this.onLoad);
+    // mapboxgl.accessToken = mapToken;
+    // this.map = new mapboxgl.Map({
+    //   container: 'map',
+    //   style: 'mapbox://styles/gulagmap/ciqkwvqfs001ngdnl7tyvutwl',
+    //   drag: true,
+    //   zoom: 2.5,
+    //   center: [90, 60],
+    //   maxBounds: [
+    //     [-94, -14],
+    //     [238, 85]
+    //   ]
+    //   // scrollZoom: false
+    // });
+    //
+    // this.map.dragRotate.disable();
+    // this.map.touchZoomRotate.disableRotation();
+    // this.map.on('load', this.onLoad);
   }
 
   onLoad() {
@@ -77,16 +76,16 @@ class Map extends PureComponent {
       }
     }, 'waterway');
 
-    const { features } = this.props;
-    const source = {
-      type: 'geojson',
-      data: {
-        type: 'FeatureCollection',
-        features
-      }
-    };
+    // const { features } = this.props;
+    // const source = {
+    //   type: 'geojson',
+    //   data: {
+    //     type: 'FeatureCollection',
+    //     features
+    //   }
+    // };
 
-    this.map.addSource('prisons', source);
+    // this.map.addSource('prisons', source);
     // this.map.addSource('allCities', {
     //   type: 'geojson',
     //   data: allCities
@@ -254,42 +253,26 @@ class Map extends PureComponent {
 
   render() {
     return (
-      <Container
-        id='map'
-        slideUp={this.props.currentPrison}
-      >
-        {/* <Controls slideUp={slideUp}> */}
-        {/* <MapButton onClick={() => this.map.zoomIn()}> */}
-        {/* <img src={plus} alt='plus' /> */}
-        {/* </MapButton> */}
-        {/* <MapButton onClick={() => this.map.zoomOut()}> */}
-        {/* <img src={minus} alt='minus' /> */}
-        {/* </MapButton> */}
-        {/* </Controls> */}
+      <Container slideUp={false}>
+        <MapGL
+          style={{ width: '100%', height: '100vh' }}
+          accessToken={mapToken}
+          mapStyle='mapbox://styles/gulagmap/ciqkwvqfs001ngdnl7tyvutwl'
+          latitude={60}
+          longitude={90}
+          zoom={2.5}
+          onViewportChange={(viewport) => {
+            console.log(viewport);
+          }}
+        />
       </Container>
     );
   }
 }
 
 Map.propTypes = {
-  currentPrison: PropTypes.number.isRequired,
-  features: PropTypes.arrayOf(
-    PropTypes.shape({
-      properties: PropTypes.shape({
-        id: PropTypes.number,
-        peoples: PropTypes.number,
-        name: PropTypes.shape({
-          ru: PropTypes.string,
-          en: PropTypes.string,
-          de: PropTypes.string
-        })
-      })
-    })
-  ).isRequired,
   currentYear: PropTypes.number.isRequired
 };
-
-Map.defaultProps = {};
 
 export default connect(
   state => ({

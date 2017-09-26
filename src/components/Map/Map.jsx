@@ -59,9 +59,9 @@ class Map extends PureComponent {
         'fill-color': '#1b2128', // 222933 #1b2128
         'fill-opacity': 1
       },
-      filter: ['all',
-        ['<=', 'year_start', this.props.currentYear],
-        ['>=', 'year_end', this.props.currentYear]
+      filter: ['all'
+        // ['<=', 'year_start', this.props.currentYear],
+        // ['>=', 'year_end', this.props.currentYear]
       ]
     }, 'waterway');
     this.map.addLayer({
@@ -257,7 +257,7 @@ class Map extends PureComponent {
         <MapGL
           style={{ width: '100%', height: '100vh' }}
           accessToken={mapToken}
-          mapStyle='mapbox://styles/gulagmap/ciqkwvqfs001ngdnl7tyvutwl'
+          mapStyle={this.props.mapStyle}
           latitude={60}
           longitude={90}
           zoom={2.5}
@@ -271,12 +271,13 @@ class Map extends PureComponent {
 }
 
 Map.propTypes = {
-  currentYear: PropTypes.number.isRequired
+  mapStyle: PropTypes.object.isRequired
 };
 
 export default connect(
   state => ({
     prisons: state.toJS().data.prisons,
+    mapStyle: state.toJS().data.mapStyle,
     currentYear: state.toJS().ui.currentYear,
     currentPrison: state.toJS().ui.currentPrison,
     isShowAllPrisons: state.toJS().ui.isShowAllPrisons

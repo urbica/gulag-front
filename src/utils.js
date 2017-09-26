@@ -1,4 +1,5 @@
 import { dataToken } from './config/tokens';
+import stylesUrl from './config/map';
 
 const options = { headers: { Authorization: `Bearer ${dataToken}` } };
 
@@ -26,4 +27,10 @@ export const getData = () => (
       types: groupById(types),
       periods: groupById(periods)
     }))
+);
+
+export const getStyles = () => (
+  fetch(stylesUrl.styles)
+    .then(response => response.json())
+    .then(json => json)
 );

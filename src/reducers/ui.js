@@ -31,9 +31,13 @@ export default (state = initState, { type, payload }) => {
     case CURRENT_PERIOD_CHANGED:
       return state.set('currentPeriod', payload);
     case TOGGLE_DEMO:
-      return { ...state, isDemoPlay: !state.isDemoPlay, isShowAllPrisons: false };
+      return state
+        .set('isDemoPlay', !state.get('isDemoPlay'))
+        .set('isShowAllPrisons', false);
     case TOGGLE_ALL_PRISONS:
-      return { ...state, isShowAllPrisons: !state.isShowAllPrisons, isDemoPlay: false };
+      return state
+        .set('isShowAllPrisons', !state.get('isShowAllPrisons'))
+        .set('isDemoPlay', false);
     default:
       return state;
   }

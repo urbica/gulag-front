@@ -112,7 +112,7 @@ Header.propTypes = {
 
 export default connect(
   state => ({
-    currentYear: state.toJS().ui.currentYear,
-    isShowAllPrisons: state.toJS().ui.isShowAllPrisons
+    currentYear: state.getIn(['ui', 'currentYear']),
+    isShowAllPrisons: state.getIn(['ui', 'isShowAllPrisons'])
   })
 )(Header);

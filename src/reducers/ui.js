@@ -1,4 +1,6 @@
-const initState = {
+import Immutable from 'immutable';
+
+const initState = Immutable.fromJS({
   currentYear: 1937,
   currentPrison: null,
   currentPeriod: null,
@@ -6,7 +8,7 @@ const initState = {
   isAboutOpen: false,
   isDemoPlay: false,
   isShowAllPrisons: false
-};
+});
 
 const CURRENT_YEAR_CHANGED = 'CURRENT_YEAR_CHANGED';
 const CURRENT_PRISON_CHANGED = 'CURRENT_PRISON_CHANGED';
@@ -23,11 +25,11 @@ export const toggleAllPrisons = () => ({ type: TOGGLE_ALL_PRISONS });
 export default (state = initState, { type, payload }) => {
   switch (type) {
     case CURRENT_YEAR_CHANGED:
-      return { ...state, currentYear: payload };
+      return state.set('currentYear', payload);
     case CURRENT_PRISON_CHANGED:
-      return { ...state, currentPrison: payload };
+      return state.set('currentPrison', payload);
     case CURRENT_PERIOD_CHANGED:
-      return { ...state, currentPeriod: payload };
+      return state.set('currentPeriod', payload);
     case TOGGLE_DEMO:
       return { ...state, isDemoPlay: !state.isDemoPlay, isShowAllPrisons: false };
     case TOGGLE_ALL_PRISONS:

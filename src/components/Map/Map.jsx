@@ -1,10 +1,19 @@
 import React, { PureComponent } from 'react';
-import MapGL from '@urbica/react-map-gl';
 import PropTypes from 'prop-types';
+import MapGL from '@urbica/react-map-gl';
 import { connect } from 'react-redux';
-// import { withRouter } from 'react-router-dom';
+import { createSelector } from 'reselect';
+
 import { mapToken } from '../../config/tokens';
 import Container from './Container';
+
+import {
+  prisonsSelector,
+  currentYearSelector,
+  currentPrisonSelector,
+  isShowAllPrisonsSelector,
+  finalStyleSelector
+} from './selectors';
 
 // import Controls from './ControlsStyle';
 // import Popup from './Popup';
@@ -15,11 +24,6 @@ import Container from './Container';
 
 
 class Map extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.onLoad = this.onLoad.bind(this);
-  }
-
   componentDidMount() {
     // mapboxgl.accessToken = mapToken;
     // this.map = new mapboxgl.Map({
@@ -252,6 +256,10 @@ class Map extends PureComponent {
   }
 
   render() {
+    if (!this.props.mapStyle) {
+      return null;
+    }
+
     return (
       <Container slideUp={false}>
         <MapGL
@@ -270,16 +278,27 @@ class Map extends PureComponent {
   }
 }
 
+const selector = createSelector(
+  prisonsSelector,
+  finalStyleSelector,
+  currentYearSelector,
+  currentPrisonSelector,
+  isShowAllPrisonsSelector,
+  (prisons, mapStyle, currentYear, isShowAllPrisons) => ({
+    prisons,
+    mapStyle,
+    currentYear,
+    isShowAllPrisons
+  })
+);
+
 Map.propTypes = {
-  mapStyle: PropTypes.object.isRequired
+  mapStyle: PropTypes.object
 };
 
-export default connect(
-  state => ({
-    prisons: state.toJS().data.prisons,
-    mapStyle: state.toJS().data.mapStyle,
-    currentYear: state.toJS().ui.currentYear,
-    currentPrison: state.toJS().ui.currentPrison,
-    isShowAllPrisons: state.toJS().ui.isShowAllPrisons
-  })
-)(Map);
+Map.defaultProps = {
+  mapStyle: null
+};
+
+export default connect(selector)(Map);
+

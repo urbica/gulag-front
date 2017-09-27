@@ -25,7 +25,6 @@
     "d3-selection": "1.1.0",
     "history": "4.7.2",
     "immutable": "4.0.0-rc.2",
-    "isomorphic-fetch": "2.2.1",
     "mapbox-gl": "0.40.1",
     "normalize.css": "7.0.0",
     "prop-types": "15.5.10",
@@ -41,6 +40,7 @@
     "redux-immutable": "4.0.0",
     "redux-logger": "3.0.6",
     "redux-saga": "0.15.6",
+    "reselect": "3.0.1",
     "styled-components": "2.1.2"
   },
   "devDependencies": {
@@ -51,5 +51,6 @@
     "eslint-plugin-import": "2.7.0",
     "eslint-plugin-jsx-a11y": "5.1.1",
     "eslint-plugin-react": "7.3.0"
-  }
+  },
+  "proxy": "https://gulag.urbica.co/"
 }

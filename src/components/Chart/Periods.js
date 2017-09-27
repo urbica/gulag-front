@@ -51,7 +51,8 @@ const getWidth = (scale, endYear, startYear) => {
 };
 
 const Periods = (props) => {
-  const { width, height, margin, xScale, periods } = props;
+  const { width, height, margin, xScale } = props;
+  const periods = props.periods.toJS();
 
   return (
     <Wrap
@@ -104,8 +105,4 @@ Periods.propTypes = {
   })
 };
 
-export default connect(
-  state => ({
-    periods: state.toJS().data.periods
-  })
-)(Periods);
+export default connect()(Periods);

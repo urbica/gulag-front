@@ -3,11 +3,13 @@ import { createSelector } from 'reselect';
 
 import layers from '../../config/layers';
 
-export const prisonsSelector = state => state.getIn(['data', 'prisons']);
-export const mapStyleSelector = state => state.getIn(['data', 'mapStyle']);
-export const currentYearSelector = state => state.getIn(['ui', 'currentYear']);
-export const currentPrisonSelector = state => state.getIn(['ui', 'currentPrison']);
-export const isShowAllPrisonsSelector = state => state.getIn(['ui', 'isShowAllPrisons']);
+import {
+  langSelector,
+  prisonsSelector,
+  mapStyleSelector,
+  currentYearSelector,
+  isShowAllPrisonsSelector
+} from '../App/selectors';
 
 // const layersSelector = state => state.getIn(['data', 'mapStyle', 'layers']);
 // const sourcesSelector = state => state.getIn(['data', 'mapStyle', 'sources']);
@@ -22,18 +24,28 @@ const emptyGeoJSONSource = Immutable.fromJS({
 
 const prisonSourceSelector = createSelector(
   prisonsSelector,
-  (prisons) => {
+  langSelector,
+  isShowAllPrisonsSelector,
+  currentYearSelector,
+  (prisons, lang, isShowAllPrisons, currentYear) => {
     if (!prisons) {
       return emptyGeoJSONSource;
     }
 
-    const features = prisons.toList().flatMap(prison => prison.get('features'));
-    const newSource = emptyGeoJSONSource.setIn(['data', 'features'], features);
+    const features = prisons
+      .toList()
+      .filter(prison => prison.getIn(['published', lang]))
+      .flatMap(prison => prison.get('features'))
+      .filter(feature =>
+        isShowAllPrisons || feature.get('properties').has(currentYear.toString())
+      );
 
-    return newSource;
+    return emptyGeoJSONSource
+      .setIn(['data', 'features'], features);
   }
 );
 
+// eslint-disable-next-line import/prefer-default-export
 export const finalStyleSelector = createSelector(
   mapStyleSelector,
   prisonSourceSelector,
@@ -42,7 +54,8 @@ export const finalStyleSelector = createSelector(
       return null;
     }
 
-    return mapStyle.setIn(['sources', 'prisons'], prisonSource)
+    return mapStyle
+      .setIn(['sources', 'prisons'], prisonSource)
       .update('layers', previousLayers => previousLayers.concat(layers));
   }
 );

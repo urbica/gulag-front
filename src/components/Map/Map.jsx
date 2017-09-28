@@ -12,10 +12,10 @@ import { mapToken } from '../../config/tokens';
 import {
   prisonsSelector,
   currentYearSelector,
-  currentPrisonSelector,
-  isShowAllPrisonsSelector,
-  finalStyleSelector
-} from './selectors';
+  isShowAllPrisonsSelector
+} from '../App/selectors';
+
+import { finalStyleSelector } from './selectors';
 
 // import Controls from './ControlsStyle';
 // import Popup from './Popup';
@@ -279,7 +279,6 @@ const selector = createSelector(
   prisonsSelector,
   finalStyleSelector,
   currentYearSelector,
-  currentPrisonSelector,
   isShowAllPrisonsSelector,
   (prisons, mapStyle, currentYear, isShowAllPrisons) => ({
     prisons,

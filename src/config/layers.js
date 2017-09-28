@@ -11,4 +11,19 @@ export default Immutable.fromJS([
       'circle-opacity': 1
     }
   }
+  // {
+  //   id: 'ussr',
+  //   type: 'fill',
+  //   source: 'ussr',
+  //   'source-layer': 'NEWUSSR_BOUND',
+  //   layout: {},
+  //   paint: {
+  //     'fill-color': '#1b2128', // 222933 #1b2128
+  //     'fill-opacity': 1
+  //   },
+  //   filter: ['all',
+  //     ['<=', 'year_start', this.props.currentYear],
+  //     ['>=', 'year_end', this.props.currentYear]
+  //   ]
+  // }
 ]);

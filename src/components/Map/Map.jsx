@@ -23,16 +23,6 @@ import { finalStyleSelector } from './selectors';
 // import plus from './icons/btn-plus.svg';
 // import minus from './icons/btn-minus.svg';
 // import allCities from '../../utils/newCities.geojson';
-
-// onLoad() {
-//   this.map.addSource('ussr', {
-//     type: 'vector',
-//     url: 'mapbox://gulagmap.83eae073'
-//   });
-//   this.map.addSource('chukotka', {
-//     type: 'vector',
-//     url: 'mapbox://gulagmap.72d3cpll'
-//   });
 //   this.map.addLayer({
 //     id: 'ussr',
 //     type: 'fill',
@@ -60,16 +50,6 @@ import { finalStyleSelector } from './selectors';
 //     }
 //   }, 'waterway');
 //
-//   // const { features } = this.props;
-//   // const source = {
-//   //   type: 'geojson',
-//   //   data: {
-//   //     type: 'FeatureCollection',
-//   //     features
-//   //   }
-//   // };
-//
-//   // this.map.addSource('prisons', source);
 //   // this.map.addSource('allCities', {
 //   //   type: 'geojson',
 //   //   data: allCities
@@ -117,138 +97,12 @@ import { finalStyleSelector } from './selectors';
 //       }
 //     }
 //   });
-//   this.map.addLayer({
-//     id: 'prisons',
-//     type: 'circle',
-//     source: 'prisons',
-//     paint: {
-//       'circle-radius': 1.75,
-//       'circle-color': '#ff2b00',
-//       'circle-opacity': 1
-//     }
-//   });
-//   this.map.addLayer({
-//     id: 'prisonsHalo',
-//     type: 'circle',
-//     source: 'prisons',
-//     paint: {
-//       'circle-color': '#eb4200',
-//       'circle-opacity': 0.3,
-//       'circle-radius': {
-//         property: 'peoples',
-//         stops: [
-//           [{ zoom: 1, value: 0 }, 4],
-//           [{ zoom: 1, value: 200000 }, 20],
-//           [{ zoom: 18, value: 0 }, 32],
-//           [{ zoom: 18, value: 200000 }, 400]
-//         ]
-//       }
-//     }
-//   });
-//   this.map.addLayer({
-//     id: 'prisonsHalo_hover',
-//     type: 'circle',
-//     source: 'prisons',
-//     paint: {
-//       'circle-color': '#eb4200',
-//       'circle-opacity': 0.7,
-//       'circle-radius': {
-//         property: 'peoples',
-//         stops: [
-//           [{ zoom: 1, value: 0 }, 4],
-//           [{ zoom: 1, value: 200000 }, 20],
-//           [{ zoom: 18, value: 0 }, 32],
-//           [{ zoom: 18, value: 200000 }, 400]
-//         ]
-//       }
-//     },
-//     filter: ['==', 'id', '']
-//   });
-//   this.map.addLayer({
-//     id: 'prisonsHalo_active',
-//     type: 'circle',
-//     source: 'prisons',
-//     paint: {
-//       'circle-color': '#eb4200',
-//       'circle-opacity': 0.7,
-//       'circle-radius': {
-//         property: 'peoples',
-//         stops: [
-//           [{ zoom: 1, value: 0 }, 4],
-//           [{ zoom: 1, value: 200000 }, 20],
-//           [{ zoom: 18, value: 0 }, 32],
-//           [{ zoom: 18, value: 200000 }, 400]
-//         ]
-//       }
-//     },
-//     filter: ['==', 'id', '']
-//   });
-//   this.map.addLayer({
-//     id: 'prisonsNames',
-//     type: 'symbol',
-//     source: 'prisons',
-//     layout: {
-//       'text-field': '{ruName}',
-//       'text-size': {
-//         stops: [
-//           [0, 8],
-//           [4, 10],
-//           [6, 14],
-//           [12, 22],
-//           [22, 28]
-//         ]
-//       },
-//       'text-anchor': 'left',
-//       'text-justify': 'left',
-//       'text-offset': [1.5, 0]
-//     },
-//     paint: {
-//       'text-color': '#fff'
-//     },
-//     filter: ['==', 'id', '']
-//   });
-//   this.map.addLayer({
-//     id: 'prisonsNames_active',
-//     type: 'symbol',
-//     source: 'prisons',
-//     layout: {
-//       'text-field': '{ruName}',
-//       'text-size': 12,
-//       'text-anchor': 'left',
-//       'text-justify': 'left',
-//       'text-offset': [1.5, 0]
-//     },
-//     paint: {
-//       'text-color': '#fff'
-//     },
-//     filter: ['==', 'id', '']
-//   });
 //
 //   setTimeout(() => {
 //     const credits = ' <a href="http://urbica.co" target="_blank">© Urbica</a>';
 //     const attrEls = document.getElementsByClassName('mapboxgl-ctrl-attrib');
 //     if (attrEls.length > 0) attrEls[0].insertAdjacentHTML('beforeend', credits);
 //   }, 1000);
-// }
-
-// componentDidMount() {
-// mapboxgl.accessToken = mapToken;
-// this.map = new mapboxgl.Map({
-//   container: 'map',
-//   style: 'mapbox://styles/gulagmap/ciqkwvqfs001ngdnl7tyvutwl',
-//   drag: true,
-//   zoom: 2.5,
-//   center: [90, 60],
-//   maxBounds: [
-//     [-94, -14],
-//     [238, 85]
-//   ]
-//   // scrollZoom: false
-// });
-//
-// this.map.dragRotate.disable();
-// this.map.touchZoomRotate.disableRotation();
-// this.map.on('load', this.onLoad);
 // }
 
 const Map = props => (

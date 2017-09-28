@@ -38,7 +38,8 @@ const prisonSourceSelector = createSelector(
       .flatMap(prison => prison.get('features'))
       .filter(feature =>
         isShowAllPrisons || feature.get('properties').has(currentYear.toString())
-      );
+      )
+      .map(feature => feature.setIn(['properties', 'peoples'], feature.getIn(['properties', currentYear.toString(), 'peoples'])));
 
     return emptyGeoJSONSource
       .setIn(['data', 'features'], features);
@@ -56,6 +57,7 @@ export const finalStyleSelector = createSelector(
 
     return mapStyle
       .setIn(['sources', 'prisons'], prisonSource)
-      .update('layers', previousLayers => previousLayers.concat(layers));
+      .update('layers', previousLayers => previousLayers.concat(layers))
+      .setIn(['layers', '6', 'layout', 'visibility'], 'visible');
   }
 );

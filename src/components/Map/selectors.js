@@ -50,14 +50,36 @@ const prisonSourceSelector = createSelector(
 export const finalStyleSelector = createSelector(
   mapStyleSelector,
   prisonSourceSelector,
-  (mapStyle, prisonSource) => {
+  currentYearSelector,
+  (mapStyle, prisonSource, currentYear) => {
     if (!mapStyle) {
       return null;
     }
 
+    const ussrLayerId = mapStyle
+      .get('layers')
+      .findIndex(layer => layer.get('id') === 'USSR');
+
+    const getUSSRBoundaryFilterByYear = () => {
+      if (currentYear !== 1960) {
+        return Immutable.fromJS(
+          ['all',
+            ['<=', 'year_start', currentYear],
+            ['>', 'year_end', currentYear]
+          ]
+        );
+      }
+
+      return Immutable.fromJS(
+        ['all',
+          ['==', 'year_end', currentYear]
+        ]
+      );
+    };
+
     return mapStyle
       .setIn(['sources', 'prisons'], prisonSource)
-      .update('layers', previousLayers => previousLayers.concat(layers))
-      .setIn(['layers', '6', 'layout', 'visibility'], 'visible');
+      .setIn(['layers', ussrLayerId, 'filter'], getUSSRBoundaryFilterByYear())
+      .update('layers', previousLayers => previousLayers.concat(layers));
   }
 );

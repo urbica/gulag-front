@@ -5,21 +5,15 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { scaleTime, scaleLinear } from 'd3-scale';
 import { max } from 'd3-array';
-import styled from 'styled-components';
 
 import data from '../../config/chartData';
 import PrisonersArea from './PrisonersArea';
 import Axis from './Axis';
 import Slider from './Slider';
-import Periods from './Periods';
+import Periods from './Periods/Periods';
 
-const Wrap = styled.div`
-  position: relative;
-  & svg {
-    position: relative;
-    z-index: 2;
-  }
-`;
+// styled
+import Container from './Container';
 
 const margin = {
   top: 5,
@@ -52,7 +46,7 @@ const Chart = (props) => {
     .range([height, 0]);
 
   return (
-    <Wrap>
+    <Container>
       <svg
         width={width + margin.left + margin.right}
         height={height + margin.top + margin.bottom}
@@ -130,7 +124,7 @@ const Chart = (props) => {
           onClick={openPeriod}
         />
       }
-    </Wrap>
+    </Container>
   );
 };
 

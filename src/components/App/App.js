@@ -41,26 +41,19 @@ class App extends PureComponent {
     return (
       <ConnectedRouter history={this.props.history}>
         <div>
-          <Route
-            path='/'
-            render={() => (
-              <div>
-                <Header />
-                <Map />
-                <ChartWrap>
-                  <PlayButton
-                    isDemoPlayed={this.props.isDemoPlay}
-                    onClick={this.demo}
-                  />
-                  <Chart />
-                  <ShowAllButton onClick={this.props.toggleAllPrisons} />
-                </ChartWrap>
-              </div>
-            )}
-          />
+          <Header />
+          <Map />
+          <ChartWrap>
+            <PlayButton
+              isDemoPlayed={this.props.isDemoPlay}
+              onClick={this.demo}
+            />
+            <Chart />
+            <ShowAllButton onClick={this.props.toggleAllPrisons} />
+          </ChartWrap>
           <Switch>
-            <Route path='/prison' component={PrisonCard} />
-            <Route path='/period' component={PeriodCard} />
+            <Route path='/prison:id' component={PrisonCard} />
+            <Route path='/period:id' component={PeriodCard} />
           </Switch>
         </div>
       </ConnectedRouter>

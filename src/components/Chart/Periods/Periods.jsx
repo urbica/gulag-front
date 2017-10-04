@@ -2,9 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
-// reducers
-import { changeCurrentPeriod } from '../../../reducers/ui';
+import { push } from 'react-router-redux';
 
 // styled
 import Container from './Container';
@@ -37,7 +35,7 @@ const Periods = ({ width, height, margin, xScale, periods, dispatch }) => (
             key={id}
             id={id}
             width={getWidth(xScale, yearEnd, yearStart)}
-            onClick={dispatch.bind(null, changeCurrentPeriod(id))}
+            onClick={dispatch.bind(null, push(`/period${id}`))}
           >
             <Year>{yearStart}</Year>
             <div>{name}</div>

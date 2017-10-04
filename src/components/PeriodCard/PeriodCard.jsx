@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 
-import { changeCurrentPeriod } from '../../reducers/ui';
+import currentPeriodSelector from './selectors';
 
 import CardButton from '../Buttons/CardButton';
 
@@ -15,26 +16,30 @@ import Title from './Title';
 import Period from './Period';
 import Description from './Description';
 
-const PeriodCard = ({ period, dispatch, currentPeriod }) => (currentPeriod ? (
-  <Container>
-    <CardButton onClick={dispatch.bind(null, changeCurrentPeriod(null))}>
-      <img src={close} alt='cross' />
-    </CardButton>
-    <Title>{period.name.ru}</Title>
-    <Period>{`${period.year_start} – ${period.year_end}`}</Period>
-    <Description>{period.description.ru}</Description>
-  </Container>
-) : null);
+const PeriodCard = ({ period, dispatch }) => (
+  !period ? null : (
+    <Container>
+      <CardButton onClick={() => dispatch(push('/'))}>
+        <img src={close} alt='cross' />
+      </CardButton>
+      <Title>{period.getIn(['name', 'ru'])}</Title>
+      <Period>{`${period.get('year_start')} – ${period.get('year_end')}`}</Period>
+      <Description>{period.getIn(['description', 'ru'])}</Description>
+    </Container>
+  )
+);
 
 PeriodCard.propTypes = {
-  period: PropTypes.object.isRequired,
-  dispatch: PropTypes.func.isRequired,
-  currentPeriod: PropTypes.bool.isRequired
+  period: PropTypes.object,
+  dispatch: PropTypes.func.isRequired
+};
+
+PeriodCard.defaultProps = {
+  period: null
 };
 
 export default connect(
-  state => ({
-    period: state.ui.currentPeriod ? state.data.periods[state.ui.currentPeriod] : null,
-    currentPeriod: state.ui.currentPeriod
+  (state, props) => ({
+    period: currentPeriodSelector(state, props)
   })
 )(PeriodCard);

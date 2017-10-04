@@ -22,7 +22,7 @@ export const getData = () => (
     .then(([prisons, photos, activities, places, types, periods]) => ({
       prisons: groupById(prisons),
       photos,
-      activities: groupById(activities),
+      activities,
       places: groupById(places),
       types: groupById(types),
       periods: groupById(periods)

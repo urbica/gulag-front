@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 
-import currentPeriodSelector from './selectors';
+import periodSelector from './selector';
 
 import CardButton from '../Buttons/CardButton';
 
@@ -19,7 +19,7 @@ import Description from './Description';
 const PeriodCard = ({ period, dispatch }) => (
   !period ? null : (
     <Container>
-      <CardButton onClick={() => dispatch(push('/'))}>
+      <CardButton onClick={dispatch.bind(null, push('/'))}>
         <img src={close} alt='cross' />
       </CardButton>
       <Title>{period.getIn(['name', 'ru'])}</Title>
@@ -39,7 +39,5 @@ PeriodCard.defaultProps = {
 };
 
 export default connect(
-  (state, props) => ({
-    period: currentPeriodSelector(state, props)
-  })
+  (state, props) => ({ period: periodSelector(state, props) })
 )(PeriodCard);

@@ -1,5 +1,3 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/require-default-props */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { scaleTime, scaleLinear } from 'd3-scale';
@@ -16,7 +14,7 @@ const margin = {
 const width = 300 - margin.left - margin.right;
 
 const PrisonChart = ({ features }) => {
-  const data = features.reduce((acc, feature) => {
+  const data = features.toJS().reduce((acc, feature) => {
     Object.keys(feature.properties).forEach((key) => {
       acc.push({
         year: +key,
@@ -63,9 +61,7 @@ const PrisonChart = ({ features }) => {
 };
 
 PrisonChart.propTypes = {
-  features: PropTypes.arrayOf(
-    PropTypes.object
-  )
+  features: PropTypes.object.isRequired
 };
 
 export default PrisonChart;

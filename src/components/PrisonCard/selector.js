@@ -6,10 +6,18 @@ export default (state, { match }) => {
     return null;
   }
 
+  const firstYear =
+    prisonSelector
+      .getIn(['features', 0, 'properties'])
+      .keySeq()
+      .first();
+  const prison =
+    prisonSelector
+      .set('firstYear', firstYear);
   const activityId = prisonSelector.get('activity_id');
 
   if (activityId === null) {
-    return prisonSelector;
+    return prison;
   }
 
   const activityName =
@@ -17,6 +25,6 @@ export default (state, { match }) => {
       .find(activity => activity.get('id') === activityId)
       .get('name');
 
-  return prisonSelector
+  return prison
     .set('activity', activityName);
 };

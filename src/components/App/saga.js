@@ -1,6 +1,6 @@
 import { call, put, takeLatest, fork } from 'redux-saga/effects';
 
-import { getData, getStyles } from '../../utils';
+import { getData, getStyles } from '../../utils/utils';
 
 import {
   DATA_FETCH_REQUEST,

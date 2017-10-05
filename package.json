@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@urbica/react-map-gl": "0.2.2",
+    "commonmark": "0.28.1",
     "d3-array": "1.2.1",
     "d3-axis": "1.0.8",
     "d3-drag": "1.1.1",

@@ -1,5 +1,5 @@
-import { dataToken } from './config/tokens';
-import stylesUrl from './config/map';
+import { dataToken } from '../config/tokens';
+import stylesUrl from '../config/map';
 
 const options = { headers: { Authorization: `Bearer ${dataToken}` } };
 

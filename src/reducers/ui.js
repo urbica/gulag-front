@@ -19,7 +19,7 @@ export const toggleAllPrisons = () => ({ type: TOGGLE_ALL_PRISONS });
 export default (state = initState, { type, payload }) => {
   switch (type) {
     case CURRENT_YEAR_CHANGED:
-      return state.set('currentYear', payload);
+      return state.set('currentYear', parseInt(payload, 10));
     case TOGGLE_DEMO:
       return state
         .set('isDemoPlay', !state.get('isDemoPlay'))

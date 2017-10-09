@@ -36,8 +36,9 @@ const prisonSourceSelector = createSelector(
       .toList()
       .filter(prison => prison.getIn(['published', lang]))
       .flatMap(prison => prison.get('features'))
-      .filter(feature =>
-        isShowAllPrisons || feature.get('properties').has(currentYear.toString())
+      .filter(
+        feature =>
+          isShowAllPrisons || feature.get('properties').has(currentYear.toString())
       )
       .map(feature => feature.setIn(['properties', 'peoples'], feature.getIn(['properties', currentYear.toString(), 'peoples'])));
 

@@ -104,7 +104,12 @@ class PrisonersArea extends PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { xScale, yScale, width, height } = nextProps;
+    const {
+      xScale,
+      yScale,
+      width,
+      height
+    } = nextProps;
     const barWidth = Math.round(width / 42) - 2;
 
     this.deadRect

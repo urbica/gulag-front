@@ -26,7 +26,7 @@ const height = 300 - margin.top - margin.bottom;
 
 const Chart = (props) => {
   const { periods, openPeriod, showAllYears } = props;
-  const innerWidth = window.innerWidth;
+  const { innerWidth } = window;
   let width;
   if (innerWidth < 1024) {
     width = innerWidth - 40 - margin.left - margin.right;
@@ -133,9 +133,7 @@ Chart.propTypes = {
   openPeriod: PropTypes.func
 };
 
-export default connect(
-  state => ({
-    periods: state.getIn(['data', 'periods']),
-    isShowAllPrisons: state.getIn(['ui', 'isShowAllPrisons'])
-  })
-)(Chart);
+export default connect(state => ({
+  periods: state.getIn(['data', 'periods']),
+  isShowAllPrisons: state.getIn(['ui', 'isShowAllPrisons'])
+}))(Chart);

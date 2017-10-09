@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions,
-jsx-a11y/no-noninteractive-element-interactions */
+jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
@@ -14,6 +14,7 @@ import ImgPreviewContainer from './ImgPreviewContainer';
 import FullScreenContainer from './FullScreenContainer';
 import FullScreenTop from './FullScreenTop';
 import NavButton from './NavButton';
+
 // import { CardButton } from '../StyledButtons';
 
 class Gallery extends PureComponent {
@@ -30,7 +31,7 @@ class Gallery extends PureComponent {
   }
 
   onPreviewClick(i) {
-    const left = this[`preview${i}`].getBoundingClientRect().left;
+    const { left } = this[`preview${i}`].getBoundingClientRect();
     const containerWidth = this.previewContainer.getBoundingClientRect().width;
     const scrollBy = left - (containerWidth / 2);
 
@@ -74,7 +75,7 @@ class Gallery extends PureComponent {
   }
 
   changeActivePhoto(val) {
-    const length = this.props.photos.length;
+    const { length } = this.props.photos;
     const newActivePhotoId = this.state.activePhotoId + val;
 
     if (length > newActivePhotoId && newActivePhotoId > -1) {

@@ -1,5 +1,4 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/require-default-props */
+/* eslint-disable react/prop-types, react/require-default-props, react/no-unused-state */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -118,7 +117,9 @@ class Slider extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { width, height, xScale, yScale, data, currentYear } = nextProps;
+    const {
+      width, height, xScale, yScale, data, currentYear
+    } = nextProps;
     const barWidth = Math.round(width / 42) - 2;
     let prisoners = 0;
 

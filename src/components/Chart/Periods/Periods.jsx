@@ -16,34 +16,45 @@ const getWidth = (scale, endYear, startYear) => {
   return Math.round(scale(dateEnd) - scale(dateStart));
 };
 
-const Periods = ({ width, height, margin, xScale, periods, dispatch }) => (
-  <Container
-    top={height + margin.top}
-    width={width}
-    left={margin.left}
-  >
-    {periods
-      .toList()
-      .map((period) => {
-        const id = period.get('id');
-        const yearStart = period.get('year_start');
-        const yearEnd = period.get('year_end');
-        const name = period.getIn(['name', 'ru']);
+const Periods = (props) => {
+  const {
+    width,
+    height,
+    margin,
+    xScale,
+    periods,
+    dispatch
+  } = props;
 
-        return (
-          <Period
-            key={id}
-            id={id}
-            width={getWidth(xScale, yearEnd, yearStart)}
-            onClick={dispatch.bind(null, push(`/period${id}`))}
-          >
-            <Year>{yearStart}</Year>
-            <div>{name}</div>
-          </Period>
-        );
-      })}
-  </Container>
-);
+  return (
+    <Container
+      top={height + margin.top}
+      width={width}
+      left={margin.left}
+    >
+      {periods
+        .toList()
+        .map((period) => {
+          const id = period.get('id');
+          const yearStart = period.get('year_start');
+          const yearEnd = period.get('year_end');
+          const name = period.getIn(['name', 'ru']);
+
+          return (
+            <Period
+              key={id}
+              id={id}
+              width={getWidth(xScale, yearEnd, yearStart)}
+              onClick={dispatch.bind(null, push(`/period${id}`))}
+            >
+              <Year>{yearStart}</Year>
+              <div>{name}</div>
+            </Period>
+          );
+        })}
+    </Container>
+  );
+};
 
 Periods.propTypes = {
   width: PropTypes.number,

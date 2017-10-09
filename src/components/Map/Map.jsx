@@ -9,9 +9,11 @@ import Container from './Container';
 
 import { mapToken } from '../../config/tokens';
 
+import { changeViewport } from '../../reducers/ui';
 import {
   prisonsSelector,
   currentYearSelector,
+  viewportSelector,
   isShowAllPrisonsSelector
 } from '../App/selectors';
 
@@ -105,39 +107,56 @@ import { finalStyleSelector } from './selectors';
 //   }, 1000);
 // }
 
-const Map = props => (
-  <Container slideUp={false}>
-    <MapGL
-      style={{ width: '100%', height: '100vh' }}
-      accessToken={mapToken}
-      mapStyle={props.mapStyle}
-      latitude={60}
-      longitude={90}
-      zoom={2.5}
-      onViewportChange={(viewport) => {
-        console.log(viewport);
-      }}
-    />
-  </Container>
-);
+const Map = (props) => {
+  const {
+    isSlideUp,
+    mapStyle,
+    viewport,
+    dispatch
+  } = props;
+
+  return (
+    <Container slideUp={isSlideUp}>
+      <MapGL
+        style={{ width: '100%', height: '100vh' }}
+        accessToken={mapToken}
+        mapStyle={mapStyle}
+        latitude={viewport.get('latitude')}
+        longitude={viewport.get('longitude')}
+        zoom={viewport.get('zoom')}
+        onViewportChange={(newViewport) => {
+          dispatch(changeViewport(newViewport));
+        }}
+      />
+    </Container>
+  );
+};
 
 Map.propTypes = {
-  mapStyle: PropTypes.object
+  isSlideUp: PropTypes.bool,
+  mapStyle: PropTypes.object,
+  dispatch: PropTypes.func.isRequired,
+  viewport: PropTypes.object.isRequired
 };
 
 Map.defaultProps = {
+  isSlideUp: false,
   mapStyle: null
 };
 
 const selector = createSelector(
+  state => state.getIn(['router']).location.pathname,
   prisonsSelector,
   finalStyleSelector,
   currentYearSelector,
+  viewportSelector,
   isShowAllPrisonsSelector,
-  (prisons, mapStyle, currentYear, isShowAllPrisons) => ({
+  (pathname, prisons, mapStyle, currentYear, viewport, isShowAllPrisons) => ({
+    isSlideUp: /\/prison/.test(pathname),
     prisons,
     mapStyle,
     currentYear,
+    viewport,
     isShowAllPrisons
   })
 );

@@ -11,9 +11,6 @@ import {
   isShowAllPrisonsSelector
 } from '../App/selectors';
 
-// const layersSelector = state => state.getIn(['data', 'mapStyle', 'layers']);
-// const sourcesSelector = state => state.getIn(['data', 'mapStyle', 'sources']);
-
 const emptyGeoJSONSource = Immutable.fromJS({
   type: 'geojson',
   data: {
@@ -35,12 +32,24 @@ const prisonSourceSelector = createSelector(
     const features = prisons
       .toList()
       .filter(prison => prison.getIn(['published', lang]))
-      .flatMap(prison => prison.get('features'))
-      .filter(
-        feature =>
-          isShowAllPrisons || feature.get('properties').has(currentYear.toString())
-      )
-      .map(feature => feature.setIn(['properties', 'peoples'], feature.getIn(['properties', currentYear.toString(), 'peoples'])));
+      .reduce((acc, prison) => (
+        prison
+          .get('features')
+          .reduce((oldFeatures, feature) => {
+            if (feature.getIn(['properties', currentYear.toString()]) || isShowAllPrisons) {
+              const newProperties = Immutable.Map({
+                id: prison.get('id'),
+                ruName: prison.getIn(['name', 'ru']),
+                enName: prison.getIn(['name', 'en']),
+                deName: prison.getIn(['name', 'de']),
+                peoples: feature.getIn(['properties', currentYear.toString(), 'peoples'])
+              });
+
+              return oldFeatures.push(feature.set('properties', newProperties));
+            }
+            return oldFeatures;
+          }, acc)
+      ), Immutable.List());
 
     return emptyGeoJSONSource
       .setIn(['data', 'features'], features);

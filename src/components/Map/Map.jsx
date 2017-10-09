@@ -2,10 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
+import { push } from 'react-router-redux';
 
 import MapGL from '@urbica/react-map-gl';
-
-import Container from './Container';
 
 import { mapToken } from '../../config/tokens';
 
@@ -16,8 +15,9 @@ import {
   viewportSelector,
   isShowAllPrisonsSelector
 } from '../App/selectors';
-
 import { finalStyleSelector } from './selectors';
+
+import Container from './Container';
 
 // import Controls from './ControlsStyle';
 // import Popup from './Popup';
@@ -121,12 +121,14 @@ const Map = (props) => {
         style={{ width: '100%', height: '100vh' }}
         accessToken={mapToken}
         mapStyle={mapStyle}
-        latitude={viewport.get('latitude')}
-        longitude={viewport.get('longitude')}
-        zoom={viewport.get('zoom')}
-        onViewportChange={(newViewport) => {
-          dispatch(changeViewport(newViewport));
+        onViewportChange={newViewport => dispatch(changeViewport(newViewport))}
+        onClick={({ features }) => {
+          if (features.length > 0) {
+            const { id } = features[0].properties;
+            dispatch(push(`/prison${id}`));
+          }
         }}
+        {...viewport.toJS()}
       />
     </Container>
   );

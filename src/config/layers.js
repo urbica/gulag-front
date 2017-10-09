@@ -1,38 +1,6 @@
 import Immutable from 'immutable';
 
 export default Immutable.fromJS([
-  // {
-  //   id: 'ussr',
-  //   // before: 'waterway',
-  //   type: 'fill',
-  //   source: 'composite',
-  //   'source-layer': 'NEWUSSR_BOUND',
-  //   layout: {
-  //     // visibility: 'visible'
-  //   },
-  //   paint: {
-  //     'fill-color': '#1b2128', // 222933 #1b2128
-  //     'fill-opacity': 1
-  //   },
-  //   filter: ['all',
-  //     ['<=', 'year_start', 1960],
-  //     ['>=', 'year_end', 1960]
-  //   ]
-  // },
-  // {
-  //   id: 'chukotka',
-  //   before: 'water',
-  //   type: 'fill',
-  //   source: 'composite',
-  //   'source-layer': 'chukotka_patch-4b7lx1',
-  //   layout: {
-  //     // visibility: 'visible'
-  //   },
-  //   paint: {
-  //     'fill-color': '#1b2128',
-  //     'fill-opacity': 1
-  //   }
-  // },
   {
     id: 'prisons',
     type: 'circle',
@@ -46,6 +14,7 @@ export default Immutable.fromJS([
   {
     id: 'prisonsHalo',
     type: 'circle',
+    interactive: true,
     source: 'prisons',
     paint: {
       'circle-color': '#eb4200',
@@ -139,19 +108,4 @@ export default Immutable.fromJS([
     },
     filter: ['==', 'id', '']
   }
-  // {
-  //   id: 'ussr',
-  //   type: 'fill',
-  //   source: 'ussr',
-  //   'source-layer': 'NEWUSSR_BOUND',
-  //   layout: {},
-  //   paint: {
-  //     'fill-color': '#1b2128', // 222933 #1b2128
-  //     'fill-opacity': 1
-  //   },
-  //   filter: ['all',
-  //     ['<=', 'year_start', this.props.currentYear],
-  //     ['>=', 'year_end', this.props.currentYear]
-  //   ]
-  // }
 ]);

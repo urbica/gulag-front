@@ -70,6 +70,10 @@ export const finalStyleSelector = createSelector(
       .get('layers')
       .findIndex(layer => layer.get('id') === 'USSR');
 
+    const citiesLayerId = mapStyle
+      .get('layers')
+      .findIndex(layer => layer.get('id') === 'city all last');
+
     const getUSSRBoundaryFilterByYear = () => {
       if (currentYear !== 1960) {
         return Immutable.fromJS(
@@ -86,10 +90,16 @@ export const finalStyleSelector = createSelector(
         ]
       );
     };
+    const citiesFilterByYear = Immutable.fromJS(
+      ['all',
+        ['==', 'year', currentYear]
+      ]
+    );
 
     return mapStyle
       .setIn(['sources', 'prisons'], prisonSource)
       .setIn(['layers', ussrLayerId, 'filter'], getUSSRBoundaryFilterByYear())
+      .setIn(['layers', citiesLayerId, 'filter'], citiesFilterByYear)
       .update('layers', previousLayers => previousLayers.concat(layers));
   }
 );

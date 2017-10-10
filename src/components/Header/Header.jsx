@@ -3,6 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 
 // styled
 import Container from './Container';
@@ -41,7 +42,7 @@ const Header = (props) => {
 
   return (
     <Container>
-      <HeaderButton>
+      <HeaderButton onClick={props.dispatch.bind(null, push('/search'))}>
         <img src={search} alt='loupe-icon' />
       </HeaderButton>
       <HeaderCenterGroup>

@@ -12,9 +12,10 @@ import ChartWrap from './ChartWrap';
 import PlayButton from '../Buttons/PlayButton';
 import Chart from '../Chart/Chart';
 import ShowAllButton from '../Buttons/ShowAllButton';
-import PrisonCard from '../PrisonCard/PrisonCard';
-import PeriodCard from '../PeriodCard/PeriodCard';
-import SearchCard from '../SearchCard/SearchCard';
+import PrisonCard from '../Cards/PrisonCard/PrisonCard';
+import PeriodCard from '../Cards/PeriodCard/PeriodCard';
+import SearchCard from '../Cards/SearchCard/SearchCard';
+import AboutCard from '../Cards/AboutCard/AboutCard';
 
 class App extends PureComponent {
   constructor(props) {
@@ -56,6 +57,7 @@ class App extends PureComponent {
             <Route path='/prison:id' component={PrisonCard} />
             <Route path='/period:id' component={PeriodCard} />
             <Route path='/search' component={SearchCard} />
+            <Route path='/about' component={AboutCard} />
           </Switch>
         </div>
       </ConnectedRouter>

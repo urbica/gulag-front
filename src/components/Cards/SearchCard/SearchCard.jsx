@@ -8,9 +8,9 @@ import { push } from 'react-router-redux';
 // import getFirstYear from '../../../utils/prison-utils';
 
 // ico
-import cross from '../../icons/btn-close.svg';
+import cross from '../../../icons/btn-close.svg';
 
-import CardButton from '../Buttons/CardButton';
+import CardButton from '../../Buttons/CardButton';
 
 // styled
 import Container from './Container';

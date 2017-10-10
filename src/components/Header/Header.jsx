@@ -100,7 +100,7 @@ const Header = (props) => {
           </Group>
         }
       </HeaderCenterGroup>
-      <HeaderButton>
+      <HeaderButton onClick={props.dispatch.bind(null, push('/about'))}>
         <img src={info} alt='info-sign' />
       </HeaderButton>
     </Container>

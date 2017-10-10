@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import parseMarkup from '../../../utils/parseMarkup';
+import parseMarkup from '../../../../utils/parseMarkup';
 
 // ico
 // import closeIcon from '../icons/btn-close.svg';

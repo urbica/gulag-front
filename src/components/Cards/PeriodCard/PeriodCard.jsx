@@ -5,10 +5,10 @@ import { push } from 'react-router-redux';
 
 import periodSelector from './selector';
 
-import CardButton from '../Buttons/CardButton';
+import CardButton from '../../Buttons/CardButton';
 
 // icons
-import close from '../../icons/btn-close.svg';
+import close from '../../../icons/btn-close.svg';
 
 // styled
 import Container from './Container';

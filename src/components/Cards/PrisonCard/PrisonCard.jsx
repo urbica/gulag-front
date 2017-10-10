@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 
 // reducer && selector
-import { changeCurrentYear } from '../../reducers/ui';
+import { changeCurrentYear } from '../../../reducers/ui';
 import prisonSelector from './selector';
 
 // images
-import close from '../../icons/btn-close.svg';
+import close from '../../../icons/btn-close.svg';
 
 // utils
 // import { getPeriods } from '../../utils';
@@ -24,7 +24,7 @@ import Left from './Left';
 import HalfWidth from './HalfWidth';
 import Subtitle from './Subtitle';
 import Right from './Right';
-import CardButton from '../Buttons/CardButton';
+import CardButton from '../../Buttons/CardButton';
 
 class PrisonCard extends PureComponent {
   componentWillReceiveProps({ prison, history, dispatch }) {

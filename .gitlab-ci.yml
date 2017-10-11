@@ -67,4 +67,4 @@ deploy:
     name: production
     url: http://gulag.urbica.co
   only:
-    - master
+    - dev

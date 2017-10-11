@@ -1,5 +1,7 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 
+// import { changeViewport } from '../../reducers/ui';
+
 import { getStyle } from '../../utils/utils';
 
 import {
@@ -19,6 +21,10 @@ function* fetchStyle() {
     yield put({ type: MAP_STYLE_FETCH_FAILURE, payload: error });
   }
 }
+
+// function* openPrison() {
+//   yield call(changeViewport);
+// }
 
 // eslint-disable-next-line import/prefer-default-export
 export function* MapSaga() {

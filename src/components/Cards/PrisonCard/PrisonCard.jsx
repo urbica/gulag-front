@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 
 // reducer && selector
-import { changeCurrentYear } from '../../../reducers/ui';
+import { changeCurrentYear, changeViewport } from '../../../reducers/ui';
 import prisonSelector from './selector';
 
 // images
@@ -30,7 +30,10 @@ class PrisonCard extends PureComponent {
   componentWillReceiveProps({ prison, history, dispatch }) {
     if (prison && history.action === 'POP') {
       const firstYear = prison.get('firstYear');
+      const longitude = prison.getIn(['features', 0, 'geometry', 'coordinates', 0]);
+      const latitude = prison.getIn(['features', 0, 'geometry', 'coordinates', 1]);
       dispatch(changeCurrentYear(firstYear));
+      dispatch(changeViewport({ longitude, latitude }));
     }
   }
 

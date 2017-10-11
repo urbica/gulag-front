@@ -125,7 +125,10 @@ const Map = (props) => {
         onClick={({ features }) => {
           if (features.length > 0) {
             const { id } = features[0].properties;
+            const longitude = features[0].geometry.coordinates[0];
+            const latitude = features[0].geometry.coordinates[1];
             dispatch(push(`/prison${id}`));
+            dispatch(changeViewport({ longitude, latitude }));
           }
         }}
         {...viewport.toJS()}

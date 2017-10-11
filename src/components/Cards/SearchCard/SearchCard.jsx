@@ -6,6 +6,7 @@ import { push } from 'react-router-redux';
 // utils
 // import { getRightLang, getPeriods } from '../../../utils/utils';
 // import getFirstYear from '../../../utils/prison-utils';
+import { changeCurrentYear, changeViewport } from '../../../reducers/ui';
 
 // ico
 import cross from '../../../icons/btn-close.svg';
@@ -85,7 +86,18 @@ class SearchCard extends PureComponent {
               .map(prison => (
                 <Item
                   key={prison.get('id')}
-                  onClick={this.props.dispatch.bind(null, push(`/prison${prison.get('id')}`))}
+                  onClick={() => {
+                    const firstYear = prison
+                      .getIn(['features', 0, 'properties'])
+                      .keySeq()
+                      .first();
+                    const longitude = prison.getIn(['features', 0, 'geometry', 'coordinates', 0]);
+                    const latitude = prison.getIn(['features', 0, 'geometry', 'coordinates', 1]);
+
+                    this.props.dispatch(changeCurrentYear(firstYear));
+                    this.props.dispatch(changeViewport({ longitude, latitude }));
+                    this.props.dispatch(push(`/prison${prison.get('id')}`));
+                  }}
                 >
                   <Name>{prison.getIn(['name', 'ru'])}</Name>
                   {/* <Periods>{getPeriods(p)}</Periods> */}

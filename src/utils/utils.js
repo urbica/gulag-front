@@ -29,7 +29,7 @@ export const getData = () => (
     }))
 );
 
-export const getStyles = () => (
+export const getStyle = () => (
   fetch(stylesUrl.styles)
     .then(response => response.json())
     .then(json => json)

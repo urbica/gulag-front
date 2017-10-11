@@ -4,12 +4,12 @@
   "private": true,
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
     "lint": "eslint src --ext .js,.jsx",
+    "test": "react-scripts test --env=jsdom",
+    "build": "react-scripts build",
+    "release": "standard-version",
     "commit": "git-cz",
-    "release": "standard-version"
+    "eject": "react-scripts eject"
   },
   "config": {
     "commitizen": {
@@ -17,20 +17,41 @@
     }
   },
   "dependencies": {
+    "@urbica/react-map-gl": "0.2.2",
+    "commonmark": "0.28.1",
+    "d3-array": "1.2.1",
+    "d3-axis": "1.0.8",
+    "d3-drag": "1.2.1",
+    "d3-scale": "1.0.6",
+    "d3-selection": "1.1.0",
+    "history": "4.7.2",
+    "immutable": "4.0.0-rc.4",
+    "mapbox-gl": "0.40.1",
     "normalize.css": "7.0.0",
-    "prop-types": "15.5.10",
-    "react": "15.6.1",
-    "react-dom": "15.6.1",
-    "react-scripts": "1.0.11",
-    "styled-components": "2.1.2"
+    "prop-types": "15.6.0",
+    "react": "16.0.0",
+    "react-dom": "16.0.0",
+    "react-intl": "2.4.0",
+    "react-intl-redux": "0.6.0",
+    "react-redux": "5.0.6",
+    "react-router-dom": "4.2.2",
+    "react-router-redux": "5.0.0-alpha.6",
+    "react-scripts": "1.0.14",
+    "redux": "3.7.2",
+    "redux-immutable": "4.0.0",
+    "redux-logger": "3.0.6",
+    "redux-saga": "0.15.6",
+    "reselect": "3.0.1",
+    "styled-components": "2.2.1"
   },
   "devDependencies": {
     "commitizen": "2.9.6",
     "cz-conventional-changelog": "2.0.0",
-    "eslint": "4.5.0",
-    "eslint-config-airbnb": "15.1.0",
+    "eslint": "4.8.0",
+    "eslint-config-airbnb": "16.0.0",
     "eslint-plugin-import": "2.7.0",
-    "eslint-plugin-jsx-a11y": "5.1.1",
-    "eslint-plugin-react": "7.3.0"
-  }
+    "eslint-plugin-jsx-a11y": "6.0.2",
+    "eslint-plugin-react": "7.4.0"
+  },
+  "proxy": "http://gulag.urbica.co/"
 }

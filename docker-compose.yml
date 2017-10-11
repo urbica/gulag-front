@@ -1,0 +1,17 @@
+version: '2.1'
+
+services:
+  gulag:
+    image: gitlab.urbica.co:5001/gulag/gulagmap:master
+    restart: always
+    environment:
+      - VIRTUAL_HOST=gulag.urbica.co
+      - LETSENCRYPT_HOST=gulag.urbica.co
+      - LETSENCRYPT_EMAIL=hello@urbica.co
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+
+networks:
+  default:
+    external:
+      name: production-network

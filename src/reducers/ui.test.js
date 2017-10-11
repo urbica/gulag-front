@@ -1,3 +1,4 @@
+import Immutable from 'immutable';
 import reducer, { changeCurrentYear } from './ui';
 
 describe('Ui Reducer', () => {
@@ -8,7 +9,7 @@ describe('Ui Reducer', () => {
   });
 
   it('change current year', () => {
-    const startState = {
+    const startState = Immutable.Map({
       currentYear: null,
       currentPrison: null,
       currentPeriod: null,
@@ -16,8 +17,8 @@ describe('Ui Reducer', () => {
       isAboutOpen: false,
       isDemoPlay: false,
       isShowAllPrisons: false
-    };
-    const expectedState = {
+    });
+    const expectedState = Immutable.Map({
       currentYear: 1937,
       currentPrison: null,
       currentPeriod: null,
@@ -25,7 +26,7 @@ describe('Ui Reducer', () => {
       isAboutOpen: false,
       isDemoPlay: false,
       isShowAllPrisons: false
-    };
+    });
 
     const result = reducer(startState, changeCurrentYear(1937));
     expect(result).toEqual(expectedState);

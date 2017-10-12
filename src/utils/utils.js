@@ -12,12 +12,12 @@ export const groupById = arr => (
 
 export const getData = () => (
   Promise.all([
-    fetch('/api/public/camps.json', options).then(res => res.json()),
-    fetch('/api/public/uploads.json', options).then(r => r.json()),
-    fetch('/api/public/activities.json', options).then(r => r.json()),
-    fetch('/api/public/places.json', options).then(r => r.json()),
-    fetch('/api/public/types.json', options).then(r => r.json()),
-    fetch('/api/public/periods.json', options).then(r => r.json())
+    fetch('http://gulagmap.ru/api/public/camps.json', options).then(res => res.json()),
+    fetch('http://gulagmap.ru/api/public/uploads.json', options).then(r => r.json()),
+    fetch('http://gulagmap.ru/api/public/activities.json', options).then(r => r.json()),
+    fetch('http://gulagmap.ru/api/public/places.json', options).then(r => r.json()),
+    fetch('http://gulagmap.ru/api/public/types.json', options).then(r => r.json()),
+    fetch('http://gulagmap.ru/api/public/periods.json', options).then(r => r.json())
   ])
     .then(([prisons, photos, activities, places, types, periods]) => ({
       prisons: groupById(prisons),

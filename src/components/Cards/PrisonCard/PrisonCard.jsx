@@ -5,6 +5,7 @@ import { push } from 'react-router-redux';
 
 // reducer && selector
 import { changeCurrentYear, changeViewport } from '../../../reducers/ui';
+import { langSelector } from '../../App/selectors';
 import prisonSelector from './selector';
 
 // images
@@ -38,7 +39,7 @@ class PrisonCard extends PureComponent {
   }
 
   render() {
-    const { prison, dispatch } = this.props;
+    const { prison, dispatch, lang } = this.props;
     if (!prison) {
       return null;
     }
@@ -48,8 +49,8 @@ class PrisonCard extends PureComponent {
     return (
       <Container>
         <Top>
-          <h1>{prison.getIn(['name', 'ru'])}</h1>
-          <Location>{prison.getIn(['additional_names', 'ru'])}</Location>
+          <h1>{prison.getIn(['name', lang])}</h1>
+          <Location>{prison.getIn(['additional_names', lang])}</Location>
           <CardButton onClick={dispatch.bind(null, push('/'))}>
             <img src={close} alt='cross' />
           </CardButton>
@@ -65,9 +66,9 @@ class PrisonCard extends PureComponent {
           </HalfWidth>
           <div>
             <Subtitle>Местоположение</Subtitle>
-            <div>{prison.getIn(['location', 'ru'])}</div>
+            <div>{prison.getIn(['location', lang])}</div>
           </div>
-          <PrisonDescription markup={prison.getIn(['description', 'ru'])} />
+          <PrisonDescription markup={prison.getIn(['description', lang])} />
         </Left>
         <Right>
           <Subtitle>Количество заключенных по годам</Subtitle>
@@ -80,7 +81,8 @@ class PrisonCard extends PureComponent {
 
 PrisonCard.propTypes = {
   prison: PropTypes.object,
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
+  lang: PropTypes.string.isRequired
 };
 
 PrisonCard.defaultProps = {
@@ -88,5 +90,8 @@ PrisonCard.defaultProps = {
 };
 
 export default connect(
-  (state, props) => ({ prison: prisonSelector(state, props) })
+  (state, props) => ({
+    prison: prisonSelector(state, props),
+    lang: langSelector(state)
+  })
 )(PrisonCard);

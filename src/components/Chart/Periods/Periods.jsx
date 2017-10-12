@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 
+import { langSelector } from '../../App/selectors';
+
 // styled
 import Container from './Container';
 import Period from './Period';
@@ -23,7 +25,8 @@ const Periods = (props) => {
     margin,
     xScale,
     periods,
-    dispatch
+    dispatch,
+    lang
   } = props;
 
   return (
@@ -38,7 +41,7 @@ const Periods = (props) => {
           const id = period.get('id');
           const yearStart = period.get('year_start');
           const yearEnd = period.get('year_end');
-          const name = period.getIn(['name', 'ru']);
+          const name = period.getIn(['name', lang]);
 
           return (
             <Period
@@ -83,4 +86,8 @@ Periods.propTypes = {
   })
 };
 
-export default connect()(Periods);
+export default connect(
+  state => ({
+    lang: langSelector(state)
+  })
+)(Periods);

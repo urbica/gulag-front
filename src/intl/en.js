@@ -1,4 +1,8 @@
 export default {
   locale: 'en',
-  messages: {}
+  messages: {
+    prisoners: 'prisoners',
+    dead: 'dead',
+    search: 'Search'
+  }
 };

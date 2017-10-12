@@ -6,6 +6,7 @@ import { push } from 'react-router-redux';
 // utils
 // import { getRightLang, getPeriods } from '../../../utils/utils';
 // import getFirstYear from '../../../utils/prison-utils';
+import { langSelector } from '../../App/selectors';
 import { changeCurrentYear, changeViewport } from '../../../reducers/ui';
 
 // ico
@@ -41,7 +42,8 @@ class SearchCard extends PureComponent {
 
   render() {
     const {
-      prisons
+      prisons,
+      lang
       // setYear,
       // places
     } = this.props;
@@ -60,9 +62,9 @@ class SearchCard extends PureComponent {
     const search = this.state.searchQuery.trim().toLowerCase();
     const prisonsFilteredBySearch = prisons.filter(
       prison =>
-        prison.getIn(['name', 'ru']).toLowerCase().match(search) ||
-        prison.getIn(['additional_names', 'ru']).toLowerCase().match(search) ||
-        prison.getIn(['description', 'ru']).toLowerCase().match(search)
+        prison.getIn(['name', lang]).toLowerCase().match(search) ||
+        prison.getIn(['additional_names', lang]).toLowerCase().match(search) ||
+        prison.getIn(['description', lang]).toLowerCase().match(search)
     );
 
     return (
@@ -83,6 +85,7 @@ class SearchCard extends PureComponent {
           {
             prisonsFilteredBySearch
               .toList()
+              .filter(prison => prison.getIn(['published', lang]))
               .map(prison => (
                 <Item
                   key={prison.get('id')}
@@ -99,7 +102,7 @@ class SearchCard extends PureComponent {
                     this.props.dispatch(push(`/prison${prison.get('id')}`));
                   }}
                 >
-                  <Name>{prison.getIn(['name', 'ru'])}</Name>
+                  <Name>{prison.getIn(['name', lang])}</Name>
                   {/* <Periods>{getPeriods(p)}</Periods> */}
                   {/* <Location>{places[p.place_id] ? places[p.place_id].name : ''}</Location> */}
                 </Item>
@@ -113,7 +116,8 @@ class SearchCard extends PureComponent {
 
 SearchCard.propTypes = {
   prisons: PropTypes.object,
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
+  lang: PropTypes.string.isRequired
 };
 
 SearchCard.defaultProps = {
@@ -121,5 +125,8 @@ SearchCard.defaultProps = {
 };
 
 export default connect(
-  state => ({ prisons: state.getIn(['data', 'prisons']) })
+  state => ({
+    prisons: state.getIn(['data', 'prisons']),
+    lang: langSelector(state)
+  })
 )(SearchCard);

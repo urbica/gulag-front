@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 
+import { langSelector } from '../../App/selectors';
 import periodSelector from './selector';
 
 import CardButton from '../../Buttons/CardButton';
@@ -16,22 +17,23 @@ import Title from './Title';
 import Period from './Period';
 import Description from './Description';
 
-const PeriodCard = ({ period, dispatch }) => (
+const PeriodCard = ({ period, dispatch, lang }) => (
   !period ? null : (
     <Container>
       <CardButton onClick={dispatch.bind(null, push('/'))}>
         <img src={close} alt='cross' />
       </CardButton>
-      <Title>{period.getIn(['name', 'ru'])}</Title>
+      <Title>{period.getIn(['name', lang])}</Title>
       <Period>{`${period.get('year_start')} – ${period.get('year_end')}`}</Period>
-      <Description>{period.getIn(['description', 'ru'])}</Description>
+      <Description>{period.getIn(['description', lang])}</Description>
     </Container>
   )
 );
 
 PeriodCard.propTypes = {
   period: PropTypes.object,
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
+  lang: PropTypes.string.isRequired
 };
 
 PeriodCard.defaultProps = {
@@ -39,5 +41,8 @@ PeriodCard.defaultProps = {
 };
 
 export default connect(
-  (state, props) => ({ period: periodSelector(state, props) })
+  (state, props) => ({
+    period: periodSelector(state, props),
+    lang: langSelector(state)
+  })
 )(PeriodCard);

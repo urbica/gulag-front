@@ -11,8 +11,15 @@ const locales = {
   'en-US': enLocale
 };
 
-const { language } = window.navigator;
-const defaultLocale = locales[language] ? locales[language] : enLocale;
+const { language, languages } = window.navigator;
+let defaultLocale = locales[language] ? locales[language] : enLocale;
+
+for (let i = 0; i < languages.length; i += 1) {
+  if (locales[languages[i]]) {
+    defaultLocale = locales[languages[i]];
+    break;
+  }
+}
 
 const initialState = Immutable.fromJS(defaultLocale);
 

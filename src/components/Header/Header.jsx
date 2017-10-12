@@ -4,6 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
+import { t } from '../../intl/helper';
 
 // styled
 import Container from './Container';
@@ -64,7 +65,7 @@ const Header = (props) => {
             </svg>
             <div>
               {/* <Amount>{`${prisonersAmount}\n`}</Amount> */}
-              <Desc>заключённых</Desc>
+              <Desc>{t('prisoners')}</Desc>
             </div>
           </Group>
         }
@@ -80,7 +81,7 @@ const Header = (props) => {
             </svg>
             <div>
               {/* <Amount>{`${deadAmount}\n`}</Amount> */}
-              <Desc>умерших</Desc>
+              <Desc>{t('dead')}</Desc>
             </div>
           </Group>
         }

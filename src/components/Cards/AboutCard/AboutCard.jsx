@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
+import { langSelector } from '../../App/selectors';
 
 // ico
 import urbica from './urbica.svg';
@@ -66,7 +67,7 @@ const AboutCard = props => (
     </DescriptionContainer>
     <Footer>
       <a href='http://gmig.ru/' target='_blank' rel='noreferrer noopener'>
-        <img src={img.ru} alt='' />
+        <img src={img[props.lang]} alt='' />
       </a>
       <a href='http://urbica.co/' target='_blank' rel='noreferrer noopener'>
         <img src={urbica} alt='URBICA' />
@@ -77,7 +78,12 @@ const AboutCard = props => (
 );
 
 AboutCard.propTypes = {
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
+  lang: PropTypes.string.isRequired
 };
 
-export default connect()(AboutCard);
+export default connect(
+  state => ({
+    lang: langSelector(state)
+  })
+)(AboutCard);

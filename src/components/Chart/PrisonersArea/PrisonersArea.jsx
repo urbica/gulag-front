@@ -1,59 +1,12 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/require-default-props */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { select } from 'd3-selection';
-import styled from 'styled-components';
 
-import { changeCurrentYear } from '../../reducers/ui';
+import { changeCurrentYear } from '../../../reducers/ui';
 
-const G = styled.g`
-  pointer-events: auto;
-  & g:first-child {
-    & rect {
-      fill: #eb4200;
-      opacity: .1;
-      transition: opacity 2s;
-      &:hover {
-        cursor: pointer;
-        opacity: .2;
-        transition: opacity .2s;
-      }
-    }
-    & line {
-      stroke: #ff2b00;
-      stroke-width: 2px;
-    }
-  }
-
-  & g:nth-child(2) {
-    & rect {
-      cursor: pointer;
-      fill-opacity: 0.1;
-    }
-  }
-
-  & g:last-child {
-    & rect {
-      fill: #fff;
-      opacity: ${({ showAllYears }) => (showAllYears ? 0.6 : 0.1)};
-      transition: opacity 2s;
-      &:hover {
-        cursor: pointer;
-        opacity: .2;
-        transition: opacity .2s;
-      }
-    }
-    & line {
-      stroke: #fff;
-      stroke-width: 2px;
-    }
-  }
-  @media (max-width: 1023px) {
-    display: none;
-  }
-`;
+// styled
+import Container from './Container';
 
 class PrisonersArea extends PureComponent {
   componentDidMount() {
@@ -188,7 +141,7 @@ class PrisonersArea extends PureComponent {
     const { margin } = this.props;
 
     return (
-      <G
+      <Container
         innerRef={(ref) => {
           this.g = ref;
         }}
@@ -200,23 +153,29 @@ class PrisonersArea extends PureComponent {
 }
 
 PrisonersArea.propTypes = {
-  width: PropTypes.number,
-  height: PropTypes.number,
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
   margin: PropTypes.shape({
     top: PropTypes.number,
     right: PropTypes.number,
     bottom: PropTypes.number,
     left: PropTypes.number
-  }),
-  xScale: PropTypes.func,
-  yScale: PropTypes.func,
+  }).isRequired,
+  xScale: PropTypes.func.isRequired,
+  yScale: PropTypes.func.isRequired,
   data: PropTypes.arrayOf(
     PropTypes.shape({
       prisoners: PropTypes.number,
       dead: PropTypes.number,
       year: PropTypes.number
     })
-  )
+  ).isRequired,
+  dispatch: PropTypes.func.isRequired,
+  showAllYears: PropTypes.bool
+};
+
+PrisonersArea.defaultProps = {
+  showAllYears: false
 };
 
 export default connect()(PrisonersArea);

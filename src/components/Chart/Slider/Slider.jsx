@@ -1,63 +1,17 @@
-/* eslint-disable react/prop-types, react/require-default-props, react/no-unused-state */
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { select, event } from 'd3-selection';
 import { drag } from 'd3-drag';
-import styled from 'styled-components';
 
-import { changeCurrentYear } from '../../reducers/ui';
+import { changeCurrentYear } from '../../../reducers/ui';
 
-const G = styled.g`
-  display: ${({ isVisible }) => (isVisible ? 'block' : 'none')};
-  &:hover {
-    cursor: pointer;
-  }
-  
-  .circle {
-    @media (min-width: 1024px) {
-      display: none;
-    }
-  }
-  
-  .rect {
-    @media (max-width: 1023px) {
-      display: none;
-    }
-  }
-  
-  .handleLines {
-    @media (max-width: 1023px) {
-      display: none;
-    }
-  }
-  
-  .handleShadow {
-    @media (max-width: 1023px) {
-      display: none;
-    }
-  }
+// styled
+import Container from './Container';
 
-  .currentYearRect {
-    @media (max-width: 1023px) {
-      display: none;
-    }
-  }
-
-  .currentYear {
-    fill: #fff;
-    @media (min-width: 1024px) {
-      display: none;
-    }
-  }
-`;
-
-class Slider extends Component {
+class Slider extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      sliderPositionYear: 1918
-    };
     this.setYear = this.setYear.bind(this);
   }
 
@@ -123,8 +77,6 @@ class Slider extends Component {
     const barWidth = Math.round(width / 42) - 2;
     let prisoners = 0;
 
-    this.setState({ sliderPositionYear: currentYear });
-
     // eslint-disable-next-line
     data.map(d => (d.year === currentYear ? prisoners = d.prisoners : 0));
 
@@ -164,8 +116,8 @@ class Slider extends Component {
       .attr('transform', 'translate(-11, -17)');
   }
 
-  componentWillUpdate(nextProps, nextState) {
-    const translateX = nextProps.xScale(new Date(nextState.sliderPositionYear, 0, 1));
+  componentWillUpdate(nextProps) {
+    const translateX = nextProps.xScale(new Date(nextProps.currentYear, 0, 1));
 
     this.handle
       .attr('transform', `translate(${translateX}, 0)`);
@@ -179,7 +131,7 @@ class Slider extends Component {
     const { height, margin, isVisible } = this.props;
 
     return (
-      <G
+      <Container
         innerRef={(ref) => {
           this.g = ref;
         }}
@@ -191,24 +143,20 @@ class Slider extends Component {
 }
 
 Slider.propTypes = {
-  xScale: PropTypes.func,
-  yScale: PropTypes.func,
-  width: PropTypes.number,
-  height: PropTypes.number,
-  margin: PropTypes.shape({
-    top: PropTypes.number,
-    right: PropTypes.number,
-    bottom: PropTypes.number,
-    left: PropTypes.number
-  }),
+  xScale: PropTypes.func.isRequired,
+  yScale: PropTypes.func.isRequired,
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
+  margin: PropTypes.object.isRequired,
   data: PropTypes.arrayOf(
     PropTypes.shape({
       prisoners: PropTypes.number,
       year: PropTypes.number
     })
-  ),
-  currentYear: PropTypes.number,
-  isVisible: PropTypes.bool
+  ).isRequired,
+  currentYear: PropTypes.number.isRequired,
+  isVisible: PropTypes.bool.isRequired,
+  dispatch: PropTypes.func.isRequired
 };
 
 export default connect(

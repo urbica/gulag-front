@@ -7,9 +7,9 @@ import { scaleTime, scaleLinear } from 'd3-scale';
 import { max } from 'd3-array';
 
 import data from '../../config/chartData';
-import PrisonersArea from './PrisonersArea';
-import Axis from './Axis';
-import Slider from './Slider';
+import PrisonersArea from './PrisonersArea/PrisonersArea';
+import Axis from './Axis/Axis';
+import Slider from './Slider/Slider';
 import Periods from './Periods/Periods';
 
 // styled

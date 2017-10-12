@@ -65,7 +65,7 @@ class PrisonersArea extends PureComponent {
       .enter()
       .append('text')
       .text(({ prisoners }) => prisoners)
-      // .text(({ prisoners }) => (prisoners !== 0 ? splitDigits(prisoners) : ''))
+      .text(({ prisoners }) => (prisoners !== 0 ? prisoners /* todo splitDigits(prisoners) */ : ''))
       .attr('x', d => xScale(d.prisoners) + 10)
       .attr('y', (d) => {
         const date = new Date(d.year, 0, 1);

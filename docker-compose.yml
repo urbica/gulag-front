@@ -2,7 +2,7 @@ version: '2.1'
 
 services:
   gulag:
-    image: gitlab.urbica.co:5001/gulag/gulagmap:master
+    image: gitlab.urbica.co:5001/gulag/gulagmap:dev
     restart: always
     environment:
       - VIRTUAL_HOST=gulag.urbica.co

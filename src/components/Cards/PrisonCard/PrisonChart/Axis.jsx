@@ -1,22 +1,9 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/require-default-props */
 import React, { PureComponent } from 'react';
-// import { toPairs } from 'ramda';
 import PropTypes from 'prop-types';
 import { select } from 'd3-selection';
 import { axisLeft } from 'd3-axis';
 
-// const axisStyle = {
-//   stroke: '#fff',
-//   strokeWidth: 1,
-//   opacity: 0.25
-// };
-// const textStyle = {
-//   'font-family': 'Formular',
-//   'font-size': 12,
-//   fill: 'rgba(255,255,255,.5)',
-//   transform: 'translateX(-10px)'
-// };
+import AxisContainer from './AxisContainer';
 
 class Axis extends PureComponent {
   componentDidMount() {
@@ -30,25 +17,14 @@ class Axis extends PureComponent {
     el.call(axis)
       .selectAll('text')
       .attr('y', 14);
-
-    // const elPath = el.selectAll('path');
-    // const elLine = el.selectAll('line');
-
-    // toPairs(axisStyle).forEach(([key, value]) => {
-    //   elPath.style(key, value);
-    //   elLine.style(key, value);
-    // });
-
-    // const elText = el.selectAll('text');
-    // toPairs(textStyle).forEach(([key, value]) => elText.style(key, value));
   }
 
   render() {
     const { margin } = this.props;
 
     return (
-      <g
-        ref={(ref) => {
+      <AxisContainer
+        innerRef={(ref) => {
           this.axis = ref;
         }}
         transform={`translate(${margin.left}, ${margin.top})`}
@@ -59,13 +35,8 @@ class Axis extends PureComponent {
 
 Axis.propTypes = {
   scale: PropTypes.func.isRequired,
-  ticks: PropTypes.number,
-  margin: PropTypes.shape({
-    top: PropTypes.number,
-    right: PropTypes.number,
-    bottom: PropTypes.number,
-    left: PropTypes.number
-  })
+  ticks: PropTypes.number.isRequired,
+  margin: PropTypes.object.isRequired
 };
 
 export default Axis;

@@ -61,7 +61,8 @@ export const finalStyleSelector = createSelector(
   mapStyleSelector,
   prisonSourceSelector,
   currentYearSelector,
-  (mapStyle, prisonSource, currentYear) => {
+  langSelector,
+  (mapStyle, prisonSource, currentYear, lang) => {
     if (!mapStyle) {
       return null;
     }
@@ -96,10 +97,13 @@ export const finalStyleSelector = createSelector(
       ]
     );
 
+    const citiesLang = `{historical_name${lang === 'ru' ? 'ru' : '_en'}}`;
+
     return mapStyle
       .setIn(['sources', 'prisons'], prisonSource)
       .setIn(['layers', ussrLayerId, 'filter'], getUSSRBoundaryFilterByYear())
       .setIn(['layers', citiesLayerId, 'filter'], citiesFilterByYear)
+      .setIn(['layers', citiesLayerId, 'layout', 'text-field'], citiesLang)
       .update('layers', previousLayers => previousLayers.concat(layers));
   }
 );

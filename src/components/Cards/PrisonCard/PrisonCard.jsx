@@ -12,7 +12,7 @@ import prisonSelector from './selector';
 import close from '../../../icons/btn-close.svg';
 
 // utils
-// import { getPeriods } from '../../utils';
+import { getPeriods } from '../../../utils/utils';
 import { t } from '../../../intl/helper';
 
 import PrisonDescription from './PrisonDescription/PrisonDescription';
@@ -58,7 +58,7 @@ class PrisonCard extends PureComponent {
         <Left>
           <HalfWidth>
             <Subtitle>{t('prisonCard.yearsOfOperation')}</Subtitle>
-            {/* <div>{getPeriods(prison)}</div> */}
+            <div>{getPeriods(prison)}</div>
           </HalfWidth>
           <HalfWidth>
             <Subtitle>{activity ? t('prisonCard.production') : ''}</Subtitle>

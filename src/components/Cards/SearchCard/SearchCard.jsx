@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 
 // utils
-// import { getRightLang, getPeriods } from '../../../utils/utils';
+import { getPeriods } from '../../../utils/utils';
 // import getFirstYear from '../../../utils/prison-utils';
 import { langSelector } from '../../App/selectors';
 import { changeCurrentYear, changeViewport } from '../../../reducers/ui';
@@ -20,7 +20,8 @@ import Header from './Header';
 import Input from './Input';
 import Item from './Item';
 import Name from './Name';
-// import Periods from './Periods';
+import Periods from './Periods';
+
 // import Location from './Location';
 
 class SearchCard extends PureComponent {
@@ -33,7 +34,7 @@ class SearchCard extends PureComponent {
   }
 
   componentDidMount() {
-    // this.input.focus();
+    this.input.focus();
   }
 
   onSearchChange(searchQuery) {
@@ -103,7 +104,7 @@ class SearchCard extends PureComponent {
                   }}
                 >
                   <Name>{prison.getIn(['name', lang])}</Name>
-                  {/* <Periods>{getPeriods(p)}</Periods> */}
+                  <Periods>{getPeriods(prison)}</Periods>
                   {/* <Location>{places[p.place_id] ? places[p.place_id].name : ''}</Location> */}
                 </Item>
               ))

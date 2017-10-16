@@ -72,7 +72,7 @@ class PrisonCard extends PureComponent {
         </Left>
         <Right>
           <Subtitle>{t('prisonCard.prisonersByYears')}</Subtitle>
-          <PrisonChart features={prison.get('features')} />
+          <PrisonChart features={prison.get('features')} lang={lang} />
         </Right>
       </Container>
     );

@@ -13,7 +13,7 @@ const margin = {
 };
 const width = 300 - margin.left - margin.right;
 
-const PrisonChart = ({ features }) => {
+const PrisonChart = ({ features, lang }) => {
   const data = features.toJS().reduce((acc, feature) => {
     Object.keys(feature.properties).forEach((key) => {
       acc.push({
@@ -49,6 +49,7 @@ const PrisonChart = ({ features }) => {
         margin={margin}
       />
       <PrisonersArea
+        lang={lang}
         data={data}
         width={width}
         height={height}
@@ -61,7 +62,8 @@ const PrisonChart = ({ features }) => {
 };
 
 PrisonChart.propTypes = {
-  features: PropTypes.object.isRequired
+  features: PropTypes.object.isRequired,
+  lang: PropTypes.string.isRequired
 };
 
 export default PrisonChart;

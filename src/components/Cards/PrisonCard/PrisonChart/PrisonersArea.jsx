@@ -80,7 +80,10 @@ class PrisonersArea extends PureComponent {
       .append('text')
       .text((d) => {
         if (d.prisoners === 0) {
-          return 'нет данных';
+          if (this.props.lang === 'ru') {
+            return 'нет данных';
+          }
+          return 'no data';
         }
         return '';
       })

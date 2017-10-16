@@ -56,8 +56,8 @@ const Header = (props) => {
       <HeaderCenterGroup>
         <Group>
           <div>
-            {`${(currentYear === 'all') ? '1918 – 1960' : currentYear}\n`}
-            <Desc>{`${(currentYear === 'all') ? 'годы' : 'год'}`}</Desc>
+            <div>{(isShowAllPrisons) ? '1918 – 1960' : currentYear}</div>
+            <Desc>{(isShowAllPrisons) ? t('header.years') : t('header.year')}</Desc>
           </div>
         </Group>
         {
@@ -72,7 +72,7 @@ const Header = (props) => {
             </svg>
             <div>
               <Amount>{`${prisonersAmount}\n`}</Amount>
-              <Desc>{t('prisoners')}</Desc>
+              <Desc>{t('header.prisoners')}</Desc>
             </div>
           </Group>
         }
@@ -88,7 +88,7 @@ const Header = (props) => {
             </svg>
             <div>
               <Amount>{`${deadAmount}\n`}</Amount>
-              <Desc>{t('dead')}</Desc>
+              <Desc>{t('header.dead')}</Desc>
             </div>
           </Group>
         }
@@ -103,7 +103,7 @@ const Header = (props) => {
             </svg>
             <div>
               {`${prisonsAmount}\n`}
-              <Desc>лагерей</Desc>
+              <Desc>{t('header.camps')}</Desc>
             </div>
           </Group>
         }

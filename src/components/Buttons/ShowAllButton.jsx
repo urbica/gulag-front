@@ -3,6 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { t } from '../../intl/helper';
 
 import ChartButton from '../Buttons/ChartButton';
 
@@ -23,7 +24,7 @@ const PlayButton = ({ onClick, showAll }) => (
     onClick={onClick}
     showAll={showAll}
   >
-    <Text>Весь период</Text>
+    <Text>{t('showAllButton')}</Text>
   </Button>
 );
 

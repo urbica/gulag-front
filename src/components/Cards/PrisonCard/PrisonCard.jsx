@@ -13,6 +13,7 @@ import close from '../../../icons/btn-close.svg';
 
 // utils
 // import { getPeriods } from '../../utils';
+import { t } from '../../../intl/helper';
 
 import PrisonDescription from './PrisonDescription/PrisonDescription';
 import PrisonChart from './PrisonChart/PrisonChart';
@@ -44,7 +45,6 @@ class PrisonCard extends PureComponent {
       return null;
     }
     const activity = prison.get('activity');
-    const activityTitle = activity ? 'Тип деятельности' : '';
 
     return (
       <Container>
@@ -57,21 +57,21 @@ class PrisonCard extends PureComponent {
         </Top>
         <Left>
           <HalfWidth>
-            <Subtitle>Годы существования</Subtitle>
+            <Subtitle>{t('prisonCard.yearsOfOperation')}</Subtitle>
             {/* <div>{getPeriods(prison)}</div> */}
           </HalfWidth>
           <HalfWidth>
-            <Subtitle>{activityTitle}</Subtitle>
+            <Subtitle>{activity ? t('prisonCard.production') : ''}</Subtitle>
             <div>{activity}</div>
           </HalfWidth>
           <div>
-            <Subtitle>Местоположение</Subtitle>
+            <Subtitle>{t('prisonCard.location')}</Subtitle>
             <div>{prison.getIn(['location', lang])}</div>
           </div>
           <PrisonDescription markup={prison.getIn(['description', lang])} />
         </Left>
         <Right>
-          <Subtitle>Количество заключенных по годам</Subtitle>
+          <Subtitle>{t('prisonCard.prisonersByYears')}</Subtitle>
           <PrisonChart features={prison.get('features')} />
         </Right>
       </Container>

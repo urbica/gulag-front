@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { langSelector } from '../../App/selectors';
+import { t } from '../../../intl/helper';
 
 // ico
 import urbica from './urbica.svg';
@@ -28,7 +29,7 @@ const img = {
 const AboutCard = props => (
   <Container>
     <Header>
-      <Title>О проекте</Title>
+      <Title>{t('aboutCard.heading')}</Title>
       <CardButton onClick={props.dispatch.bind(null, push('/'))}>
         <img src={cross} alt='cross' />
       </CardButton>
@@ -71,7 +72,7 @@ const AboutCard = props => (
       </a>
       <a href='http://urbica.co/' target='_blank' rel='noreferrer noopener'>
         <img src={urbica} alt='URBICA' />
-        <div style={{ marginTop: '9px' }}>Дизайн и разработка</div>
+        <div style={{ marginTop: '9px' }}>{t('aboutCard.urbica')}</div>
       </a>
     </Footer>
   </Container>

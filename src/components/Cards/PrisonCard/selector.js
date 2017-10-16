@@ -1,5 +1,12 @@
+import activitiesEn from '../../../config/i18n';
+
 const prisonSelector = (state, id) => state.getIn(['data', 'prisons', id]);
-const activitiesSelector = state => state.getIn(['data', 'activities']);
+const activitiesSelector = (state) => {
+  if (state.getIn(['intl', 'locale']) === 'ru') {
+    return state.getIn(['data', 'activities']);
+  }
+  return activitiesEn;
+};
 
 const withFirstYear = (prison) => {
   const firstYear = prison

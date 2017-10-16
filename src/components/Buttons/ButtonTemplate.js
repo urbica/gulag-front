@@ -8,12 +8,17 @@ export default styled.button`
   border-width: 1px;
   border-color: transparent;
   margin: 0;
-  background-color: transparent;
+
   outline: none;
+
+  background-color: transparent;
+
   & img {
     width: 100%;
+
     opacity: .6;
   }
+
   &:hover img {
     opacity: .8;
   }

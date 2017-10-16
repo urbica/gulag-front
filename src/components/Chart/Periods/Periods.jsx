@@ -1,8 +1,9 @@
-/* eslint-disable react/prop-types, react/require-default-props */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
+
+import { height, margin } from '../config';
 
 import { langSelector } from '../../App/selectors';
 
@@ -21,15 +22,13 @@ const getWidth = (scale, endYear, startYear) => {
 const Periods = (props) => {
   const {
     width,
-    height,
-    margin,
     xScale,
     periods,
     dispatch,
     lang
   } = props;
 
-  return (
+  return !periods ? null : (
     <Container
       top={height + margin.top}
       width={width}
@@ -60,34 +59,20 @@ const Periods = (props) => {
 };
 
 Periods.propTypes = {
-  width: PropTypes.number,
-  height: PropTypes.number,
-  margin: PropTypes.shape({
-    top: PropTypes.number,
-    right: PropTypes.number,
-    bottom: PropTypes.number,
-    left: PropTypes.number
-  }),
-  xScale: PropTypes.func,
-  periods: PropTypes.shape({
-    id: PropTypes.number,
-    year_end: PropTypes.number,
-    year_start: PropTypes.number,
-    description: PropTypes.shape({
-      ru: PropTypes.string,
-      en: PropTypes.string,
-      de: PropTypes.string
-    }),
-    name: PropTypes.shape({
-      ru: PropTypes.string,
-      en: PropTypes.string,
-      de: PropTypes.string
-    })
-  })
+  width: PropTypes.number.isRequired,
+  xScale: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  lang: PropTypes.string.isRequired,
+  periods: PropTypes.object
+};
+
+Periods.defaultProps = {
+  periods: null
 };
 
 export default connect(
   state => ({
+    periods: state.getIn(['data', 'periods']),
     lang: langSelector(state)
   })
 )(Periods);

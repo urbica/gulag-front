@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
+import { height, margin } from '../config';
+
 export default styled.g`
+  transform: translate(${margin.left}px, ${height + margin.top}px);
+
   & path,
   & line {
     stroke: #fff;

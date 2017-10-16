@@ -7,10 +7,10 @@ import { axisBottom } from 'd3-axis';
 import Container from './Container';
 
 class Axis extends PureComponent {
-  componentWillReceiveProps() {
-    const { scale, width } = this.props;
+  componentDidMount() {
+    const { xScale, width } = this.props;
 
-    const axis = axisBottom(scale);
+    const axis = axisBottom(xScale);
     if (width < 833) {
       axis
         .tickSize(0)
@@ -26,23 +26,18 @@ class Axis extends PureComponent {
   }
 
   render() {
-    const { height, margin } = this.props;
-
     return (
       <Container
         innerRef={(ref) => {
           this.axis = ref;
         }}
-        transform={`translate(${margin.left}, ${height + margin.top})`}
       />
     );
   }
 }
 
 Axis.propTypes = {
-  scale: PropTypes.func.isRequired,
-  height: PropTypes.number.isRequired,
-  margin: PropTypes.object.isRequired,
+  xScale: PropTypes.func.isRequired,
   width: PropTypes.number.isRequired
 };
 

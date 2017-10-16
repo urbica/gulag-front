@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 
+import { margin } from '../config';
+
 export default styled.g`
+  transform: translate(${margin.left}px, ${margin.top}px);
   pointer-events: auto;
 
   & g:first-child {

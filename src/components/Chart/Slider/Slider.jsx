@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { select, event } from 'd3-selection';
 import { drag } from 'd3-drag';
 
+import { height, chartData, yScale } from '../config';
+
 import { changeCurrentYear } from '../../../reducers/ui';
 
 // styled
@@ -16,22 +18,45 @@ class Slider extends PureComponent {
   }
 
   componentDidMount() {
+    const translateX = this.props.xScale(new Date(this.props.currentYear, 0, 1));
+    const barWidth = Math.round(this.props.width / 42) - 2;
+    let prisoners = 0;
+
+    // eslint-disable-next-line
+    chartData.forEach(d => (d.year === this.props.currentYear ? prisoners = d.prisoners : 0));
+
     const slider = select(this.g);
     this.handle = slider
       .append('g')
-      .attr('class', 'handle');
+      .attr('class', 'handle')
+      .attr('transform', `translate(${translateX}, 0)`);
 
     // current year rect
     this.currentYearRect = this.handle
-      .append('rect');
+      .append('rect')
+      .attr('x', 0)
+      .attr('y', 0)
+      .attr('fill', '#fff')
+      .attr('opacity', 0.5)
+      .attr('class', 'currentYearRect')
+      .attr('width', barWidth)
+      .attr('height', height - yScale(prisoners))
+      .attr('transform', `translate(1, -${height - yScale(prisoners)})`);
 
     // handle year
     this.year = this.handle
       .append('text')
+      .attr('transform', 'translate(-11, -17)')
       .attr('class', 'currentYear');
 
     this.sliderLine = slider
-      .append('line').call(
+      .append('line')
+      .attr('stroke-width', 30)
+      .attr('stroke', 'transparent')
+      .attr('pointer-events', 'auto')
+      .attr('x1', this.props.xScale.range()[0])
+      .attr('x2', this.props.xScale.range()[1])
+      .call(
         drag().on('start drag', this.setYear)
       );
 
@@ -68,34 +93,43 @@ class Slider extends PureComponent {
       .attr('fill', '#22252F')
       .attr('opacity', '0.3')
       .attr('class', 'handleLines');
+
+    if (this.props.width >= 833) {
+      // handle shadow
+      this.handleShadow
+        .attr('width', barWidth);
+
+      // handle rect
+      this.handleRect
+        .attr('width', barWidth);
+
+      // handle lines
+      this.handleLines
+        .attr('transform', `translate(${-18.3 + (barWidth / 2)}, -5.5)`);
+    }
   }
 
-  componentWillReceiveProps(nextProps) {
-    const {
-      width, height, xScale, yScale, data, currentYear
-    } = nextProps;
+  componentWillReceiveProps({ width, xScale, currentYear }) {
+    const translateX = xScale(new Date(currentYear, 0, 1));
     const barWidth = Math.round(width / 42) - 2;
     let prisoners = 0;
 
     // eslint-disable-next-line
-    data.map(d => (d.year === currentYear ? prisoners = d.prisoners : 0));
+    chartData.forEach(d => (d.year === currentYear ? prisoners = d.prisoners : 0));
+
+    this.handle
+      .attr('transform', `translate(${translateX}, 0)`);
 
     this.currentYearRect
-      .attr('x', 0)
-      .attr('y', 0)
       .attr('width', barWidth)
       .attr('height', height - yScale(prisoners))
-      .attr('fill', '#fff')
-      .attr('opacity', 0.5)
-      .attr('class', 'currentYearRect')
       .attr('transform', `translate(1, -${height - yScale(prisoners)})`);
 
     this.sliderLine
       .attr('x1', xScale.range()[0])
-      .attr('x2', xScale.range()[1])
-      .attr('stroke-width', 30)
-      .attr('stroke', 'transparent')
-      .attr('pointer-events', 'auto');
+      .attr('x2', xScale.range()[1]);
+
+    this.year.text(currentYear);
 
     if (width >= 833) {
       // handle shadow
@@ -110,17 +144,6 @@ class Slider extends PureComponent {
       this.handleLines
         .attr('transform', `translate(${-18.3 + (barWidth / 2)}, -5.5)`);
     }
-
-    this.year
-      .text(currentYear)
-      .attr('transform', 'translate(-11, -17)');
-  }
-
-  componentWillUpdate(nextProps) {
-    const translateX = nextProps.xScale(new Date(nextProps.currentYear, 0, 1));
-
-    this.handle
-      .attr('transform', `translate(${translateX}, 0)`);
   }
 
   setYear() {
@@ -128,15 +151,12 @@ class Slider extends PureComponent {
   }
 
   render() {
-    const { height, margin, isVisible } = this.props;
-
     return (
       <Container
         innerRef={(ref) => {
           this.g = ref;
         }}
-        transform={`translate(${margin.left}, ${height + margin.top})`}
-        isVisible={isVisible}
+        isVisible={!this.props.isShowAllPrisons}
       />
     );
   }
@@ -144,23 +164,15 @@ class Slider extends PureComponent {
 
 Slider.propTypes = {
   xScale: PropTypes.func.isRequired,
-  yScale: PropTypes.func.isRequired,
   width: PropTypes.number.isRequired,
-  height: PropTypes.number.isRequired,
-  margin: PropTypes.object.isRequired,
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      prisoners: PropTypes.number,
-      year: PropTypes.number
-    })
-  ).isRequired,
   currentYear: PropTypes.number.isRequired,
-  isVisible: PropTypes.bool.isRequired,
+  isShowAllPrisons: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired
 };
 
 export default connect(
   state => ({
-    currentYear: state.getIn(['ui', 'currentYear'])
+    currentYear: state.getIn(['ui', 'currentYear']),
+    isShowAllPrisons: state.getIn(['ui', 'isShowAllPrisons'])
   })
 )(Slider);

@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { select } from 'd3-selection';
 
+import { height, chartData, yScale } from '../config';
+
 import { changeCurrentYear } from '../../../reducers/ui';
 
 // styled
@@ -10,8 +12,6 @@ import Container from './Container';
 
 class PrisonersArea extends PureComponent {
   componentDidMount() {
-    const { data } = this.props;
-
     const prisonersArea = select(this.g);
     const deadG = prisonersArea
       .append('g');
@@ -22,47 +22,102 @@ class PrisonersArea extends PureComponent {
     const prisonersG = prisonersArea
       .append('g');
 
+    const barWidth = Math.round(this.props.width / 42) - 2;
+
     // dead group
     this.deadRect = deadG
       .selectAll('rect')
-      .data(data)
+      .data(chartData)
       .enter()
-      .append('rect');
+      .append('rect')
+      .attr('y', d => yScale(d.dead))
+      .attr('height', d => height - yScale(d.dead))
+      .attr('x', (d) => {
+        const date = new Date(d.year, 0, 1);
+        return this.props.xScale(date) + 1;
+      })
+      .attr('width', barWidth);
 
     this.deadLine = deadG
       .selectAll('line')
-      .data(data)
+      .data(chartData)
       .enter()
-      .append('line');
+      .append('line')
+      .attr('fill', 'none')
+      .attr('y1', d => yScale(d.dead))
+      .attr('y2', d => yScale(d.dead))
+      .attr('x1', (d) => {
+        const date = new Date(d.year, 0, 1);
+        return this.props.xScale(date) + 1;
+      })
+      .attr('x2', (d) => {
+        const date = new Date(d.year, 0, 1);
+
+        if (d.dead === 0) {
+          return this.props.xScale(date) + 1;
+        }
+        return this.props.xScale(date) + barWidth + 1;
+      });
 
     // no data group
     this.noDataRect = noDataG
       .selectAll('rect')
-      .data(data)
+      .data(chartData)
       .enter()
-      .append('rect');
+      .append('rect')
+      .attr('y', yScale(250000))
+      .attr('height', height - yScale(250000))
+      .attr('fill', 'url(#Gradient)')
+      .on('click', d => this.props.dispatch(changeCurrentYear(d.year)))
+      .attr('x', (d) => {
+        const date = new Date(d.year, 0, 1);
+        return this.props.xScale(date) + 1;
+      })
+      .attr('width', (d) => {
+        if (d.prisoners === 0) {
+          return barWidth;
+        }
+        return 0;
+      });
 
     // prisoners group
     this.prisonersRect = prisonersG
       .selectAll('rect')
-      .data(data)
+      .data(chartData)
       .enter()
-      .append('rect');
+      .append('rect')
+      .attr('y', d => yScale(d.prisoners))
+      .attr('height', d => height - yScale(d.prisoners))
+      .on('click', d => this.props.dispatch(changeCurrentYear(d.year)))
+      .attr('x', (d) => {
+        const date = new Date(d.year, 0, 1);
+        return this.props.xScale(date) + 1;
+      })
+      .attr('width', barWidth);
 
     this.prisonersLine = prisonersG
       .selectAll('line')
-      .data(data)
+      .data(chartData)
       .enter()
-      .append('line');
+      .append('line')
+      .attr('fill', 'none')
+      .attr('y1', d => yScale(d.prisoners))
+      .attr('y2', d => yScale(d.prisoners))
+      .attr('x1', (d) => {
+        const date = new Date(d.year, 0, 1);
+        return this.props.xScale(date) + 1;
+      })
+      .attr('x2', (d) => {
+        const date = new Date(d.year, 0, 1);
+
+        if (d.prisoners === 0) {
+          return this.props.xScale(date) + 1;
+        }
+        return this.props.xScale(date) + barWidth + 1;
+      });
   }
 
-  componentWillReceiveProps(nextProps) {
-    const {
-      xScale,
-      yScale,
-      width,
-      height
-    } = nextProps;
+  componentWillReceiveProps({ xScale, width }) {
     const barWidth = Math.round(width / 42) - 2;
 
     this.deadRect
@@ -70,17 +125,13 @@ class PrisonersArea extends PureComponent {
         const date = new Date(d.year, 0, 1);
         return xScale(date) + 1;
       })
-      .attr('y', d => yScale(d.dead))
-      .attr('width', barWidth)
-      .attr('height', d => height - yScale(d.dead));
+      .attr('width', barWidth);
 
     this.deadLine
-      .attr('fill', 'none')
       .attr('x1', (d) => {
         const date = new Date(d.year, 0, 1);
         return xScale(date) + 1;
       })
-      .attr('y1', d => yScale(d.dead))
       .attr('x2', (d) => {
         const date = new Date(d.year, 0, 1);
 
@@ -88,44 +139,32 @@ class PrisonersArea extends PureComponent {
           return xScale(date) + 1;
         }
         return xScale(date) + barWidth + 1;
-      })
-      .attr('y2', d => yScale(d.dead));
+      });
 
     this.noDataRect
       .attr('x', (d) => {
         const date = new Date(d.year, 0, 1);
         return xScale(date) + 1;
       })
-      // .attr('y', 0)
-      .attr('y', yScale(250000))
       .attr('width', (d) => {
         if (d.prisoners === 0) {
           return barWidth;
         }
         return 0;
-      })
-      // .attr('height', height)
-      .attr('height', height - yScale(250000))
-      .attr('fill', 'url(#Gradient)')
-      .on('click', d => this.props.dispatch(changeCurrentYear(d.year)));
+      });
 
     this.prisonersRect
       .attr('x', (d) => {
         const date = new Date(d.year, 0, 1);
         return xScale(date) + 1;
       })
-      .attr('y', d => yScale(d.prisoners))
-      .attr('width', barWidth)
-      .attr('height', d => height - yScale(d.prisoners))
-      .on('click', d => this.props.dispatch(changeCurrentYear(d.year)));
+      .attr('width', barWidth);
 
     this.prisonersLine
-      .attr('fill', 'none')
       .attr('x1', (d) => {
         const date = new Date(d.year, 0, 1);
         return xScale(date) + 1;
       })
-      .attr('y1', d => yScale(d.prisoners))
       .attr('x2', (d) => {
         const date = new Date(d.year, 0, 1);
 
@@ -133,20 +172,16 @@ class PrisonersArea extends PureComponent {
           return xScale(date) + 1;
         }
         return xScale(date) + barWidth + 1;
-      })
-      .attr('y2', d => yScale(d.prisoners));
+      });
   }
 
   render() {
-    const { margin } = this.props;
-
     return (
       <Container
         innerRef={(ref) => {
           this.g = ref;
         }}
-        transform={`translate(${margin.left}, ${margin.top})`}
-        showAllYears={this.props.showAllYears}
+        showAllYears={this.props.isShowAllPrisons}
       />
     );
   }
@@ -154,28 +189,11 @@ class PrisonersArea extends PureComponent {
 
 PrisonersArea.propTypes = {
   width: PropTypes.number.isRequired,
-  height: PropTypes.number.isRequired,
-  margin: PropTypes.shape({
-    top: PropTypes.number,
-    right: PropTypes.number,
-    bottom: PropTypes.number,
-    left: PropTypes.number
-  }).isRequired,
   xScale: PropTypes.func.isRequired,
-  yScale: PropTypes.func.isRequired,
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      prisoners: PropTypes.number,
-      dead: PropTypes.number,
-      year: PropTypes.number
-    })
-  ).isRequired,
   dispatch: PropTypes.func.isRequired,
-  showAllYears: PropTypes.bool
+  isShowAllPrisons: PropTypes.bool.isRequired
 };
 
-PrisonersArea.defaultProps = {
-  showAllYears: false
-};
-
-export default connect()(PrisonersArea);
+export default connect(
+  state => ({ isShowAllPrisons: state.getIn(['ui', 'isShowAllPrisons']) })
+)(PrisonersArea);

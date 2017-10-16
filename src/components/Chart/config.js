@@ -1,4 +1,15 @@
-export default [
+import { scaleLinear } from 'd3-scale';
+import { max } from 'd3-array';
+
+export const margin = {
+  top: 5,
+  right: 20,
+  bottom: 70,
+  left: 20
+};
+export const height = 300 - margin.top - margin.bottom;
+
+export const chartData = [
   {
     year: 1918,
     prisoners: 0,
@@ -215,3 +226,7 @@ export default [
     dead: 0
   }
 ];
+
+export const yScale = scaleLinear()
+  .domain([0, max(chartData, d => d.prisoners)])
+  .range([height, 0]);

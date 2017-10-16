@@ -10,9 +10,11 @@ import pause from '../../icons/btn-pause.svg';
 
 const Button = styled(ChartButton)`
   background-color: ${({ isPlay }) => (isPlay ? '#000' : 'rgba(0,0,0,.5)')};
+
   & img {
     opacity: 1;
   }
+
   @media (max-width: 1023px) {
     display: none;
   }

@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 
+import { height, margin } from '../config';
+
 export default styled.g`
   display: ${({ isVisible }) => (isVisible ? 'block' : 'none')};
+  
+  transform: translate(${margin.left}px, ${height + margin.top}px);
 
   &:hover {
     cursor: pointer;

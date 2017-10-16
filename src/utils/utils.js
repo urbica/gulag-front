@@ -34,3 +34,5 @@ export const getStyle = () => (
     .then(response => response.json())
     .then(json => json)
 );
+
+export const splitDigits = digit => String(digit).replace(/(\d)(?=(\d{3})+([^\d]|$))/g, '$1 ');

@@ -1,45 +1,52 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/require-default-props */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { t } from '../../intl/helper';
 
+import { chartData } from '../Chart/config';
+
 // styled
 import Container from './Container';
 import HeaderCenterGroup from './HeaderCenterGroup';
 import Desc from './Desc';
-// import Amount from './Amount';
+import Amount from './Amount';
 import Group from './Group';
 import HeaderButton from '../Buttons/HeaderButton';
 
 // icons
 import search from '../../icons/btn-search.svg';
 import info from '../../icons/btn-info.svg';
-// import data from '../../../utils/prisonersAmountByYears';
-// import { splitDigits } from '../../../utils/utils';
+import { splitDigits } from '../../utils/utils';
 
-// const formatedData = {};
-// // eslint-disable-next-line
-// data.map(d => (formatedData[d.year] = d));
+const formatedData = chartData.reduce((acc, year) => {
+  acc[year.year] = year;
+  return acc;
+}, {});
 
 const Header = (props) => {
   const { currentYear, isShowAllPrisons } = props;
 
-  // const dataSearchingStr = 'данные уточняются';
-  const notMobilePrisoners = true;
-  const notMobileDead = true;
+  const dataSearchingStr = 'данные уточняются';
+  let notMobilePrisoners = true;
+  let notMobileDead = true;
 
-  // if (width < 530) {
-  //   notMobilePrisoners = formatedData[currentYear].prisoners !== 0;
-  //   notMobileDead = formatedData[currentYear].dead !== 0;
-  // }
+  if (window.innerWidth < 530) {
+    notMobilePrisoners = formatedData[currentYear].prisoners !== 0;
+    notMobileDead = formatedData[currentYear].dead !== 0;
+  }
 
-  // const prisonersAmount = showAmountsGroup && formatedData[currentYear].prisoners !== 0 ?
-  //   splitDigits(formatedData[currentYear].prisoners) : dataSearchingStr;
-  // const deadAmount = showAmountsGroup && formatedData[currentYear].dead !== 0 ?
-  //   splitDigits(formatedData[currentYear].dead) : dataSearchingStr;
+  const prisonersAmount = notMobilePrisoners && formatedData[currentYear].prisoners !== 0 ?
+    splitDigits(formatedData[currentYear].prisoners) : dataSearchingStr;
+  const deadAmount = notMobileDead && formatedData[currentYear].dead !== 0 ?
+    splitDigits(formatedData[currentYear].dead) : dataSearchingStr;
+
+  let prisonsAmount = 0;
+  if (props.prisons) {
+    prisonsAmount = props.prisons
+      .filter(prison => prison.getIn(['published', 'ru']))
+      .size;
+  }
 
   return (
     <Container>
@@ -64,7 +71,7 @@ const Header = (props) => {
               </g>
             </svg>
             <div>
-              {/* <Amount>{`${prisonersAmount}\n`}</Amount> */}
+              <Amount>{`${prisonersAmount}\n`}</Amount>
               <Desc>{t('prisoners')}</Desc>
             </div>
           </Group>
@@ -80,7 +87,7 @@ const Header = (props) => {
               </g>
             </svg>
             <div>
-              {/* <Amount>{`${deadAmount}\n`}</Amount> */}
+              <Amount>{`${deadAmount}\n`}</Amount>
               <Desc>{t('dead')}</Desc>
             </div>
           </Group>
@@ -95,8 +102,8 @@ const Header = (props) => {
               </g>
             </svg>
             <div>
-              {`${props.prisonsAmount}\n`}
-              <Desc>лагерь</Desc>
+              {`${prisonsAmount}\n`}
+              <Desc>лагерей</Desc>
             </div>
           </Group>
         }
@@ -109,12 +116,19 @@ const Header = (props) => {
 };
 
 Header.propTypes = {
-  currentYear: PropTypes.number
+  currentYear: PropTypes.number.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  isShowAllPrisons: PropTypes.bool.isRequired,
+  prisons: PropTypes.object
+};
+
+Header.defaultProps = {
+  prisons: null
 };
 
 export default connect(
   state => ({
-    currentYear: state.getIn(['ui', 'currentYear']),
-    isShowAllPrisons: state.getIn(['ui', 'isShowAllPrisons'])
+    isShowAllPrisons: state.getIn(['ui', 'isShowAllPrisons']),
+    prisons: state.getIn(['data', 'prisons'])
   })
 )(Header);

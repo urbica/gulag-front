@@ -43,7 +43,7 @@ class App extends PureComponent {
     return (
       <ConnectedRouter history={this.props.history}>
         <div>
-          <Header />
+          <Header currentYear={this.props.currentYear} />
           <Map />
           <ChartWrap>
             <PlayButton

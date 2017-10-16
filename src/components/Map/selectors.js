@@ -97,7 +97,7 @@ export const finalStyleSelector = createSelector(
       ]
     );
 
-    const citiesLang = `{historical_name${lang === 'ru' ? 'ru' : '_en'}}`;
+    const citiesLang = `{historical_name${lang === 'ru' ? '' : '_en'}}`;
 
     return mapStyle
       .setIn(['sources', 'prisons'], prisonSource)

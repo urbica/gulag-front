@@ -3,31 +3,41 @@ import PropTypes from 'prop-types';
 import { select } from 'd3-selection';
 import { axisLeft } from 'd3-axis';
 
-import AxisContainer from './AxisContainer';
+import Container from './Container';
 
 class Axis extends PureComponent {
   componentDidMount() {
     const { scale, ticks } = this.props;
 
-    const axis = axisLeft(scale);
-    axis.ticks(ticks)
-      .tickSize(0);
+    const axis =
+      axisLeft(scale)
+        .ticks(ticks)
+        .tickSize(0);
 
-    const el = select(this.axis);
-    el.call(axis)
+    this.g
+      .call(axis)
+      .selectAll('text')
+      .attr('y', 14);
+  }
+
+  componentWillReceiveProps({ scale, ticks }) {
+    const axis =
+      axisLeft(scale)
+        .ticks(ticks)
+        .tickSize(0);
+
+    this.g
+      .call(axis)
       .selectAll('text')
       .attr('y', 14);
   }
 
   render() {
-    const { margin } = this.props;
-
     return (
-      <AxisContainer
+      <Container
         innerRef={(ref) => {
-          this.axis = ref;
+          this.g = select(ref);
         }}
-        transform={`translate(${margin.left}, ${margin.top})`}
       />
     );
   }
@@ -35,8 +45,7 @@ class Axis extends PureComponent {
 
 Axis.propTypes = {
   scale: PropTypes.func.isRequired,
-  ticks: PropTypes.number.isRequired,
-  margin: PropTypes.object.isRequired
+  ticks: PropTypes.number.isRequired
 };
 
 export default Axis;

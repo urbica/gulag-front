@@ -2,16 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { scaleTime, scaleLinear } from 'd3-scale';
 import { max } from 'd3-array';
-import Axis from './Axis';
-import PrisonersArea from './PrisonersArea';
 
-const margin = {
-  top: 5,
-  right: 65,
-  bottom: 5,
-  left: 40
-};
-const width = 300 - margin.left - margin.right;
+import { margin, width } from './config';
+
+import Axis from './Axis/Axis';
+import PrisonersArea from './PrisonersArea/PrisonersArea';
 
 const PrisonChart = ({ features, lang }) => {
   const data = features.toJS().reduce((acc, feature) => {
@@ -46,14 +41,11 @@ const PrisonChart = ({ features, lang }) => {
         ticks={(lastYear - firstYear) + 1}
         scale={yScale}
         height={height}
-        margin={margin}
       />
       <PrisonersArea
         lang={lang}
         data={data}
-        width={width}
         height={height}
-        margin={margin}
         xScale={xScale}
         yScale={yScale}
       />

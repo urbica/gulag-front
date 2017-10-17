@@ -7,12 +7,15 @@ import PropTypes from 'prop-types';
 // import closeIcon from '../icons/btn-close.svg';
 
 // styled
+import Container from './Container';
 import Top from './Top';
 import FullScreenButton from './FullScreenButton';
+import Description from './Description';
 import PreviewsContainer from './PreviewsContainer';
 import ImgPreviewContainer from './ImgPreviewContainer';
 import FullScreenContainer from './FullScreenContainer';
 import FullScreenTop from './FullScreenTop';
+import FullScreenDescription from './FullScreenDescription';
 import NavButton from './NavButton';
 
 // import { CardButton } from '../StyledButtons';
@@ -88,18 +91,32 @@ class Gallery extends PureComponent {
   }
 
   render() {
+    const { src: activeSrc, desc: activeDesc } = this.props.photos[this.state.activePhotoId];
+
     return (
-      <div style={{ breakInside: 'avoid' }}>
+      <Container>
         <Top>
           <div style={{ display: 'inline-block', position: 'relative' }}>
             <img
-              src={this.props.photos[this.state.activePhotoId]}
+              src={activeSrc}
               alt=''
               onClick={this.toggleFullScreen}
             />
             <FullScreenButton onClick={this.toggleFullScreen} />
           </div>
         </Top>
+        <Description>
+          <div
+            style={{
+              position: 'absolute',
+              bottom: '12px',
+              fontStyle: 'italic',
+              backgroundColor: 'rgba(0, 0, 0, 0.7)'
+            }}
+          >
+            {activeDesc}
+          </div>
+        </Description>
         <PreviewsContainer
           innerRef={(ref) => {
             this.previewContainer = ref;
@@ -117,7 +134,7 @@ class Gallery extends PureComponent {
                 onClick={this.onPreviewClick.bind(null, i)}
               >
                 <img
-                  src={img}
+                  src={img.src}
                   alt=''
                 />
               </ImgPreviewContainer>
@@ -140,11 +157,16 @@ class Gallery extends PureComponent {
             />
             <FullScreenTop>
               <img
-                src={this.props.photos[this.state.activePhotoId]}
+                src={activeSrc}
                 onClick={e => e.stopPropagation()}
                 alt=''
               />
             </FullScreenTop>
+            <FullScreenDescription>
+              <div>
+                <div style={{ maxWidth: '700px', margin: 'auto' }}>{activeDesc}</div>
+              </div>
+            </FullScreenDescription>
             <PreviewsContainer
               innerRef={(ref) => {
                 this.previewFullScreenContainer = ref;
@@ -162,7 +184,7 @@ class Gallery extends PureComponent {
                     }}
                   >
                     <img
-                      src={img}
+                      src={img.src}
                       alt=''
                     />
                   </ImgPreviewContainer>
@@ -175,14 +197,14 @@ class Gallery extends PureComponent {
             />
           </FullScreenContainer>
         }
-      </div>
+      </Container>
     );
   }
 }
 
 Gallery.propTypes = {
   photos: PropTypes.arrayOf(
-    PropTypes.string
+    PropTypes.object
   ).isRequired
 };
 

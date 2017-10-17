@@ -4,7 +4,6 @@ export default styled.div`
   position: relative;
   width: 100%;
   max-height: 225px;
-  margin-bottom: 5px;
 
   text-align: center;
 

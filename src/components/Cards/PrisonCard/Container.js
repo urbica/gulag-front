@@ -12,7 +12,6 @@ export default styled.div`
   padding: 40px 100px 80px 40px;
 
   font-family: 'Formular', sans-serif;
-  font-size: 14px;
   color: #fff;
 
   background-color: #000;

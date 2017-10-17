@@ -14,8 +14,6 @@ import Gallery from './Gallery/Gallery';
 import Container from './Container';
 // import { CardButton } from '../StyledButtons';
 
-const imgURLRegEx = /(?:!\[.*?]\()+(.+?)(?:\))+/g;
-
 const PrisonDescription = ({ markup }) => (
   <Container>
     {
@@ -30,13 +28,18 @@ const PrisonDescription = ({ markup }) => (
             }
             case 'gallery': {
               const photos = [];
-              let arr;
+              elem.payload
+                .split('![](')
+                .forEach((e, index) => {
+                  if (index > 0) {
+                    const photoWithDesc = e.split(')\n');
+                    photos.push({
+                      src: photoWithDesc[0],
+                      desc: photoWithDesc[1]
+                    });
+                  }
+                });
 
-              // eslint-disable-next-line no-cond-assign
-              while ((arr = imgURLRegEx.exec(elem.payload)) !== null) {
-                // adding current match to last arr in acc
-                photos.push(arr[1]);
-              }
               return (
                 <Gallery
                   key={i}

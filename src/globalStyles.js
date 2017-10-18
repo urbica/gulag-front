@@ -66,4 +66,29 @@ injectGlobal`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+
+  .incut {
+    outline: 20px solid #1A1A1A;
+
+    font-family: 'Vremena';
+    color: rgba(225,225,225,0.5);
+
+    background-color: #1A1A1A;
+    break-inside: avoid;
+    
+    h2 {
+      font-size: 20px;
+      font-weight: 500 !important;
+
+      opacity: 0.5;
+    }
+
+    p {
+      font-size: 16px;
+      font-style: italic;
+
+      opacity: 0.5;
+    }
+  }
+
 `;

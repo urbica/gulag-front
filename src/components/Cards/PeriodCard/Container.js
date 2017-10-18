@@ -9,8 +9,6 @@ export default styled.div`
   max-height: 590px;
   padding: 40px 60px 60px 40px;
 
-  color: #fff;
-
   background-color: #000;
 
   overflow: scroll;

@@ -9,8 +9,6 @@ export default styled.div`
   flex-direction: column;
   width: 600px;
 
-  color: #fff;
-
   z-index: 1;
 
   @media (max-width: 599px) {

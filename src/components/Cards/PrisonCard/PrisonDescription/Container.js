@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { color } from '../../../../config/styles';
 
 export default styled.div`
   h2 {
@@ -7,26 +8,24 @@ export default styled.div`
 
     font-size: 20px;
     font-weight: bold;
-    color: #fff;
   }
   
   p {
     margin-bottom: 40px;
 
     font-size: 16px;
-    line-height: 22px;
-    color: #fff;
+    line-height: 1.7;
   }
   
   a {
     display: inline-block;
     padding-bottom: 2px;
-    border-bottom: 4px solid #fff;
+    border-bottom: 4px solid ${color};
     margin-bottom: 10px;
 
     font-size: 16px;
     line-height: 22px;
-    color: #fff;
+    color: ${color};
     text-decoration: none;
 
     transition: 0.4s;

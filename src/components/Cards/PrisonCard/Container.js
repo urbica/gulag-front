@@ -11,10 +11,7 @@ export default styled.div`
   min-height: 70%;
   padding: 40px 100px 80px 40px;
 
-  font-family: 'Formular', sans-serif;
-  color: #fff;
-
-  background-color: #000;
+  background-color: #14171a;
 
   overflow: scroll;
   transition: .4s;

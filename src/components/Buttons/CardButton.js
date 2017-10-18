@@ -7,7 +7,7 @@ export default styled(ButtonTemplate)`
   right: 0;
 
   &:hover {
-    background-color: #4D4D4D;
+    background-color: #1B2128;
   }
 
   &:active {

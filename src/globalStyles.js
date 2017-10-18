@@ -1,5 +1,6 @@
 import 'normalize.css/normalize.css';
 import { injectGlobal } from 'styled-components';
+import { color } from './config/styles';
 
 import lightWoff2 from './assets/formular-lightitalic/formular-lightitalic.woff2';
 import lightWoff from './assets/formular-lightitalic/formular-lightitalic.woff';
@@ -63,31 +64,34 @@ injectGlobal`
   body {
     font-family: 'Formular', sans-serif;
     font-size: 16px;
+    color: ${color};
+
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   .incut {
-    outline: 20px solid #1A1A1A;
+    outline: 20px solid #1B2128;
 
-    font-family: 'Vremena';
-    color: rgba(225,225,225,0.5);
+    font-style: italic;
 
-    background-color: #1A1A1A;
+    background-color: #1B2128;
     break-inside: avoid;
     
     h2 {
       font-size: 20px;
       font-weight: 500 !important;
-
-      opacity: 0.5;
+      color: rgba(219, 235, 219, 0.5);
     }
 
     p {
-      font-size: 16px;
-      font-style: italic;
+      font-size: 18px;
+      color: rgba(219, 235, 219, 0.5);
+    }
 
-      opacity: 0.5;
+    a {
+      color: rgba(219, 235, 219, 0.5) !important;
+      border-bottom-color: rgba(219, 235, 219, 0.5) !important;
     }
   }
 

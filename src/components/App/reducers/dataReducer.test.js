@@ -1,4 +1,4 @@
-import reducer from './reducer';
+import reducer from './dataReducer';
 
 describe('Data Reducer', () => {
   it('returns a state object', () => {

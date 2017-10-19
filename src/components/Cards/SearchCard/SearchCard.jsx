@@ -7,7 +7,7 @@ import { push } from 'react-router-redux';
 import { getPeriods } from '../../../utils/utils';
 // import getFirstYear from '../../../utils/prison-utils';
 import { langSelector } from '../../App/selectors';
-import { changeCurrentYear, changeViewport } from '../../../reducers/ui';
+import { changeCurrentYear, changeViewport } from '../../App/reducers/uiReducer';
 
 // ico
 import cross from '../../../icons/btn-close.svg';

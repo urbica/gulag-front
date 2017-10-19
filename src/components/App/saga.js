@@ -2,10 +2,8 @@ import { all, put, fork } from 'redux-saga/effects';
 import { DataSaga } from './dataSaga';
 import { MapSaga } from '../Map/saga';
 
-import {
-  DATA_FETCH_REQUEST,
-  MAP_STYLE_FETCH_REQUEST
-} from './reducer';
+import { DATA_FETCH_REQUEST } from './reducers/dataReducer';
+import { MAP_STYLE_FETCH_REQUEST } from '../Map/reducer';
 
 const sagas = [DataSaga, MapSaga];
 

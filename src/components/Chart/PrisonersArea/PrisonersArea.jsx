@@ -5,7 +5,7 @@ import { select } from 'd3-selection';
 
 import { height, chartData, yScale } from '../config';
 
-import { changeCurrentYear } from '../../../reducers/ui';
+import { changeCurrentYear } from '../../App/reducers/uiReducer';
 
 // styled
 import Container from './Container';

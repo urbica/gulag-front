@@ -1,5 +1,5 @@
 import Immutable from 'immutable';
-import reducer, { changeCurrentYear } from './ui';
+import reducer, { changeCurrentYear } from './uiReducer';
 
 describe('Ui Reducer', () => {
   it('returns a state object', () => {

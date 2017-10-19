@@ -8,7 +8,7 @@ import {
   MAP_STYLE_FETCH_REQUEST,
   MAP_STYLE_FETCH_SUCCESS,
   MAP_STYLE_FETCH_FAILURE
-} from '../App/reducer';
+} from './reducer';
 
 function* fetchStyle() {
   try {

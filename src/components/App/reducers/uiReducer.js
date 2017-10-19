@@ -1,24 +1,20 @@
 import Immutable from 'immutable';
-import { viewport } from '../config/map';
+import { viewport } from '../../../config/map';
 
 const initState = Immutable.fromJS({
   currentYear: 1937,
   viewport,
-  isSearchOpen: false,
-  isAboutOpen: false,
   isDemoPlay: false,
   isShowAllPrisons: false
 });
 
 const CURRENT_YEAR_CHANGED = 'CURRENT_YEAR_CHANGED';
 const VIEWPORT_CHANGED = 'VIEWPORT_CHANGED';
-// const PRISON_OPENED = 'PRISON_OPENED';
 const TOGGLE_ALL_PRISONS = 'TOGGLE_ALL_PRISONS';
 const TOGGLE_DEMO = 'TOGGLE_DEMO';
 
 export const changeCurrentYear = year => ({ type: CURRENT_YEAR_CHANGED, payload: year });
 export const changeViewport = newViewport => ({ type: VIEWPORT_CHANGED, payload: newViewport });
-// export const openPrison = id => ({ type: PRISON_OPENED, payload: id });
 export const toggleDemo = () => ({ type: TOGGLE_DEMO });
 export const toggleAllPrisons = () => ({ type: TOGGLE_ALL_PRISONS });
 

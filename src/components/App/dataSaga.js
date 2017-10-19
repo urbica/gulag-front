@@ -6,7 +6,7 @@ import {
   DATA_FETCH_REQUEST,
   DATA_FETCH_SUCCESS,
   DATA_FETCH_FAILURE
-} from './reducer';
+} from './reducers/dataReducer';
 
 function* fetchData() {
   try {

@@ -9,7 +9,6 @@ export default styled.header`
 
   background-color: rgba(0,0,0,.5);
 
-  white-space: pre;
   z-index: 1;
 
   @media (max-width: 375px) {

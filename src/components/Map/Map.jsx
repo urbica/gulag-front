@@ -8,7 +8,7 @@ import MapGL from '@urbica/react-map-gl';
 
 import { mapToken } from '../../config/tokens';
 
-import { changeViewport } from '../../reducers/ui';
+import { changeViewport } from '../App/reducers/uiReducer';
 import {
   prisonsSelector,
   currentYearSelector,

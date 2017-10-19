@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -37,7 +38,7 @@ const AboutCard = props => (
       </CardButton>
     </Header>
     <DescriptionContainer>
-      {content[props.lang].map(p => <p>{p}</p>)}
+      {content[props.lang].map((p, i) => <p key={i}>{p}</p>)}
     </DescriptionContainer>
     <Footer>
       <a href='http://gmig.ru/' target='_blank' rel='noreferrer noopener'>

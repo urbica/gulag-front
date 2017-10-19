@@ -1,8 +1,8 @@
 import Immutable from 'immutable';
 import { UPDATE } from 'react-intl-redux';
 
-import ruLocale from '../intl/ru';
-import enLocale from '../intl/en';
+import ruLocale from '../../../intl/ru';
+import enLocale from '../../../intl/en';
 
 const locales = {
   ru: ruLocale,

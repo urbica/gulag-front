@@ -4,7 +4,7 @@ import createHistory from 'history/createBrowserHistory';
 import { createStore, applyMiddleware } from 'redux';
 import { combineReducers } from 'redux-immutable';
 import { Provider } from 'react-redux';
-import { routerMiddleware, routerReducer } from 'react-router-redux';
+import { ConnectedRouter, routerMiddleware, routerReducer } from 'react-router-redux';
 import createSagaMiddleware from 'redux-saga';
 import { createLogger } from 'redux-logger';
 import { IntlProvider } from 'react-intl-redux';
@@ -18,9 +18,10 @@ import Saga from './components/App/saga';
 import registerServiceWorker from './registerServiceWorker';
 
 // reducers
-import dataReducer from './components/App/reducer';
-import uiReducer from './reducers/ui';
-import intlReducer from './reducers/intlReducer';
+import dataReducer from './components/App/reducers/dataReducer';
+import mapReducer from './components/Map/reducer';
+import uiReducer from './components/App/reducers/uiReducer';
+import intlReducer from './components/App/reducers/intlReducer';
 
 addLocaleData([...enLocaleData, ...ruLocaleData]);
 
@@ -49,6 +50,7 @@ if (process.env.NODE_ENV === 'development') {
 
 const reducer = combineReducers({
   data: dataReducer,
+  mapStyle: mapReducer,
   ui: uiReducer,
   intl: intlReducer,
   router: routerReducer
@@ -62,7 +64,9 @@ const intlSelector = state => state.get('intl').toJS();
 ReactDOM.render(
   <Provider store={store}>
     <IntlProvider intlSelector={intlSelector}>
-      <App history={history} />
+      <ConnectedRouter history={history}>
+        <App />
+      </ConnectedRouter>
     </IntlProvider>
   </Provider>, document.getElementById('root')
 );

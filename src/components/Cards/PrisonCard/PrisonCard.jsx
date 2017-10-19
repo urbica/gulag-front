@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 
 // reducer && selector
-import { changeCurrentYear, changeViewport } from '../../../reducers/ui';
+import { changeCurrentYear, changeViewport } from '../../App/reducers/uiReducer';
 import { langSelector } from '../../App/selectors';
 import prisonSelector from './selector';
 

@@ -10,9 +10,9 @@ import { langSelector } from '../../App/selectors';
 import { changeCurrentYear, changeViewport } from '../../App/reducers/uiReducer';
 
 // ico
-import cross from '../../../icons/btn-close.svg';
+import cross from '../btn-close.svg';
 
-import CardButton from '../../Buttons/CardButton';
+import CardButton from '../CardButton';
 
 // styled
 import Container from './Container';

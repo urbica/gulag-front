@@ -10,9 +10,9 @@ import { t } from '../../../intl/helper';
 import urbica from './urbica.svg';
 import museum from './museum.svg';
 import museumEn from './museum-en.svg';
-import cross from '../../../icons/btn-close.svg';
+import cross from '../btn-close.svg';
 
-import CardButton from '../../Buttons/CardButton';
+import CardButton from '../CardButton';
 
 // styled
 import Container from './Container';

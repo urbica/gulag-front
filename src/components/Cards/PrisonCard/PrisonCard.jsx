@@ -9,7 +9,7 @@ import { langSelector } from '../../App/selectors';
 import prisonSelector from './selector';
 
 // images
-import close from '../../../icons/btn-close.svg';
+import close from '../btn-close.svg';
 
 // utils
 import { getPeriods } from '../../../utils/utils';
@@ -26,7 +26,7 @@ import Left from './Left';
 import HalfWidth from './HalfWidth';
 import Subtitle from './Subtitle';
 import Right from './Right';
-import CardButton from '../../Buttons/CardButton';
+import CardButton from '../CardButton';
 
 class PrisonCard extends PureComponent {
   componentWillReceiveProps({ prison, history, dispatch }) {
@@ -80,9 +80,9 @@ class PrisonCard extends PureComponent {
 }
 
 PrisonCard.propTypes = {
-  prison: PropTypes.object,
   dispatch: PropTypes.func.isRequired,
-  lang: PropTypes.string.isRequired
+  lang: PropTypes.string.isRequired,
+  prison: PropTypes.object
 };
 
 PrisonCard.defaultProps = {
@@ -91,7 +91,7 @@ PrisonCard.defaultProps = {
 
 export default connect(
   (state, props) => ({
-    prison: prisonSelector(state, props),
-    lang: langSelector(state)
+    lang: langSelector(state),
+    prison: prisonSelector(state, props)
   })
 )(PrisonCard);

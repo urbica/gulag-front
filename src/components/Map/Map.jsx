@@ -21,9 +21,9 @@ import Container from './Container';
 
 import Controls from './Controls/Controls';
 // import Popup from './Popup';
-import MapButton from '../Buttons/MapButton';
-import plus from '../../icons/btn-plus.svg';
-import minus from '../../icons/btn-minus.svg';
+import MapButton from './Controls/MapButton';
+import plus from './btn-plus.svg';
+import minus from './btn-minus.svg';
 //   setTimeout(() => {
 //     const credits = ' <a href="http://urbica.co" target="_blank">© Urbica</a>';
 //     const attrEls = document.getElementsByClassName('mapboxgl-ctrl-attrib');

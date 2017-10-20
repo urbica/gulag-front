@@ -4,7 +4,9 @@ export default styled.div`
   position: fixed;
   top: ${({ slideUp }) => (slideUp ? '-30%' : '0')};
   bottom: 0;
+
   width: 100%;
+
   transition: .4s;
   z-index: 0;
 

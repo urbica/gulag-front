@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import ButtonTemplate from './ButtonTemplate';
+import Button from '../../Button';
 
-export default styled(ButtonTemplate)`
+export default styled(Button)`
   flex-shrink: 0;
 
   &:hover {

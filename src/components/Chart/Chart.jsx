@@ -7,8 +7,8 @@ import { toggleAllPrisons, changeCurrentYear, toggleDemo } from '../App/reducers
 
 import { height, margin } from './config';
 
-import PlayButton from '../Buttons/PlayButton';
-import ShowAllButton from '../Buttons/ShowAllButton';
+import PlayButton from './Buttons/PlayButton';
+import ShowAllButton from './Buttons/ShowAllButton';
 import PrisonersArea from './PrisonersArea/PrisonersArea';
 import Axis from './Axis/Axis';
 import Slider from './Slider/Slider';
@@ -133,12 +133,12 @@ class Chart extends PureComponent {
 }
 
 Chart.propTypes = {
-  toggleDemo: PropTypes.func.isRequired,
+  currentYear: PropTypes.number.isRequired,
   isDemoPlay: PropTypes.bool.isRequired,
   isShowAll: PropTypes.bool.isRequired,
-  currentYear: PropTypes.number.isRequired,
+  toggleAllPrisons: PropTypes.func.isRequired,
   changeCurrentYear: PropTypes.func.isRequired,
-  toggleAllPrisons: PropTypes.func.isRequired
+  toggleDemo: PropTypes.func.isRequired
 };
 
 export default connect(

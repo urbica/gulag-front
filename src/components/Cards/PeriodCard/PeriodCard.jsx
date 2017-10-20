@@ -6,10 +6,10 @@ import { push } from 'react-router-redux';
 import { langSelector } from '../../App/selectors';
 import periodSelector from './selector';
 
-import CardButton from '../../Buttons/CardButton';
+import CardButton from '../CardButton';
 
 // icons
-import close from '../../../icons/btn-close.svg';
+import close from '../btn-close.svg';
 
 // styled
 import Container from './Container';
@@ -31,9 +31,9 @@ const PeriodCard = ({ period, dispatch, lang }) => (
 );
 
 PeriodCard.propTypes = {
-  period: PropTypes.object,
   dispatch: PropTypes.func.isRequired,
-  lang: PropTypes.string.isRequired
+  lang: PropTypes.string.isRequired,
+  period: PropTypes.object
 };
 
 PeriodCard.defaultProps = {
@@ -42,7 +42,7 @@ PeriodCard.defaultProps = {
 
 export default connect(
   (state, props) => ({
-    period: periodSelector(state, props),
-    lang: langSelector(state)
+    lang: langSelector(state),
+    period: periodSelector(state, props)
   })
 )(PeriodCard);

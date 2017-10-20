@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import ChartButton from './ChartButton';
-import play from '../../icons/btn-play.svg';
-import pause from '../../icons/btn-pause.svg';
+import play from './btn-play.svg';
+import pause from './btn-pause.svg';
 
 const Button = styled(ChartButton)`
   background-color: ${({ isPlay }) => (isPlay ? '#000' : 'rgba(0,0,0,.5)')};

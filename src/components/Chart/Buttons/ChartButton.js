@@ -1,10 +1,12 @@
 import styled from 'styled-components';
-import ButtonTemplate from './ButtonTemplate';
+import Button from '../../Button';
 
-export default styled(ButtonTemplate)`
-  pointer-events: auto;
+export default styled(Button)`
+  margin-top: 157px;
 
   background-color: rgba(0,0,0,.5);
+
+  pointer-events: auto;
 
   &:hover {
     background-color: rgba(0,0,0,.7);

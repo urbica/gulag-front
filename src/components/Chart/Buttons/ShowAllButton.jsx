@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { t } from '../../intl/helper';
+import { t } from '../../../intl/helper';
 
-import ChartButton from '../Buttons/ChartButton';
+import ChartButton from './ChartButton';
 
 const Button = styled(ChartButton)`
   font-size: 12px;

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { cardBackgroundColor } from '../../../config/styles';
 
 export default styled.input`
   width: 100%;
@@ -13,7 +14,7 @@ export default styled.input`
   font-size: 16px;
   color: rgba(225, 225, 225, 0.5);
 
-  background-color: #000;
+  background-color: ${cardBackgroundColor};
 
   @media (max-width: 425px) {
     padding-left: 20px;

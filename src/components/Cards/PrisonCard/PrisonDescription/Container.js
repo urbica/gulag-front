@@ -13,7 +13,6 @@ export default styled.div`
   p {
     margin-bottom: 40px;
 
-    font-size: 16px;
     line-height: 1.7;
   }
   
@@ -23,7 +22,6 @@ export default styled.div`
     border-bottom: 4px solid ${color};
     margin-bottom: 10px;
 
-    font-size: 16px;
     line-height: 22px;
     color: ${color};
     text-decoration: none;

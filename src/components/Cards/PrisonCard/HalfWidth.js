@@ -8,7 +8,6 @@ export default styled.div`
   vertical-align: top;
 
   & div {
-    font-size: 16px;
     line-height: 22px;
 
     opacity: 0.8;

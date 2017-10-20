@@ -1,19 +1,19 @@
 import 'normalize.css/normalize.css';
 import { injectGlobal } from 'styled-components';
-import { color } from './config/styles';
+import { fontSize, color } from '../../config/styles';
 
-import lightWoff2 from './assets/formular-lightitalic/formular-lightitalic.woff2';
-import lightWoff from './assets/formular-lightitalic/formular-lightitalic.woff';
-import lightTtf from './assets/formular-lightitalic/formular-lightitalic.ttf';
-import regularWoff2 from './assets/formular-regular/formular-regular.woff2';
-import regularWoff from './assets/formular-regular/formular-regular.woff';
-import regularTtf from './assets/formular-regular/formular-regular.ttf';
-import mediumWoff2 from './assets/formular-medium/formular-medium.woff2';
-import mediumWoff from './assets/formular-medium/formular-medium.woff';
-import mediumTtf from './assets/formular-medium/formular-medium.ttf';
-import blackWoff2 from './assets/formular-black/formular-black.woff2';
-import blackWoff from './assets/formular-black/formular-black.woff';
-import blackTtf from './assets/formular-black/formular-black.ttf';
+import lightWoff2 from '../../assets/formular-lightitalic/formular-lightitalic.woff2';
+import lightWoff from '../../assets/formular-lightitalic/formular-lightitalic.woff';
+import lightTtf from '../../assets/formular-lightitalic/formular-lightitalic.ttf';
+import regularWoff2 from '../../assets/formular-regular/formular-regular.woff2';
+import regularWoff from '../../assets/formular-regular/formular-regular.woff';
+import regularTtf from '../../assets/formular-regular/formular-regular.ttf';
+import mediumWoff2 from '../../assets/formular-medium/formular-medium.woff2';
+import mediumWoff from '../../assets/formular-medium/formular-medium.woff';
+import mediumTtf from '../../assets/formular-medium/formular-medium.ttf';
+import blackWoff2 from '../../assets/formular-black/formular-black.woff2';
+import blackWoff from '../../assets/formular-black/formular-black.woff';
+import blackTtf from '../../assets/formular-black/formular-black.ttf';
 
 // eslint-disable-next-line no-unused-expressions
 injectGlobal`
@@ -63,7 +63,7 @@ injectGlobal`
 
   body {
     font-family: 'Formular', sans-serif;
-    font-size: 16px;
+    font-size: ${fontSize};
     color: ${color};
 
     -webkit-font-smoothing: antialiased;

@@ -7,6 +7,7 @@ export default styled.button`
   border-style: solid;
   border-width: 1px;
   border-color: transparent;
+  border-radius: 0;
   margin: 0;
 
   outline: none;

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
+import './globalStyles';
+
 import Header from '../Header/Header';
 import Map from '../Map/Map';
 import Chart from '../Chart/Chart';

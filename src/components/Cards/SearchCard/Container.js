@@ -7,8 +7,6 @@ export default styled.div`
 
   width: 430px;
 
-  color: #fff;
-
   overflow: scroll;
   z-index: 2;
 

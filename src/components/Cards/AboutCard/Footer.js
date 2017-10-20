@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { cardBackgroundColor } from '../../../config/styles';
 
 export default styled.footer`
   display: flex;
@@ -6,7 +7,7 @@ export default styled.footer`
 
   align-items: flex-start;
 
-  background-color: #000;
+  background-color: ${cardBackgroundColor};
 
   & a {
     display: inline-block;
@@ -14,7 +15,7 @@ export default styled.footer`
 
     font-size: 12px;
     text-decoration: none;
-    color: rgba(255, 255, 255, .5);
+    color: rgba(219, 235, 219, .5);
   }
 
   & a:first-child {

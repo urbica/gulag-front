@@ -1,14 +1,12 @@
 import styled from 'styled-components';
+import { color } from '../../../config/styles';
 
 export default styled.a`
   display: inline-block;
   padding-bottom: 2px;
-  border-bottom: 4px solid #fff;
-  margin-bottom: 10px;
+  border-bottom: 4px solid ${color};
 
-  font-size: 16px;
-  line-height: 22px;
-  color: #fff;
+  color: ${color};
   text-decoration: none;
 
   transition: 0.4s;

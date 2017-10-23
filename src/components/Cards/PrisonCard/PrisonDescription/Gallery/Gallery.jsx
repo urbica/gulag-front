@@ -7,7 +7,6 @@ import PropTypes from 'prop-types';
 // import closeIcon from '../icons/btn-close.svg';
 
 // styled
-import Container from './Container';
 import Top from './Top';
 import FullScreenButton from './FullScreenButton';
 import Description from './Description';
@@ -94,7 +93,7 @@ class Gallery extends PureComponent {
     const { src: activeSrc, desc: activeDesc } = this.props.photos[this.state.activePhotoId];
 
     return (
-      <Container>
+      <div>
         <Top>
           <div style={{ display: 'inline-block', position: 'relative' }}>
             <img
@@ -197,7 +196,7 @@ class Gallery extends PureComponent {
             />
           </FullScreenContainer>
         }
-      </Container>
+      </div>
     );
   }
 }

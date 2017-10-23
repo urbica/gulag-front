@@ -14,6 +14,7 @@ import close from '../btn-close.svg';
 // utils
 import { getPeriods } from '../../../utils/utils';
 import { t } from '../../../intl/helper';
+import parseMarkup from '../../../utils/parseMarkup';
 
 import PrisonDescription from './PrisonDescription/PrisonDescription';
 import PrisonChart from './PrisonChart/PrisonChart';
@@ -27,6 +28,8 @@ import HalfWidth from './HalfWidth';
 import Subtitle from './Subtitle';
 import Right from './Right';
 import CardButton from '../CardButton';
+import Bottom from './Bottom';
+import Gallery from './PrisonDescription/Gallery/Gallery';
 
 class PrisonCard extends PureComponent {
   componentWillReceiveProps({ prison, history, dispatch }) {
@@ -45,6 +48,7 @@ class PrisonCard extends PureComponent {
       return null;
     }
     const activity = prison.get('activity');
+    const markup = prison.getIn(['description', lang]);
 
     return (
       <Container>
@@ -68,12 +72,44 @@ class PrisonCard extends PureComponent {
             <Subtitle>{t('prisonCard.location')}</Subtitle>
             <div>{prison.getIn(['location', lang])}</div>
           </div>
-          <PrisonDescription markup={prison.getIn(['description', lang])} />
+          <PrisonDescription markup={markup} />
         </Left>
         <Right>
           <Subtitle>{t('prisonCard.prisonersByYears')}</Subtitle>
           <PrisonChart features={prison.get('features')} lang={lang} />
         </Right>
+        <Bottom>
+          {
+            parseMarkup(markup)
+              .map((elem, i) => {
+                switch (elem.type) {
+                  case 'gallery': {
+                    const photos = [];
+                    elem.payload
+                      .split('![](')
+                      .forEach((e, index) => {
+                        if (index > 0) {
+                          const photoWithDesc = e.split(')\n');
+                          photos.push({
+                            src: photoWithDesc[0],
+                            desc: photoWithDesc[1]
+                          });
+                        }
+                      });
+
+                    return (
+                      <Gallery
+                        // eslint-disable-next-line react/no-array-index-key
+                        key={i}
+                        photos={photos}
+                      />
+                    );
+                  }
+                  default:
+                    return null;
+                }
+              })}
+        </Bottom>
       </Container>
     );
   }

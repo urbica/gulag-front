@@ -8,7 +8,7 @@ import parseMarkup from '../../../../utils/parseMarkup';
 // import closeIcon from '../icons/btn-close.svg';
 
 import Description from './Description';
-import Gallery from './Gallery/Gallery';
+// import Gallery from './Gallery/Gallery';
 
 // styled
 import Container from './Container';
@@ -26,27 +26,27 @@ const PrisonDescription = ({ markup }) => (
             case 'incut': {
               return <Description key={i} md={elem.payload} isIncut />;
             }
-            case 'gallery': {
-              const photos = [];
-              elem.payload
-                .split('![](')
-                .forEach((e, index) => {
-                  if (index > 0) {
-                    const photoWithDesc = e.split(')\n');
-                    photos.push({
-                      src: photoWithDesc[0],
-                      desc: photoWithDesc[1]
-                    });
-                  }
-                });
-
-              return (
-                <Gallery
-                  key={i}
-                  photos={photos}
-                />
-              );
-            }
+            // case 'gallery': {
+            //   const photos = [];
+            //   elem.payload
+            //     .split('![](')
+            //     .forEach((e, index) => {
+            //       if (index > 0) {
+            //         const photoWithDesc = e.split(')\n');
+            //         photos.push({
+            //           src: photoWithDesc[0],
+            //           desc: photoWithDesc[1]
+            //         });
+            //       }
+            //     });
+            //
+            //   return (
+            //     <Gallery
+            //       key={i}
+            //       photos={photos}
+            //     />
+            //   );
+            // }
             default:
               return null;
           }

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export default styled.div`
   position: relative;
   min-height: 32px;
-  background-color: rgba(0,0,0,0.85);
+  background-color: rgba(20, 23, 26, .85);
   & div {
     position: absolute;
     bottom: 12px;
@@ -13,7 +13,7 @@ export default styled.div`
 
     font-style: italic;
 
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(20, 23, 26, .85);
     
     transform: translateX(-50%);
   }

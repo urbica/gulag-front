@@ -95,7 +95,13 @@ class Gallery extends PureComponent {
     return (
       <div>
         <Top>
-          <div style={{ display: 'inline-block', position: 'relative' }}>
+          <div style={{
+            display: 'inline-block',
+            position: 'relative',
+            top: '50%',
+            transform: 'translateY(-50%)'
+          }}
+          >
             <img
               src={activeSrc}
               alt=''
@@ -109,8 +115,11 @@ class Gallery extends PureComponent {
             style={{
               position: 'absolute',
               bottom: '12px',
+              left: '50%',
+              maxWidth: '700px',
               fontStyle: 'italic',
-              backgroundColor: 'rgba(0, 0, 0, 0.7)'
+              backgroundColor: 'rgba(20, 23, 26, .85)',
+              transform: 'translateX(-50%)'
             }}
           >
             {activeDesc}

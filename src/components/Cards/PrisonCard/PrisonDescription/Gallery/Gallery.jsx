@@ -93,7 +93,10 @@ class Gallery extends PureComponent {
     const { src: activeSrc, desc: activeDesc } = this.props.photos[this.state.activePhotoId];
 
     return (
-      <div>
+      <div style={{
+        maxWidth: '700px'
+      }}
+      >
         <Top>
           <div style={{
             display: 'inline-block',
@@ -115,11 +118,8 @@ class Gallery extends PureComponent {
             style={{
               position: 'absolute',
               bottom: '12px',
-              left: '50%',
-              maxWidth: '700px',
               fontStyle: 'italic',
-              backgroundColor: 'rgba(20, 23, 26, .85)',
-              transform: 'translateX(-50%)'
+              backgroundColor: 'rgba(20, 23, 26, .85)'
             }}
           >
             {activeDesc}

@@ -9,7 +9,7 @@ export default styled.div`
   align-content: flex-start;
   width: 100%;
   min-height: 70%;
-  padding: 40px 100px 80px 40px;
+  padding: 40px 40px 80px 40px;
 
   background-color: #14171a;
 

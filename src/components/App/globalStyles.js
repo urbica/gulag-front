@@ -71,7 +71,8 @@ injectGlobal`
   }
 
   .incut {
-    outline: 20px solid #1B2128;
+    padding: 15px;
+    margin-bottom: 40px;
 
     font-style: italic;
 
@@ -94,5 +95,4 @@ injectGlobal`
       border-bottom-color: rgba(219, 235, 219, 0.5) !important;
     }
   }
-
 `;

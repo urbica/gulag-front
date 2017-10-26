@@ -94,7 +94,8 @@ class Gallery extends PureComponent {
 
     return (
       <div style={{
-        maxWidth: '700px'
+        maxWidth: '700px',
+        marginTop: '40px'
       }}
       >
         <Top>

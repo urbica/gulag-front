@@ -79,6 +79,7 @@ class PrisonCard extends PureComponent {
           <PrisonChart features={prison.get('features')} lang={lang} />
         </Right>
         <Bottom>
+          <Subtitle>Фото и документы</Subtitle>
           {
             parseMarkup(markup)
               .map((elem, i) => {

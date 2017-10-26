@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { color } from '../../../config/styles';
 
 export default styled.div`
   width: 100%;
-  border-top: 1px solid ${color};
+  padding-top: 40px;
+  border-top: 1px solid rgba(219, 235, 219, .2);
 `;

@@ -5,6 +5,7 @@ import { select, event } from 'd3-selection';
 import { drag } from 'd3-drag';
 
 import { height, chartData, yScale } from '../config';
+import { color } from '../../../config/styles';
 
 import { changeCurrentYear } from '../../App/reducers/uiReducer';
 
@@ -36,7 +37,7 @@ class Slider extends PureComponent {
       .append('rect')
       .attr('x', 0)
       .attr('y', 0)
-      .attr('fill', '#fff')
+      .attr('fill', color)
       .attr('opacity', 0.5)
       .attr('class', 'currentYearRect')
       .attr('width', barWidth)
@@ -82,7 +83,7 @@ class Slider extends PureComponent {
     this.handleRect = this.handle
       .append('rect')
       .attr('height', 11)
-      .attr('fill', '#fff')
+      .attr('fill', color)
       .attr('transform', 'translate(1, -5)')
       .attr('class', 'rect');
 

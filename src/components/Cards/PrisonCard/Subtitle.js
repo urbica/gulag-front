@@ -9,6 +9,8 @@ export default styled.h2`
   & + div {
     margin-bottom: 40px;
 
+    line-height: 1.7;
+
     @media (max-width: 425px) {
        margin-bottom: 30px;
     }

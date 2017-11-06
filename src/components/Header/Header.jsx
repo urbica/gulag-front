@@ -11,6 +11,7 @@ import { splitDigits } from '../../utils/utils';
 import Container from './Container';
 import Button from './Button/Button';
 import Middle from './Middle';
+import Amount from './Amount';
 import Desc from './Desc';
 import Group from './Group';
 
@@ -52,7 +53,7 @@ const Header = (props) => {
       <Middle>
         <Group>
           <div>
-            <div>{(isShowAllPrisons) ? '1918 – 1960' : currentYear}</div>
+            <Amount>{(isShowAllPrisons) ? '1918 – 1960' : currentYear}</Amount>
             <Desc>{(isShowAllPrisons) ? t('header.years') : t('header.year')}</Desc>
           </div>
         </Group>
@@ -67,7 +68,7 @@ const Header = (props) => {
               </g>
             </svg>
             <div>
-              <div>{`${prisonersAmount}\n`}</div>
+              <Amount>{`${prisonersAmount}\n`}</Amount>
               <Desc>{t('header.prisoners')}</Desc>
             </div>
           </Group>
@@ -83,7 +84,7 @@ const Header = (props) => {
               </g>
             </svg>
             <div>
-              <div>{`${deadAmount}\n`}</div>
+              <Amount>{`${deadAmount}\n`}</Amount>
               <Desc>{t('header.dead')}</Desc>
             </div>
           </Group>
@@ -98,7 +99,7 @@ const Header = (props) => {
               </g>
             </svg>
             <div>
-              <div>{`${prisonsAmount}\n`}</div>
+              <Amount>{`${prisonsAmount}\n`}</Amount>
               <Desc>{t('header.camps')}</Desc>
             </div>
           </Group>

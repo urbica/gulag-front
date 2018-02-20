@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { push } from 'react-router-redux';
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 import MapGL from '@urbica/react-map-gl';
 

@@ -5,16 +5,14 @@ export default styled.button`
   height: 50px;
   padding: 0;
   border: none;
-  border-radius: 0;
+  border-radius: 50%;
   margin: 0;
 
   outline: none;
 
-  background-color: transparent;
+  background-color: #14171a;
 
   & img {
-    width: 100%;
-
     opacity: .6;
   }
 

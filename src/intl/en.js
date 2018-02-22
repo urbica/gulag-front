@@ -1,12 +1,7 @@
 export default {
   locale: 'en',
   messages: {
-    'header.year': 'year',
-    'header.years': 'Total period',
-    'header.prisoners': 'prisoners',
-    'header.dead': 'dead',
-    'header.search': 'Search',
-    'header.camps': 'camps',
+    'menu.title': 'Gulag Map',
     showAllButton: 'Whole period',
     'prisonCard.yearsOfOperation': 'Years of operation',
     'prisonCard.location': 'Location',

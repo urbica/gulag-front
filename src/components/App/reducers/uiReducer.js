@@ -1,22 +1,30 @@
 import Immutable from 'immutable';
-import { viewport } from '../../../config/map';
+import { FETCH_REQUEST, FETCH_SUCCESS } from './dataReducer';
 
 const initState = Immutable.fromJS({
   currentYear: 1937,
-  viewport,
+  viewport: {
+    latitude: 60,
+    longitude: 90,
+    zoom: 2.5
+  },
   isDemoPlay: false,
-  isShowAllPrisons: false
+  isShowAllPrisons: false,
+  isMenuOpen: false,
+  isDataLoading: true
 });
 
 const CURRENT_YEAR_CHANGED = 'CURRENT_YEAR_CHANGED';
 const VIEWPORT_CHANGED = 'VIEWPORT_CHANGED';
 const TOGGLE_ALL_PRISONS = 'TOGGLE_ALL_PRISONS';
 const TOGGLE_DEMO = 'TOGGLE_DEMO';
+const MENU_TOGGLED = 'MENU_TOGGLED';
 
 export const changeCurrentYear = year => ({ type: CURRENT_YEAR_CHANGED, payload: year });
 export const changeViewport = newViewport => ({ type: VIEWPORT_CHANGED, payload: newViewport });
 export const toggleDemo = () => ({ type: TOGGLE_DEMO });
 export const toggleAllPrisons = () => ({ type: TOGGLE_ALL_PRISONS });
+export const toggleMenu = () => ({ type: MENU_TOGGLED });
 
 export default (state = initState, { type, payload }) => {
   switch (type) {
@@ -34,6 +42,12 @@ export default (state = initState, { type, payload }) => {
       return state
         .set('isShowAllPrisons', !state.get('isShowAllPrisons'))
         .set('isDemoPlay', false);
+    case MENU_TOGGLED:
+      return state.set('isMenuOpen', !state.get('isMenuOpen'));
+    case FETCH_REQUEST:
+      return state.set('isDataLoading', true);
+    case FETCH_SUCCESS:
+      return state.set('isDataLoading', false);
     default:
       return state;
   }

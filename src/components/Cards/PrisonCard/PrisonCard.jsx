@@ -117,7 +117,7 @@ class PrisonCard extends PureComponent {
 }
 
 PrisonCard.propTypes = {
-  history: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   lang: PropTypes.string.isRequired,
   prison: PropTypes.object

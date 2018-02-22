@@ -1,22 +1,23 @@
 import Immutable from 'immutable';
 
 const initState = Immutable.fromJS({
-  prisons: null,
+  camps: null,
   periods: null,
   photos: null,
   activities: null,
   places: null,
-  types: null
+  types: [],
+  mapStyles: null
 });
 
-export const DATA_FETCH_REQUEST = 'DATA_FETCH_REQUEST';
-export const DATA_FETCH_SUCCESS = 'DATA_FETCH_SUCCESS';
-export const DATA_FETCH_FAILURE = 'DATA_FETCH_FAILURE';
+export const FETCH_REQUEST = 'FETCH_REQUEST';
+export const FETCH_SUCCESS = 'FETCH_SUCCESS';
+export const FETCH_FAILURE = 'FETCH_FAILURE';
 
-export default (state = initState, action) => {
-  switch (action.type) {
-    case DATA_FETCH_SUCCESS:
-      return state.merge(action.payload);
+export default (state = initState, { type, payload }) => {
+  switch (type) {
+    case FETCH_SUCCESS:
+      return state.merge(payload);
     default:
       return state;
   }

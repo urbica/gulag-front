@@ -8,7 +8,6 @@ export default styled.div`
   width: 100%;
 
   transition: .4s;
-  z-index: 0;
 
   & .mapboxgl-ctrl-attrib {
     opacity: 0.3;

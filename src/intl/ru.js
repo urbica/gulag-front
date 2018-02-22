@@ -1,12 +1,7 @@
 export default {
   locale: 'ru',
   messages: {
-    'header.year': 'год',
-    'header.years': 'годы',
-    'header.prisoners': 'заключенных',
-    'header.dead': 'умерших',
-    'header.search': 'Поиск',
-    'header.camps': 'лагерей',
+    'menu.title': 'Карта гулага',
     showAllButton: 'Весь период',
     'prisonCard.yearsOfOperation': 'Годы существования',
     'prisonCard.location': 'Местоположение',

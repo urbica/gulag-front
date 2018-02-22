@@ -1,16 +1,13 @@
 import { all, put, fork } from 'redux-saga/effects';
-import { DataSaga } from './dataSaga';
-import { MapSaga } from '../Map/saga';
+import ApiSaga from './apiSaga';
 
-import { DATA_FETCH_REQUEST } from './reducers/dataReducer';
-import { MAP_STYLE_FETCH_REQUEST } from '../Map/reducer';
+import { FETCH_REQUEST } from './reducers/dataReducer';
 
-const sagas = [DataSaga, MapSaga];
+const sagas = [ApiSaga];
 
 function* Saga() {
   yield all(sagas.map(saga => fork(saga)));
-  yield put({ type: DATA_FETCH_REQUEST });
-  yield put({ type: MAP_STYLE_FETCH_REQUEST });
+  yield put({ type: FETCH_REQUEST });
 }
 
 export default Saga;

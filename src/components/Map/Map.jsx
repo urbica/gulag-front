@@ -14,9 +14,9 @@ import {
   prisonsSelector,
   currentYearSelector,
   viewportSelector,
-  isShowAllPrisonsSelector
+  isShowAllPrisonsSelector,
+  finalStyleSelector
 } from '../App/selectors';
-import { finalStyleSelector } from './selectors';
 
 import Container from './Container';
 
@@ -34,10 +34,7 @@ import minus from './btn-minus.svg';
 
 const Map = (props) => {
   const {
-    isSlideUp,
-    mapStyle,
-    viewport,
-    dispatch
+    isSlideUp, mapStyle, viewport, dispatch
   } = props;
 
   return (

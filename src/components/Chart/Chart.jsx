@@ -58,7 +58,11 @@ class Chart extends PureComponent {
 
   render() {
     return (
-      <Container>
+      <Container
+        mountOnEnter
+        in={!this.props.isDataLoading}
+        timeout={2000}
+      >
         <PlayButton
           isDemoPlayed={this.props.isDemoPlay}
           onClick={this.demo}
@@ -138,14 +142,16 @@ Chart.propTypes = {
   isShowAll: PropTypes.bool.isRequired,
   toggleAllPrisons: PropTypes.func.isRequired,
   changeCurrentYear: PropTypes.func.isRequired,
-  toggleDemo: PropTypes.func.isRequired
+  toggleDemo: PropTypes.func.isRequired,
+  isDataLoading: PropTypes.bool.isRequired
 };
 
 export default connect(
   state => ({
     currentYear: state.getIn(['ui', 'currentYear']),
     isDemoPlay: state.getIn(['ui', 'isDemoPlay']),
-    isShowAll: state.getIn(['ui', 'isShowAllPrisons'])
+    isShowAll: state.getIn(['ui', 'isShowAllPrisons']),
+    isDataLoading: state.getIn(['ui', 'isDataLoading'])
   }),
   { toggleAllPrisons, changeCurrentYear, toggleDemo }
 )(Chart);

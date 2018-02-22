@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import transition from 'styled-transition-group';
 
-export default styled.div`
+export default transition.div`
   position: fixed;
   bottom: 0;
 
@@ -10,5 +10,13 @@ export default styled.div`
   width: 100%;
 
   pointer-events: none;
-  z-index: 1;
+  
+  &:enter {
+    bottom: -200px;
+  }
+
+  &:enter-active {
+    bottom: 0;
+    transition: bottom 2000ms ease-in;
+  }
 `;

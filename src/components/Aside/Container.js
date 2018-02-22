@@ -1,7 +1,8 @@
-import styled from 'styled-components';
+import transition from 'styled-transition-group';
 
-export default styled.div`
+export default transition.div`
   position: absolute;
+  left: ${({ isMenuOpen }) => (isMenuOpen ? 0 : '-400px')};
 
   display: flex;
   flex-direction: column;
@@ -13,6 +14,23 @@ export default styled.div`
 
   background-color: #14171a;
   
-  transform: translateX(${({ isOpen }) => (isOpen ? 0 : '-400px')});
-  transition: .4s;
+  &:enter {
+    left: -400px;
+  }
+
+  &:enter-active {
+    left: 0;
+
+    transition: left 400ms ease-in;
+  }
+
+  &:exit {
+    left: 0;
+  }
+
+  &:exit-active {
+    left: -400px;
+
+    transition: left 400ms ease-in;
+  }
 `;

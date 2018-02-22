@@ -11,7 +11,8 @@ const initState = Immutable.fromJS({
   isDemoPlay: false,
   isShowAllPrisons: false,
   isMenuOpen: false,
-  isDataLoading: true
+  isDataLoading: true,
+  isCampFiltersOpen: false
 });
 
 const CURRENT_YEAR_CHANGED = 'CURRENT_YEAR_CHANGED';
@@ -19,12 +20,14 @@ const VIEWPORT_CHANGED = 'VIEWPORT_CHANGED';
 const TOGGLE_ALL_PRISONS = 'TOGGLE_ALL_PRISONS';
 const TOGGLE_DEMO = 'TOGGLE_DEMO';
 const MENU_TOGGLED = 'MENU_TOGGLED';
+const CAMP_FILTERS_TOGGLED = 'CAMP_FILTERS_TOGGLED';
 
 export const changeCurrentYear = year => ({ type: CURRENT_YEAR_CHANGED, payload: year });
 export const changeViewport = newViewport => ({ type: VIEWPORT_CHANGED, payload: newViewport });
 export const toggleDemo = () => ({ type: TOGGLE_DEMO });
 export const toggleAllPrisons = () => ({ type: TOGGLE_ALL_PRISONS });
 export const toggleMenu = () => ({ type: MENU_TOGGLED });
+export const toggleCampFilters = () => ({ type: CAMP_FILTERS_TOGGLED });
 
 export default (state = initState, { type, payload }) => {
   switch (type) {
@@ -48,6 +51,8 @@ export default (state = initState, { type, payload }) => {
       return state.set('isDataLoading', true);
     case FETCH_SUCCESS:
       return state.set('isDataLoading', false);
+    case CAMP_FILTERS_TOGGLED:
+      return state.set('isCampFiltersOpen', !state.get('isCampFiltersOpen'));
     default:
       return state;
   }

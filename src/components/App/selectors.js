@@ -5,10 +5,11 @@ import layers from '../../config/layers';
 export const langSelector = state => state.getIn(['intl', 'locale']);
 export const prisonsSelector = state => state.getIn(['data', 'prisons']);
 export const mapStyleSelector = state => state.getIn(['data', 'mapStyles']);
+export const typesSelector = state => state.getIn(['data', 'types']);
 export const currentYearSelector = state => state.getIn(['ui', 'currentYear']);
 export const viewportSelector = state => state.getIn(['ui', 'viewport']);
 export const isShowAllPrisonsSelector = state => state.getIn(['ui', 'isShowAllPrisons']);
-export const isDataLoadingSelector = state => state.getIn(['ui', 'isDataLoading']);
+export const isCampFiltersOpenSelector = state => state.getIn(['ui', 'isCampFiltersOpen']);
 
 const emptyGeoJSONSource = Immutable.fromJS({
   type: 'geojson',

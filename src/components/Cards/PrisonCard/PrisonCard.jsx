@@ -9,7 +9,7 @@ import { langSelector } from '../../App/selectors';
 import prisonSelector from './selector';
 
 // images
-import close from '../btn-close.svg';
+import close from '../../FullScreenCard/btn-close.svg';
 
 // utils
 import { getPeriods } from '../../../utils/utils';

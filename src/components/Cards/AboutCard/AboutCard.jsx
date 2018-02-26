@@ -10,7 +10,7 @@ import { t } from '../../../intl/helper';
 import urbica from './urbica.svg';
 import museum from './museum.svg';
 import museumEn from './museum-en.svg';
-import cross from '../btn-close.svg';
+import cross from '../../FullScreenCard/btn-close.svg';
 
 import CardButton from '../CardButton';
 

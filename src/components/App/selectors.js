@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 import layers from '../../config/layers';
 
 export const langSelector = state => state.getIn(['intl', 'locale']);
-export const prisonsSelector = state => state.getIn(['data', 'prisons']);
+export const campsSelector = state => state.getIn(['data', 'camps']);
 export const mapStyleSelector = state => state.getIn(['data', 'mapStyles']);
 export const typesSelector = state => state.getIn(['data', 'types']);
 export const currentYearSelector = state => state.getIn(['ui', 'currentYear']);
@@ -20,7 +20,7 @@ const emptyGeoJSONSource = Immutable.fromJS({
 });
 
 const prisonSourceSelector = createSelector(
-  prisonsSelector,
+  campsSelector,
   langSelector,
   isShowAllPrisonsSelector,
   currentYearSelector,

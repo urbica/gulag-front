@@ -8,7 +8,7 @@ import Menu from '../Menu/Menu';
 import Chart from '../Chart/Chart';
 import Aside from '../Aside';
 import CampFilters from '../CampFilters/CampFilters';
-import SearchCard from '../Cards/SearchCard/SearchCard';
+import Search from '../Search';
 import PeriodCard from '../Cards/PeriodCard/PeriodCard';
 import AboutCard from '../Cards/AboutCard/AboutCard';
 import PrisonCard from '../Cards/PrisonCard/PrisonCard';
@@ -23,7 +23,7 @@ const App = () => (
     <Aside />
     <CampFilters />
     <Switch>
-      <Route path='/search' component={SearchCard} />
+      <Route path='/search' component={Search} />
       <Route path='/chronology' component={PeriodCard} />
       <Route path='/about' component={AboutCard} />
       <Route path='/prison:id' component={PrisonCard} />

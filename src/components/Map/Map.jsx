@@ -11,7 +11,7 @@ import { mapToken } from '../../config/tokens';
 
 import { changeViewport } from '../App/reducers/uiReducer';
 import {
-  prisonsSelector,
+  campsSelector,
   currentYearSelector,
   viewportSelector,
   isShowAllPrisonsSelector,
@@ -86,7 +86,7 @@ Map.defaultProps = {
 
 const selector = createSelector(
   state => state.getIn(['router']).location.pathname,
-  prisonsSelector,
+  campsSelector,
   finalStyleSelector,
   currentYearSelector,
   viewportSelector,

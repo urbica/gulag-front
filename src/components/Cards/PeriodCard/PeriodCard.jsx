@@ -9,7 +9,7 @@ import periodSelector from './selector';
 import CardButton from '../CardButton';
 
 // icons
-import close from '../btn-close.svg';
+import close from '../../FullScreenCard/btn-close.svg';
 
 // styled
 import Container from './Container';

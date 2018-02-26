@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Aside renders correctly 1`] = `
+<div
+  className="sc-bdVaJa kFtmJW"
+  timeout={400}
+>
+  <div>
+    <div>
+      <button
+        className="sc-bwzfXH AOaMT"
+        onClick={[Function]}
+      >
+        Поиск
+      </button>
+      <button
+        onClick={[Function]}
+      >
+        close
+      </button>
+    </div>
+    <button
+      className="sc-bwzfXH AOaMT"
+      onClick={[Function]}
+    >
+      Типы лагерей на карте
+    </button>
+    <button
+      className="sc-bwzfXH AOaMT"
+      onClick={[Function]}
+    >
+      Хронология ГУЛАГа
+    </button>
+  </div>
+  <div>
+    <button
+      className="sc-bwzfXH AOaMT"
+      onClick={[Function]}
+    >
+      О проекте
+    </button>
+    <div>
+      <button>
+        ru
+      </button>
+      <button>
+        en
+      </button>
+      <button>
+        de
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Aside renders correctly 2`] = `
+<div
+  className="sc-bdVaJa kFtmJW"
+  timeout={400}
+>
+  <div>
+    <div>
+      <button
+        className="sc-bwzfXH AOaMT"
+        onClick={[Function]}
+      >
+        Поиск
+      </button>
+      <button
+        onClick={[Function]}
+      >
+        close
+      </button>
+    </div>
+    <button
+      className="sc-bwzfXH AOaMT"
+      onClick={[Function]}
+    >
+      Типы лагерей на карте
+    </button>
+    <button
+      className="sc-bwzfXH AOaMT"
+      onClick={[Function]}
+    >
+      Хронология ГУЛАГа
+    </button>
+  </div>
+  <div>
+    <button
+      className="sc-bwzfXH AOaMT"
+      onClick={[Function]}
+    >
+      О проекте
+    </button>
+    <div>
+      <button>
+        ru
+      </button>
+      <button>
+        en
+      </button>
+      <button>
+        de
+      </button>
+    </div>
+  </div>
+</div>
+`;

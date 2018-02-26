@@ -6,7 +6,7 @@ import './globalStyles';
 import Map from '../Map/Map';
 import Menu from '../Menu/Menu';
 import Chart from '../Chart/Chart';
-import Aside from '../Aside/Aside';
+import Aside from '../Aside';
 import CampFilters from '../CampFilters/CampFilters';
 import SearchCard from '../Cards/SearchCard/SearchCard';
 import PeriodCard from '../Cards/PeriodCard/PeriodCard';

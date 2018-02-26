@@ -1,6 +1,8 @@
 import transition from 'styled-transition-group';
 
-export default transition.div`
+export default transition.div.attrs({
+  timeout: 400
+})`
   position: absolute;
   left: ${({ isMenuOpen }) => (isMenuOpen ? 0 : '-400px')};
 

@@ -7,7 +7,6 @@ export default {
     'prisonCard.location': 'Местоположение',
     'prisonCard.prisonersByYears': 'Количество заключенных по годам',
     'prisonCard.production': 'Тип деятельности',
-    'aboutCard.heading': 'О проекте',
-    'aboutCard.urbica': 'Дизайн и разработка'
+    'aboutCard.heading': 'О проекте'
   }
 };

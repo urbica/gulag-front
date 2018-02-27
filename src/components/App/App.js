@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import './globalStyles';
 
+import Preloader from '../Preloader/Preloader';
 import Map from '../Map/Map';
 import Menu from '../Menu/Menu';
 import Chart from '../Chart/Chart';
@@ -10,9 +11,8 @@ import Aside from '../Aside';
 import CampFilters from '../CampFilters/CampFilters';
 import Search from '../Search';
 import PeriodCard from '../Cards/PeriodCard/PeriodCard';
-import AboutCard from '../Cards/AboutCard/AboutCard';
+import About from '../About';
 import PrisonCard from '../Cards/PrisonCard/PrisonCard';
-import Preloader from '../Preloader/Preloader';
 
 const App = () => (
   <Fragment>
@@ -25,7 +25,7 @@ const App = () => (
     <Switch>
       <Route path='/search' component={Search} />
       <Route path='/chronology' component={PeriodCard} />
-      <Route path='/about' component={AboutCard} />
+      <Route path='/about' component={About} />
       <Route path='/prison:id' component={PrisonCard} />
     </Switch>
   </Fragment>

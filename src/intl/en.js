@@ -7,7 +7,6 @@ export default {
     'prisonCard.location': 'Location',
     'prisonCard.prisonersByYears': 'Number of prisoners by years',
     'prisonCard.production': 'Production performance',
-    'aboutCard.heading': 'About',
-    'aboutCard.urbica': 'Design and development'
+    'aboutCard.heading': 'About'
   }
 };

@@ -10,7 +10,7 @@ import Chart from '../Chart/Chart';
 import Aside from '../Aside';
 import CampFilters from '../CampFilters/CampFilters';
 import Search from '../Search';
-import PeriodCard from '../Cards/PeriodCard/PeriodCard';
+import Chronology from '../Chronology';
 import About from '../About';
 import PrisonCard from '../Cards/PrisonCard/PrisonCard';
 
@@ -24,7 +24,7 @@ const App = () => (
     <CampFilters />
     <Switch>
       <Route path='/search' component={Search} />
-      <Route path='/chronology' component={PeriodCard} />
+      <Route path='/chronology' component={Chronology} />
       <Route path='/about' component={About} />
       <Route path='/prison:id' component={PrisonCard} />
     </Switch>

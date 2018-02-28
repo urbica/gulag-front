@@ -12,7 +12,6 @@ import ShowAllButton from './Buttons/ShowAllButton';
 import PrisonersArea from './PrisonersArea/PrisonersArea';
 import Axis from './Axis/Axis';
 import Slider from './Slider/Slider';
-import Periods from './Periods/Periods';
 
 // styled
 import Container from './Container';
@@ -122,10 +121,6 @@ class Chart extends PureComponent {
               xScale={xScale}
             />
           </svg>
-          <Periods
-            width={width}
-            xScale={xScale}
-          />
         </ChartWrap>
         <ShowAllButton
           isShowAll={this.props.isShowAll}

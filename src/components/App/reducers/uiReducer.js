@@ -1,7 +1,7 @@
 import Immutable from 'immutable';
 import { FETCH_REQUEST, FETCH_SUCCESS } from './dataReducer';
 
-const initState = Immutable.fromJS({
+export const initState = Immutable.fromJS({
   currentYear: 1937,
   viewport: {
     latitude: 60,
@@ -12,7 +12,15 @@ const initState = Immutable.fromJS({
   isShowAllPrisons: false,
   isMenuOpen: false,
   isDataLoading: true,
-  isCampFiltersOpen: false
+  isCampFiltersOpen: false,
+  campTypeFilters: {
+    0: true,
+    1: true,
+    2: true,
+    3: true,
+    4: true,
+    5: true
+  }
 });
 
 const CURRENT_YEAR_CHANGED = 'CURRENT_YEAR_CHANGED';
@@ -21,6 +29,7 @@ const TOGGLE_ALL_PRISONS = 'TOGGLE_ALL_PRISONS';
 const TOGGLE_DEMO = 'TOGGLE_DEMO';
 const MENU_TOGGLED = 'MENU_TOGGLED';
 const CAMP_FILTERS_TOGGLED = 'CAMP_FILTERS_TOGGLED';
+const CAMP_FILTER_TOGGLED = 'CAMP_FILTER_TOGGLED';
 
 export const changeCurrentYear = year => ({ type: CURRENT_YEAR_CHANGED, payload: year });
 export const changeViewport = newViewport => ({ type: VIEWPORT_CHANGED, payload: newViewport });
@@ -28,6 +37,7 @@ export const toggleDemo = () => ({ type: TOGGLE_DEMO });
 export const toggleAllPrisons = () => ({ type: TOGGLE_ALL_PRISONS });
 export const toggleMenu = () => ({ type: MENU_TOGGLED });
 export const toggleCampFilters = () => ({ type: CAMP_FILTERS_TOGGLED });
+export const toggleCampTypeFilters = id => ({ type: CAMP_FILTER_TOGGLED, payload: id });
 
 export default (state = initState, { type, payload }) => {
   switch (type) {
@@ -53,6 +63,8 @@ export default (state = initState, { type, payload }) => {
       return state.set('isDataLoading', false);
     case CAMP_FILTERS_TOGGLED:
       return state.set('isCampFiltersOpen', !state.get('isCampFiltersOpen'));
+    case CAMP_FILTER_TOGGLED:
+      return state.setIn(['campTypeFilters', payload], !state.getIn(['campTypeFilters', payload]));
     default:
       return state;
   }

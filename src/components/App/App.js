@@ -8,7 +8,7 @@ import Map from '../Map/Map';
 import Menu from '../Menu/Menu';
 import Chart from '../Chart/Chart';
 import Aside from '../Aside';
-import CampFilters from '../CampFilters/CampFilters';
+import CampFilters from '../CampFilters';
 import Search from '../Search';
 import Chronology from '../Chronology';
 import About from '../About';

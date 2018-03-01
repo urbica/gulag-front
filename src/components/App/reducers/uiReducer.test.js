@@ -1,5 +1,6 @@
-import Immutable, { Map } from 'immutable';
+import { Map } from 'immutable';
 import reducer, {
+  initState,
   changeCurrentYear,
   changeViewport,
   toggleDemo,
@@ -9,87 +10,53 @@ import reducer, {
 } from './uiReducer';
 import { FETCH_REQUEST, FETCH_SUCCESS } from './dataReducer';
 
-let initState = Immutable.fromJS({
-  currentYear: null,
-  viewport: {
-    latitude: null,
-    longitude: null,
-    zoom: null
-  },
-  isDemoPlay: null,
-  isShowAllPrisons: null,
-  isMenuOpen: null,
-  isDataLoading: null,
-  isCampFiltersOpen: null
-});
-
 describe('Ui Reducer', () => {
   it('returns a state object', () => {
-    initState = reducer(undefined, { type: 'ANYTHING' });
+    const newState = reducer(undefined, { type: 'ANYTHING' });
 
-    expect(initState).toBeDefined();
+    expect(newState).toBeDefined();
   });
   it('change current year', () => {
     const value = 1937;
-    const expectedState = initState
-      .set('currentYear', value)
-      .set('isShowAllPrisons', false);
+    const newState = reducer(initState, changeCurrentYear(value));
 
-    initState = reducer(initState, changeCurrentYear(value));
-    expect(initState).toEqual(expectedState);
+    expect(newState.get('currentYear')).toEqual(value);
+    expect(newState.get('isShowAllPrisons')).toEqual(false);
   });
   it('change viewport', () => {
-    const expectedState = initState.set('viewport', Map({
+    const viewport = Map({
       latitude: 70,
       longitude: 50,
       zoom: 3
-    }));
+    });
 
-    initState = reducer(initState, changeViewport({
-      latitude: 70,
-      longitude: 50,
-      zoom: 3
-    }));
-    expect(initState).toEqual(expectedState);
+    const newState = reducer(initState, changeViewport(viewport));
+    expect(newState.get('viewport')).toEqual(viewport);
   });
   it('toggle demo', () => {
-    const expectedState = initState
-      .set('isDemoPlay', true)
-      .set('isShowAllPrisons', false);
-
-    initState = reducer(initState, toggleDemo());
-    expect(initState).toEqual(expectedState);
+    const newState = reducer(initState, toggleDemo());
+    expect(newState.get('isDemoPlay')).toEqual(true);
+    expect(newState.get('isShowAllPrisons')).toEqual(false);
   });
   it('can show all prisoners', () => {
-    const expectedState = initState
-      .set('isDemoPlay', false)
-      .set('isShowAllPrisons', true);
-
-    initState = reducer(initState, toggleAllPrisons());
-    expect(initState).toEqual(expectedState);
+    const newState = reducer(initState, toggleAllPrisons());
+    expect(newState.get('isDemoPlay')).toEqual(false);
+    expect(newState.get('isShowAllPrisons')).toEqual(true);
   });
   it('toggle menu', () => {
-    const expectedState = initState.set('isMenuOpen', true);
-
-    initState = reducer(initState, toggleMenu());
-    expect(initState).toEqual(expectedState);
+    const newState = reducer(initState, toggleMenu());
+    expect(newState.get('isMenuOpen')).toEqual(true);
   });
   it('can show that data is loading', () => {
-    const expectedState = initState.set('isDataLoading', true);
-
-    initState = reducer(initState, { type: FETCH_REQUEST });
-    expect(initState).toEqual(expectedState);
+    const newState = reducer(initState, { type: FETCH_REQUEST });
+    expect(newState.get('isDataLoading')).toEqual(true);
   });
   it('can show that data is loaded', () => {
-    const expectedState = initState.set('isDataLoading', false);
-
-    initState = reducer(initState, { type: FETCH_SUCCESS });
-    expect(initState).toEqual(expectedState);
+    const newState = reducer(initState, { type: FETCH_SUCCESS });
+    expect(newState.get('isDataLoading')).toEqual(false);
   });
   it('toggle camp filters', () => {
-    const expectedState = initState.set('isCampFiltersOpen', true);
-
-    initState = reducer(initState, toggleCampFilters());
-    expect(initState).toEqual(expectedState);
+    const newState = reducer(initState, toggleCampFilters());
+    expect(newState.get('isCampFiltersOpen')).toEqual(true);
   });
 });

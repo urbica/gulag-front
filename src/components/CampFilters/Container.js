@@ -19,7 +19,7 @@ export default transition.div`
   &:enter-active {
     left: 0;
     
-    transition: left 400ms ease-in;
+    transition: left 300ms ease-in-out;
   }
   
   &:exit {
@@ -29,6 +29,6 @@ export default transition.div`
   &:exit-active {
     left: -400px;
 
-    transition: left 400ms ease-in;
+    transition: left 300ms ease-in-out;
   }
 `;

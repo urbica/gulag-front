@@ -1,9 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// ico
+import cross from '../cross.svg';
+
 // styled
 import Container from './Container';
+import CloseButton from './CloseButton';
 import Button from './Button';
+import LangButton from './LangButton';
 
 const Aside = (props) => {
   const {
@@ -15,20 +20,20 @@ const Aside = (props) => {
       isMenuOpen={isMenuOpen}
       in={isMenuOpen}
     >
+      <CloseButton onClick={closeMenu}>
+        <img src={cross} alt='close' />
+      </CloseButton>
       <div>
-        <div>
-          <Button onClick={pushToSearch}>Поиск</Button>
-          <button onClick={closeMenu}>close</button>
-        </div>
+        <Button onClick={pushToSearch}>Поиск</Button>
         <Button onClick={openCampFilters}>Типы лагерей на карте</Button>
         <Button onClick={pushToChronology}>Хронология ГУЛАГа</Button>
       </div>
       <div>
         <Button onClick={pushToAbout}>О проекте</Button>
         <div>
-          <button>ru</button>
-          <button>en</button>
-          <button>de</button>
+          <LangButton isActive>Rus</LangButton>
+          <LangButton>Eng</LangButton>
+          <LangButton>Deu</LangButton>
         </div>
       </div>
     </Container>

@@ -6,7 +6,7 @@ import { select } from 'd3-selection';
 
 import Container from './Container';
 
-import { splitDigits } from '../../../../../utils/utils';
+import { splitDigits } from '../../../../utils/utils';
 
 class PrisonersArea extends PureComponent {
   componentDidMount() {

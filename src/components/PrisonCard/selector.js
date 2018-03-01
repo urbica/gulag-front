@@ -1,4 +1,4 @@
-import activitiesEn from '../../../config/i18n';
+import activitiesEn from '../../config/i18n';
 
 const prisonSelector = (state, id) => state.getIn(['data', 'prisons', id]);
 const activitiesSelector = (state) => {

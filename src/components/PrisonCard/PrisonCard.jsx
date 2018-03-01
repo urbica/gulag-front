@@ -4,17 +4,17 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 
 // reducer && selector
-import { changeCurrentYear, changeViewport } from '../../App/reducers/uiReducer';
-import { langSelector } from '../../App/selectors';
+import { changeCurrentYear, changeViewport } from '../App/reducers/uiReducer';
+import { langSelector } from '../App/selectors';
 import prisonSelector from './selector';
 
 // images
-import close from '../../FullScreenCard/btn-close.svg';
+import close from '../cross.svg';
 
 // utils
-import { getPeriods } from '../../../utils/utils';
-import { t } from '../../../intl/helper';
-import parseMarkup from '../../../utils/parseMarkup';
+import { getPeriods } from '../../utils/utils';
+import { t } from '../../intl/helper';
+import parseMarkup from '../../utils/parseMarkup';
 
 import PrisonDescription from './PrisonDescription/PrisonDescription';
 import PrisonChart from './PrisonChart/PrisonChart';
@@ -27,7 +27,7 @@ import Left from './Left';
 import HalfWidth from './HalfWidth';
 import Subtitle from './Subtitle';
 import Right from './Right';
-import CardButton from '../CardButton';
+import CardButton from './CardButton';
 import Bottom from './Bottom';
 import Gallery from './PrisonDescription/Gallery/Gallery';
 

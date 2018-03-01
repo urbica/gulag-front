@@ -12,7 +12,7 @@ import CampFilters from '../CampFilters';
 import Search from '../Search';
 import Chronology from '../Chronology';
 import About from '../About';
-import PrisonCard from '../Cards/PrisonCard/PrisonCard';
+import PrisonCard from '../PrisonCard/PrisonCard';
 
 const App = () => (
   <Fragment>

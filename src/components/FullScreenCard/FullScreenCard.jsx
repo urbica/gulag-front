@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import icon from './btn-close.svg';
+import icon from '../cross.svg';
 import Container from './Container';
 import Button from './Button';
 import ChildrenContainer from './ChildrenContainer';

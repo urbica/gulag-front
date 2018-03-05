@@ -36,6 +36,7 @@ build:latest:
   only:
     - master
     - dev
+    - next-version
 
 build:release:
   stage: build
@@ -68,3 +69,4 @@ deploy:
     url: http://gulag.urbica.co
   only:
     - dev
+    - next-version

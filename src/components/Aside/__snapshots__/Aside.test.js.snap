@@ -5,28 +5,30 @@ exports[`Aside renders correctly 1`] = `
   className="sc-bdVaJa kFtmJW"
   timeout={400}
 >
+  <button
+    className="sc-bwzfXH kSHzym"
+    onClick={[Function]}
+  >
+    <img
+      alt="close"
+      src="cross.svg"
+    />
+  </button>
   <div>
-    <div>
-      <button
-        className="sc-bwzfXH AOaMT"
-        onClick={[Function]}
-      >
-        Поиск
-      </button>
-      <button
-        onClick={[Function]}
-      >
-        close
-      </button>
-    </div>
     <button
-      className="sc-bwzfXH AOaMT"
+      className="sc-htpNat gkmNkY"
+      onClick={[Function]}
+    >
+      Поиск
+    </button>
+    <button
+      className="sc-htpNat gkmNkY"
       onClick={[Function]}
     >
       Типы лагерей на карте
     </button>
     <button
-      className="sc-bwzfXH AOaMT"
+      className="sc-htpNat gkmNkY"
       onClick={[Function]}
     >
       Хронология ГУЛАГа
@@ -34,20 +36,26 @@ exports[`Aside renders correctly 1`] = `
   </div>
   <div>
     <button
-      className="sc-bwzfXH AOaMT"
+      className="sc-htpNat gkmNkY"
       onClick={[Function]}
     >
       О проекте
     </button>
     <div>
-      <button>
-        ru
+      <button
+        className="sc-bxivhb lkPidi"
+      >
+        Rus
       </button>
-      <button>
-        en
+      <button
+        className="sc-bxivhb jpemKf"
+      >
+        Eng
       </button>
-      <button>
-        de
+      <button
+        className="sc-bxivhb jpemKf"
+      >
+        Deu
       </button>
     </div>
   </div>
@@ -59,28 +67,30 @@ exports[`Aside renders correctly 2`] = `
   className="sc-bdVaJa kFtmJW"
   timeout={400}
 >
+  <button
+    className="sc-bwzfXH kSHzym"
+    onClick={[Function]}
+  >
+    <img
+      alt="close"
+      src="cross.svg"
+    />
+  </button>
   <div>
-    <div>
-      <button
-        className="sc-bwzfXH AOaMT"
-        onClick={[Function]}
-      >
-        Поиск
-      </button>
-      <button
-        onClick={[Function]}
-      >
-        close
-      </button>
-    </div>
     <button
-      className="sc-bwzfXH AOaMT"
+      className="sc-htpNat gkmNkY"
+      onClick={[Function]}
+    >
+      Поиск
+    </button>
+    <button
+      className="sc-htpNat gkmNkY"
       onClick={[Function]}
     >
       Типы лагерей на карте
     </button>
     <button
-      className="sc-bwzfXH AOaMT"
+      className="sc-htpNat gkmNkY"
       onClick={[Function]}
     >
       Хронология ГУЛАГа
@@ -88,20 +98,26 @@ exports[`Aside renders correctly 2`] = `
   </div>
   <div>
     <button
-      className="sc-bwzfXH AOaMT"
+      className="sc-htpNat gkmNkY"
       onClick={[Function]}
     >
       О проекте
     </button>
     <div>
-      <button>
-        ru
+      <button
+        className="sc-bxivhb lkPidi"
+      >
+        Rus
       </button>
-      <button>
-        en
+      <button
+        className="sc-bxivhb jpemKf"
+      >
+        Eng
       </button>
-      <button>
-        de
+      <button
+        className="sc-bxivhb jpemKf"
+      >
+        Deu
       </button>
     </div>
   </div>

@@ -1,6 +1,6 @@
 import 'normalize.css/normalize.css';
 import { injectGlobal } from 'styled-components';
-import { fontSize, color } from '../../config/styles';
+import { fontSize, mainFontColour } from '../../config/styles';
 
 import lightWoff2 from '../../assets/formular-lightitalic/formular-lightitalic.woff2';
 import lightWoff from '../../assets/formular-lightitalic/formular-lightitalic.woff';
@@ -64,7 +64,7 @@ injectGlobal`
   body {
     font-family: 'Formular', sans-serif;
     font-size: ${fontSize};
-    color: ${color};
+    color: ${mainFontColour};
 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

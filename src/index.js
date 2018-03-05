@@ -20,7 +20,7 @@ import intlReducer from './components/App/reducers/intlReducer';
 //
 import Saga from './components/App/saga';
 import App from './components/App/App';
-import registerServiceWorker from './registerServiceWorker';
+// import registerServiceWorker from './registerServiceWorker';
 
 const reducer = combineReducers({
   data: dataReducer,
@@ -66,4 +66,4 @@ ReactDOM.render(
     </IntlProvider>
   </Provider>, document.getElementById('root')
 );
-registerServiceWorker();
+// registerServiceWorker();

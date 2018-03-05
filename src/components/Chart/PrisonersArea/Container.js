@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { margin } from '../config';
-import { color } from '../../../config/styles';
+import { mainFontColour } from '../../../config/styles';
 
 export default styled.g`
   transform: translate(${margin.left}px, ${margin.top}px);
@@ -33,7 +33,7 @@ export default styled.g`
 
   & g:last-child {
     & rect {
-      fill: ${color};
+      fill: ${mainFontColour};
       opacity: ${({ showAllYears }) => (showAllYears ? 0.6 : 0.1)};
       transition: opacity 2s;
       &:hover {
@@ -43,7 +43,7 @@ export default styled.g`
       }
     }
     & line {
-      stroke: ${color};
+      stroke: ${mainFontColour};
       stroke-width: 2px;
     }
   }

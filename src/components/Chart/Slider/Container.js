@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { height, margin } from '../config';
-import { color } from '../../../config/styles';
+import { mainFontColour } from '../../../config/styles';
 
 export default styled.g`
   display: ${({ isVisible }) => (isVisible ? 'block' : 'none')};
@@ -43,7 +43,7 @@ export default styled.g`
   }
 
   .currentYear {
-    fill: ${color};
+    fill: ${mainFontColour};
     @media (min-width: 1024px) {
       display: none;
     }

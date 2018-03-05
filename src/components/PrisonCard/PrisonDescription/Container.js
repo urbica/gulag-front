@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { color } from '../../../config/styles';
+import { mainFontColour } from '../../../config/styles';
 
 export default styled.div`
   h2 {
@@ -19,11 +19,11 @@ export default styled.div`
   a {
     display: inline-block;
     padding-bottom: 2px;
-    border-bottom: 4px solid ${color};
+    border-bottom: 4px solid ${mainFontColour};
     margin-bottom: 10px;
 
     line-height: 22px;
-    color: ${color};
+    color: ${mainFontColour};
     text-decoration: none;
 
     transition: 0.4s;

@@ -1,7 +1,8 @@
 import Immutable from 'immutable';
-import { dataToken, mapToken } from '../config/tokens';
+import { mapToken } from '../config/tokens';
+// import { dataToken, mapToken } from '../config/tokens';
 
-const dataOptions = { headers: { Authorization: `Bearer ${dataToken}` } };
+// const dataOptions = { headers: { Authorization: `Bearer ${dataToken}` } };
 const mapStylesUrl =
   `https://api.mapbox.com/styles/v1/gulagmap/cj8bt4qbw7kbo2rry4oft6e5g?access_token=${mapToken}`;
 

@@ -7,9 +7,8 @@ if [ -d /mnt/storage/urbica/gulag/gulag-next ]; then
 else
     cd /mnt/storage/urbica
     mkdir -p /mnt/storage/urbica/gulag
-    cd gulag-next
     ssh-keyscan -p 2222 gitlab.urbica.co >> ~/.ssh/known_hosts
-    git clone -b next-version ssh://git@gitlab.urbica.co:2222/gulag/gulagmap.git
+    git clone -b next-version ssh://git@gitlab.urbica.co:2222/gulag/gulagmap.git gulag-next
     cd gulag-next
 fi
 

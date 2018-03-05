@@ -1,7 +1,7 @@
 version: '3.4'
 
 services:
-  gulag-front:
+  gulag-next-front:
       image: gitlab.urbica.co:5001/gulag/gulagmap:dev
       container_name: gulag-next-front
       restart: always
@@ -16,7 +16,7 @@ services:
       depends_on:
         - gulag-next-api
 
-  gulag-api:
+  gulag-next-front:
     image: gitlab.urbica.co:5001/device25/gulag-workshop:master
     container_name: gulag-next-api
     restart: always
@@ -27,7 +27,7 @@ services:
     depends_on:
       - gulag-next-db
 
-  gulag-db:
+  gulag-next-front:
       image: mdillon/postgis:9.6-alpine
       container_name: gulag-next-db
       restart: always

@@ -18,12 +18,12 @@ export default () => (
       //   .then(res => (res.status !== 200 ? reject(res) : res.json())),
       // fetch('/api/public/types.json', dataOptions)
       //   .then(res => (res.status !== 200 ? reject(res) : res.json())),
-      fetch('/api/periods', dataOptions)
-        .then(res => (res.status !== 200 ? reject(res) : res.json())),
+      // fetch('/api/periods', dataOptions)
+      //   .then(res => (res.status !== 200 ? reject(res) : res.json())),
       fetch(mapStylesUrl)
         .then(res => (res.status !== 200 ? reject(res) : res.json()))
     ])
-      .then(([periods, mapStyles]) => resolve(Immutable.fromJS({ periods, mapStyles })))
+      .then(([mapStyles]) => resolve(Immutable.fromJS({ mapStyles })))
       // .then(([camps, photos, activities, places, types, periods, mapStyles]) =>
       //   resolve(Immutable.fromJS({
       //     camps, photos, activities, places, types, periods, mapStyles

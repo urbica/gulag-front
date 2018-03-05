@@ -3,7 +3,7 @@ version: '3.4'
 services:
   gulag-front:
       image: gitlab.urbica.co:5001/gulag/gulagmap:dev
-      container_name: gulag-front
+      container_name: gulag-next-front
       restart: always
       environment:
         - VIRTUAL_HOST=gulag-next.urbica.co
@@ -14,22 +14,22 @@ services:
       volumes:
         - ./nginx.conf:/etc/nginx/conf.d/default.conf
       depends_on:
-        - gulag-api
+        - gulag-next-api
 
   gulag-api:
     image: gitlab.urbica.co:5001/device25/gulag-workshop:master
-    container_name: gulag-api
+    container_name: gulag-next-api
     restart: always
     env_file:
       - .env
 #    volumes:
 #      - ./uploads:/usr/src/app/uploads
     depends_on:
-      - gulag-db
+      - gulag-next-db
 
   gulag-db:
       image: mdillon/postgis:9.6-alpine
-      container_name: gulag-db
+      container_name: gulag-next-db
       restart: always
       environment:
         - POSTGRES_DB=db

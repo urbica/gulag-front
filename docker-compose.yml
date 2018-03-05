@@ -16,6 +16,13 @@ services:
       depends_on:
         - gulag-next-api
 
+  gulag-next-admin:
+      image: gitlab.urbica.co:5001/gulag/gulag:refactoring
+      container_name: gulag-next-admin
+      restart: always
+      depends_on:
+        - gulag-next-api
+
   gulag-next-api:
     image: gitlab.urbica.co:5001/device25/gulag-workshop:master
     container_name: gulag-next-api

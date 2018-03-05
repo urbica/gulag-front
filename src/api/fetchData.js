@@ -8,25 +8,26 @@ const mapStylesUrl =
 export default () => (
   new Promise((resolve, reject) => (
     Promise.all([
-      fetch('/api/public/camps.json', dataOptions)
-        .then(res => (res.status !== 200 ? reject(res) : res.json())),
-      fetch('/api/public/uploads.json', dataOptions)
-        .then(res => (res.status !== 200 ? reject(res) : res.json())),
-      fetch('/api/public/activities.json', dataOptions)
-        .then(res => (res.status !== 200 ? reject(res) : res.json())),
-      fetch('/api/public/places.json', dataOptions)
-        .then(res => (res.status !== 200 ? reject(res) : res.json())),
-      fetch('/api/public/types.json', dataOptions)
-        .then(res => (res.status !== 200 ? reject(res) : res.json())),
-      fetch('/api/public/periods.json', dataOptions)
+      // fetch('/api/public/camps.json', dataOptions)
+      //   .then(res => (res.status !== 200 ? reject(res) : res.json())),
+      // fetch('/api/public/uploads.json', dataOptions)
+      //   .then(res => (res.status !== 200 ? reject(res) : res.json())),
+      // fetch('/api/public/activities.json', dataOptions)
+      //   .then(res => (res.status !== 200 ? reject(res) : res.json())),
+      // fetch('/api/public/places.json', dataOptions)
+      //   .then(res => (res.status !== 200 ? reject(res) : res.json())),
+      // fetch('/api/public/types.json', dataOptions)
+      //   .then(res => (res.status !== 200 ? reject(res) : res.json())),
+      fetch('/api/periods', dataOptions)
         .then(res => (res.status !== 200 ? reject(res) : res.json())),
       fetch(mapStylesUrl)
         .then(res => (res.status !== 200 ? reject(res) : res.json()))
     ])
-      .then(([camps, photos, activities, places, types, periods, mapStyles]) =>
-        resolve(Immutable.fromJS({
-          camps, photos, activities, places, types, periods, mapStyles
-        })))
+      .then(([periods, mapStyles]) => resolve(Immutable.fromJS({ periods, mapStyles })))
+      // .then(([camps, photos, activities, places, types, periods, mapStyles]) =>
+      //   resolve(Immutable.fromJS({
+      //     camps, photos, activities, places, types, periods, mapStyles
+      //   })))
       .catch(err => reject(err))
   ))
 );

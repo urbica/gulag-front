@@ -56,5 +56,5 @@
     "react-scripts": "1.1.1",
     "react-test-renderer": "16.2.0"
   },
-  "proxy": "https://gulagmap.ru/"
+  "proxy": "https://gulag-next.urbica.co/"
 }

@@ -35,4 +35,27 @@ export default transition.div.attrs({
 
     transition: left 400ms ease-in;
   }
+  
+  @media (max-width: 600px) {
+    width: 100%;
+    left: ${({ isMenuOpen }) => (isMenuOpen ? 0 : '-100%')};
+    padding-left: 10vw;
+    padding-right: 10vw;
+    
+    &:enter {
+      left: -100%;
+    }
+
+    &:enter-active {
+      left: 0;
+    }
+    
+    &:exit {
+      left: 0;
+    }
+
+    &:exit-active {
+      left: -100%;
+    }
+  }
 `;

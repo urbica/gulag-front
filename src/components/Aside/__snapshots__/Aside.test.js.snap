@@ -2,7 +2,7 @@
 
 exports[`Aside renders correctly 1`] = `
 <div
-  className="sc-bdVaJa kFtmJW"
+  className="sc-bdVaJa ffDkPe"
   timeout={400}
 >
   <button
@@ -64,7 +64,7 @@ exports[`Aside renders correctly 1`] = `
 
 exports[`Aside renders correctly 2`] = `
 <div
-  className="sc-bdVaJa kFtmJW"
+  className="sc-bdVaJa ffDkPe"
   timeout={400}
 >
   <button

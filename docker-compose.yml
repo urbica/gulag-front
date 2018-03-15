@@ -33,7 +33,7 @@ services:
 #      - ./uploads:/usr/src/app/uploads
     depends_on:
       - gulag-next-db
-    command: ['gulag-next-api', 'npm', 'run', 'db:migrate']
+    command: ['npm', 'run', 'db:migrate']
 
   gulag-next-db:
       image: mdillon/postgis:9.6-alpine

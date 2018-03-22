@@ -16,8 +16,8 @@ const Chronology = ({ pushToRoot, periods }) => (
     {periods.map(period => (
       <Period key={period.get('id')}>
         <Year>{period.get('year')}</Year>
-        <PeriodTitle>{period.get('title')}</PeriodTitle>
-        <Description>{period.get('description')}</Description>
+        <PeriodTitle>{period.getIn(['title', 'ru'])}</PeriodTitle>
+        <Description>{period.getIn(['description', 'ru'])}</Description>
       </Period>
     ))}
   </FullScreenCard>

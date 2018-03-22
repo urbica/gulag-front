@@ -7,15 +7,12 @@ import { periodsSelector } from '../App/selectors';
 
 import Chronology from './Chronology';
 
-const mapStateToProps = createSelector(
-  periodsSelector,
-  (periods) => {
-    if (!periods) {
-      return { periods: List() };
-    }
-    return { periods };
+const mapStateToProps = createSelector(periodsSelector, (periods) => {
+  if (!periods) {
+    return { periods: List() };
   }
-);
+  return { periods: periods.sort((a, b) => a.get('id') > b.get('id')) };
+});
 const mapDispatchToProps = dispatch => ({
   pushToRoot: () => dispatch(push('/'))
 });

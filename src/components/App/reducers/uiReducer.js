@@ -14,12 +14,12 @@ export const initState = Immutable.fromJS({
   isDataLoading: true,
   isCampFiltersOpen: false,
   campTypeFilters: {
-    0: true,
     1: true,
     2: true,
     3: true,
     4: true,
-    5: true
+    5: true,
+    6: true
   }
 });
 
@@ -42,19 +42,13 @@ export const toggleCampTypeFilters = id => ({ type: CAMP_FILTER_TOGGLED, payload
 export default (state = initState, { type, payload }) => {
   switch (type) {
     case CURRENT_YEAR_CHANGED:
-      return state
-        .set('currentYear', parseInt(payload, 10))
-        .set('isShowAllPrisons', false);
+      return state.set('currentYear', parseInt(payload, 10)).set('isShowAllPrisons', false);
     case VIEWPORT_CHANGED:
       return state.update('viewport', previousViewport => previousViewport.merge(payload));
     case TOGGLE_DEMO:
-      return state
-        .set('isDemoPlay', !state.get('isDemoPlay'))
-        .set('isShowAllPrisons', false);
+      return state.set('isDemoPlay', !state.get('isDemoPlay')).set('isShowAllPrisons', false);
     case TOGGLE_ALL_PRISONS:
-      return state
-        .set('isShowAllPrisons', !state.get('isShowAllPrisons'))
-        .set('isDemoPlay', false);
+      return state.set('isShowAllPrisons', !state.get('isShowAllPrisons')).set('isDemoPlay', false);
     case MENU_TOGGLED:
       return state.set('isMenuOpen', !state.get('isMenuOpen'));
     case FETCH_REQUEST:

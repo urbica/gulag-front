@@ -11,20 +11,26 @@ export default () =>
       //   .then(res => (res.status !== 200 ? reject(res) : res.json())),
       // fetch('/api/public/uploads.json', dataOptions)
       //   .then(res => (res.status !== 200 ? reject(res) : res.json())),
-      // fetch('/api/public/activities.json', dataOptions)
-      //   .then(res => (res.status !== 200 ? reject(res) : res.json())),
-      // fetch('/api/public/places.json', dataOptions)
-      //   .then(res => (res.status !== 200 ? reject(res) : res.json())),
-      // fetch('/api/public/types.json', dataOptions)
-      //   .then(res => (res.status !== 200 ? reject(res) : res.json())),
+      fetch('/api/camp-activities', dataOptions).then(
+        res => (res.status !== 200 ? reject(res) : res.json())
+      ),
+      fetch('/api/camp-regions', dataOptions).then(
+        res => (res.status !== 200 ? reject(res) : res.json())
+      ),
+      fetch('/api/camp-types', dataOptions).then(
+        res => (res.status !== 200 ? reject(res) : res.json())
+      ),
       fetch('/api/periods', dataOptions).then(
         res => (res.status !== 200 ? reject(res) : res.json())
       ),
       fetch(mapStylesUrl).then(res => (res.status !== 200 ? reject(res) : res.json()))
     ])
-      .then(([periods, mapStyles]) =>
+      .then(([activities, regions, types, periods, mapStyles]) =>
         resolve(
           Immutable.fromJS({
+            activities,
+            regions,
+            types,
             periods,
             mapStyles
           })

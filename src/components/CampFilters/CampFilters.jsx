@@ -38,23 +38,12 @@ const CampFilters = (props) => {
         const isActive = campTypeFilters.get(typeId);
 
         return (
-          <Filter
-            key={type.get('id')}
-            onClick={toggleFilter.bind(null, typeId)}
-          >
+          <Filter key={type.get('id')} onClick={toggleFilter.bind(null, typeId)}>
             <FilterTop>
-              <FilterTitle isActive={isActive}>
-                {type.get('name')}
-              </FilterTitle>
-              <Switcher
-                typeId={type.get('id')}
-                isActive={isActive}
-              />
+              <FilterTitle isActive={isActive}>{type.getIn(['title', 'ru'])}</FilterTitle>
+              <Switcher typeId={type.get('id')} isActive={isActive} />
             </FilterTop>
-            <Description isActive={isActive}>
-              Вид пенитенциарного учреждения. Под различными названиями и формами собственности
-              существуют практически во всём мире.
-            </Description>
+            <Description isActive={isActive}>{type.getIn(['description', 'ru'])}</Description>
           </Filter>
         );
       })}

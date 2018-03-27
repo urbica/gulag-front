@@ -5,7 +5,7 @@ import Aside from './Aside';
 
 const fn = jest.fn();
 
-test('Aside renders correctly', () => {
+test.skip('Aside renders correctly', () => {
   const component = renderer.create(
     <Aside
       isMenuOpen={false}

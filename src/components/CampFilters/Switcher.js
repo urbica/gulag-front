@@ -12,8 +12,10 @@ const colors = {
 const disableColor = '122,133,126';
 
 export default styled.div`
-  width: 40px;
+  flex: 0 0 40px;
   height: 22px;
+
+  margin-left: 30px;
 
   border-radius: 11px;
 

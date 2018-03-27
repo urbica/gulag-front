@@ -20,11 +20,11 @@ import {
 
 import Container from './Container';
 
-import Controls from './Controls/Controls';
+// import Controls from './Controls/Controls';
 // import Popup from './Popup';
-import MapButton from './Controls/MapButton';
-import plus from './btn-plus.svg';
-import minus from './btn-minus.svg';
+// import MapButton from './Controls/MapButton';
+// import plus from './btn-plus.svg';
+// import minus from './btn-minus.svg';
 //   setTimeout(() => {
 //     const credits = ' <a href="http://urbica.co" target="_blank">© Urbica</a>';
 //     const attrEls = document.getElementsByClassName('mapboxgl-ctrl-attrib');
@@ -55,7 +55,7 @@ const Map = (props) => {
         }}
         {...viewport.toJS()}
       />
-      <Controls slideUp={isSlideUp}>
+      {/* <Controls slideUp={isSlideUp}>
         <MapButton
           onClick={dispatch.bind(null, changeViewport({ zoom: viewport.get('zoom') + 1 }))}
         >
@@ -66,8 +66,7 @@ const Map = (props) => {
         >
           <img src={minus} alt='minus' />
         </MapButton>
-      </Controls>
-
+      </Controls> */}
     </Container>
   );
 };
@@ -102,4 +101,3 @@ const selector = createSelector(
 );
 
 export default connect(selector)(Map);
-

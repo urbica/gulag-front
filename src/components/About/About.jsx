@@ -24,11 +24,11 @@ const img = {
   de: museumEn
 };
 
-const About = ({ pushToRoot }) => (
+const About = ({ locale, pushToRoot }) => (
   <FullScreenCard onClick={pushToRoot}>
     <Title>{t('aboutCard.heading')}</Title>
     <Description>
-      {content.ru.map((p, i) => <p key={i}>{p}</p>)}
+      {content[locale].map((p, i) => <p key={i}>{p}</p>)}
       <Link href='mailto:mail@gulagmap.ru'>mail@gulagmap.ru</Link>
     </Description>
     <Footer>
@@ -43,6 +43,7 @@ const About = ({ pushToRoot }) => (
 );
 
 About.propTypes = {
+  locale: PropTypes.string.isRequired,
   pushToRoot: PropTypes.func.isRequired
 };
 

@@ -8,10 +8,12 @@ const mapStateToProps = createSelector(
   typesSelector,
   isCampFiltersOpenSelector,
   state => state.getIn(['ui', 'campTypeFilters']),
-  (types, isCampFiltersOpen, campTypeFilters) => ({
+  state => state.getIn(['intl', 'locale']),
+  (types, isCampFiltersOpen, campTypeFilters, locale) => ({
     types,
     isCampFiltersOpen,
-    campTypeFilters
+    campTypeFilters,
+    locale
   })
 );
 const mapDispatchToProps = dispatch => ({

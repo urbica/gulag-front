@@ -11,4 +11,12 @@ export default styled.button`
   color: rgba(226, 243, 227, ${({ isActive }) => (isActive ? '0.8' : '0.3')});
 
   background-color: transparent;
+
+  cursor: pointer;
+  transition: 0.4s;
+
+  &:hover {
+    transition: 0.4s;
+    opacity: 0.6;
+  }
 `;

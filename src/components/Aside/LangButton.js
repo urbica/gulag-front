@@ -13,10 +13,10 @@ export default styled.button`
   background-color: transparent;
 
   cursor: pointer;
-  transition: 0.4s;
+  transition: opacity 0.4s;
 
   &:hover {
-    transition: 0.4s;
+    transition: opacity 0.4s;
     opacity: 0.6;
   }
 `;

@@ -7,6 +7,10 @@ export default {
     'prisonCard.location': 'Location',
     'prisonCard.prisonersByYears': 'Number of prisoners by years',
     'prisonCard.production': 'Production performance',
-    'aboutCard.heading': 'About'
+    'aboutCard.heading': 'About',
+    'aside.search': 'Search',
+    'aside.campTypes': 'Camp types',
+    'aside.gulagChronology': 'GULAG chronology',
+    'campFilters.title': 'Camp types on the map'
   }
 };

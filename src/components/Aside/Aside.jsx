@@ -29,9 +29,9 @@ const Aside = (props) => {
         <img src={cross} alt='close' />
       </CloseButton>
       <div>
-        <Button onClick={pushToSearch}>Поиск</Button>
-        <Button onClick={openCampFilters}>Типы лагерей на карте</Button>
-        <Button onClick={pushToChronology}>Хронология ГУЛАГа</Button>
+        <Button onClick={pushToSearch}>{t('aside.search')}</Button>
+        <Button onClick={openCampFilters}>{t('aside.campTypes')}</Button>
+        <Button onClick={pushToChronology}>{t('aside.gulagChronology')}</Button>
       </div>
       <div>
         <Button onClick={pushToAbout}>{t('aboutCard.heading')}</Button>

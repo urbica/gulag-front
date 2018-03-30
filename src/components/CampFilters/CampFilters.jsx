@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { t } from '../../intl/helper';
 
 // icon
 import arrow from './arrow.svg';
@@ -33,7 +34,7 @@ const CampFilters = (props) => {
       timeout={400}
     >
       <Top>
-        <Title>Отображение лагерей на карте</Title>
+        <Title>{t('campFilters.title')}</Title>
         <BackButton onClick={closeCampFilters}>
           <img src={arrow} alt='close' />
         </BackButton>

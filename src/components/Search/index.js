@@ -5,27 +5,17 @@ import { connect } from 'react-redux';
 import { campsSelector, langSelector } from '../App/selectors';
 
 import Search from './Search';
-import { getPeriods } from '../../utils/utils';
+// import { getPeriods } from '../../utils/utils';
 
-const mapStateToProps = createSelector(
-  campsSelector,
-  langSelector,
-  (camps, lang) => {
-    if (!camps) {
-      return { camps: Map() };
-    }
-
-    const filteredCamps = camps
-      .map(camp => camp
-        .set('name', camp.getIn(['name', lang]))
-        .set('periods', getPeriods(camp))
-        .set('locations', camp.getIn(['location', lang])))
-      .filter(camp => camp.getIn(['published', lang]))
-      .toList();
-
-    return { camps: filteredCamps, lang };
+const mapStateToProps = createSelector(campsSelector, langSelector, (camps, lang) => {
+  if (!camps) {
+    return { camps: Map() };
   }
-);
+
+  const filteredCamps = camps.filter(camp => camp.getIn(['published', lang])).toList();
+
+  return { camps: filteredCamps, lang };
+});
 const mapDispatchToProps = dispatch => ({
   pushToRoot: () => dispatch(push('/')),
   pushToCamp: id => dispatch(push(`/camp${id}`))

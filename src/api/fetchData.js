@@ -7,8 +7,7 @@ const mapStylesUrl = `https://api.mapbox.com/styles/v1/gulagmap/cj8bt4qbw7kbo2rr
 export default () =>
   new Promise((resolve, reject) =>
     Promise.all([
-      // fetch('/api/public/camps.json', dataOptions)
-      //   .then(res => (res.status !== 200 ? reject(res) : res.json())),
+      fetch('/api/camps', dataOptions).then(res => (res.status !== 200 ? reject(res) : res.json())),
       // fetch('/api/public/uploads.json', dataOptions)
       //   .then(res => (res.status !== 200 ? reject(res) : res.json())),
       fetch('/api/camp-activities', dataOptions).then(
@@ -25,9 +24,10 @@ export default () =>
       ),
       fetch(mapStylesUrl).then(res => (res.status !== 200 ? reject(res) : res.json()))
     ])
-      .then(([activities, regions, types, periods, mapStyles]) =>
+      .then(([camps, activities, regions, types, periods, mapStyles]) =>
         resolve(
           Immutable.fromJS({
+            camps,
             activities,
             regions,
             types,

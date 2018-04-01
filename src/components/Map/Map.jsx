@@ -2,9 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { push } from 'react-router-redux';
 import 'mapbox-gl/dist/mapbox-gl.css';
-
 import MapGL from '@urbica/react-map-gl';
 
 import { mapToken } from '../../config/tokens';
@@ -44,17 +42,11 @@ const Map = (props) => {
         accessToken={mapToken}
         mapStyle={mapStyle}
         onViewportChange={newViewport => dispatch(changeViewport(newViewport))}
-        onClick={({ features }) => {
-          if (features.length > 0) {
-            const { id } = features[0].properties;
-            const longitude = features[0].geometry.coordinates[0];
-            const latitude = features[0].geometry.coordinates[1];
-            dispatch(push(`/prison${id}`));
-            dispatch(changeViewport({ longitude, latitude }));
-          }
-        }}
         {...viewport.toJS()}
-      />
+      >
+        {/* <Source id='markers' source='' /> */}
+        {/* <Layer layer='markers' onClick='' /> */}
+      </MapGL>
       {/* <Controls slideUp={isSlideUp}>
         <MapButton
           onClick={dispatch.bind(null, changeViewport({ zoom: viewport.get('zoom') + 1 }))}

@@ -11,6 +11,7 @@ export const currentYearSelector = state => state.getIn(['ui', 'currentYear']);
 export const viewportSelector = state => state.getIn(['ui', 'viewport']);
 export const isShowAllPrisonsSelector = state => state.getIn(['ui', 'isShowAllPrisons']);
 export const isCampFiltersOpenSelector = state => state.getIn(['ui', 'isCampFiltersOpen']);
+export const campTypeFiltersSelector = state => state.getIn(['ui', 'campTypeFilters']);
 
 const emptyGeoJSONSource = Immutable.fromJS({
   type: 'geojson',
@@ -23,16 +24,20 @@ const emptyGeoJSONSource = Immutable.fromJS({
 const prisonSourceSelector = createSelector(
   campsSelector,
   langSelector,
-  isShowAllPrisonsSelector,
-  currentYearSelector,
-  (prisons, lang /*  isShowAllPrisons, currentYear */) => {
+  campTypeFiltersSelector,
+  // isShowAllPrisonsSelector,
+  // currentYearSelector,
+  (prisons, lang, campTypeFilters /*  isShowAllPrisons, currentYear */) => {
     if (!prisons) {
       return emptyGeoJSONSource;
     }
 
     const features = prisons
       .toList()
-      .filter(prison => prison.getIn(['published', lang]))
+      .filter(
+        camp =>
+          camp.getIn(['published', lang]) && campTypeFilters.get(camp.get('typeId').toString())
+      )
       .reduce(
         (acc, prison) =>
           prison.get('locations').reduce((oldFeatures, feature) => {
@@ -42,6 +47,7 @@ const prisonSourceSelector = createSelector(
               ruName: prison.getIn(['title', 'ru']),
               enName: prison.getIn(['title', 'en']),
               deName: prison.getIn(['title', 'de']),
+              typeId: prison.get('typeId'),
               peoples: 5000
               // peoples: feature.getIn(['properties', currentYear.toString(), 'peoples'])
             });

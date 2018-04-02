@@ -7,7 +7,23 @@ export default Immutable.fromJS([
     source: 'prisons',
     paint: {
       'circle-radius': 1.75,
-      'circle-color': '#ff2b00',
+      'circle-color': [
+        'match',
+        ['get', 'typeId'],
+        1,
+        'rgb(235,66,0)',
+        2,
+        'rgb(204,145,51)',
+        3,
+        'rgb(42,167,148)',
+        4,
+        'rgb(39,73,241)',
+        5,
+        'rgb(136,68,119)',
+        6,
+        'rgb(23,149,211)',
+        /* other */ '#ccc'
+      ],
       'circle-opacity': 1
     }
   },
@@ -17,8 +33,24 @@ export default Immutable.fromJS([
     interactive: true,
     source: 'prisons',
     paint: {
-      'circle-color': '#eb4200',
-      'circle-opacity': 0.3,
+      'circle-color': [
+        'match',
+        ['get', 'typeId'],
+        1,
+        'rgb(235,66,0)',
+        2,
+        'rgb(204,145,51)',
+        3,
+        'rgb(42,167,148)',
+        4,
+        'rgb(39,73,241)',
+        5,
+        'rgb(136,68,119)',
+        6,
+        'rgb(23,149,211)',
+        /* other */ '#ccc'
+      ],
+      'circle-opacity': 0.2,
       'circle-radius': {
         property: 'peoples',
         stops: [
@@ -75,13 +107,7 @@ export default Immutable.fromJS([
     layout: {
       'text-field': '{ruName}',
       'text-size': {
-        stops: [
-          [0, 8],
-          [4, 10],
-          [6, 14],
-          [12, 22],
-          [22, 28]
-        ]
+        stops: [[0, 8], [4, 10], [6, 14], [12, 22], [22, 28]]
       },
       'text-anchor': 'left',
       'text-justify': 'left',

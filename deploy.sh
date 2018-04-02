@@ -15,3 +15,4 @@ fi
 
 docker-compose pull
 docker-compose up -d --force-recreate
+docker-compose exec gulag-next-api npm run db:migrate

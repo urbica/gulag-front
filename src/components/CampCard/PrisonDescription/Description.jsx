@@ -58,15 +58,14 @@ class Description extends PureComponent {
           onClick={this.onClick}
           dangerouslySetInnerHTML={{ __html: result }}
         />
-        {
-          this.state.imgUrl &&
+        {this.state.imgUrl && (
           <FullScreenContainer onClick={this.fullScreenOnClick}>
             <img src={this.state.imgUrl} alt='' onClick={e => e.stopPropagation()} />
             {/* <CardButton onClick={this.toggleFullScreen}> */}
             {/* <img src={closeIcon} alt='' /> */}
             {/* </CardButton> */}
           </FullScreenContainer>
-        }
+        )}
       </div>
     );
   }

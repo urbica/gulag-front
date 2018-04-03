@@ -14,7 +14,7 @@ export default styled.g`
   & text {
     font-family: 'Formular';
     font-size: 12px;
-    fill: rgba(255,255,255,.5);
+    fill: rgba(255, 255, 255, 0.5);
     transform: translateX(-10px);
   }
 `;

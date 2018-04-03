@@ -7,10 +7,10 @@ export default styled(Button)`
   right: 0;
 
   &:hover {
-    background-color: #1B2128;
+    background-color: #1b2128;
   }
 
   &:active {
-    background-color: rgba(93,106,119,.2);
+    background-color: rgba(93, 106, 119, 0.2);
   }
 `;

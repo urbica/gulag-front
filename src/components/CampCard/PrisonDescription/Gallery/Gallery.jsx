@@ -93,24 +93,22 @@ class Gallery extends PureComponent {
     const { src: activeSrc, desc: activeDesc } = this.props.photos[this.state.activePhotoId];
 
     return (
-      <div style={{
-        maxWidth: '700px',
-        marginTop: '40px'
-      }}
+      <div
+        style={{
+          maxWidth: '700px',
+          marginTop: '40px'
+        }}
       >
         <Top>
-          <div style={{
-            display: 'inline-block',
-            position: 'relative',
-            top: '50%',
-            transform: 'translateY(-50%)'
-          }}
+          <div
+            style={{
+              display: 'inline-block',
+              position: 'relative',
+              top: '50%',
+              transform: 'translateY(-50%)'
+            }}
           >
-            <img
-              src={activeSrc}
-              alt=''
-              onClick={this.toggleFullScreen}
-            />
+            <img src={activeSrc} alt='' onClick={this.toggleFullScreen} />
             <FullScreenButton onClick={this.toggleFullScreen} />
           </div>
         </Top>
@@ -131,27 +129,21 @@ class Gallery extends PureComponent {
             this.previewContainer = ref;
           }}
         >
-          {
-            this.props.photos.map((img, i) => (
-              <ImgPreviewContainer
-                // eslint-disable-next-line react/no-array-index-key
-                key={i}
-                innerRef={(ref) => {
-                  this[`preview${i}`] = ref;
-                }}
-                isActive={this.state.activePhotoId === i}
-                onClick={this.onPreviewClick.bind(null, i)}
-              >
-                <img
-                  src={img.src}
-                  alt=''
-                />
-              </ImgPreviewContainer>
-            ))
-          }
+          {this.props.photos.map((img, i) => (
+            <ImgPreviewContainer
+              // eslint-disable-next-line react/no-array-index-key
+              key={i}
+              innerRef={(ref) => {
+                this[`preview${i}`] = ref;
+              }}
+              isActive={this.state.activePhotoId === i}
+              onClick={this.onPreviewClick.bind(null, i)}
+            >
+              <img src={img.src} alt='' />
+            </ImgPreviewContainer>
+          ))}
         </PreviewsContainer>
-        {
-          this.state.isFullScreen &&
+        {this.state.isFullScreen && (
           <FullScreenContainer>
             <div
               style={{ position: 'absolute', width: '100%', height: '100%' }}
@@ -160,16 +152,9 @@ class Gallery extends PureComponent {
             {/* <CardButton onClick={this.toggleFullScreen}> */}
             {/* <img src={closeIcon} alt='' /> */}
             {/* </CardButton> */}
-            <NavButton
-              position='left'
-              onClick={this.changeActivePhoto.bind(null, -1)}
-            />
+            <NavButton position='left' onClick={this.changeActivePhoto.bind(null, -1)} />
             <FullScreenTop>
-              <img
-                src={activeSrc}
-                onClick={e => e.stopPropagation()}
-                alt=''
-              />
+              <img src={activeSrc} onClick={e => e.stopPropagation()} alt='' />
             </FullScreenTop>
             <FullScreenDescription>
               <div>
@@ -181,40 +166,30 @@ class Gallery extends PureComponent {
                 this.previewFullScreenContainer = ref;
               }}
             >
-              {
-                this.props.photos.map((img, i) => (
-                  <ImgPreviewContainer
-                    // eslint-disable-next-line react/no-array-index-key
-                    key={i}
-                    isActive={this.state.activePhotoId === i}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      this.onPreviewClick(i);
-                    }}
-                  >
-                    <img
-                      src={img.src}
-                      alt=''
-                    />
-                  </ImgPreviewContainer>
-                ))
-              }
+              {this.props.photos.map((img, i) => (
+                <ImgPreviewContainer
+                  // eslint-disable-next-line react/no-array-index-key
+                  key={i}
+                  isActive={this.state.activePhotoId === i}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    this.onPreviewClick(i);
+                  }}
+                >
+                  <img src={img.src} alt='' />
+                </ImgPreviewContainer>
+              ))}
             </PreviewsContainer>
-            <NavButton
-              position='right'
-              onClick={this.changeActivePhoto.bind(null, 1)}
-            />
+            <NavButton position='right' onClick={this.changeActivePhoto.bind(null, 1)} />
           </FullScreenContainer>
-        }
+        )}
       </div>
     );
   }
 }
 
 Gallery.propTypes = {
-  photos: PropTypes.arrayOf(
-    PropTypes.object
-  ).isRequired
+  photos: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 export default Gallery;

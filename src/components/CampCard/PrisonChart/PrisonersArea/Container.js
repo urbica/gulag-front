@@ -18,7 +18,7 @@ export default styled.g`
   }
 
   & g text {
-    opacity: .2;
+    opacity: 0.2;
     transform: translate(10px, 18px);
   }
 `;

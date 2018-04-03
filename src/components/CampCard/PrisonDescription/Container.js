@@ -9,13 +9,13 @@ export default styled.div`
     font-size: 20px;
     font-weight: bold;
   }
-  
+
   p {
     margin-bottom: 40px;
 
     line-height: 1.7;
   }
-  
+
   a {
     display: inline-block;
     padding-bottom: 2px;
@@ -34,7 +34,7 @@ export default styled.div`
       transition: 0.4s;
     }
   }
-  
+
   img {
     max-width: 100%;
   }

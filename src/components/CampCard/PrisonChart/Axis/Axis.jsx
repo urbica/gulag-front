@@ -9,10 +9,9 @@ class Axis extends PureComponent {
   componentDidMount() {
     const { scale, ticks } = this.props;
 
-    const axis =
-      axisLeft(scale)
-        .ticks(ticks)
-        .tickSize(0);
+    const axis = axisLeft(scale)
+      .ticks(ticks)
+      .tickSize(0);
 
     this.g
       .call(axis)
@@ -21,10 +20,9 @@ class Axis extends PureComponent {
   }
 
   componentWillReceiveProps({ scale, ticks }) {
-    const axis =
-      axisLeft(scale)
-        .ticks(ticks)
-        .tickSize(0);
+    const axis = axisLeft(scale)
+      .ticks(ticks)
+      .tickSize(0);
 
     this.g
       .call(axis)

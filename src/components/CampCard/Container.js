@@ -14,7 +14,7 @@ export default styled.div`
   background-color: #14171a;
 
   overflow: scroll;
-  transition: .4s;
+  transition: 0.4s;
   z-index: 1;
 
   @media (max-width: 425px) {

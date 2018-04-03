@@ -22,7 +22,7 @@ const PrisonChart = ({ features, lang }) => {
   const firstYear = data[0].year;
   const lastYear = data[data.length - 1].year;
 
-  const height = (((lastYear - firstYear) + 1) * 26);
+  const height = ((lastYear - firstYear) + 1) * 26;
 
   const yScale = scaleTime()
     .domain([new Date(firstYear, 0, 1), new Date(lastYear, 11, 31)])
@@ -33,22 +33,9 @@ const PrisonChart = ({ features, lang }) => {
     .range([0, width]);
 
   return (
-    <svg
-      width={width + margin.left + margin.right}
-      height={height + margin.top + margin.bottom}
-    >
-      <Axis
-        ticks={(lastYear - firstYear) + 1}
-        scale={yScale}
-        height={height}
-      />
-      <PrisonersArea
-        lang={lang}
-        data={data}
-        height={height}
-        xScale={xScale}
-        yScale={yScale}
-      />
+    <svg width={width + margin.left + margin.right} height={height + margin.top + margin.bottom}>
+      <Axis ticks={(lastYear - firstYear) + 1} scale={yScale} height={height} />
+      <PrisonersArea lang={lang} data={data} height={height} xScale={xScale} yScale={yScale} />
     </svg>
   );
 };

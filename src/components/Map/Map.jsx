@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import MapGL, { Source, Layer } from '@urbica/react-map-gl';
+import { push } from 'react-router-redux';
 
 import { mapToken } from '../../config/tokens';
 
@@ -39,7 +40,12 @@ class Map extends PureComponent {
 
   render() {
     const {
-      isSlideUp, mapStyle, viewport, dispatch, prisonSource
+      isSlideUp,
+      mapStyle,
+      viewport,
+      changeViewportHandler,
+      prisonSource,
+      openCampCard
     } = this.props;
 
     return (
@@ -51,12 +57,15 @@ class Map extends PureComponent {
           style={{ width: '100%', height: '100vh' }}
           accessToken={mapToken}
           mapStyle={mapStyle}
-          onViewportChange={newViewport => dispatch(changeViewport(newViewport))}
+          onViewportChange={changeViewportHandler}
           {...viewport.toJS()}
         >
           <Source id='prisons' source={prisonSource} />
           <Layer layer={layers.get('prisons')} />
-          <Layer layer={layers.get('prisonsHalo')} />
+          <Layer
+            layer={layers.get('prisonsHalo')}
+            onClick={({ features }) => openCampCard(features[0].properties.id)}
+          />
         </MapGL>
         {/* <Controls slideUp={isSlideUp}>
           <MapButton
@@ -78,9 +87,10 @@ class Map extends PureComponent {
 Map.propTypes = {
   isSlideUp: PropTypes.bool,
   mapStyle: PropTypes.object,
-  dispatch: PropTypes.func.isRequired,
   viewport: PropTypes.object.isRequired,
-  prisonSource: PropTypes.object.isRequired
+  prisonSource: PropTypes.object.isRequired,
+  changeViewportHandler: PropTypes.func.isRequired,
+  openCampCard: PropTypes.func.isRequired
 };
 
 Map.defaultProps = {
@@ -107,4 +117,9 @@ const selector = createSelector(
   })
 );
 
-export default connect(selector)(Map);
+const mapDispatchToProps = dispatch => ({
+  changeViewportHandler: newViewport => dispatch(changeViewport(newViewport)),
+  openCampCard: id => dispatch(push(`/camp${id}`))
+});
+
+export default connect(selector, mapDispatchToProps)(Map);

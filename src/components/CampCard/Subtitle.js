@@ -12,7 +12,7 @@ export default styled.h2`
     line-height: 1.7;
 
     @media (max-width: 425px) {
-       margin-bottom: 30px;
+      margin-bottom: 30px;
     }
   }
 `;

@@ -12,7 +12,7 @@ import CampFilters from '../CampFilters';
 import Search from '../Search';
 import Chronology from '../Chronology';
 import About from '../About';
-import PrisonCard from '../PrisonCard/PrisonCard';
+import CampCard from '../CampCard/CampCard';
 
 const App = () => (
   <Fragment>
@@ -26,7 +26,7 @@ const App = () => (
       <Route path='/search' component={Search} />
       <Route path='/chronology' component={Chronology} />
       <Route path='/about' component={About} />
-      <Route path='/prison:id' component={PrisonCard} />
+      <Route path='/camp:id' component={CampCard} />
     </Switch>
   </Fragment>
 );

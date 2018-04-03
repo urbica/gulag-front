@@ -14,7 +14,7 @@ export default styled.button`
   outline: none;
 
   background-color: rgba(16, 20, 24, 0.5);
-  
+
   &:hover {
     display: block;
     background-color: rgba(16, 20, 24, 0.7);
@@ -28,7 +28,7 @@ export default styled.button`
     width: 10px;
     height: 10px;
   }
-  
+
   &:before {
     top: 10px;
     right: 10px;

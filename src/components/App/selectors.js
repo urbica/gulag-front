@@ -1,6 +1,5 @@
 import Immutable from 'immutable';
 import { createSelector } from 'reselect';
-import layers from '../../config/layers';
 
 export const langSelector = state => state.getIn(['intl', 'locale']);
 export const campsSelector = state => state.getIn(['data', 'camps']);
@@ -21,7 +20,7 @@ const emptyGeoJSONSource = Immutable.fromJS({
   }
 });
 
-const prisonSourceSelector = createSelector(
+export const prisonSourceSelector = createSelector(
   campsSelector,
   langSelector,
   campTypeFiltersSelector,
@@ -96,10 +95,8 @@ export const finalStyleSelector = createSelector(
     const citiesLang = `{historical_name${lang === 'ru' ? '' : '_en'}}`;
 
     return mapStyle
-      .setIn(['sources', 'prisons'], prisonSource)
       .setIn(['layers', ussrLayerId, 'filter'], getUSSRBoundaryFilterByYear())
       .setIn(['layers', citiesLayerId, 'filter'], citiesFilterByYear)
-      .setIn(['layers', citiesLayerId, 'layout', 'text-field'], citiesLang)
-      .update('layers', previousLayers => previousLayers.concat(layers));
+      .setIn(['layers', citiesLayerId, 'layout', 'text-field'], citiesLang);
   }
 );

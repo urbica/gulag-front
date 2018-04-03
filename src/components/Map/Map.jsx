@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import MapGL from '@urbica/react-map-gl';
+import MapGL, { Source, Layer } from '@urbica/react-map-gl';
 
 import { mapToken } from '../../config/tokens';
 
@@ -13,8 +13,10 @@ import {
   currentYearSelector,
   viewportSelector,
   isShowAllPrisonsSelector,
-  finalStyleSelector
+  finalStyleSelector,
+  prisonSourceSelector
 } from '../App/selectors';
+import layers from '../../config/layers';
 
 import Container from './Container';
 
@@ -30,44 +32,55 @@ import Container from './Container';
 //   }, 1000);
 // }
 
-const Map = (props) => {
-  const {
-    isSlideUp, mapStyle, viewport, dispatch
-  } = props;
+class Map extends PureComponent {
+  componentDidMount() {
+    window.mapRef = this.mapRef;
+  }
 
-  return (
-    <Container slideUp={isSlideUp}>
-      <MapGL
-        style={{ width: '100%', height: '100vh' }}
-        accessToken={mapToken}
-        mapStyle={mapStyle}
-        onViewportChange={newViewport => dispatch(changeViewport(newViewport))}
-        {...viewport.toJS()}
-      >
-        {/* <Source id='markers' source='' /> */}
-        {/* <Layer layer='markers' onClick='' /> */}
-      </MapGL>
-      {/* <Controls slideUp={isSlideUp}>
-        <MapButton
-          onClick={dispatch.bind(null, changeViewport({ zoom: viewport.get('zoom') + 1 }))}
+  render() {
+    const {
+      isSlideUp, mapStyle, viewport, dispatch, prisonSource
+    } = this.props;
+
+    return (
+      <Container slideUp={isSlideUp}>
+        <MapGL
+          ref={(ref) => {
+            this.mapRef = ref;
+          }}
+          style={{ width: '100%', height: '100vh' }}
+          accessToken={mapToken}
+          mapStyle={mapStyle}
+          onViewportChange={newViewport => dispatch(changeViewport(newViewport))}
+          {...viewport.toJS()}
         >
-          <img src={plus} alt='plus' />
-        </MapButton>
-        <MapButton
-          onClick={dispatch.bind(null, changeViewport({ zoom: viewport.get('zoom') - 1 }))}
-        >
-          <img src={minus} alt='minus' />
-        </MapButton>
-      </Controls> */}
-    </Container>
-  );
-};
+          <Source id='prisons' source={prisonSource} />
+          <Layer layer={layers.get('prisons')} />
+          <Layer layer={layers.get('prisonsHalo')} />
+        </MapGL>
+        {/* <Controls slideUp={isSlideUp}>
+          <MapButton
+            onClick={dispatch.bind(null, changeViewport({ zoom: viewport.get('zoom') + 1 }))}
+          >
+            <img src={plus} alt='plus' />
+          </MapButton>
+          <MapButton
+            onClick={dispatch.bind(null, changeViewport({ zoom: viewport.get('zoom') - 1 }))}
+          >
+            <img src={minus} alt='minus' />
+          </MapButton>
+        </Controls> */}
+      </Container>
+    );
+  }
+}
 
 Map.propTypes = {
   isSlideUp: PropTypes.bool,
   mapStyle: PropTypes.object,
   dispatch: PropTypes.func.isRequired,
-  viewport: PropTypes.object.isRequired
+  viewport: PropTypes.object.isRequired,
+  prisonSource: PropTypes.object.isRequired
 };
 
 Map.defaultProps = {
@@ -82,13 +95,15 @@ const selector = createSelector(
   currentYearSelector,
   viewportSelector,
   isShowAllPrisonsSelector,
-  (pathname, prisons, mapStyle, currentYear, viewport, isShowAllPrisons) => ({
+  prisonSourceSelector,
+  (pathname, prisons, mapStyle, currentYear, viewport, isShowAllPrisons, prisonSource) => ({
     isSlideUp: /\/prison/.test(pathname),
     prisons,
     mapStyle,
     currentYear,
     viewport,
-    isShowAllPrisons
+    isShowAllPrisons,
+    prisonSource
   })
 );
 

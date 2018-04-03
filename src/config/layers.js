@@ -1,7 +1,7 @@
 import Immutable from 'immutable';
 
-export default Immutable.fromJS([
-  {
+export default Immutable.fromJS({
+  prisons: {
     id: 'prisons',
     type: 'circle',
     source: 'prisons',
@@ -27,7 +27,7 @@ export default Immutable.fromJS([
       'circle-opacity': 1
     }
   },
-  {
+  prisonsHalo: {
     id: 'prisonsHalo',
     type: 'circle',
     interactive: true,
@@ -62,7 +62,7 @@ export default Immutable.fromJS([
       }
     }
   },
-  {
+  prisonsHalo_hover: {
     id: 'prisonsHalo_hover',
     type: 'circle',
     source: 'prisons',
@@ -81,7 +81,7 @@ export default Immutable.fromJS([
     },
     filter: ['==', 'id', '']
   },
-  {
+  prisonsHalo_active: {
     id: 'prisonsHalo_active',
     type: 'circle',
     source: 'prisons',
@@ -100,7 +100,7 @@ export default Immutable.fromJS([
     },
     filter: ['==', 'id', '']
   },
-  {
+  prisonsNames: {
     id: 'prisonsNames',
     type: 'symbol',
     source: 'prisons',
@@ -118,7 +118,7 @@ export default Immutable.fromJS([
     },
     filter: ['==', 'id', '']
   },
-  {
+  prisonsNames_active: {
     id: 'prisonsNames_active',
     type: 'symbol',
     source: 'prisons',
@@ -134,4 +134,4 @@ export default Immutable.fromJS([
     },
     filter: ['==', 'id', '']
   }
-]);
+});

@@ -61,7 +61,7 @@ class Chart extends PureComponent {
 
   render() {
     return (
-      <Container mountOnEnter in={!this.props.isDataLoading} timeout={2000}>
+      <Container in={!this.props.isDataLoading} timeout={800}>
         <PlayButton isDemoPlayed={this.props.isDemoPlay} onClick={this.demo} />
         <ChartWrap>
           <svg

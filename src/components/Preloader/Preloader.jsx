@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Container from './Container';
 
 const Preloader = ({ isDataLoading }) => (
-  <Container unmountOnExit in={isDataLoading} timeout={1500}>
+  <Container unmountOnExit in={isDataLoading} timeout={400}>
     Loading
   </Container>
 );

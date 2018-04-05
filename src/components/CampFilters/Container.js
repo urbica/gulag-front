@@ -18,10 +18,10 @@ export default transition.div`
 
   &:enter-active {
     left: 0;
-    
-    transition: left 300ms ease-in-out;
+
+    transition: left 250ms ease-in-out;
   }
-  
+
   &:exit {
     left: 0;
   }
@@ -29,7 +29,7 @@ export default transition.div`
   &:exit-active {
     left: -400px;
 
-    transition: left 300ms ease-in-out;
+    transition: left 250ms ease-in-out;
   }
 
   @media (max-width: 600px) {
@@ -37,7 +37,7 @@ export default transition.div`
     left: ${({ isCampFiltersOpen }) => (isCampFiltersOpen ? 0 : '-100%')};
     padding-left: 10vw;
     padding-right: 10vw;
-    
+
     &:enter {
       left: -100%;
     }
@@ -45,7 +45,7 @@ export default transition.div`
     &:enter-active {
       left: 0;
     }
-    
+
     &:exit {
       left: 0;
     }

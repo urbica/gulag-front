@@ -16,7 +16,7 @@ import Button from '../Button';
 import Title from './Title';
 
 const Menu = ({ dispatch, isDataLoading }) => (
-  <Container mountOnEnter in={!isDataLoading} timeout={2000}>
+  <Container in={!isDataLoading} timeout={400}>
     <Button onClick={dispatch.bind(null, toggleMenu())}>
       <img src={menu} alt='menu' />
     </Button>

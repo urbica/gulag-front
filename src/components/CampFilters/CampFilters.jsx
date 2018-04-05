@@ -31,7 +31,7 @@ const CampFilters = props => {
       mountOnEnter
       isCampFiltersOpen={isCampFiltersOpen}
       in={isCampFiltersOpen}
-      timeout={400}
+      timeout={250}
     >
       <Top>
         <Title>{t('campFilters.title')}</Title>

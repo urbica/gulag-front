@@ -13,6 +13,6 @@ export default transition.div`
 
   &:enter-active {
     top: 28px;
-    transition: top 2000ms ease-in;
+    transition: top 400ms ease-in-out;
   }
 `;

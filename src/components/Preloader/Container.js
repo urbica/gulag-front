@@ -2,7 +2,7 @@ import transition from 'styled-transition-group';
 
 export default transition.div`
   position: fixed;
-  
+
   display: flex;
   width: 100%;
   height: 100vh;
@@ -19,6 +19,6 @@ export default transition.div`
 
   &:exit-active {
     opacity: 0;
-    transition: opacity ${({ timeout }) => timeout}ms ease-in;
+    transition: opacity ${({ timeout }) => timeout}ms ease-in-out;
   }
 `;

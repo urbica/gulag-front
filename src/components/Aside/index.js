@@ -23,7 +23,8 @@ const mapDispatchToProps = dispatch => ({
   openCampFilters: () => dispatch(toggleCampFilters()),
   pushToChronology: () => dispatch(push('/chronology')),
   pushToAbout: () => dispatch(push('/about')),
-  changeLang: lang => dispatch(updateIntl({ locale: lang, messages: locales[lang].messages }))
+  changeLang: lang =>
+    dispatch(updateIntl({ locale: lang, messages: locales[lang].messages }))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Aside);

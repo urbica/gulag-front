@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions,
-jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events */
+jsx-a11y/no-noninteractive-element-interactions,
+jsx-a11y/click-events-have-key-events */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
@@ -35,11 +36,12 @@ class Gallery extends PureComponent {
   onPreviewClick(i) {
     const { left } = this[`preview${i}`].getBoundingClientRect();
     const containerWidth = this.previewContainer.getBoundingClientRect().width;
-    const scrollBy = left - (containerWidth / 2);
+    const scrollBy = left - containerWidth / 2;
 
     if (!this.state.isFullScreen) {
       this.previewContainer.scrollTo(scrollBy, 0);
-      // this.previewContainer.scrollLeft = this.previewContainer.scrollLeft + scrollBy;
+      // this.previewContainer.scrollLeft =
+      //   this.previewContainer.scrollLeft + scrollBy;
     } else {
       this.previewFullScreenContainer.scrollTo(scrollBy, 0);
       // this.previewFullScreenContainer.scrollLeft =
@@ -90,7 +92,9 @@ class Gallery extends PureComponent {
   }
 
   render() {
-    const { src: activeSrc, desc: activeDesc } = this.props.photos[this.state.activePhotoId];
+    const { src: activeSrc, desc: activeDesc } = this.props.photos[
+      this.state.activePhotoId
+    ];
 
     return (
       <div
@@ -125,7 +129,7 @@ class Gallery extends PureComponent {
           </div>
         </Description>
         <PreviewsContainer
-          innerRef={(ref) => {
+          innerRef={ref => {
             this.previewContainer = ref;
           }}
         >
@@ -133,7 +137,7 @@ class Gallery extends PureComponent {
             <ImgPreviewContainer
               // eslint-disable-next-line react/no-array-index-key
               key={i}
-              innerRef={(ref) => {
+              innerRef={ref => {
                 this[`preview${i}`] = ref;
               }}
               isActive={this.state.activePhotoId === i}
@@ -152,17 +156,22 @@ class Gallery extends PureComponent {
             {/* <CardButton onClick={this.toggleFullScreen}> */}
             {/* <img src={closeIcon} alt='' /> */}
             {/* </CardButton> */}
-            <NavButton position='left' onClick={this.changeActivePhoto.bind(null, -1)} />
+            <NavButton
+              position='left'
+              onClick={this.changeActivePhoto.bind(null, -1)}
+            />
             <FullScreenTop>
               <img src={activeSrc} onClick={e => e.stopPropagation()} alt='' />
             </FullScreenTop>
             <FullScreenDescription>
               <div>
-                <div style={{ maxWidth: '700px', margin: 'auto' }}>{activeDesc}</div>
+                <div style={{ maxWidth: '700px', margin: 'auto' }}>
+                  {activeDesc}
+                </div>
               </div>
             </FullScreenDescription>
             <PreviewsContainer
-              innerRef={(ref) => {
+              innerRef={ref => {
                 this.previewFullScreenContainer = ref;
               }}
             >
@@ -171,7 +180,7 @@ class Gallery extends PureComponent {
                   // eslint-disable-next-line react/no-array-index-key
                   key={i}
                   isActive={this.state.activePhotoId === i}
-                  onClick={(e) => {
+                  onClick={e => {
                     e.stopPropagation();
                     this.onPreviewClick(i);
                   }}
@@ -180,7 +189,10 @@ class Gallery extends PureComponent {
                 </ImgPreviewContainer>
               ))}
             </PreviewsContainer>
-            <NavButton position='right' onClick={this.changeActivePhoto.bind(null, 1)} />
+            <NavButton
+              position='right'
+              onClick={this.changeActivePhoto.bind(null, 1)}
+            />
           </FullScreenContainer>
         )}
       </div>

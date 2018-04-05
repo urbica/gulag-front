@@ -15,7 +15,9 @@ const mapStateToProps = createSelector(
       return { camps: Map(), lang };
     }
 
-    const filteredCamps = camps.filter(camp => camp.getIn(['published', lang])).toList();
+    const filteredCamps = camps
+      .filter(camp => camp.getIn(['published', lang]))
+      .toList();
 
     return { camps: filteredCamps, lang };
   }

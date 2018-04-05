@@ -7,8 +7,10 @@ import ChartButton from './ChartButton';
 
 const Button = styled(ChartButton)`
   font-size: 12px;
-  background-color: ${({ isShowAll }) => (isShowAll ? '#000' : 'rgba(0,0,0,.5)')};
-  color: ${({ isShowAll }) => (isShowAll ? 'rgba(255,255,255,1)' : 'rgba(255,255,255,.6)')};
+  background-color: ${({ isShowAll }) =>
+    isShowAll ? '#000' : 'rgba(0,0,0,.5)'};
+  color: ${({ isShowAll }) =>
+    isShowAll ? 'rgba(255,255,255,1)' : 'rgba(255,255,255,.6)'};
   @media (max-width: 1023px) {
     display: none;
   }
@@ -18,10 +20,7 @@ const Text = styled.div`
   margin-top: -2px;
 `;
 const ShowAllButton = ({ onClick, isShowAll }) => (
-  <Button
-    onClick={onClick}
-    isShowAll={isShowAll}
-  >
+  <Button onClick={onClick} isShowAll={isShowAll}>
     <Text>{t('showAllButton')}</Text>
   </Button>
 );

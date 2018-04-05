@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions,
-jsx-a11y/no-static-element-interactions, react/no-danger, jsx-a11y/click-events-have-key-events */
+jsx-a11y/no-static-element-interactions,
+react/no-danger, jsx-a11y/click-events-have-key-events */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Parser, HtmlRenderer } from 'commonmark';
@@ -60,7 +61,11 @@ class Description extends PureComponent {
         />
         {this.state.imgUrl && (
           <FullScreenContainer onClick={this.fullScreenOnClick}>
-            <img src={this.state.imgUrl} alt='' onClick={e => e.stopPropagation()} />
+            <img
+              src={this.state.imgUrl}
+              alt=''
+              onClick={e => e.stopPropagation()}
+            />
             {/* <CardButton onClick={this.toggleFullScreen}> */}
             {/* <img src={closeIcon} alt='' /> */}
             {/* </CardButton> */}

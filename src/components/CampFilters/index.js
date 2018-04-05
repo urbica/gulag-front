@@ -2,7 +2,10 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import CampFilters from './CampFilters';
 import { isCampFiltersOpenSelector, typesSelector } from '../App/selectors';
-import { toggleCampFilters, toggleCampTypeFilters } from '../App/reducers/uiReducer';
+import {
+  toggleCampFilters,
+  toggleCampTypeFilters
+} from '../App/reducers/uiReducer';
 
 const mapStateToProps = createSelector(
   typesSelector,

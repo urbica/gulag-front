@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { scaleTime } from 'd3-scale';
 
-import { toggleAllPrisons, changeCurrentYear, toggleDemo } from '../App/reducers/uiReducer';
+import {
+  toggleAllPrisons,
+  changeCurrentYear,
+  toggleDemo
+} from '../App/reducers/uiReducer';
 
 import { height, margin } from './config';
 
@@ -57,15 +61,8 @@ class Chart extends PureComponent {
 
   render() {
     return (
-      <Container
-        mountOnEnter
-        in={!this.props.isDataLoading}
-        timeout={2000}
-      >
-        <PlayButton
-          isDemoPlayed={this.props.isDemoPlay}
-          onClick={this.demo}
-        />
+      <Container mountOnEnter in={!this.props.isDataLoading} timeout={2000}>
+        <PlayButton isDemoPlayed={this.props.isDemoPlay} onClick={this.demo} />
         <ChartWrap>
           <svg
             width={width + margin.left + margin.right}
@@ -108,18 +105,9 @@ class Chart extends PureComponent {
                 <feGaussianBlur stdDeviation='5' in='SourceGraphic' />
               </filter>
             </defs>
-            <PrisonersArea
-              width={width}
-              xScale={xScale}
-            />
-            <Axis
-              width={width}
-              xScale={xScale}
-            />
-            <Slider
-              width={width}
-              xScale={xScale}
-            />
+            <PrisonersArea width={width} xScale={xScale} />
+            <Axis width={width} xScale={xScale} />
+            <Slider width={width} xScale={xScale} />
           </svg>
         </ChartWrap>
         <ShowAllButton

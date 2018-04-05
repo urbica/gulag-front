@@ -6,7 +6,11 @@ import { combineReducers } from 'redux-immutable';
 import createSagaMiddleware from 'redux-saga';
 import { createLogger } from 'redux-logger';
 import { IntlProvider } from 'react-intl-redux';
-import { ConnectedRouter, routerMiddleware, routerReducer } from 'react-router-redux';
+import {
+  ConnectedRouter,
+  routerMiddleware,
+  routerReducer
+} from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
 import { addLocaleData } from 'react-intl';
 import enLocaleData from 'react-intl/locale-data/en';
@@ -44,10 +48,7 @@ if (process.env.NODE_ENV === 'development') {
     loggerMiddleware
   );
 } else {
-  middleware = applyMiddleware(
-    sagaMiddleware,
-    routersMiddleware
-  );
+  middleware = applyMiddleware(sagaMiddleware, routersMiddleware);
 }
 
 const store = createStore(reducer, middleware);
@@ -64,6 +65,7 @@ ReactDOM.render(
         <App />
       </ConnectedRouter>
     </IntlProvider>
-  </Provider>, document.getElementById('root')
+  </Provider>,
+  document.getElementById('root')
 );
 // registerServiceWorker();

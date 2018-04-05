@@ -16,7 +16,7 @@ import FilterTitle from './FilterTitle';
 import Switcher from './Switcher';
 import Description from './Description';
 
-const CampFilters = (props) => {
+const CampFilters = props => {
   const {
     types,
     isCampFiltersOpen,
@@ -39,17 +39,24 @@ const CampFilters = (props) => {
           <img src={arrow} alt='close' />
         </BackButton>
       </Top>
-      {types.map((type) => {
+      {types.map(type => {
         const typeId = type.get('id').toString();
         const isActive = campTypeFilters.get(typeId);
 
         return (
-          <Filter key={type.get('id')} onClick={toggleFilter.bind(null, typeId)}>
+          <Filter
+            key={type.get('id')}
+            onClick={toggleFilter.bind(null, typeId)}
+          >
             <FilterTop>
-              <FilterTitle isActive={isActive}>{type.getIn(['title', locale])}</FilterTitle>
+              <FilterTitle isActive={isActive}>
+                {type.getIn(['title', locale])}
+              </FilterTitle>
               <Switcher typeId={type.get('id')} isActive={isActive} />
             </FilterTop>
-            <Description isActive={isActive}>{type.getIn(['description', locale])}</Description>
+            <Description isActive={isActive}>
+              {type.getIn(['description', locale])}
+            </Description>
           </Filter>
         );
       })}

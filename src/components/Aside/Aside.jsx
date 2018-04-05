@@ -11,7 +11,7 @@ import CloseButton from './CloseButton';
 import Button from './Button';
 import LangButton from './LangButton';
 
-const Aside = (props) => {
+const Aside = props => {
   const {
     isMenuOpen,
     openCampFilters,
@@ -36,13 +36,22 @@ const Aside = (props) => {
       <div>
         <Button onClick={pushToAbout}>{t('aboutCard.heading')}</Button>
         <div>
-          <LangButton isActive={locale === 'ru'} onClick={changeLang.bind(null, 'ru')}>
+          <LangButton
+            isActive={locale === 'ru'}
+            onClick={changeLang.bind(null, 'ru')}
+          >
             Rus
           </LangButton>
-          <LangButton isActive={locale === 'en'} onClick={changeLang.bind(null, 'en')}>
+          <LangButton
+            isActive={locale === 'en'}
+            onClick={changeLang.bind(null, 'en')}
+          >
             Eng
           </LangButton>
-          {/* <LangButton isActive={locale === 'de'} onClick={changeLang.bind(null, 'en')}>
+          {/* <LangButton
+            isActive={locale === 'de'}
+            onClick={changeLang.bind(null, 'en')}
+          >
             Deu
           </LangButton> */}
         </div>

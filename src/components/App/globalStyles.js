@@ -1,3 +1,4 @@
+/* eslint-disable */
 import 'normalize.css/normalize.css';
 import { injectGlobal } from 'styled-components';
 import { fontSize, mainFontColour } from '../../config/styles';
@@ -15,7 +16,6 @@ import blackWoff2 from '../../assets/formular-black/formular-black.woff2';
 import blackWoff from '../../assets/formular-black/formular-black.woff';
 import blackTtf from '../../assets/formular-black/formular-black.ttf';
 
-// eslint-disable-next-line no-unused-expressions
 injectGlobal`
   * {
     box-sizing: border-box;
@@ -78,7 +78,7 @@ injectGlobal`
 
     background-color: #1B2128;
     break-inside: avoid;
-    
+
     h2 {
       font-size: 20px;
       font-weight: 500 !important;

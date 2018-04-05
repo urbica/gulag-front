@@ -19,12 +19,15 @@ class Slider extends PureComponent {
   }
 
   componentDidMount() {
-    const translateX = this.props.xScale(new Date(this.props.currentYear, 0, 1));
+    const translateX = this.props.xScale(
+      new Date(this.props.currentYear, 0, 1)
+    );
     const barWidth = Math.round(this.props.width / 42) - 2;
     let prisoners = 0;
 
-    // eslint-disable-next-line
-    chartData.forEach(d => (d.year === this.props.currentYear ? prisoners = d.prisoners : 0));
+    chartData.forEach(
+      d => (d.year === this.props.currentYear ? ({ prisoners } = d) : 0)
+    );
 
     const slider = select(this.g);
     this.handle = slider
@@ -57,9 +60,7 @@ class Slider extends PureComponent {
       .attr('pointer-events', 'auto')
       .attr('x1', this.props.xScale.range()[0])
       .attr('x2', this.props.xScale.range()[1])
-      .call(
-        drag().on('start drag', this.setYear)
-      );
+      .call(drag().on('start drag', this.setYear));
 
     // handle circle
     this.handle
@@ -90,23 +91,27 @@ class Slider extends PureComponent {
     // handle lines
     this.handleLines = this.handle
       .append('path')
-      .attr('d', 'M15,3 L16,3 L16,9 L15,9 L15,3 Z M19,3 L20,3 L20,9 L19,9 L19,3 Z M23,3 L24,3 L24,9 L23,9 L23,3 Z')
+      .attr(
+        'd',
+        // eslint-disable-next-line
+        'M15,3 L16,3 L16,9 L15,9 L15,3 Z M19,3 L20,3 L20,9 L19,9 L19,3 Z M23,3 L24,3 L24,9 L23,9 L23,3 Z'
+      )
       .attr('fill', '#22252F')
       .attr('opacity', '0.3')
       .attr('class', 'handleLines');
 
     if (this.props.width >= 833) {
       // handle shadow
-      this.handleShadow
-        .attr('width', barWidth);
+      this.handleShadow.attr('width', barWidth);
 
       // handle rect
-      this.handleRect
-        .attr('width', barWidth);
+      this.handleRect.attr('width', barWidth);
 
       // handle lines
-      this.handleLines
-        .attr('transform', `translate(${-18.3 + (barWidth / 2)}, -5.5)`);
+      this.handleLines.attr(
+        'transform',
+        `translate(${-18.3 + barWidth / 2}, -5.5)`
+      );
     }
   }
 
@@ -115,46 +120,44 @@ class Slider extends PureComponent {
     const barWidth = Math.round(width / 42) - 2;
     let prisoners = 0;
 
-    // eslint-disable-next-line
-    chartData.forEach(d => (d.year === currentYear ? prisoners = d.prisoners : 0));
+    chartData.forEach(d => (d.year === currentYear ? ({ prisoners } = d) : 0));
 
-    this.handle
-      .attr('transform', `translate(${translateX}, 0)`);
+    this.handle.attr('transform', `translate(${translateX}, 0)`);
 
     this.currentYearRect
       .attr('width', barWidth)
       .attr('height', height - yScale(prisoners))
       .attr('transform', `translate(1, -${height - yScale(prisoners)})`);
 
-    this.sliderLine
-      .attr('x1', xScale.range()[0])
-      .attr('x2', xScale.range()[1]);
+    this.sliderLine.attr('x1', xScale.range()[0]).attr('x2', xScale.range()[1]);
 
     this.year.text(currentYear);
 
     if (width >= 833) {
       // handle shadow
-      this.handleShadow
-        .attr('width', barWidth);
+      this.handleShadow.attr('width', barWidth);
 
       // handle rect
-      this.handleRect
-        .attr('width', barWidth);
+      this.handleRect.attr('width', barWidth);
 
       // handle lines
-      this.handleLines
-        .attr('transform', `translate(${-18.3 + (barWidth / 2)}, -5.5)`);
+      this.handleLines.attr(
+        'transform',
+        `translate(${-18.3 + barWidth / 2}, -5.5)`
+      );
     }
   }
 
   setYear() {
-    this.props.dispatch(changeCurrentYear(this.props.xScale.invert(event.x).getFullYear()));
+    this.props.dispatch(
+      changeCurrentYear(this.props.xScale.invert(event.x).getFullYear())
+    );
   }
 
   render() {
     return (
       <Container
-        innerRef={(ref) => {
+        innerRef={ref => {
           this.g = ref;
         }}
         isVisible={!this.props.isShowAllPrisons}
@@ -171,9 +174,7 @@ Slider.propTypes = {
   dispatch: PropTypes.func.isRequired
 };
 
-export default connect(
-  state => ({
-    currentYear: state.getIn(['ui', 'currentYear']),
-    isShowAllPrisons: state.getIn(['ui', 'isShowAllPrisons'])
-  })
-)(Slider);
+export default connect(state => ({
+  currentYear: state.getIn(['ui', 'currentYear']),
+  isShowAllPrisons: state.getIn(['ui', 'isShowAllPrisons'])
+}))(Slider);

@@ -8,9 +8,12 @@ export const typesSelector = state => state.getIn(['data', 'types']);
 export const periodsSelector = state => state.getIn(['data', 'periods']);
 export const currentYearSelector = state => state.getIn(['ui', 'currentYear']);
 export const viewportSelector = state => state.getIn(['ui', 'viewport']);
-export const isShowAllPrisonsSelector = state => state.getIn(['ui', 'isShowAllPrisons']);
-export const isCampFiltersOpenSelector = state => state.getIn(['ui', 'isCampFiltersOpen']);
-export const campTypeFiltersSelector = state => state.getIn(['ui', 'campTypeFilters']);
+export const isShowAllPrisonsSelector = state =>
+  state.getIn(['ui', 'isShowAllPrisons']);
+export const isCampFiltersOpenSelector = state =>
+  state.getIn(['ui', 'isCampFiltersOpen']);
+export const campTypeFiltersSelector = state =>
+  state.getIn(['ui', 'campTypeFilters']);
 
 const emptyGeoJSONSource = Immutable.fromJS({
   type: 'geojson',
@@ -32,13 +35,14 @@ export const prisonSourceSelector = createSelector(
     }
 
     const features = camps
-      .filter((camp) => {
+      .filter(camp => {
         const campType = camp.get('typeId') && camp.get('typeId').toString();
 
         return camp.getIn(['published', lang]) && campTypeFilters.get(campType);
       })
       .reduce((accCamps, camp) => {
-        const locations = camp.get('locations')
+        const locations = camp
+          .get('locations')
           .reduce((accLocations, location) => {
             const statistics = location
               .get('statistics')
@@ -84,7 +88,9 @@ export const finalStyleSelector = createSelector(
       return null;
     }
 
-    const ussrLayerId = mapStyle.get('layers').findIndex(layer => layer.get('id') === 'USSR');
+    const ussrLayerId = mapStyle
+      .get('layers')
+      .findIndex(layer => layer.get('id') === 'USSR');
 
     const citiesLayerId = mapStyle
       .get('layers')
@@ -101,7 +107,10 @@ export const finalStyleSelector = createSelector(
 
       return Immutable.fromJS(['all', ['==', 'year_end', currentYear]]);
     };
-    const citiesFilterByYear = Immutable.fromJS(['all', ['==', 'year', currentYear]]);
+    const citiesFilterByYear = Immutable.fromJS([
+      'all',
+      ['==', 'year', currentYear]
+    ]);
 
     const citiesLang = `{historical_name${lang === 'ru' ? '' : '_en'}}`;
 

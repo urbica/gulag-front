@@ -16,11 +16,7 @@ import Button from '../Button';
 import Title from './Title';
 
 const Menu = ({ dispatch, isDataLoading }) => (
-  <Container
-    mountOnEnter
-    in={!isDataLoading}
-    timeout={2000}
-  >
+  <Container mountOnEnter in={!isDataLoading} timeout={2000}>
     <Button onClick={dispatch.bind(null, toggleMenu())}>
       <img src={menu} alt='menu' />
     </Button>
@@ -33,4 +29,6 @@ Menu.propTypes = {
   isDataLoading: PropTypes.bool.isRequired
 };
 
-export default connect(state => ({ isDataLoading: state.getIn(['ui', 'isDataLoading']) }))(Menu);
+export default connect(state => ({
+  isDataLoading: state.getIn(['ui', 'isDataLoading'])
+}))(Menu);

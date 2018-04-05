@@ -29,7 +29,8 @@ import Container from './Container';
 //   setTimeout(() => {
 //     const credits = ' <a href="http://urbica.co" target="_blank">© Urbica</a>';
 //     const attrEls = document.getElementsByClassName('mapboxgl-ctrl-attrib');
-//     if (attrEls.length > 0) attrEls[0].insertAdjacentHTML('beforeend', credits);
+//     if (attrEls.length > 0)
+//       attrEls[0].insertAdjacentHTML('beforeend', credits);
 //   }, 1000);
 // }
 
@@ -51,7 +52,7 @@ class Map extends PureComponent {
     return (
       <Container slideUp={isSlideUp}>
         <MapGL
-          ref={(ref) => {
+          ref={ref => {
             this.mapRef = ref;
           }}
           style={{ width: '100%', height: '100vh' }}
@@ -64,17 +65,25 @@ class Map extends PureComponent {
           <Layer layer={layers.get('prisons')} />
           <Layer
             layer={layers.get('prisonsHalo')}
-            onClick={({ features }) => openCampCard(features[0].properties.campId)}
+            onClick={({ features }) =>
+              openCampCard(features[0].properties.campId)
+            }
           />
         </MapGL>
         {/* <Controls slideUp={isSlideUp}>
           <MapButton
-            onClick={dispatch.bind(null, changeViewport({ zoom: viewport.get('zoom') + 1 }))}
+            onClick={dispatch.bind(
+              null,
+              changeViewport({ zoom: viewport.get('zoom') + 1 })
+            )}
           >
             <img src={plus} alt='plus' />
           </MapButton>
           <MapButton
-            onClick={dispatch.bind(null, changeViewport({ zoom: viewport.get('zoom') - 1 }))}
+            onClick={dispatch.bind(
+              null,
+              changeViewport({ zoom: viewport.get('zoom') - 1 })
+            )}
           >
             <img src={minus} alt='minus' />
           </MapButton>
@@ -106,7 +115,15 @@ const selector = createSelector(
   viewportSelector,
   isShowAllPrisonsSelector,
   prisonSourceSelector,
-  (pathname, prisons, mapStyle, currentYear, viewport, isShowAllPrisons, prisonSource) => ({
+  (
+    pathname,
+    prisons,
+    mapStyle,
+    currentYear,
+    viewport,
+    isShowAllPrisons,
+    prisonSource
+  ) => ({
     isSlideUp: /\/prison/.test(pathname),
     prisons,
     mapStyle,

@@ -15,16 +15,17 @@ const search = {
   en: 'Search'
 };
 
-const Search = (props) => {
-  const {
-    pushToRoot, camps, pushToCamp, lang
-  } = props;
+const Search = props => {
+  const { pushToRoot, camps, pushToCamp, lang } = props;
 
   return (
     <FullScreenCard onClick={pushToRoot}>
       <Input placeholder={search[lang]} onChange={() => ({})} />
       {camps.map(camp => (
-        <Item key={camp.get('id')} onClick={pushToCamp.bind(null, camp.get('id'))}>
+        <Item
+          key={camp.get('id')}
+          onClick={pushToCamp.bind(null, camp.get('id'))}
+        >
           <Title>{camp.getIn(['title', lang])}</Title>
           {/* <Periods>{camp.get('periods')}</Periods> */}
           {/* <Locations>{camp.get('locations')}</Locations> */}

@@ -42,9 +42,9 @@ const Aside = (props) => {
           <LangButton isActive={locale === 'en'} onClick={changeLang.bind(null, 'en')}>
             Eng
           </LangButton>
-          <LangButton isActive={locale === 'de'} onClick={changeLang.bind(null, 'en')}>
+          {/* <LangButton isActive={locale === 'de'} onClick={changeLang.bind(null, 'en')}>
             Deu
-          </LangButton>
+          </LangButton> */}
         </div>
       </div>
     </Container>

@@ -1,28 +1,20 @@
 import React, { PureComponent } from 'react';
+import ReactDom from 'react-dom';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { createSelector } from 'reselect';
+import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import MapGL, { Source, Layer } from '@urbica/react-map-gl';
-import { push } from 'react-router-redux';
 
 import { mapToken } from '../../config/tokens';
-
-import { changeViewport } from '../App/reducers/uiReducer';
-import {
-  campsSelector,
-  currentYearSelector,
-  viewportSelector,
-  isShowAllPrisonsSelector,
-  finalStyleSelector,
-  prisonSourceSelector
-} from '../App/selectors';
 import layers from '../../config/layers';
 
+// component
+import Popup from './Popup/Popup';
+
+// styled
 import Container from './Container';
 
 // import Controls from './Controls/Controls';
-// import Popup from './Popup';
 // import MapButton from './Controls/MapButton';
 // import plus from './btn-plus.svg';
 // import minus from './btn-minus.svg';
@@ -35,8 +27,31 @@ import Container from './Container';
 // }
 
 class Map extends PureComponent {
-  componentDidMount() {
-    window.mapRef = this.mapRef;
+  constructor(props) {
+    super(props);
+
+    this.mapGlRef = React.createRef();
+
+    this.onLayerClick = e => {
+      if (e.features.length > 1) {
+        const div = document.createElement('div');
+        ReactDom.render(
+          <Popup features={e.features} onClick={this.props.openCampCard} />,
+          div
+        );
+
+        this.popup = new mapboxgl.Popup({
+          closeButton: false,
+          anchor: 'left',
+          offset: 40
+        })
+          .setLngLat(e.features[0].geometry.coordinates)
+          .setDOMContent(div)
+          .addTo(this.mapGlRef.current.getMap());
+      } else {
+        this.props.openCampCard(e.features[0].properties.campId);
+      }
+    };
   }
 
   render() {
@@ -45,16 +60,13 @@ class Map extends PureComponent {
       mapStyle,
       viewport,
       changeViewportHandler,
-      prisonSource,
-      openCampCard
+      prisonSource
     } = this.props;
 
     return (
       <Container slideUp={isSlideUp}>
         <MapGL
-          ref={ref => {
-            this.mapRef = ref;
-          }}
+          ref={this.mapGlRef}
           style={{ width: '100%', height: '100vh' }}
           accessToken={mapToken}
           mapStyle={mapStyle}
@@ -65,9 +77,7 @@ class Map extends PureComponent {
           <Layer layer={layers.get('prisons')} />
           <Layer
             layer={layers.get('prisonsHalo')}
-            onClick={({ features }) =>
-              openCampCard(features[0].properties.campId)
-            }
+            onClick={this.onLayerClick}
           />
         </MapGL>
         {/* <Controls slideUp={isSlideUp}>
@@ -107,36 +117,4 @@ Map.defaultProps = {
   mapStyle: null
 };
 
-const selector = createSelector(
-  state => state.getIn(['router']).location.pathname,
-  campsSelector,
-  finalStyleSelector,
-  currentYearSelector,
-  viewportSelector,
-  isShowAllPrisonsSelector,
-  prisonSourceSelector,
-  (
-    pathname,
-    prisons,
-    mapStyle,
-    currentYear,
-    viewport,
-    isShowAllPrisons,
-    prisonSource
-  ) => ({
-    isSlideUp: /\/prison/.test(pathname),
-    prisons,
-    mapStyle,
-    currentYear,
-    viewport,
-    isShowAllPrisons,
-    prisonSource
-  })
-);
-
-const mapDispatchToProps = dispatch => ({
-  changeViewportHandler: newViewport => dispatch(changeViewport(newViewport)),
-  openCampCard: id => dispatch(push(`/camp${id}`))
-});
-
-export default connect(selector, mapDispatchToProps)(Map);
+export default Map;

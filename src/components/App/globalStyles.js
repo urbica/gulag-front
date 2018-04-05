@@ -95,4 +95,15 @@ injectGlobal`
       border-bottom-color: rgba(219, 235, 219, 0.5) !important;
     }
   }
+
+  .mapboxgl-popup-tip {
+    display: none;
+  }
+
+  .mapboxgl-popup-content {
+    padding: 0 !important;
+    border: none !important;
+    background: inherit !important;
+    box-shadow: none !important;
+  }
 `;

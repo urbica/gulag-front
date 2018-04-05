@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { t } from '../../intl/helper';
 
 import FullScreenCard from '../FullScreenCard/FullScreenCard';
 
@@ -12,7 +13,7 @@ import Description from './Description';
 
 const Chronology = ({ pushToRoot, periods }) => (
   <FullScreenCard onClick={pushToRoot}>
-    <Title>Хронология ГУЛАГа</Title>
+    <Title>{t('aside.gulagChronology')}</Title>
     {periods.map(period => (
       <Period key={period.get('id')}>
         <Year>{period.get('year')}</Year>

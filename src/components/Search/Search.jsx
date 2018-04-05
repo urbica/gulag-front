@@ -10,13 +10,19 @@ import Title from './Title';
 // import Periods from './Periods';
 // import Locations from './Locations';
 
+const search = {
+  ru: 'Поиск',
+  en: 'Search'
+};
+
 const Search = (props) => {
   const {
     pushToRoot, camps, pushToCamp, lang
   } = props;
+
   return (
     <FullScreenCard onClick={pushToRoot}>
-      <Input placeholder='Поиск' onChange={() => ({})} />
+      <Input placeholder={search[lang]} onChange={() => ({})} />
       {camps.map(camp => (
         <Item key={camp.get('id')} onClick={pushToCamp.bind(null, camp.get('id'))}>
           <Title>{camp.getIn(['title', lang])}</Title>

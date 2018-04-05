@@ -64,7 +64,7 @@ class Map extends PureComponent {
           <Layer layer={layers.get('prisons')} />
           <Layer
             layer={layers.get('prisonsHalo')}
-            onClick={({ features }) => openCampCard(features[0].properties.id)}
+            onClick={({ features }) => openCampCard(features[0].properties.campId)}
           />
         </MapGL>
         {/* <Controls slideUp={isSlideUp}>

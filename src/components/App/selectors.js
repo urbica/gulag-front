@@ -1,4 +1,4 @@
-import Immutable from 'immutable';
+import Immutable, { Map, List } from 'immutable';
 import { createSelector } from 'reselect';
 
 export const langSelector = state => state.getIn(['intl', 'locale']);
@@ -25,38 +25,49 @@ export const prisonSourceSelector = createSelector(
   langSelector,
   campTypeFiltersSelector,
   // isShowAllPrisonsSelector,
-  // currentYearSelector,
-  (prisons, lang, campTypeFilters /*  isShowAllPrisons, currentYear */) => {
-    if (!prisons) {
+  currentYearSelector,
+  (camps, lang, campTypeFilters, /* isShowAllPrisons, */ currentYear) => {
+    if (!camps) {
       return emptyGeoJSONSource;
     }
 
-    const features = prisons
-      .toList()
-      .filter(
-        camp =>
-          camp.getIn(['published', lang]) && campTypeFilters.get(camp.get('typeId').toString())
-      )
-      .reduce(
-        (acc, prison) =>
-          prison.get('locations').reduce((oldFeatures, feature) => {
-            // if (feature.getIn(['properties', currentYear.toString()]) || isShowAllPrisons) {
-            const newProperties = Immutable.Map({
-              id: prison.get('id'),
-              ruName: prison.getIn(['title', 'ru']),
-              enName: prison.getIn(['title', 'en']),
-              deName: prison.getIn(['title', 'de']),
-              typeId: prison.get('typeId'),
-              peoples: 5000
-              // peoples: feature.getIn(['properties', currentYear.toString(), 'peoples'])
+    const features = camps
+      .filter((camp) => {
+        const campType = camp.get('typeId') && camp.get('typeId').toString();
+
+        return camp.getIn(['published', lang]) && campTypeFilters.get(campType);
+      })
+      .reduce((accCamps, camp) => {
+        const locations = camp.get('locations')
+          .reduce((accLocations, location) => {
+            const statistics = location
+              .get('statistics')
+              .find(stat => stat.get('year') === currentYear);
+
+            if (!statistics) {
+              return accLocations;
+            }
+
+            const properties = Map({
+              campId: camp.get('id'),
+              ruName: camp.getIn(['title', 'ru']),
+              enName: camp.getIn(['title', 'en']),
+              deName: camp.getIn(['title', 'de']),
+              typeId: camp.get('typeId'),
+              peoples: statistics.get('prisonersCount')
             });
 
-            return oldFeatures.push(feature.set('properties', newProperties));
-            // }
-            // return oldFeatures;
-          }, acc),
-        Immutable.List()
-      );
+            const feature = Map({
+              type: 'Feature',
+              geometry: location.get('geometry'),
+              properties
+            });
+
+            return accLocations.push(feature);
+          }, List());
+
+        return accCamps.merge(locations);
+      }, List());
 
     return emptyGeoJSONSource.setIn(['data', 'features'], features);
   }

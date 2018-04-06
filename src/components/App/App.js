@@ -6,7 +6,7 @@ import './globalStyles';
 import Preloader from '../Preloader/Preloader';
 import Map from '../Map';
 import Menu from '../Menu/Menu';
-import Chart from '../Chart/Chart';
+import Chart from '../Chart';
 import Aside from '../Aside';
 import CampFilters from '../CampFilters';
 import Search from '../Search';

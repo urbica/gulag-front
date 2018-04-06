@@ -12,11 +12,21 @@ export default transition.div`
   pointer-events: none;
 
   &:enter {
-    bottom: -200px;
+    bottom: -400px;
   }
 
   &:enter-active {
     bottom: 0;
-    transition: bottom 800ms ease-in-out;
+    transition: bottom 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  }
+
+  &:exit {
+    bottom: 0;
+  }
+
+  &:exit-active {
+    bottom: -400px;
+
+    transition: bottom 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
   }
 `;

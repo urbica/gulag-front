@@ -1,13 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { scaleTime } from 'd3-scale';
-
-import {
-  toggleAllPrisons,
-  changeCurrentYear,
-  toggleDemo
-} from '../App/reducers/uiReducer';
 
 import { height, margin } from './config';
 
@@ -61,7 +54,12 @@ class Chart extends PureComponent {
 
   render() {
     return (
-      <Container in={!this.props.isDataLoading} timeout={800}>
+      <Container
+        mountOnEnter
+        unmountOnExit
+        in={this.props.isChartVisible}
+        timeout={800}
+      >
         <PlayButton isDemoPlayed={this.props.isDemoPlay} onClick={this.demo} />
         <ChartWrap>
           <svg
@@ -126,15 +124,7 @@ Chart.propTypes = {
   toggleAllPrisons: PropTypes.func.isRequired,
   changeCurrentYear: PropTypes.func.isRequired,
   toggleDemo: PropTypes.func.isRequired,
-  isDataLoading: PropTypes.bool.isRequired
+  isChartVisible: PropTypes.bool.isRequired
 };
 
-export default connect(
-  state => ({
-    currentYear: state.getIn(['ui', 'currentYear']),
-    isDemoPlay: state.getIn(['ui', 'isDemoPlay']),
-    isShowAll: state.getIn(['ui', 'isShowAllPrisons']),
-    isDataLoading: state.getIn(['ui', 'isDataLoading'])
-  }),
-  { toggleAllPrisons, changeCurrentYear, toggleDemo }
-)(Chart);
+export default Chart;

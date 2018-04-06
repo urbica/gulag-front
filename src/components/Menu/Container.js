@@ -13,6 +13,6 @@ export default transition.div`
 
   &:enter-active {
     top: 28px;
-    transition: top 400ms ease-in-out;
+    transition: top 400ms cubic-bezier(0.68, -0.55, 0.27, 1.55);
   }
 `;

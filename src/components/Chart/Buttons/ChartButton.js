@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Button from '../../Button';
 
 export default styled(Button)`
-  margin-top: 200px;
+  margin-bottom: 28px;
 
   background-color: rgba(0, 0, 0, 0.5);
 

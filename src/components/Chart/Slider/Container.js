@@ -37,6 +37,8 @@ export default styled.g`
   }
 
   .currentYearRect {
+    display: ${({ isChartVisible }) => (isChartVisible ? 'inferit' : 'none')};
+
     @media (max-width: 1023px) {
       display: none;
     }

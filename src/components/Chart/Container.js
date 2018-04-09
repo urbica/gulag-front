@@ -6,8 +6,9 @@ export default transition.div`
 
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
   width: 100%;
+  height: 200px;
 
   background-image: linear-gradient(to bottom, rgba(27, 33, 40, 0), #1b2128);
 

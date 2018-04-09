@@ -10,6 +10,7 @@ import Chart from './Chart';
 
 const mapStateToProps = state => {
   const campFilters = state.getIn(['ui', 'campTypeFilters']);
+  const isDataLoading = state.getIn(['ui', 'isDataLoading']);
   const isChartVisible =
     campFilters.get('1') &&
     !campFilters.get('2') &&
@@ -17,12 +18,13 @@ const mapStateToProps = state => {
     !campFilters.get('4') &&
     !campFilters.get('5') &&
     !campFilters.get('6') &&
-    !state.getIn(['ui', 'isDataLoading']);
+    !isDataLoading;
 
   return {
     currentYear: state.getIn(['ui', 'currentYear']),
     isDemoPlay: state.getIn(['ui', 'isDemoPlay']),
     isShowAll: state.getIn(['ui', 'isShowAllPrisons']),
+    isDataLoading,
     isChartVisible
   };
 };

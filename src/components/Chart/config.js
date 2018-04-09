@@ -1,11 +1,11 @@
-import { scaleLinear } from 'd3-scale';
+import { scaleLinear, scaleTime } from 'd3-scale';
 import { max } from 'd3-array';
 
 export const margin = {
   top: 5,
-  right: 20,
+  right: 15,
   bottom: 50,
-  left: 20
+  left: 15
 };
 export const height = 300 - margin.top - margin.bottom;
 
@@ -230,3 +230,9 @@ export const chartData = [
 export const yScale = scaleLinear()
   .domain([0, max(chartData, d => d.prisoners)])
   .range([height, 0]);
+
+export const calculateXScale = width =>
+  scaleTime()
+    .domain([new Date(1918, 0, 1), new Date(1960, 11, 31)])
+    .range([0, width - margin.left - margin.right])
+    .clamp(true);

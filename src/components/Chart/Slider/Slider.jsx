@@ -158,9 +158,11 @@ class Slider extends PureComponent {
   }
 
   setYear() {
-    this.props.changeCurrentYear(
-      this.props.xScale.invert(event.x).getFullYear()
-    );
+    const { changeCurrentYear, xScale } = this.props;
+
+    const newYear = xScale.invert(event.x).getFullYear();
+
+    changeCurrentYear(newYear);
   }
 
   render() {
@@ -168,6 +170,7 @@ class Slider extends PureComponent {
       <Container
         innerRef={this.gRef}
         isVisible={!this.props.isShowAllPrisons}
+        isChartVisible={this.props.isChartVisible}
       />
     );
   }
@@ -178,7 +181,8 @@ Slider.propTypes = {
   width: PropTypes.number.isRequired,
   currentYear: PropTypes.number.isRequired,
   isShowAllPrisons: PropTypes.bool.isRequired,
-  changeCurrentYear: PropTypes.func.isRequired
+  changeCurrentYear: PropTypes.func.isRequired,
+  isChartVisible: PropTypes.bool.isRequired
 };
 
 export default Slider;

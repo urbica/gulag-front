@@ -4,6 +4,8 @@ import { select } from 'd3-selection';
 import { axisBottom } from 'd3-axis';
 import { timeMonth } from 'd3-time';
 
+import { calculateXScale } from '../config';
+
 // styled
 import Container from './Container';
 
@@ -12,28 +14,38 @@ class Axis extends PureComponent {
     super(props);
 
     this.gRef = React.createRef();
-
-    this.createAxis = () => {
-      const { xScale, width } = this.props;
-
-      const axis = axisBottom(xScale).tickSizeOuter(0);
-
-      if (width < 833) {
-        axis.ticks(0, '');
-      } else {
-        axis
-          .ticks(timeMonth.filter(d => d.getMonth() === 6))
-          .tickFormat((d, i) => (i % 2 === 0 ? d.getFullYear() : null))
-          .tickSizeInner(4);
-      }
-
-      const el = select(this.gRef.current);
-      el.call(axis);
-    };
+    this.createAxis = this.createAxis.bind(this);
   }
 
   componentDidMount() {
     this.createAxis();
+  }
+
+  componentDidUpdate() {
+    this.createAxis();
+  }
+
+  createAxis() {
+    const { width, isChartVisible } = this.props;
+    const xScale = calculateXScale(width);
+    const axis = axisBottom(xScale).tickSizeOuter(0);
+
+    if (width < 833) {
+      axis.ticks(0, '');
+    } else if (!isChartVisible) {
+      axis
+        .ticks(timeMonth.filter(d => d.getMonth() === 6))
+        .tickFormat((d, i) => (i % 2 === 0 ? d.getFullYear() : null))
+        .tickSizeInner(0);
+    } else {
+      axis
+        .ticks(timeMonth.filter(d => d.getMonth() === 6))
+        .tickFormat((d, i) => (i % 2 === 0 ? d.getFullYear() : null))
+        .tickSizeInner(4);
+    }
+
+    const el = select(this.gRef.current);
+    el.call(axis);
   }
 
   render() {
@@ -42,8 +54,8 @@ class Axis extends PureComponent {
 }
 
 Axis.propTypes = {
-  xScale: PropTypes.func.isRequired,
-  width: PropTypes.number.isRequired
+  width: PropTypes.number.isRequired,
+  isChartVisible: PropTypes.bool.isRequired
 };
 
 export default Axis;

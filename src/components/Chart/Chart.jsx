@@ -8,7 +8,7 @@ import PlayButton from './Buttons/PlayButton';
 import ShowAllButton from './Buttons/ShowAllButton';
 import PrisonersArea from './PrisonersArea/PrisonersArea';
 import Axis from './Axis/Axis';
-import Slider from './Slider/Slider';
+import Slider from './Slider';
 
 // styled
 import Container from './Container';
@@ -101,6 +101,9 @@ class Chart extends PureComponent {
                 filterUnits='objectBoundingBox'
               >
                 <feGaussianBlur stdDeviation='5' in='SourceGraphic' />
+              </filter>
+              <filter id='textShadow'>
+                <feGaussianBlur in='SourceGraphic' stdDeviation='4' />
               </filter>
             </defs>
             <PrisonersArea width={width} xScale={xScale} />

@@ -1,13 +1,10 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { select, event } from 'd3-selection';
 import { drag } from 'd3-drag';
 
 import { height, chartData, yScale } from '../config';
 import { mainFontColour } from '../../../config/styles';
-
-import { changeCurrentYear } from '../../App/reducers/uiReducer';
 
 // styled
 import Container from './Container';
@@ -15,6 +12,7 @@ import Container from './Container';
 class Slider extends PureComponent {
   constructor(props) {
     super(props);
+    this.gRef = React.createRef();
     this.setYear = this.setYear.bind(this);
   }
 
@@ -23,13 +21,12 @@ class Slider extends PureComponent {
       new Date(this.props.currentYear, 0, 1)
     );
     const barWidth = Math.round(this.props.width / 42) - 2;
-    let prisoners = 0;
 
-    chartData.forEach(
-      d => (d.year === this.props.currentYear ? ({ prisoners } = d) : 0)
+    const { prisoners } = chartData.find(
+      d => d.year === this.props.currentYear
     );
 
-    const slider = select(this.g);
+    const slider = select(this.gRef.current);
     this.handle = slider
       .append('g')
       .attr('class', 'handle')
@@ -46,12 +43,6 @@ class Slider extends PureComponent {
       .attr('width', barWidth)
       .attr('height', height - yScale(prisoners))
       .attr('transform', `translate(1, -${height - yScale(prisoners)})`);
-
-    // handle year
-    this.year = this.handle
-      .append('text')
-      .attr('transform', 'translate(-11, -17)')
-      .attr('class', 'currentYear');
 
     this.sliderLine = slider
       .append('line')
@@ -80,6 +71,16 @@ class Slider extends PureComponent {
       .attr('transform', 'translate(1, -5)')
       .attr('class', 'handleShadow');
 
+    // text shadow
+    this.textShadow = this.handle
+      .append('rect')
+      .attr('width', 60)
+      .attr('height', 27)
+      .attr('fill', '#1c232a')
+      .attr('filter', 'url(#textShadow)')
+      .attr('transform', 'translate(-20, 4)')
+      .attr('class', 'textShadow');
+
     // handle rect
     this.handleRect = this.handle
       .append('rect')
@@ -100,6 +101,13 @@ class Slider extends PureComponent {
       .attr('opacity', '0.3')
       .attr('class', 'handleLines');
 
+    // handle year
+    this.year = this.handle
+      .append('text')
+      .attr('transform', 'translate(-11, -17)')
+      .attr('class', 'currentYear')
+      .text(this.props.currentYear);
+
     if (this.props.width >= 833) {
       // handle shadow
       this.handleShadow.attr('width', barWidth);
@@ -112,15 +120,16 @@ class Slider extends PureComponent {
         'transform',
         `translate(${-18.3 + barWidth / 2}, -5.5)`
       );
+
+      this.year.attr('transform', 'translate(-7, 25)');
     }
   }
 
   componentWillReceiveProps({ width, xScale, currentYear }) {
     const translateX = xScale(new Date(currentYear, 0, 1));
     const barWidth = Math.round(width / 42) - 2;
-    let prisoners = 0;
 
-    chartData.forEach(d => (d.year === currentYear ? ({ prisoners } = d) : 0));
+    const { prisoners } = chartData.find(d => d.year === currentYear);
 
     this.handle.attr('transform', `translate(${translateX}, 0)`);
 
@@ -149,17 +158,15 @@ class Slider extends PureComponent {
   }
 
   setYear() {
-    this.props.dispatch(
-      changeCurrentYear(this.props.xScale.invert(event.x).getFullYear())
+    this.props.changeCurrentYear(
+      this.props.xScale.invert(event.x).getFullYear()
     );
   }
 
   render() {
     return (
       <Container
-        innerRef={ref => {
-          this.g = ref;
-        }}
+        innerRef={this.gRef}
         isVisible={!this.props.isShowAllPrisons}
       />
     );
@@ -171,10 +178,7 @@ Slider.propTypes = {
   width: PropTypes.number.isRequired,
   currentYear: PropTypes.number.isRequired,
   isShowAllPrisons: PropTypes.bool.isRequired,
-  dispatch: PropTypes.func.isRequired
+  changeCurrentYear: PropTypes.func.isRequired
 };
 
-export default connect(state => ({
-  currentYear: state.getIn(['ui', 'currentYear']),
-  isShowAllPrisons: state.getIn(['ui', 'isShowAllPrisons'])
-}))(Slider);
+export default Slider;

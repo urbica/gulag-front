@@ -9,6 +9,8 @@ export default transition.div`
   align-items: center;
   width: 100%;
 
+  background-image: linear-gradient(to bottom, rgba(27, 33, 40, 0), #1b2128);
+
   pointer-events: none;
 
   &:enter {

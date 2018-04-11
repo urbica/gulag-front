@@ -13,6 +13,7 @@ services:
 #        - 4000:80
       volumes:
         - ./nginx.conf:/etc/nginx/conf.d/default.conf
+        - ./photos:/usr/share/nginx/photos
       depends_on:
         - gulag-next-api
 
@@ -29,8 +30,6 @@ services:
     restart: always
     env_file:
       - .env
-#    volumes:
-#      - ./uploads:/usr/src/app/uploads
     depends_on:
       - gulag-next-db
 

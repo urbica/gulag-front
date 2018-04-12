@@ -21,16 +21,16 @@ class Component extends PureComponent {
       handleToggleVisible,
       handleClickActive,
       handleClick,
-      getArrayPhoto,
       active
     } = this.props;
+
     return (
       <Container isOpened={photo.isOpened}>
         <Wrapper onClick={handleToggleVisible} />
         <Main isOpened={photo.isOpened}>
-          <img src={getArrayPhoto().active} alt='' />
+          <img src={list.getIn([active, 'src'])} alt='' />
           <article>
-            <span>{list[active]['description-ru']}</span>
+            <span>{list.getIn([active, 'description-ru'])}</span>
           </article>
         </Main>
         <Gallery>
@@ -59,7 +59,6 @@ Component.propTypes = {
   list: PropTypes.object.isRequired,
   handleToggleVisible: PropTypes.func.isRequired,
   handleClick: PropTypes.func.isRequired,
-  getArrayPhoto: PropTypes.func.isRequired,
   active: PropTypes.number.isRequired,
   handleClickActive: PropTypes.func.isRequired
 };

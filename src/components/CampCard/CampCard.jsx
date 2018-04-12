@@ -2,7 +2,8 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import Gallery from 'react-photo-gallery';
+
+import Gallery from './PrisonDescription/Gallery/Gallery.styled';
 
 // reducer && selector
 // import {
@@ -10,9 +11,6 @@ import Gallery from 'react-photo-gallery';
 // } from '../App/reducers/uiReducer';
 import { langSelector } from '../App/selectors';
 import prisonSelector from './selector';
-
-// data
-import data from './PrisonDescription/photoTestFile.json';
 
 // images
 import close from '../cross.svg';
@@ -40,19 +38,19 @@ import Bottom from './Bottom';
 import Slider from './PrisonDescription/Slider/Slider';
 // import Gallery from './PrisonDescription/Gallery/Gallery';
 
-const list = (() =>
-  data.map((item, i) => ({
-    src: item.path,
-    'title-ru': item.title.ru,
-    'title-en': item.title.en,
-    'title-de': item.title.de,
-    'description-ru': item.description.ru,
-    'description-en': item.description.en,
-    'description-de': item.description.de,
-    width: 4,
-    height: 3,
+const getList = arr =>
+  arr.get('photos').map((item, i) => ({
+    src: item.get('path'),
+    'title-ru': item.getIn(['title', 'ru']),
+    'title-en': item.getIn(['title', 'en']),
+    'title-de': item.getIn(['title', 'de']),
+    'description-ru': item.getIn(['description', 'ru']),
+    'description-en': item.getIn(['description', 'en']),
+    'description-de': item.getIn(['description', 'de']),
+    width: 2,
+    height: 2,
     count: i
-  })))();
+  }));
 
 class PrisonCard extends PureComponent {
   constructor() {
@@ -61,37 +59,24 @@ class PrisonCard extends PureComponent {
       isOpened: false,
       active: 0
     };
-    this.getArrayPhoto = this.getArrayPhoto.bind(this);
+
     this.handleClick = this.handleClick.bind(this);
     this.handleToggleVisible = this.handleToggleVisible.bind(this);
     this.handleOpen = this.handleOpen.bind(this);
     this.handleClickActive = this.handleClickActive.bind(this);
   }
 
-  getArrayPhoto() {
-    const first = list[this.state.active - 1]
-      ? list[this.state.active - 1]
-      : list[list.length - 1];
-    const last = list[this.state.active + 1]
-      ? list[this.state.active + 1]
-      : list[0];
-    return {
-      first: first.src,
-      active: list[this.state.active].src,
-      last: last.src
-    };
-  }
-
   handleClick(bool) {
+    const { prison } = this.props;
+    const { active } = this.state;
+    const arr = getList(prison);
     if (bool) {
       this.setState({
-        active: list[this.state.active - 1]
-          ? this.state.active - 1
-          : list.length - 1
+        active: arr.get(active - 1) ? this.state.active - 1 : arr.size - 1
       });
     } else {
       this.setState({
-        active: list[this.state.active + 1] ? this.state.active + 1 : 0
+        active: arr.get(active + 1) ? active + 1 : 0
       });
     }
   }
@@ -162,17 +147,23 @@ class PrisonCard extends PureComponent {
         </Right>
         <Bottom>
           <Subtitle>Фото и документы</Subtitle>
-          <section onMouseDown={this.handleOpen} role='presentation'>
-            <Gallery photos={list} />
-          </section>
+          <Gallery onMouseDown={this.handleOpen} role='presentation'>
+            {getList(prison).map(item => (
+              <img
+                src={item.src}
+                alt={item['description-ru']}
+                count={item.count}
+                key={item.count}
+              />
+            ))}
+          </Gallery>
           <section>
             <Slider
               handleToggleVisible={this.handleToggleVisible}
               photo={this.state}
-              list={list}
+              list={getList(prison)}
               active={this.state.active}
               handleClick={this.handleClick}
-              getArrayPhoto={this.getArrayPhoto}
               handleClickActive={this.handleClickActive}
             />
           </section>

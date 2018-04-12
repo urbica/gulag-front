@@ -1,0 +1,86 @@
+[
+  {
+    "id": 0,
+    "title": {
+      "ru": "Title 1 RU",
+      "en": "Title 1 EN",
+      "de": "Title 1 DE"
+    },
+    "description": {
+      "ru": "Lorem ipsum 1 RU",
+      "en": "Lorem ipsum 1 EN",
+      "de": "Lorem ipsum 1 DE"
+    },
+    "path": "http://gulagmap.ru/uploads/010-1496301818420.jpg"
+  },
+  {
+    "id": 1,
+    "title": {
+      "ru": "Title 2 RU",
+      "en": "Title 2 EN",
+      "de": "Title 2 DE"
+    },
+    "description": {
+      "ru": "Lorem ipsum 2 RU",
+      "en": "Lorem ipsum 2 EN",
+      "de": "Lorem ipsum 2 DE"
+    },
+    "path": "http://gulagmap.ru/uploads/bdb5724e5be88aa9a4fa2edc003bf13b-1506695327044.jpg"
+  },
+  {
+    "id": 2,
+    "title": {
+      "ru": "Title 3 RU",
+      "en": "Title 3 EN",
+      "de": "Title 3 DE"
+    },
+    "description": {
+      "ru": "Lorem ipsum 3 RU",
+      "en": "Lorem ipsum 3 EN",
+      "de": "Lorem ipsum 3 DE"
+    },
+    "path": "http://gulagmap.ru/uploads/schema-1506586884992.jpg"
+  },
+  {
+    "id": 3,
+    "title": {
+      "ru": "Title 4 RU",
+      "en": "Title 4 EN",
+      "de": "Title 4 DE"
+    },
+    "description": {
+      "ru": "Lorem ipsum 4 RU",
+      "en": "Lorem ipsum 4 EN",
+      "de": "Lorem ipsum 4 DE"
+    },
+    "path": "http://gulagmap.ru/uploads/1-1506619500094.jpg"
+  },
+  {
+    "id": 4,
+    "title": {
+      "ru": "Title 5 RU",
+      "en": "Title 5 EN",
+      "de": "Title 5 DE"
+    },
+    "description": {
+      "ru": "Lorem ipsum 5 RU",
+      "en": "Lorem ipsum 5 EN",
+      "de": "Lorem ipsum 5 DE"
+    },
+    "path": "http://gulagmap.ru/uploads/67b5f140060808f2ff5843d5b4db1e8b-1506695293278.jpg"
+  },
+  {
+    "id": 5,
+    "title": {
+      "ru": "Title 16 RU",
+      "en": "Title 16 EN",
+      "de": "Title 16 DE"
+    },
+    "description": {
+      "ru": "Lorem ipsum 6 RU",
+      "en": "Lorem ipsum 6 EN",
+      "de": "Lorem ipsum 6 DE"
+    },
+    "path": "http://gulagmap.ru/uploads/010-1496301818420.jpg"
+  }
+]

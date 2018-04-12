@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
+import Gallery from 'react-photo-gallery';
 
 // reducer && selector
 // import {
@@ -10,13 +11,16 @@ import { push } from 'react-router-redux';
 import { langSelector } from '../App/selectors';
 import prisonSelector from './selector';
 
+// data
+import data from './PrisonDescription/photoTestFile.json';
+
 // images
 import close from '../cross.svg';
 
 // utils
 import { getPeriods } from '../../utils/utils';
 import { t } from '../../intl/helper';
-import parseMarkup from '../../utils/parseMarkup';
+// import parseMarkup from '../../utils/parseMarkup';
 
 import PrisonDescription from './PrisonDescription/PrisonDescription';
 // import PrisonChart from './PrisonChart/PrisonChart';
@@ -31,9 +35,79 @@ import Subtitle from './Subtitle';
 import Right from './Right';
 import CardButton from './CardButton';
 import Bottom from './Bottom';
-import Gallery from './PrisonDescription/Gallery/Gallery';
+
+// components
+import Slider from './PrisonDescription/Slider/Slider';
+// import Gallery from './PrisonDescription/Gallery/Gallery';
+
+const list = (() =>
+  data.map((item, i) => ({
+    src: item.path,
+    'title-ru': item.title.ru,
+    'title-en': item.title.en,
+    'title-de': item.title.de,
+    'description-ru': item.description.ru,
+    'description-en': item.description.en,
+    'description-de': item.description.de,
+    width: 4,
+    height: 3,
+    count: i
+  })))();
 
 class PrisonCard extends PureComponent {
+  constructor() {
+    super();
+    this.state = {
+      isOpened: false,
+      active: 0
+    };
+    this.getArrayPhoto = this.getArrayPhoto.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.handleToggleVisible = this.handleToggleVisible.bind(this);
+    this.handleOpen = this.handleOpen.bind(this);
+    this.handleClickActive = this.handleClickActive.bind(this);
+  }
+
+  getArrayPhoto() {
+    const first = list[this.state.active - 1]
+      ? list[this.state.active - 1]
+      : list[list.length - 1];
+    const last = list[this.state.active + 1]
+      ? list[this.state.active + 1]
+      : list[0];
+    return {
+      first: first.src,
+      active: list[this.state.active].src,
+      last: last.src
+    };
+  }
+
+  handleClick(bool) {
+    if (bool) {
+      this.setState({
+        active: list[this.state.active - 1]
+          ? this.state.active - 1
+          : list.length - 1
+      });
+    } else {
+      this.setState({
+        active: list[this.state.active + 1] ? this.state.active + 1 : 0
+      });
+    }
+  }
+  handleClickActive(item) {
+    this.setState({
+      active: item
+    });
+  }
+
+  handleOpen(e) {
+    const active = parseInt(e.target.getAttribute('count'), 10);
+    this.setState({
+      active
+    });
+    this.handleToggleVisible();
+  }
   // componentWillReceiveProps({ prison, history, dispatch }) {
   //   if (prison && history.action === 'POP') {
   //     const firstYear = prison.get('firstYear');
@@ -45,6 +119,9 @@ class PrisonCard extends PureComponent {
   //     dispatch(changeViewport({ longitude, latitude }));
   //   }
   // }
+  handleToggleVisible() {
+    this.setState({ isOpened: !this.state.isOpened });
+  }
 
   render() {
     const { prison, dispatch, lang } = this.props;
@@ -85,32 +162,20 @@ class PrisonCard extends PureComponent {
         </Right>
         <Bottom>
           <Subtitle>Фото и документы</Subtitle>
-          {parseMarkup(markup).map((elem, i) => {
-            switch (elem.type) {
-              case 'gallery': {
-                const photos = [];
-                elem.payload.split('![](').forEach((e, index) => {
-                  if (index > 0) {
-                    const photoWithDesc = e.split(')\n');
-                    photos.push({
-                      src: photoWithDesc[0],
-                      desc: photoWithDesc[1]
-                    });
-                  }
-                });
-
-                return (
-                  <Gallery
-                    // eslint-disable-next-line react/no-array-index-key
-                    key={i}
-                    photos={photos}
-                  />
-                );
-              }
-              default:
-                return null;
-            }
-          })}
+          <section onMouseDown={this.handleOpen} role='presentation'>
+            <Gallery photos={list} />
+          </section>
+          <section>
+            <Slider
+              handleToggleVisible={this.handleToggleVisible}
+              photo={this.state}
+              list={list}
+              active={this.state.active}
+              handleClick={this.handleClick}
+              getArrayPhoto={this.getArrayPhoto}
+              handleClickActive={this.handleClickActive}
+            />
+          </section>
         </Bottom>
       </Container>
     );
@@ -118,7 +183,6 @@ class PrisonCard extends PureComponent {
 }
 
 PrisonCard.propTypes = {
-  // history: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   lang: PropTypes.string.isRequired,
   prison: PropTypes.object

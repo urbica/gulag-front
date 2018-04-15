@@ -30,37 +30,65 @@ class Map extends PureComponent {
   constructor(props) {
     super(props);
 
+    this.state = {
+      layers
+    };
+
     this.mapGlRef = React.createRef();
 
-    this.onLayerClick = e => {
-      if (e.features.length > 1) {
-        const div = document.createElement('div');
-        ReactDom.render(
-          <Popup features={e.features} onClick={this.props.openCampCard} />,
-          div
-        );
+    this.onLayerHover = this.onLayerHover.bind(this);
+    this.onLayerLeave = this.onLayerLeave.bind(this);
+    this.onLayerClick = this.onLayerClick.bind(this);
+  }
 
-        this.popup = new mapboxgl.Popup({
-          closeButton: false,
-          anchor: 'left',
-          offset: 40
-        })
-          .setLngLat(e.features[0].geometry.coordinates)
-          .setDOMContent(div)
-          .addTo(this.mapGlRef.current.getMap());
-      } else {
-        this.props.openCampCard(e.features[0].properties.campId);
-      }
-    };
+  onLayerHover(e) {
+    const feature = e.features[0];
+    if (!feature) return;
+
+    this.mapGlRef.current.getMap().getCanvas().style.cursor = 'pointer';
+    const newLayers = this.state.layers
+      .setIn(['campsHalo_hover', 'filter', 2], feature.properties.campId)
+      .setIn(['campsNames', 'filter', 2], feature.properties.campId);
+
+    this.setState({ layers: newLayers });
+  }
+
+  onLayerLeave() {
+    this.mapGlRef.current.getMap().getCanvas().style.cursor = '';
+    const newLayers = this.state.layers
+      .setIn(['campsHalo_hover', 'filter', 2], '')
+      .setIn(['campsNames', 'filter', 2], '');
+
+    this.setState({ layers: newLayers });
+  }
+
+  onLayerClick(e) {
+    if (e.features.length > 1) {
+      const div = document.createElement('div');
+      ReactDom.render(
+        <Popup features={e.features} onClick={this.props.openCampCard} />,
+        div
+      );
+
+      this.popup = new mapboxgl.Popup({
+        closeButton: false,
+        anchor: 'left',
+        offset: 40
+      })
+        .setLngLat(e.features[0].geometry.coordinates)
+        .setDOMContent(div)
+        .addTo(this.mapGlRef.current.getMap());
+    } else {
+      this.props.openCampCard(e.features[0].properties.campId);
+    }
   }
 
   render() {
     const {
       isSlideUp,
-      mapStyle,
       viewport,
       changeViewportHandler,
-      prisonSource
+      campsSource
     } = this.props;
 
     return (
@@ -69,16 +97,20 @@ class Map extends PureComponent {
           ref={this.mapGlRef}
           style={{ width: '100%', height: '100vh' }}
           accessToken={mapToken}
-          mapStyle={mapStyle}
+          mapStyle='mapbox://styles/gulagmap/cj8bt4qbw7kbo2rry4oft6e5g'
           onViewportChange={changeViewportHandler}
           {...viewport.toJS()}
         >
-          <Source id='prisons' source={prisonSource} />
-          <Layer layer={layers.get('prisons')} />
+          <Source id='camps' source={campsSource} />
+          <Layer layer={this.state.layers.get('camps')} />
           <Layer
-            layer={layers.get('prisonsHalo')}
+            layer={this.state.layers.get('campsHalo')}
+            onHover={this.onLayerHover}
+            onLeave={this.onLayerLeave}
             onClick={this.onLayerClick}
           />
+          <Layer layer={this.state.layers.get('campsHalo_hover')} />
+          <Layer layer={this.state.layers.get('campsNames')} />
         </MapGL>
         {/* <Controls slideUp={isSlideUp}>
           <MapButton
@@ -107,7 +139,7 @@ Map.propTypes = {
   isSlideUp: PropTypes.bool,
   mapStyle: PropTypes.object,
   viewport: PropTypes.object.isRequired,
-  prisonSource: PropTypes.object.isRequired,
+  campsSource: PropTypes.object.isRequired,
   changeViewportHandler: PropTypes.func.isRequired,
   openCampCard: PropTypes.func.isRequired
 };

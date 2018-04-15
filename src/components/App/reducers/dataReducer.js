@@ -6,8 +6,7 @@ const initState = Immutable.fromJS({
   photos: null,
   activities: null,
   places: null,
-  types: [],
-  mapStyles: null
+  types: []
 });
 
 export const FETCH_REQUEST = 'FETCH_REQUEST';

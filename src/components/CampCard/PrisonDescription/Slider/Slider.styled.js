@@ -57,6 +57,8 @@ const Main = styled.div`
     align-items: center;
     text-align: center;
     background: rgba(0, 0, 0, 0.85);
+    word-wrap: break-word;
+    overflow: hidden;
   }
 
   span {

@@ -1,27 +1,18 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
 
-import Gallery from './PrisonDescription/Gallery/Gallery.styled';
-
-// reducer && selector
-// import {
-//   changeCurrentYear, changeViewport
-// } from '../App/reducers/uiReducer';
-import { langSelector } from '../App/selectors';
-import prisonSelector from './selector';
+// utils
+import { t } from '../../intl/helper';
 
 // images
 import close from '../cross.svg';
 
-// utils
-import { getPeriods } from '../../utils/utils';
-import { t } from '../../intl/helper';
-// import parseMarkup from '../../utils/parseMarkup';
-
+// components
+import YearsOfOperation from './YearsOfOperation/YearsOfOperation';
 import PrisonDescription from './PrisonDescription/PrisonDescription';
-// import PrisonChart from './PrisonChart/PrisonChart';
+// import campChart from './campChart/campChart';
+// import Gallery from './campDescription/Gallery/Gallery';
+import Slider from './PrisonDescription/Slider/Slider';
 
 // styled
 import Container from './Container';
@@ -33,10 +24,7 @@ import Subtitle from './Subtitle';
 import Right from './Right';
 import CardButton from './CardButton';
 import Bottom from './Bottom';
-
-// components
-import Slider from './PrisonDescription/Slider/Slider';
-// import Gallery from './PrisonDescription/Gallery/Gallery';
+import Gallery from './PrisonDescription/Gallery/Gallery.styled';
 
 const getList = arr =>
   arr.get('photos').map((item, i) => ({
@@ -52,24 +40,35 @@ const getList = arr =>
     count: i
   }));
 
-class PrisonCard extends PureComponent {
-  constructor() {
-    super();
+class CampCard extends PureComponent {
+  constructor(props) {
+    super(props);
     this.state = {
       isOpened: false,
       active: 0
     };
 
-    this.handleClick = this.handleClick.bind(this);
-    this.handleToggleVisible = this.handleToggleVisible.bind(this);
     this.handleOpen = this.handleOpen.bind(this);
+    this.handleToggleVisible = this.handleToggleVisible.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     this.handleClickActive = this.handleClickActive.bind(this);
   }
 
+  handleOpen(e) {
+    const active = parseInt(e.target.getAttribute('count'), 10);
+
+    this.setState({ active });
+    this.handleToggleVisible();
+  }
+
+  handleToggleVisible() {
+    this.setState({ isOpened: !this.state.isOpened });
+  }
+
   handleClick(bool) {
-    const { prison } = this.props;
+    const { camp } = this.props;
     const { active } = this.state;
-    const arr = getList(prison);
+    const arr = getList(camp);
     if (bool) {
       this.setState({
         active: arr.get(active - 1) ? this.state.active - 1 : arr.size - 1
@@ -80,65 +79,37 @@ class PrisonCard extends PureComponent {
       });
     }
   }
+
   handleClickActive(item) {
     this.setState({
       active: item
     });
   }
 
-  handleOpen(e) {
-    const active = parseInt(e.target.getAttribute('count'), 10);
-    this.setState({
-      active
-    });
-    this.handleToggleVisible();
-  }
-  // componentWillReceiveProps({ prison, history, dispatch }) {
-  //   if (prison && history.action === 'POP') {
-  //     const firstYear = prison.get('firstYear');
-  //     const longitude = prison
-  //       .getIn(['features', 0, 'geometry', 'coordinates', 0]);
-  //     const latitude = prison
-  //       .getIn(['features', 0, 'geometry', 'coordinates', 1]);
-  //     dispatch(changeCurrentYear(firstYear));
-  //     dispatch(changeViewport({ longitude, latitude }));
-  //   }
-  // }
-  handleToggleVisible() {
-    this.setState({ isOpened: !this.state.isOpened });
-  }
-
   render() {
-    const { prison, dispatch, lang } = this.props;
-    if (!prison) {
+    const { camp, lang, closeCard } = this.props;
+    if (!camp) {
       return null;
     }
 
-    const activity = prison.get('activity');
-    const markup = prison.getIn(['description', lang]);
+    const activity = camp.get('activity');
+    const markup = camp.getIn(['description', lang]);
 
     return (
       <Container>
         <Top>
-          <h1>{prison.getIn(['title', lang])}</h1>
-          <Location>{prison.getIn(['subTitles', lang])}</Location>
-          <CardButton onClick={dispatch.bind(null, push('/'))}>
+          <h1>{camp.getIn(['title', lang])}</h1>
+          <Location>{camp.getIn(['subTitles', lang])}</Location>
+          <CardButton onClick={closeCard}>
             <img src={close} alt='cross' />
           </CardButton>
         </Top>
         <Left>
           <HalfWidth>
-            <Subtitle>{t('prisonCard.yearsOfOperation')}</Subtitle>
-            <div>{getPeriods(prison)}</div>
-          </HalfWidth>
-          <HalfWidth>
             <Subtitle>{activity ? t('prisonCard.production') : ''}</Subtitle>
             <div>{activity}</div>
           </HalfWidth>
-          <div>
-            <Subtitle>{t('prisonCard.location')}</Subtitle>
-            <div>{prison.getIn(['location', lang])}</div>
-          </div>
+          <YearsOfOperation locations={camp.get('locations')} lang={lang} />
           <PrisonDescription markup={markup} />
         </Left>
         <Right>
@@ -148,7 +119,7 @@ class PrisonCard extends PureComponent {
         <Bottom>
           <Subtitle>Фото и документы</Subtitle>
           <Gallery onMouseDown={this.handleOpen} role='presentation'>
-            {getList(prison).map(item => (
+            {getList(camp).map(item => (
               <img
                 src={item.src}
                 alt={item['description-ru']}
@@ -161,7 +132,7 @@ class PrisonCard extends PureComponent {
             <Slider
               handleToggleVisible={this.handleToggleVisible}
               photo={this.state}
-              list={getList(prison)}
+              list={getList(camp)}
               active={this.state.active}
               handleClick={this.handleClick}
               handleClickActive={this.handleClickActive}
@@ -173,17 +144,14 @@ class PrisonCard extends PureComponent {
   }
 }
 
-PrisonCard.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+CampCard.propTypes = {
+  camp: PropTypes.object,
   lang: PropTypes.string.isRequired,
-  prison: PropTypes.object
+  closeCard: PropTypes.func.isRequired
 };
 
-PrisonCard.defaultProps = {
-  prison: null
+CampCard.defaultProps = {
+  camp: null
 };
 
-export default connect((state, props) => ({
-  lang: langSelector(state),
-  prison: prisonSelector(state, props)
-}))(PrisonCard);
+export default CampCard;

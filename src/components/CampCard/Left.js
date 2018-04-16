@@ -8,11 +8,6 @@ export default styled.div`
   columns: 450px;
   column-gap: 60px;
 
-  & > div:nth-child(2) {
-    padding-right: 0;
-    padding-left: 20px;
-  }
-
   @media (max-width: 425px) {
     display: flex;
     padding-right: 0;

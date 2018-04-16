@@ -1,12 +1,10 @@
 import styled from 'styled-components';
+import Button from '../Button';
 
-export default styled.button`
+export default styled(Button)`
   position: fixed;
   top: 40px;
   right: 40px;
-
-  width: 40px;
-  height: 40px;
   padding: 0;
   border: none;
   margin: 0;
@@ -14,4 +12,12 @@ export default styled.button`
   outline: none;
 
   background-color: transparent;
+
+  &:hover {
+    background-color: #1b2128;
+  }
+
+  &:active {
+    background-color: rgba(93, 106, 119, 0.2);
+  }
 `;

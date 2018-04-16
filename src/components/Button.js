@@ -7,16 +7,15 @@ export default styled.button`
   border: none;
   border-radius: 50%;
   margin: 0;
-
+  cursor: pointer;
   outline: none;
-
   background-color: #14171a;
 
   & img {
-    opacity: .6;
+    opacity: 0.6;
   }
 
   &:hover img {
-    opacity: .8;
+    opacity: 0.8;
   }
 `;

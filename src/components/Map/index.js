@@ -28,7 +28,7 @@ const mapStateToProps = createSelector(
     isShowAllPrisons,
     campsSource
   ) => ({
-    isSlideUp: /\/prison/.test(pathname),
+    isSlideUp: /\/camp/.test(pathname),
     prisons,
     currentYear,
     viewport,

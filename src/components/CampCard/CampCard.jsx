@@ -10,7 +10,7 @@ import close from '../cross.svg';
 // components
 import YearsOfOperation from './YearsOfOperation/YearsOfOperation';
 import PrisonDescription from './PrisonDescription/PrisonDescription';
-// import campChart from './campChart/campChart';
+import PrisonChart from './PrisonChart/PrisonChart';
 // import Gallery from './campDescription/Gallery/Gallery';
 import Slider from './PrisonDescription/Slider/Slider';
 
@@ -116,7 +116,7 @@ class CampCard extends PureComponent {
         </Left>
         <Right>
           <Subtitle>{t('prisonCard.prisonersByYears')}</Subtitle>
-          {/* <PrisonChart features={prison.get('features')} lang={lang} /> */}
+          <PrisonChart locations={camp.get('locations')} lang={lang} />
         </Right>
         <Bottom>
           <Subtitle>Фото и документы</Subtitle>

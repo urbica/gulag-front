@@ -8,16 +8,11 @@ import { margin, width } from './config';
 import Axis from './Axis/Axis';
 import PrisonersArea from './PrisonersArea/PrisonersArea';
 
-const PrisonChart = ({ features, lang }) => {
-  const data = features.toJS().reduce((acc, feature) => {
-    Object.keys(feature.properties).forEach(key => {
-      acc.push({
-        year: +key,
-        prisoners: +feature.properties[key].peoples
-      });
-    });
-    return acc;
-  }, []);
+const PrisonChart = ({ locations, lang }) => {
+  const data = locations.reduce(
+    (acc, location) => [...acc, ...location.get('statistics').toJS()],
+    []
+  );
 
   const firstYear = data[0].year;
   const lastYear = data[data.length - 1].year;
@@ -29,7 +24,7 @@ const PrisonChart = ({ features, lang }) => {
     .range([0, height]);
 
   const xScale = scaleLinear()
-    .domain([0, max(data, d => d.prisoners)])
+    .domain([0, max(data, d => d.prisonersCount)])
     .range([0, width]);
 
   return (
@@ -50,7 +45,7 @@ const PrisonChart = ({ features, lang }) => {
 };
 
 PrisonChart.propTypes = {
-  features: PropTypes.object.isRequired,
+  locations: PropTypes.object.isRequired,
   lang: PropTypes.string.isRequired
 };
 

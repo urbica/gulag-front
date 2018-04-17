@@ -17,11 +17,11 @@ class PrisonersArea extends PureComponent {
       .data(data)
       .enter()
       .append('rect')
-      .attr('y', (d) => {
+      .attr('y', d => {
         const date = new Date(d.year, 0, 1);
         return yScale(date) + 1;
       })
-      .attr('width', d => xScale(d.prisoners))
+      .attr('width', d => xScale(d.prisonersCount))
       .attr('height', 25);
 
     this.prisonersLine = this.g
@@ -30,14 +30,14 @@ class PrisonersArea extends PureComponent {
       .enter()
       .append('line')
       .attr('fill', 'none')
-      .attr('stroke', d => (d.prisoners !== 0 ? '#fff' : 'transparent'))
-      .attr('x1', d => xScale(d.prisoners))
-      .attr('y1', (d) => {
+      .attr('stroke', d => (d.prisonersCount !== 0 ? '#fff' : 'transparent'))
+      .attr('x1', d => xScale(d.prisonersCount))
+      .attr('y1', d => {
         const date = new Date(d.year, 0, 1);
         return yScale(date) + 1;
       })
-      .attr('x2', d => xScale(d.prisoners))
-      .attr('y2', (d) => {
+      .attr('x2', d => xScale(d.prisonersCount))
+      .attr('y2', d => {
         const date = new Date(d.year, 0, 1);
         return yScale(date) + 26;
       });
@@ -47,9 +47,12 @@ class PrisonersArea extends PureComponent {
       .data(data)
       .enter()
       .append('text')
-      .text(({ prisoners }) => (prisoners !== 0 ? splitDigits(prisoners) : ''))
-      .attr('x', d => xScale(d.prisoners) + 10)
-      .attr('y', (d) => {
+      .text(
+        ({ prisonersCount }) =>
+          prisonersCount !== 0 ? splitDigits(prisonersCount) : ''
+      )
+      .attr('x', d => xScale(d.prisonersCount) + 10)
+      .attr('y', d => {
         const date = new Date(d.year, 0, 1);
         return yScale(date) + 19;
       });
@@ -60,8 +63,8 @@ class PrisonersArea extends PureComponent {
       .data(data)
       .enter()
       .append('text')
-      .text((d) => {
-        if (d.prisoners === 0) {
+      .text(d => {
+        if (d.prisonersCount === 0) {
           if (this.props.lang === 'ru') {
             return 'нет данных';
           }
@@ -69,7 +72,7 @@ class PrisonersArea extends PureComponent {
         }
         return '';
       })
-      .attr('y', (d) => {
+      .attr('y', d => {
         const date = new Date(d.year, 0, 1);
         return yScale(date);
       });
@@ -87,11 +90,11 @@ class PrisonersArea extends PureComponent {
       .data(data)
       .enter()
       .append('rect')
-      .attr('y', (d) => {
+      .attr('y', d => {
         const date = new Date(d.year, 0, 1);
         return yScale(date) + 1;
       })
-      .attr('width', d => xScale(d.prisoners))
+      .attr('width', d => xScale(d.prisonersCount))
       .attr('height', 25);
 
     this.prisonersLine = this.g
@@ -100,14 +103,14 @@ class PrisonersArea extends PureComponent {
       .enter()
       .append('line')
       .attr('fill', 'none')
-      .attr('stroke', d => (d.prisoners !== 0 ? '#fff' : 'transparent'))
-      .attr('x1', d => xScale(d.prisoners))
-      .attr('y1', (d) => {
+      .attr('stroke', d => (d.prisonersCount !== 0 ? '#fff' : 'transparent'))
+      .attr('x1', d => xScale(d.prisonersCount))
+      .attr('y1', d => {
         const date = new Date(d.year, 0, 1);
         return yScale(date) + 1;
       })
-      .attr('x2', d => xScale(d.prisoners))
-      .attr('y2', (d) => {
+      .attr('x2', d => xScale(d.prisonersCount))
+      .attr('y2', d => {
         const date = new Date(d.year, 0, 1);
         return yScale(date) + 26;
       });
@@ -117,9 +120,12 @@ class PrisonersArea extends PureComponent {
       .data(data)
       .enter()
       .append('text')
-      .text(({ prisoners }) => (prisoners !== 0 ? splitDigits(prisoners) : ''))
-      .attr('x', d => xScale(d.prisoners) + 10)
-      .attr('y', (d) => {
+      .text(
+        ({ prisonersCount }) =>
+          prisonersCount !== 0 ? splitDigits(prisonersCount) : ''
+      )
+      .attr('x', d => xScale(d.prisonersCount) + 10)
+      .attr('y', d => {
         const date = new Date(d.year, 0, 1);
         return yScale(date) + 19;
       });
@@ -130,8 +136,8 @@ class PrisonersArea extends PureComponent {
       .data(data)
       .enter()
       .append('text')
-      .text((d) => {
-        if (d.prisoners === 0) {
+      .text(d => {
+        if (d.prisonersCount === 0) {
           if (this.props.lang === 'ru') {
             return 'нет данных';
           }
@@ -139,7 +145,7 @@ class PrisonersArea extends PureComponent {
         }
         return '';
       })
-      .attr('y', (d) => {
+      .attr('y', d => {
         const date = new Date(d.year, 0, 1);
         return yScale(date);
       });
@@ -148,7 +154,7 @@ class PrisonersArea extends PureComponent {
   render() {
     return (
       <Container
-        innerRef={(ref) => {
+        innerRef={ref => {
           this.g = select(ref);
         }}
       />
@@ -161,7 +167,7 @@ PrisonersArea.propTypes = {
   yScale: PropTypes.func,
   data: PropTypes.arrayOf(
     PropTypes.shape({
-      prisoners: PropTypes.number,
+      prisonersCount: PropTypes.number,
       year: PropTypes.number
     })
   )

@@ -87,12 +87,12 @@ class CampCard extends PureComponent {
   }
 
   render() {
-    const { camp, lang, closeCard } = this.props;
+    const { camp, lang, closeCard, activities } = this.props;
     if (!camp) {
       return null;
     }
 
-    const activity = camp.get('activity');
+    const activity = camp.get('activityId');
     const markup = camp.getIn(['description', lang]);
 
     return (
@@ -107,7 +107,9 @@ class CampCard extends PureComponent {
         <Left>
           <HalfWidth>
             <Subtitle>{activity ? t('prisonCard.production') : ''}</Subtitle>
-            <div>{activity}</div>
+            <div>
+              {activities.getIn([camp.get('activityId'), 'title', lang])}
+            </div>
           </HalfWidth>
           <YearsOfOperation locations={camp.get('locations')} lang={lang} />
           <PrisonDescription markup={markup} />
@@ -147,11 +149,13 @@ class CampCard extends PureComponent {
 CampCard.propTypes = {
   camp: PropTypes.object,
   lang: PropTypes.string.isRequired,
-  closeCard: PropTypes.func.isRequired
+  closeCard: PropTypes.func.isRequired,
+  activities: PropTypes.object
 };
 
 CampCard.defaultProps = {
-  camp: null
+  camp: null,
+  activities: null
 };
 
 export default CampCard;

@@ -5,6 +5,7 @@ export const langSelector = state => state.getIn(['intl', 'locale']);
 export const campsSelector = state => state.getIn(['data', 'camps']);
 export const typesSelector = state => state.getIn(['data', 'types']);
 export const periodsSelector = state => state.getIn(['data', 'periods']);
+export const activitiesSelector = state => state.getIn(['data', 'activities']);
 export const currentYearSelector = state => state.getIn(['ui', 'currentYear']);
 export const viewportSelector = state => state.getIn(['ui', 'viewport']);
 export const isShowAllPrisonsSelector = state =>

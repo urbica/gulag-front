@@ -30,6 +30,7 @@ const TOGGLE_DEMO = 'TOGGLE_DEMO';
 const MENU_TOGGLED = 'MENU_TOGGLED';
 const CAMP_FILTERS_TOGGLED = 'CAMP_FILTERS_TOGGLED';
 const CAMP_FILTER_TOGGLED = 'CAMP_FILTER_TOGGLED';
+const CLOSE_MENUS = 'CLOSE_MENUS';
 
 export const changeCurrentYear = year => ({
   type: CURRENT_YEAR_CHANGED,
@@ -47,6 +48,7 @@ export const toggleCampTypeFilters = id => ({
   type: CAMP_FILTER_TOGGLED,
   payload: id
 });
+export const closeMenus = () => ({ type: CLOSE_MENUS });
 
 export default (state = initState, { type, payload }) => {
   switch (type) {
@@ -78,6 +80,8 @@ export default (state = initState, { type, payload }) => {
         ['campTypeFilters', payload],
         !state.getIn(['campTypeFilters', payload])
       );
+    case CLOSE_MENUS:
+      return state.set('isMenuOpen', false).set('isCampFiltersOpen', false);
     default:
       return state;
   }

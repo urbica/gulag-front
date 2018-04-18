@@ -8,7 +8,7 @@ import {
   isShowAllPrisonsSelector,
   prisonSourceSelector
 } from '../App/selectors';
-import { changeViewport } from '../App/reducers/uiReducer';
+import { changeViewport, closeMenus } from '../App/reducers/uiReducer';
 
 import Map from './Map';
 
@@ -35,6 +35,7 @@ const mapDispatchToProps = dispatch => ({
       longitude: lngLat.lng
     };
 
+    dispatch(closeMenus());
     dispatch(changeViewport(newViewport));
     dispatch(push(`/camp${id}`));
   }

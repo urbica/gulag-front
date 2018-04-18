@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 
 import { t } from '../../intl/helper';
 
@@ -17,7 +18,12 @@ import Title from './Title';
 
 const Menu = ({ dispatch, isDataLoading }) => (
   <Container in={!isDataLoading} timeout={400}>
-    <Button onClick={dispatch.bind(null, toggleMenu())}>
+    <Button
+      onClick={() => {
+        dispatch(push('/'));
+        dispatch(toggleMenu());
+      }}
+    >
       <img src={menu} alt='menu' />
     </Button>
     <Title>{t('menu.title')}</Title>

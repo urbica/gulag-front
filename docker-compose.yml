@@ -1,48 +1,48 @@
 version: '3.4'
 
 services:
-  gulag-next-front:
-      image: gitlab.urbica.co:5001/gulag/gulagmap:next-version
-      container_name: gulag-next-front
-      restart: always
-      environment:
-        - VIRTUAL_HOST=gulag-next.urbica.co
-        - LETSENCRYPT_HOST=gulag-next.urbica.co
-        - LETSENCRYPT_EMAIL=hello@urbica.co
-#      ports:
-#        - 4000:80
-      volumes:
-        - ./nginx.conf:/etc/nginx/conf.d/default.conf
-        - ./photos:/usr/share/nginx/photos
-      depends_on:
-        - gulag-next-api
+  gulag-front:
+    image: gitlab.urbica.co:5001/gulag/front:dev
+    container_name: gulag-front
+    restart: always
+    environment:
+      - VIRTUAL_HOST=gulag.urbica.co
+      - LETSENCRYPT_HOST=gulag.urbica.co
+      - LETSENCRYPT_EMAIL=hello@urbica.co
+#    ports:
+#      - 4000:80
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./photos:/usr/share/nginx/photos
+    depends_on:
+      - gulag-api
 
-  gulag-next-admin:
-      image: gitlab.urbica.co:5001/gulag/gulag:refactoring
-      container_name: gulag-next-admin
-      restart: always
-      depends_on:
-        - gulag-next-api
+  gulag-admin:
+    image: gitlab.urbica.co:5001/gulag/admin:dev
+    container_name: gulag-admin
+    restart: always
+    depends_on:
+      - gulag-api
 
-  gulag-next-api:
-    image: gitlab.urbica.co:5001/device25/gulag-workshop:master
-    container_name: gulag-next-api
+  gulag-api:
+    image: gitlab.urbica.co:5001/gulag/api:master
+    container_name: gulag-api
     restart: always
     env_file:
       - .env
     volumes:
       - ./photos:/usr/src/app/photos
     depends_on:
-      - gulag-next-db
+      - gulag-db
 
-  gulag-next-db:
-      image: mdillon/postgis:9.6-alpine
-      container_name: gulag-next-db
-      restart: always
-      environment:
-        - POSTGRES_DB=db
-      volumes:
-        - ./db:/var/lib/postgresql/data
+  gulag-db:
+    image: mdillon/postgis:9.6-alpine
+    container_name: gulag-db
+    restart: always
+    environment:
+      - POSTGRES_DB=db
+    volumes:
+      - ./db:/var/lib/postgresql/data
 
 networks:
   default:

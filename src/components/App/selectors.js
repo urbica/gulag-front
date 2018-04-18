@@ -1,6 +1,8 @@
 import Immutable, { Map, List } from 'immutable';
 import { createSelector } from 'reselect';
 
+import findMaxPrisoners from '../../utils/findMaxPrisoners';
+
 export const langSelector = state => state.getIn(['intl', 'locale']);
 export const campsSelector = state => state.getIn(['data', 'camps']);
 export const typesSelector = state => state.getIn(['data', 'types']);
@@ -49,9 +51,9 @@ export const prisonSourceSelector = createSelector(
   filteredCampsSelector,
   langSelector,
   campTypeFiltersSelector,
-  // isShowAllPrisonsSelector,
+  isShowAllPrisonsSelector,
   currentYearSelector,
-  (camps, lang, campTypeFilters, /* isShowAllPrisons, */ currentYear) => {
+  (camps, lang, campTypeFilters, isShowAllCamps, currentYear) => {
     const features = camps.reduce((accCamps, camp) => {
       const locations = camp
         .get('locations')
@@ -59,6 +61,25 @@ export const prisonSourceSelector = createSelector(
           const statistics = location
             .get('statistics')
             .find(stat => stat.get('year') === currentYear);
+
+          if (isShowAllCamps) {
+            const properties = Map({
+              campId: camp.get('id'),
+              ruName: camp.getIn(['title', 'ru']),
+              enName: camp.getIn(['title', 'en']),
+              deName: camp.getIn(['title', 'de']),
+              typeId: camp.get('typeId'),
+              peoples: findMaxPrisoners(location.get('statistics'))
+            });
+
+            const feature = Map({
+              type: 'Feature',
+              geometry: location.get('geometry'),
+              properties
+            });
+
+            return accLocations.push(feature);
+          }
 
           if (!statistics) {
             return accLocations;

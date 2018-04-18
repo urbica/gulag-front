@@ -3,7 +3,6 @@ import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 
 import {
-  campsSelector,
   currentYearSelector,
   viewportSelector,
   isShowAllPrisonsSelector,
@@ -15,21 +14,12 @@ import Map from './Map';
 
 const mapStateToProps = createSelector(
   state => state.getIn(['router']).location.pathname,
-  campsSelector,
   currentYearSelector,
   viewportSelector,
   isShowAllPrisonsSelector,
   prisonSourceSelector,
-  (
-    pathname,
-    prisons,
-    currentYear,
-    viewport,
-    isShowAllPrisons,
-    campsSource
-  ) => ({
+  (pathname, currentYear, viewport, isShowAllPrisons, campsSource) => ({
     isSlideUp: /\/camp/.test(pathname),
-    prisons,
     currentYear,
     viewport,
     isShowAllPrisons,

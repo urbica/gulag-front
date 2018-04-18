@@ -140,7 +140,6 @@ class Map extends PureComponent {
 
 Map.propTypes = {
   isSlideUp: PropTypes.bool,
-  mapStyle: PropTypes.object,
   viewport: PropTypes.object.isRequired,
   campsSource: PropTypes.object.isRequired,
   changeViewportHandler: PropTypes.func.isRequired,
@@ -148,8 +147,7 @@ Map.propTypes = {
 };
 
 Map.defaultProps = {
-  isSlideUp: false,
-  mapStyle: null
+  isSlideUp: false
 };
 
 export default Map;

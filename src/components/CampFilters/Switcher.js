@@ -1,13 +1,7 @@
 import styled from 'styled-components';
 
-const colors = {
-  1: '235,66,0',
-  2: '204,145,51',
-  3: '42,167,148',
-  4: '13,85,255',
-  5: '184,88,107',
-  6: '157,60,255'
-};
+// config
+import campColors from '../../config/campsColors';
 
 const disableColor = '122,133,126';
 
@@ -20,7 +14,7 @@ export default styled.div`
   border-radius: 11px;
 
   background-color: rgba(
-    ${({ isActive, typeId }) => (isActive ? colors[typeId] : disableColor)},
+    ${({ isActive, typeId }) => (isActive ? campColors[typeId] : disableColor)},
     0.2
   );
 
@@ -33,7 +27,8 @@ export default styled.div`
 
     border-radius: 50%;
     background-color: rgba(
-      ${({ isActive, typeId }) => (isActive ? colors[typeId] : disableColor)},
+      ${({ isActive, typeId }) =>
+        isActive ? campColors[typeId] : disableColor},
       1
     );
     transform: translateX(${({ isActive }) => (isActive ? '18px' : 0)});

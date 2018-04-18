@@ -29,7 +29,7 @@ const filteredCampsSelector = createSelector(
   campTypeFiltersSelector,
   (camps, lang, campTypeFilters) => {
     if (!camps) {
-      return null;
+      return List();
     }
 
     return camps.filter(camp => {
@@ -51,10 +51,6 @@ export const prisonSourceSelector = createSelector(
   // isShowAllPrisonsSelector,
   currentYearSelector,
   (camps, lang, campTypeFilters, /* isShowAllPrisons, */ currentYear) => {
-    if (!camps) {
-      return emptyGeoJSONSource;
-    }
-
     const features = camps.reduce((accCamps, camp) => {
       const locations = camp
         .get('locations')

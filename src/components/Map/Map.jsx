@@ -66,7 +66,10 @@ class Map extends PureComponent {
     if (e.features.length > 1) {
       const div = document.createElement('div');
       ReactDom.render(
-        <Popup features={e.features} onClick={this.props.openCampCard} />,
+        <Popup
+          features={e.features}
+          onClick={this.props.openCampCard.bind(null, e.lngLat)}
+        />,
         div
       );
 
@@ -79,7 +82,7 @@ class Map extends PureComponent {
         .setDOMContent(div)
         .addTo(this.mapGlRef.current.getMap());
     } else {
-      this.props.openCampCard(e.features[0].properties.campId);
+      this.props.openCampCard(e.lngLat, e.features[0].properties.campId);
     }
   }
 

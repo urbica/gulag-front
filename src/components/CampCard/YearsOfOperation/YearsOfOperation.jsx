@@ -15,7 +15,7 @@ const YearsOfOperation = ({ locations, lang }) => (
     {locations
       .sort((a, b) => a.get('orderIndex') > b.get('orderIndex'))
       .map(location => {
-        if (location.get('statistics')) {
+        if (location.get('statistics').size > 0) {
           let period;
           if (location.get('statistics').size === 1) {
             period = location.getIn(['statistics', 0, 'year']);

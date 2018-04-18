@@ -39,7 +39,15 @@ const mapStateToProps = createSelector(
 
 const mapDispatchToProps = dispatch => ({
   changeViewportHandler: newViewport => dispatch(changeViewport(newViewport)),
-  openCampCard: id => dispatch(push(`/camp${id}`))
+  openCampCard: (lngLat, id) => {
+    const newViewport = {
+      latitude: lngLat.lat,
+      longitude: lngLat.lng
+    };
+
+    dispatch(changeViewport(newViewport));
+    dispatch(push(`/camp${id}`));
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Map);

@@ -9,10 +9,12 @@ import Axis from './Axis/Axis';
 import PrisonersArea from './PrisonersArea/PrisonersArea';
 
 const PrisonChart = ({ locations, lang }) => {
-  const data = locations.reduce(
-    (acc, location) => [...acc, ...location.get('statistics').toJS()],
-    []
-  );
+  const data = locations
+    .reduce(
+      (acc, location) => [...acc, ...location.get('statistics').toJS()],
+      []
+    )
+    .sort((a, b) => a.year > b.year);
 
   const firstYear = data[0].year;
   const lastYear = data[data.length - 1].year;

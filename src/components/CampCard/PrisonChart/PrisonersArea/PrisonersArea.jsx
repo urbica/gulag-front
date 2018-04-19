@@ -30,7 +30,13 @@ class PrisonersArea extends PureComponent {
       .enter()
       .append('line')
       .attr('fill', 'none')
-      .attr('stroke', d => (d.prisonersCount !== 0 ? '#fff' : 'transparent'))
+      .attr(
+        'stroke',
+        d =>
+          d.prisonersCount !== 0 && d.prisonersCount !== null
+            ? '#fff'
+            : 'transparent'
+      )
       .attr('x1', d => xScale(d.prisonersCount))
       .attr('y1', d => {
         const date = new Date(d.year, 0, 1);
@@ -49,7 +55,9 @@ class PrisonersArea extends PureComponent {
       .append('text')
       .text(
         ({ prisonersCount }) =>
-          prisonersCount !== 0 ? splitDigits(prisonersCount) : ''
+          prisonersCount !== 0 && prisonersCount !== null
+            ? splitDigits(prisonersCount)
+            : ''
       )
       .attr('x', d => xScale(d.prisonersCount) + 10)
       .attr('y', d => {
@@ -63,8 +71,8 @@ class PrisonersArea extends PureComponent {
       .data(data)
       .enter()
       .append('text')
-      .text(d => {
-        if (d.prisonersCount === 0) {
+      .text(({ prisonersCount }) => {
+        if (prisonersCount === 0 || prisonersCount === null) {
           if (this.props.lang === 'ru') {
             return 'нет данных';
           }
@@ -103,7 +111,13 @@ class PrisonersArea extends PureComponent {
       .enter()
       .append('line')
       .attr('fill', 'none')
-      .attr('stroke', d => (d.prisonersCount !== 0 ? '#fff' : 'transparent'))
+      .attr(
+        'stroke',
+        d =>
+          d.prisonersCount !== 0 && d.prisonersCount !== null
+            ? '#fff'
+            : 'transparent'
+      )
       .attr('x1', d => xScale(d.prisonersCount))
       .attr('y1', d => {
         const date = new Date(d.year, 0, 1);
@@ -122,7 +136,9 @@ class PrisonersArea extends PureComponent {
       .append('text')
       .text(
         ({ prisonersCount }) =>
-          prisonersCount !== 0 ? splitDigits(prisonersCount) : ''
+          prisonersCount !== 0 && prisonersCount !== null
+            ? splitDigits(prisonersCount)
+            : ''
       )
       .attr('x', d => xScale(d.prisonersCount) + 10)
       .attr('y', d => {
@@ -136,8 +152,8 @@ class PrisonersArea extends PureComponent {
       .data(data)
       .enter()
       .append('text')
-      .text(d => {
-        if (d.prisonersCount === 0) {
+      .text(({ prisonersCount }) => {
+        if (prisonersCount === 0 || prisonersCount === null) {
           if (this.props.lang === 'ru') {
             return 'нет данных';
           }

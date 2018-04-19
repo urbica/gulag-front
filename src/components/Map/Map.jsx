@@ -98,7 +98,7 @@ class Map extends PureComponent {
       <Container slideUp={isSlideUp}>
         <MapGL
           ref={this.mapGlRef}
-          style={{ width: '100%', height: '100vh' }}
+          style={{ width: '100%', height: '100%' }}
           accessToken={mapToken}
           mapStyle='mapbox://styles/gulagmap/cj8bt4qbw7kbo2rry4oft6e5g'
           onViewportChange={changeViewportHandler}

@@ -88,12 +88,14 @@ class Map extends PureComponent {
 
   onLayerClick(e) {
     if (e.features.length > 1) {
+      const openCampCardHandler = campId => {
+        this.popup.remove();
+        this.props.openCampCard(e.lngLat, campId);
+      };
+
       const div = document.createElement('div');
       ReactDom.render(
-        <Popup
-          features={e.features}
-          onClick={this.props.openCampCard.bind(null, e.lngLat)}
-        />,
+        <Popup features={e.features} onClick={openCampCardHandler} />,
         div
       );
 

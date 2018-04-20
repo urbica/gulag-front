@@ -6,10 +6,6 @@ export default styled(Button)`
   top: 0;
   right: 0;
 
-  &:hover {
-    background-color: #1b2128;
-  }
-
   &:active {
     background-color: rgba(93, 106, 119, 0.2);
   }

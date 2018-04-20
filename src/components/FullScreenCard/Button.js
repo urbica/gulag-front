@@ -8,14 +8,8 @@ export default styled(Button)`
   padding: 0;
   border: none;
   margin: 0;
-
   outline: none;
-
   background-color: transparent;
-
-  &:hover {
-    background-color: #1b2128;
-  }
 
   &:active {
     background-color: rgba(93, 106, 119, 0.2);

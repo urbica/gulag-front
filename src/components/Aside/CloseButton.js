@@ -9,11 +9,7 @@ export default styled(Button)`
   border: none;
   margin: 0;
   background-color: transparent;
-  transition: 0.3s;
-
-  &:hover {
-    background-color: #1b2128;
-  }
+  transition: 0.5s;
 
   &:active {
     background-color: rgba(93, 106, 119, 0.2);

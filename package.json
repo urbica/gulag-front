@@ -43,8 +43,9 @@
     "standard-version": "4.3.0"
   },
   "dependencies": {
-    "@urbica/react-map-gl": "0.6.0-beta.10",
+    "@urbica/react-map-gl": "0.6.0-beta.11",
     "commonmark": "0.28.1",
+    "create-immutable-selector": "1.0.0",
     "d3-array": "1.2.1",
     "d3-axis": "1.0.8",
     "d3-drag": "1.2.1",
@@ -56,9 +57,9 @@
     "mapbox-gl": "0.44.2",
     "normalize.css": "8.0.0",
     "prop-types": "15.6.1",
-    "react": "16.3.1",
+    "react": "16.3.2",
     "react-addons-css-transition-group": "15.6.2",
-    "react-dom": "16.3.1",
+    "react-dom": "16.3.2",
     "react-intl": "2.4.0",
     "react-intl-redux": "0.7.0",
     "react-redux": "5.0.7",
@@ -70,7 +71,7 @@
     "redux-logger": "3.0.6",
     "redux-saga": "0.16.0",
     "reselect": "3.0.1",
-    "styled-components": "3.2.5",
+    "styled-components": "3.2.6",
     "styled-transition-group": "1.0.0"
   },
   "proxy": "https://gulag.urbica.co"

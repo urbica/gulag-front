@@ -134,6 +134,83 @@ export default Immutable.fromJS({
       'text-color': '#fff'
     },
     filter: ['==', 'campId', '']
+  },
+  ussr: {
+    id: 'USSR',
+    type: 'fill',
+    source: 'composite',
+    'source-layer': 'USSR_new-8b73vi',
+    paint: {
+      'fill-color': '#1B2128',
+      'fill-antialias': false
+    },
+    filter: ['all', ['<=', 'year_start', 1937], ['>=', 'year_end', 1937]]
+  },
+  chukotka: {
+    id: 'chukotka',
+    type: 'fill',
+    source: 'composite',
+    'source-layer': 'chukotka_patch-4b7lx1',
+    paint: {
+      'fill-color': '#1b2128',
+      'fill-opacity': 1
+    }
+  },
+  cities: {
+    id: 'cities',
+    type: 'symbol',
+    metadata: {
+      'mapbox:group': 'c6ab0d812282617f74a5b31640cfe7a8'
+    },
+    source: 'composite',
+    'source-layer': 'allCities-difd7x',
+    layout: {
+      'text-size': {
+        base: 1,
+        stops: [[0, 8], [4, 12], [6, 16], [12, 22], [22, 28]]
+      },
+      'text-transform': 'none',
+      'text-font': ['PT Sans Regular'],
+      'text-padding': 1,
+      'text-offset': {
+        base: 1,
+        stops: [[0, [0, -0.1]], [6, [0, -0.3]]]
+      },
+      'text-anchor': 'bottom',
+      'text-field': '{historical_name}',
+      'icon-padding': 1,
+      'icon-ignore-placement': true
+    },
+    paint: {
+      'text-color': '#6A748C',
+      'icon-opacity': {
+        base: 1,
+        stops: [[1, 1], [7, 1], [7.5, 0]]
+      }
+    },
+    filter: ['all', ['==', 'year', 1937]]
+  },
+  citiesDots: {
+    id: 'city all last copy',
+    type: 'circle',
+    metadata: {
+      'mapbox:group': 'c6ab0d812282617f74a5b31640cfe7a8'
+    },
+    source: 'composite',
+    'source-layer': 'allCities-difd7x',
+    layout: {},
+    paint: {
+      'circle-color': '#6A748C',
+      'circle-radius': {
+        base: 1,
+        stops: [[1, 1], [4, 1.3], [22, 1.3]]
+      },
+      'circle-opacity': {
+        base: 1,
+        stops: [[0, 1], [7, 1], [7.5, 0]]
+      }
+    },
+    filter: ['all', ['==', 'year', 1937]]
   }
   // prisonsNames_active: {
   //   id: 'prisonsNames_active',

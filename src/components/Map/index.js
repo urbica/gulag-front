@@ -6,7 +6,8 @@ import {
   currentYearSelector,
   viewportSelector,
   isShowAllPrisonsSelector,
-  prisonSourceSelector
+  prisonSourceSelector,
+  langSelector
 } from '../App/selectors';
 import { changeViewport, closeMenus } from '../App/reducers/uiReducer';
 
@@ -18,12 +19,14 @@ const mapStateToProps = createSelector(
   viewportSelector,
   isShowAllPrisonsSelector,
   prisonSourceSelector,
-  (pathname, currentYear, viewport, isShowAllPrisons, campsSource) => ({
+  langSelector,
+  (pathname, currentYear, viewport, isShowAllPrisons, campsSource, lang) => ({
     isSlideUp: /\/camp/.test(pathname),
     currentYear,
     viewport,
     isShowAllPrisons,
-    campsSource
+    campsSource,
+    lang
   })
 );
 

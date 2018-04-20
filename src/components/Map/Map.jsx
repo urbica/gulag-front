@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import ReactDom from 'react-dom';
 import PropTypes from 'prop-types';
+import Immutable from 'immutable';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import MapGL, { Source, Layer } from '@urbica/react-map-gl';
@@ -27,6 +28,29 @@ import Container from './Container';
 // }
 
 class Map extends PureComponent {
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const ussrFilter = Immutable.List([
+      'all',
+      ['<=', 'year_start', nextProps.currentYear],
+      ['>=', 'year_end', nextProps.currentYear]
+    ]);
+    const citiesFilter = Immutable.List([
+      'all',
+      ['==', 'year', nextProps.currentYear]
+    ]);
+    const citiesNames = `{historical_name${
+      nextProps.lang === 'ru' ? '' : '_en'
+    }}`;
+
+    const updatedLayers = prevState.layers
+      .setIn(['ussr', 'filter'], ussrFilter)
+      .setIn(['cities', 'filter'], citiesFilter)
+      .setIn(['citiesDots', 'filter'], citiesFilter)
+      .setIn(['cities', 'layout', 'text-field'], citiesNames);
+
+    return { layers: updatedLayers };
+  }
+
   constructor(props) {
     super(props);
 
@@ -94,6 +118,8 @@ class Map extends PureComponent {
       campsSource
     } = this.props;
 
+    console.log(this.state.layers.getIn(['ussr', 'filter']).toArray());
+
     return (
       <Container slideUp={isSlideUp}>
         <MapGL
@@ -105,6 +131,13 @@ class Map extends PureComponent {
           {...viewport.toJS()}
         >
           <Source id='camps' source={campsSource} />
+          <Layer layer={this.state.layers.get('ussr')} before='waterway-z3' />
+          <Layer
+            layer={this.state.layers.get('chukotka')}
+            before='waterway-z3'
+          />
+          <Layer layer={this.state.layers.get('cities')} />
+          <Layer layer={this.state.layers.get('citiesDots')} />
           <Layer layer={this.state.layers.get('camps')} />
           <Layer
             layer={this.state.layers.get('campsHalo')}

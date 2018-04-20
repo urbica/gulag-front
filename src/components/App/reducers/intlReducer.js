@@ -14,10 +14,12 @@ const locales = {
 const { language, languages } = window.navigator;
 let defaultLocale = locales[language] ? locales[language] : enLocale;
 
-for (let i = 0; i < languages.length; i += 1) {
-  if (locales[languages[i]]) {
-    defaultLocale = locales[languages[i]];
-    break;
+if (languages) {
+  for (let i = 0; i < languages.length; i += 1) {
+    if (locales[languages[i]]) {
+      defaultLocale = locales[languages[i]];
+      break;
+    }
   }
 }
 

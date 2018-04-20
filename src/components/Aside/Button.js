@@ -5,12 +5,14 @@ export default styled.button`
   padding: 0;
   border: none;
   margin-bottom: 40px;
-
   font-size: 20px;
   font-weight: 900;
   color: #e2f3e3;
-
   background-color: transparent;
-
   opacity: 0.8;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
 `;

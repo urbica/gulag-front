@@ -14,7 +14,15 @@ const PrisonChart = ({ locations, lang }) => {
       (acc, location) => [...acc, ...location.get('statistics').toJS()],
       []
     )
-    .sort((a, b) => a.year > b.year);
+    .sort((a, b) => {
+      if (a.year < b.year) {
+        return -1;
+      }
+      if (a.year > b.year) {
+        return 1;
+      }
+      return 0;
+    });
 
   const firstYear = data[0].year;
   const lastYear = data[data.length - 1].year;

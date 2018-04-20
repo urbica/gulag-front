@@ -118,29 +118,31 @@ class CampCard extends PureComponent {
           <Subtitle>{t('prisonCard.prisonersByYears')}</Subtitle>
           <PrisonChart locations={camp.get('locations')} lang={lang} />
         </Right>
-        <Bottom>
-          <Subtitle>{t('prisonCard.photo')}</Subtitle>
-          <Gallery onMouseDown={this.handleOpen} role='presentation'>
-            {getList(camp).map(item => (
-              <img
-                src={item.src}
-                alt={item['description-ru']}
-                count={item.count}
-                key={item.count}
+        {camp.get('photos').size > 0 && (
+          <Bottom>
+            <Subtitle>{t('prisonCard.photo')}</Subtitle>
+            <Gallery onMouseDown={this.handleOpen} role='presentation'>
+              {getList(camp).map(item => (
+                <img
+                  src={item.src}
+                  alt={item['description-ru']}
+                  count={item.count}
+                  key={item.count}
+                />
+              ))}
+            </Gallery>
+            <section>
+              <Slider
+                handleToggleVisible={this.handleToggleVisible}
+                photo={this.state}
+                list={getList(camp)}
+                active={this.state.active}
+                handleClick={this.handleClick}
+                handleClickActive={this.handleClickActive}
               />
-            ))}
-          </Gallery>
-          <section>
-            <Slider
-              handleToggleVisible={this.handleToggleVisible}
-              photo={this.state}
-              list={getList(camp)}
-              active={this.state.active}
-              handleClick={this.handleClick}
-              handleClickActive={this.handleClickActive}
-            />
-          </section>
-        </Bottom>
+            </section>
+          </Bottom>
+        )}
       </Container>
     );
   }

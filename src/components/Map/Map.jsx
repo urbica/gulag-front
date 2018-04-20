@@ -118,8 +118,6 @@ class Map extends PureComponent {
       campsSource
     } = this.props;
 
-    console.log(this.state.layers.getIn(['ussr', 'filter']).toArray());
-
     return (
       <Container slideUp={isSlideUp}>
         <MapGL

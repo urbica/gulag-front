@@ -124,7 +124,7 @@ class CampCard extends PureComponent {
             <Gallery onMouseDown={this.handleOpen} role='presentation'>
               {getList(camp).map(item => (
                 <img
-                  src={item.src}
+                  src={`/${item.src}`}
                   alt={item['description-ru']}
                   count={item.count}
                   key={item.count}

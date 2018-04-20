@@ -1,7 +1,7 @@
 import transition from 'styled-transition-group';
 
 export default transition.div`
-  position: absolute;
+  position: fixed;
   top: 28px;
   left: 23px;
 

@@ -5,7 +5,7 @@ export default styled.button`
   border: none;
   border-bottom: ${({ isActive }) => (isActive ? '5px' : 0)} solid
     rgba(226, 243, 227, 0.8);
-  margin: 0 25px 0 0;
+  margin: 0 25px 50px 0;
 
   font-size: 20px;
   font-weight: 900;

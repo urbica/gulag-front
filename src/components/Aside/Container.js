@@ -3,7 +3,7 @@ import transition from 'styled-transition-group';
 export default transition.div.attrs({
   timeout: 250
 })`
-  position: absolute;
+  position: fixed;
   left: ${({ isMenuOpen }) => (isMenuOpen ? 0 : '-400px')};
 
   display: flex;
@@ -12,9 +12,12 @@ export default transition.div.attrs({
 
   width: 400px;
   height: 100%;
-  padding: 50px 40px;
+  padding: 50px 40px 0px;
 
   background-color: #14171a;
+
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
 
   &:enter {
     left: -400px;

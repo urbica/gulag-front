@@ -1,7 +1,7 @@
 import transition from 'styled-transition-group';
 
 export default transition.div`
-  position: absolute;
+  position: fixed;
   left: ${({ isCampFiltersOpen }) => (isCampFiltersOpen ? 0 : '-400px')};
 
   width: 400px;
@@ -11,7 +11,8 @@ export default transition.div`
   background-color: #14171a;
 
   overflow: scroll;
-  
+  -webkit-overflow-scrolling: touch;
+
   &:enter {
     left: -400px;
   }

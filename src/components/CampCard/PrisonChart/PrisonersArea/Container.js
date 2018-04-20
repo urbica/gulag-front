@@ -14,11 +14,14 @@ export default styled.g`
   }
 
   & text {
-    fill: #fff;
+    fill: #e2f3e3;
+    opacity: 0.8;
   }
 
   & g text {
     opacity: 0.2;
+    fill: #e2f3e3;
+    color: #e2f3e3;
     transform: translate(10px, 18px);
   }
 `;

@@ -7,6 +7,7 @@ export default {
     'prisonCard.location': 'Location',
     'prisonCard.prisonersByYears': 'Number of prisoners by years',
     'prisonCard.production': 'Production performance',
+    'prisonCard.photo': 'Photo and documents',
     'aboutCard.heading': 'About',
     'aside.search': 'Search',
     'aside.campTypes': 'Camp types',

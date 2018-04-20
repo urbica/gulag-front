@@ -7,6 +7,7 @@ export default {
     'prisonCard.location': 'Местоположение',
     'prisonCard.prisonersByYears': 'Количество заключенных по годам',
     'prisonCard.production': 'Тип деятельности',
+    'prisonCard.photo': 'Фото и документы',
     'aboutCard.heading': 'О проекте',
     'aside.search': 'Поиск',
     'aside.campTypes': 'Типы лагерей на карте',

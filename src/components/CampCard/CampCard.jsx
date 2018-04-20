@@ -119,7 +119,7 @@ class CampCard extends PureComponent {
           <PrisonChart locations={camp.get('locations')} lang={lang} />
         </Right>
         <Bottom>
-          <Subtitle>Фото и документы</Subtitle>
+          <Subtitle>{t('prisonCard.photo')}</Subtitle>
           <Gallery onMouseDown={this.handleOpen} role='presentation'>
             {getList(camp).map(item => (
               <img

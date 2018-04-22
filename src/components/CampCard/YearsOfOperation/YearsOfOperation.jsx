@@ -7,7 +7,7 @@ import { t } from '../../../intl/helper';
 // styled
 import Title from './Title';
 import Location from './Location';
-import Period from './Period';
+// import Period from './Period';
 
 const YearsOfOperation = ({ locations, lang }) => (
   <div>
@@ -24,29 +24,29 @@ const YearsOfOperation = ({ locations, lang }) => (
       })
       .map(location => {
         if (location.get('statistics').size > 0) {
-          let period;
-          if (location.get('statistics').size === 1) {
-            period = location.getIn(['statistics', 0, 'year']);
-          } else {
-            const sortedStat = location.get('statistics').sort((a, b) => {
-              if (a.get('year') < b.get('year')) {
-                return -1;
-              }
-              if (a.get('year') > b.get('year')) {
-                return 1;
-              }
-              return 0;
-            });
-
-            const firstYear = sortedStat.first().get('year');
-            const lastYear = sortedStat.last().get('year');
-
-            period = `${firstYear}—${lastYear}`;
-          }
+          // let period;
+          // if (location.get('statistics').size === 1) {
+          //   period = location.getIn(['statistics', 0, 'year']);
+          // } else {
+          //   const sortedStat = location.get('statistics').sort((a, b) => {
+          //     if (a.get('year') < b.get('year')) {
+          //       return -1;
+          //     }
+          //     if (a.get('year') > b.get('year')) {
+          //       return 1;
+          //     }
+          //     return 0;
+          //   });
+          //
+          //   const firstYear = sortedStat.first().get('year');
+          //   const lastYear = sortedStat.last().get('year');
+          //
+          //   period = `${firstYear}—${lastYear}`;
+          // }
 
           return (
             <Location key={location.get('id')}>
-              <Period>{period}</Period>
+              {/* <Period>{period}</Period> */}
               <div>{location.getIn(['description', lang])}</div>
             </Location>
           );

@@ -25,7 +25,8 @@ const mapStateToProps = state => {
     isDemoPlay: state.getIn(['ui', 'isDemoPlay']),
     isShowAll: state.getIn(['ui', 'isShowAllPrisons']),
     isDataLoading,
-    isChartVisible
+    isChartVisible,
+    lang: state.getIn(['intl', 'locale'])
   };
 };
 

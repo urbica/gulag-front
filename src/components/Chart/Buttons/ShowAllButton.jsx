@@ -25,6 +25,8 @@ const Text = styled.div`
   position: absolute;
   top: 10px;
   left: calc(100% + 7px);
+
+  text-align: left;
 `;
 
 const ShowAllButton = ({ onClick, isShowAll }) => (

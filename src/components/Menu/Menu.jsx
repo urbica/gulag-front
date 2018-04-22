@@ -36,5 +36,6 @@ Menu.propTypes = {
 };
 
 export default connect(state => ({
-  isDataLoading: state.getIn(['ui', 'isDataLoading'])
+  isDataLoading: state.getIn(['ui', 'isDataLoading']),
+  lang: state.getIn(['intl', 'locale'])
 }))(Menu);

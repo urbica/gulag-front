@@ -120,12 +120,10 @@ class Chart extends PureComponent {
             isChartVisible={this.props.isChartVisible}
           />
         </svg>
-        {this.props.isChartVisible && (
-          <ShowAllButton
-            isShowAll={this.props.isShowAll}
-            onClick={this.props.toggleAllPrisons}
-          />
-        )}
+        <ShowAllButton
+          isShowAll={this.props.isShowAll}
+          onClick={this.props.toggleAllPrisons}
+        />
       </Container>
     );
   }

@@ -19,13 +19,6 @@ import Container from './Container';
 // import MapButton from './Controls/MapButton';
 // import plus from './btn-plus.svg';
 // import minus from './btn-minus.svg';
-//   setTimeout(() => {
-//     const credits = ' <a href="http://urbica.co" target="_blank">© Urbica</a>';
-//     const attrEls = document.getElementsByClassName('mapboxgl-ctrl-attrib');
-//     if (attrEls.length > 0)
-//       attrEls[0].insertAdjacentHTML('beforeend', credits);
-//   }, 1000);
-// }
 
 class Map extends PureComponent {
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -41,12 +34,14 @@ class Map extends PureComponent {
     const citiesNames = `{historical_name${
       nextProps.lang === 'ru' ? '' : '_en'
     }}`;
+    const campsNames = `{${nextProps.lang}Name}`;
 
     const updatedLayers = prevState.layers
       .setIn(['ussr', 'filter'], ussrFilter)
       .setIn(['cities', 'filter'], citiesFilter)
       .setIn(['citiesDots', 'filter'], citiesFilter)
-      .setIn(['cities', 'layout', 'text-field'], citiesNames);
+      .setIn(['cities', 'layout', 'text-field'], citiesNames)
+      .setIn(['campsNames', 'layout', 'text-field'], campsNames);
 
     return { layers: updatedLayers };
   }
@@ -62,6 +57,7 @@ class Map extends PureComponent {
 
     this.onLayerHover = this.onLayerHover.bind(this);
     this.onLayerLeave = this.onLayerLeave.bind(this);
+    this.openCampCardHandler = this.openCampCardHandler.bind(this);
     this.onLayerClick = this.onLayerClick.bind(this);
   }
 
@@ -86,16 +82,20 @@ class Map extends PureComponent {
     this.setState({ layers: newLayers });
   }
 
+  openCampCardHandler(lngLat, campId) {
+    if (this.popup) this.popup.remove();
+    this.props.openCampCard(lngLat, campId);
+  }
+
   onLayerClick(e) {
     if (e.features.length > 1) {
-      const openCampCardHandler = campId => {
-        this.popup.remove();
-        this.props.openCampCard(e.lngLat, campId);
-      };
-
       const div = document.createElement('div');
       ReactDom.render(
-        <Popup features={e.features} onClick={openCampCardHandler} />,
+        <Popup
+          features={e.features}
+          onClick={this.openCampCardHandler}
+          lang={this.props.lang}
+        />,
         div
       );
 
@@ -108,7 +108,10 @@ class Map extends PureComponent {
         .setDOMContent(div)
         .addTo(this.mapGlRef.current.getMap());
     } else {
-      this.props.openCampCard(e.lngLat, e.features[0].properties.campId);
+      this.openCampCardHandler(
+        e.features[0].geometry.coordinates,
+        e.features[0].properties.campId
+      );
     }
   }
 
@@ -176,7 +179,8 @@ Map.propTypes = {
   viewport: PropTypes.object.isRequired,
   campsSource: PropTypes.object.isRequired,
   changeViewportHandler: PropTypes.func.isRequired,
-  openCampCard: PropTypes.func.isRequired
+  openCampCard: PropTypes.func.isRequired,
+  lang: PropTypes.string.isRequired
 };
 
 Map.defaultProps = {

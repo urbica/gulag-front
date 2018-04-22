@@ -34,8 +34,8 @@ const mapDispatchToProps = dispatch => ({
   changeViewportHandler: newViewport => dispatch(changeViewport(newViewport)),
   openCampCard: (lngLat, id) => {
     const newViewport = {
-      latitude: lngLat.lat,
-      longitude: lngLat.lng
+      latitude: lngLat[1],
+      longitude: lngLat[0]
     };
 
     dispatch(closeMenus());

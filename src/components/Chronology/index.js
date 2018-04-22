@@ -3,16 +3,23 @@ import { List } from 'immutable';
 import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 
-import { periodsSelector } from '../App/selectors';
+import { periodsSelector, langSelector } from '../App/selectors';
 
 import Chronology from './Chronology';
 
-const mapStateToProps = createSelector(periodsSelector, (periods) => {
-  if (!periods) {
-    return { periods: List() };
+const mapStateToProps = createSelector(
+  periodsSelector,
+  langSelector,
+  (periods, lang) => {
+    if (!periods) {
+      return { periods: List(), lang };
+    }
+    return {
+      periods: periods.sort((a, b) => a.get('id') > b.get('id')),
+      lang
+    };
   }
-  return { periods: periods.sort((a, b) => a.get('id') > b.get('id')) };
-});
+);
 const mapDispatchToProps = dispatch => ({
   pushToRoot: () => dispatch(push('/'))
 });

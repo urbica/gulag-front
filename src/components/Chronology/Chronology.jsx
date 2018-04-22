@@ -27,7 +27,7 @@ const toggleVisible = () => {
 };
 class Chronology extends PureComponent {
   render() {
-    const { pushToRoot, periods } = this.props;
+    const { pushToRoot, periods, lang } = this.props;
     return (
       <FullScreenCard onClick={pushToRoot}>
         <Title>{t('aside.gulagChronology')}</Title>
@@ -35,8 +35,8 @@ class Chronology extends PureComponent {
           {periods.map(period => (
             <Period key={period.get('id')} className='to-show'>
               <Year>{period.get('year')}</Year>
-              <PeriodTitle>{period.getIn(['title', 'ru'])}</PeriodTitle>
-              <Description>{period.getIn(['description', 'ru'])}</Description>
+              <PeriodTitle>{period.getIn(['title', lang])}</PeriodTitle>
+              <Description>{period.getIn(['description', lang])}</Description>
             </Period>
           ))}
         </ToggleVisible>
@@ -47,7 +47,8 @@ class Chronology extends PureComponent {
 
 Chronology.propTypes = {
   pushToRoot: PropTypes.func.isRequired,
-  periods: PropTypes.object.isRequired
+  periods: PropTypes.object.isRequired,
+  lang: PropTypes.string.isRequired
 };
 
 export default Chronology;

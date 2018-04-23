@@ -49,11 +49,13 @@ class Chart extends PureComponent {
       clearInterval(this.playDemo);
     } else {
       this.playDemo = setInterval(() => {
-        if (this.props.currentYear < 1956 && this.props.isDemoPlay) {
+        if (this.props.currentYear < 1960 && this.props.isDemoPlay) {
           this.props.changeCurrentYear(this.props.currentYear + 1);
-        } else {
+        } else if (this.props.currentYear === 1960) {
           clearInterval(this.playDemo);
           this.props.toggleDemo();
+        } else {
+          clearInterval(this.playDemo);
         }
       }, 1000);
     }

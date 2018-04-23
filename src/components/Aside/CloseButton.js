@@ -10,8 +10,4 @@ export default styled(Button)`
   margin: 0;
   background-color: transparent;
   transition: 0.5s;
-
-  &:active {
-    background-color: rgba(93, 106, 119, 0.2);
-  }
 `;

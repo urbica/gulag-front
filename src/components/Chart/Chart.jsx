@@ -53,6 +53,7 @@ class Chart extends PureComponent {
           this.props.changeCurrentYear(this.props.currentYear + 1);
         } else {
           clearInterval(this.playDemo);
+          this.props.toggleDemo();
         }
       }, 1000);
     }

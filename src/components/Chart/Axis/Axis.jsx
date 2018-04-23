@@ -28,20 +28,20 @@ class Axis extends PureComponent {
   createAxis() {
     const { width, isChartVisible } = this.props;
     const xScale = calculateXScale(width);
-    const axis = axisBottom(xScale).tickSizeOuter(0);
+    const axis = axisBottom(xScale)
+      .tickSizeOuter(0)
+      .tickSizeInner(4);
 
     if (width < 833) {
       axis.ticks(0, '');
     } else if (!isChartVisible) {
       axis
         .ticks(timeMonth.filter(d => d.getMonth() === 6))
-        .tickFormat((d, i) => (i % 2 === 0 ? d.getFullYear() : null))
-        .tickSizeInner(0);
+        .tickFormat((d, i) => (i % 2 === 0 ? d.getFullYear() : null));
     } else {
       axis
         .ticks(timeMonth.filter(d => d.getMonth() === 6))
-        .tickFormat((d, i) => (i % 2 === 0 ? d.getFullYear() : null))
-        .tickSizeInner(4);
+        .tickFormat((d, i) => (i % 2 === 0 ? d.getFullYear() : null));
     }
 
     const el = select(this.gRef.current);

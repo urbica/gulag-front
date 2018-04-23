@@ -55,10 +55,33 @@ class Map extends PureComponent {
 
     this.mapGlRef = React.createRef();
 
+    this.onZoomend = this.onZoomend.bind(this);
     this.onLayerHover = this.onLayerHover.bind(this);
     this.onLayerLeave = this.onLayerLeave.bind(this);
     this.openCampCardHandler = this.openCampCardHandler.bind(this);
     this.onLayerClick = this.onLayerClick.bind(this);
+  }
+
+  componentDidMount() {
+    this.map = this.mapGlRef.current.getMap();
+    this.map.on('zoomend', this.onZoomend);
+  }
+
+  onZoomend() {
+    const { lng, lat } = this.map.getCenter();
+    const zoom = this.map.getZoom();
+    const pitch = this.map.getPitch();
+    const bearing = this.map.getBearing();
+
+    const viewport = {
+      latitude: lat,
+      longitude: lng,
+      zoom,
+      pitch,
+      bearing
+    };
+
+    this.props.changeViewport(viewport);
   }
 
   onLayerHover(e) {
@@ -116,12 +139,7 @@ class Map extends PureComponent {
   }
 
   render() {
-    const {
-      isSlideUp,
-      viewport,
-      changeViewportHandler,
-      campsSource
-    } = this.props;
+    const { isSlideUp, viewport, changeViewport, campsSource } = this.props;
 
     return (
       <Container slideUp={isSlideUp}>
@@ -130,7 +148,7 @@ class Map extends PureComponent {
           style={{ width: '100%', height: '100%' }}
           accessToken={mapToken}
           mapStyle='mapbox://styles/gulagmap/cj8bt4qbw7kbo2rry4oft6e5g'
-          onViewportChange={changeViewportHandler}
+          onViewportChange={changeViewport}
           {...viewport.toJS()}
         >
           <Source id='camps' source={campsSource} />
@@ -178,7 +196,7 @@ Map.propTypes = {
   isSlideUp: PropTypes.bool,
   viewport: PropTypes.object.isRequired,
   campsSource: PropTypes.object.isRequired,
-  changeViewportHandler: PropTypes.func.isRequired,
+  changeViewport: PropTypes.func.isRequired,
   openCampCard: PropTypes.func.isRequired,
   lang: PropTypes.string.isRequired
 };

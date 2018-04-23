@@ -12,6 +12,9 @@ export default {
     'aside.search': 'Search',
     'aside.campTypes': 'Camp types',
     'aside.gulagChronology': 'GULAG chronology',
-    'campFilters.title': 'Camp types on the map'
+    'campFilters.title': 'Camp types on the map',
+    prisoners: 'prisoners',
+    deads: 'deads',
+    noData: 'no data'
   }
 };

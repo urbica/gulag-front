@@ -12,6 +12,9 @@ export default {
     'aside.search': 'Поиск',
     'aside.campTypes': 'Типы лагерей на карте',
     'aside.gulagChronology': 'Хронология ГУЛАГа',
-    'campFilters.title': 'Отображение лагерей на карте'
+    'campFilters.title': 'Отображение лагерей на карте',
+    prisoners: 'заключённых',
+    deads: 'умерших',
+    noData: 'нет данных'
   }
 };

@@ -111,7 +111,12 @@ class Chart extends PureComponent {
             </filter>
           </defs>
           {this.props.isChartVisible && (
-            <PrisonersArea width={width} xScale={calculateXScale(width)} />
+            <PrisonersArea
+              width={width}
+              xScale={calculateXScale(width)}
+              isShowAll={this.props.isShowAll}
+              changeCurrentYear={this.props.changeCurrentYear}
+            />
           )}
           <Axis width={width} isChartVisible={this.props.isChartVisible} />
           <Slider

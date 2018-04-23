@@ -12,7 +12,7 @@ export default transition.div.attrs({
 
   width: 400px;
   height: 100%;
-  padding: 50px 40px 0px;
+  padding: 50px 40px;
 
   background-color: #14171a;
 

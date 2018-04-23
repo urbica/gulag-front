@@ -10,12 +10,12 @@ export default styled.g`
   & g:first-child {
     & rect {
       fill: #eb4200;
-      opacity: .1;
+      opacity: ${({ showAllYears }) => (showAllYears ? 1 : 0.1)};
       transition: opacity 2s;
       &:hover {
         cursor: pointer;
-        opacity: .2;
-        transition: opacity .2s;
+        opacity: 0.2;
+        transition: opacity 0.2s;
       }
     }
     & line {
@@ -38,8 +38,8 @@ export default styled.g`
       transition: opacity 2s;
       &:hover {
         cursor: pointer;
-        opacity: .2;
-        transition: opacity .2s;
+        opacity: 0.2;
+        transition: opacity 0.2s;
       }
     }
     & line {

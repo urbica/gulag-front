@@ -31,8 +31,8 @@ const mapStateToProps = createSelector(
   }
 );
 const mapDispatchToProps = dispatch => ({
-  pushToRoot: () => dispatch(push('/')),
-  pushToCamp: id => dispatch(push(`/camp${id}`))
+  closeCard: () => dispatch(push('/')),
+  openCampCard: id => dispatch(push(`/camp${id}`))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);

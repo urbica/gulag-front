@@ -11,7 +11,9 @@ export default styled.input`
 
   font-size: 20px;
   font-weight: 900;
-  color: rgba(226, 243, 227, 0.2);
+  color: rgba(226, 243, 227, 0.8);
+
+  opacity: 0.7;
 
   background-color: transparent;
 `;

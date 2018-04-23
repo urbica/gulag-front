@@ -28,12 +28,14 @@ class Search extends PureComponent {
     this.onSearchChange = this.onSearchChange.bind(this);
   }
 
-  onSearchChange(searchQuery) {
+  onSearchChange(e) {
+    const searchQuery = e.target.value;
+
     this.setState({ searchQuery });
   }
 
   render() {
-    const { pushToRoot, camps, pushToCamp, lang, regions } = this.props;
+    const { closeCard, camps, openCampCard, lang, regions } = this.props;
 
     const search = this.state.searchQuery.trim().toLowerCase();
     const campsFilteredBySearch = camps.filter(
@@ -53,15 +55,12 @@ class Search extends PureComponent {
     );
 
     return (
-      <FullScreenCard onClick={pushToRoot}>
-        <Input
-          placeholder={placeholder[lang]}
-          onChange={event => this.onSearchChange(event.target.value)}
-        />
+      <FullScreenCard onClick={closeCard}>
+        <Input placeholder={placeholder[lang]} onChange={this.onSearchChange} />
         {campsFilteredBySearch.map(camp => (
           <Item
             key={camp.get('id')}
-            onClick={pushToCamp.bind(null, camp.get('id'))}
+            onClick={openCampCard.bind(null, camp.get('id'))}
           >
             <Title>{camp.getIn(['title', lang])}</Title>
             <Periods>{getPeriods(camp.get('locations'))}</Periods>
@@ -76,9 +75,9 @@ class Search extends PureComponent {
 }
 
 Search.propTypes = {
-  pushToRoot: PropTypes.func.isRequired,
+  closeCard: PropTypes.func.isRequired,
   camps: PropTypes.object.isRequired,
-  pushToCamp: PropTypes.func.isRequired,
+  openCampCard: PropTypes.func.isRequired,
   lang: PropTypes.string.isRequired,
   regions: PropTypes.object.isRequired
 };

@@ -8,7 +8,7 @@ export default styled.div`
   font-size: 14px;
 
   opacity: 0.8;
-  
+
   &:before {
     content: '';
     position: absolute;
@@ -32,10 +32,19 @@ export default styled.div`
     display: block;
     width: 1px;
 
-    background-color: rgba(226,243,227,0.2);
+    background-color: rgba(226, 243, 227, 0.2);
   }
-  
+
   &:last-child:after {
     display: none;
+  }
+
+  @media (max-width: 768px) {
+    &:before {
+      left: -20px;
+    }
+    &:after {
+      left: -14px;
+    }
   }
 `;

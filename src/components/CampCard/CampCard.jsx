@@ -92,6 +92,8 @@ class CampCard extends PureComponent {
       return null;
     }
 
+    document.title = camp.getIn(['title', lang]);
+
     const activity = camp.get('activityId');
     const markup = camp.getIn(['description', lang]);
 

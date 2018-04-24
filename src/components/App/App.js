@@ -14,21 +14,25 @@ import Chronology from '../Chronology';
 import About from '../About';
 import CampCard from '../CampCard';
 
-const App = () => (
-  <Fragment>
-    <Preloader />
-    <Map />
-    <Menu />
-    <Chart />
-    <Aside />
-    <CampFilters />
-    <Switch>
-      <Route path='/search' component={Search} />
-      <Route path='/chronology' component={Chronology} />
-      <Route path='/about' component={About} />
-      <Route path='/camp:id' component={CampCard} />
-    </Switch>
-  </Fragment>
-);
+const App = () => {
+  document.title = 'Карта истории ГУЛАГа';
+
+  return (
+    <Fragment>
+      <Preloader />
+      <Map />
+      <Menu />
+      <Chart />
+      <Aside />
+      <CampFilters />
+      <Switch>
+        <Route path='/search' component={Search} />
+        <Route path='/chronology' component={Chronology} />
+        <Route path='/about' component={About} />
+        <Route path='/camp:id' component={CampCard} />
+      </Switch>
+    </Fragment>
+  );
+};
 
 export default App;

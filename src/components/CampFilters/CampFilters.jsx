@@ -39,27 +39,32 @@ const CampFilters = props => {
           <img src={arrow} alt='close' />
         </BackButton>
       </Top>
-      {types.map(type => {
-        const typeId = type.get('id').toString();
-        const isActive = campTypeFilters.get(typeId);
+      {types
+        .filter(
+          type =>
+            type.get('id') !== 3 && type.get('id') !== 4 && type.get('id') !== 5
+        )
+        .map(type => {
+          const typeId = type.get('id').toString();
+          const isActive = campTypeFilters.get(typeId);
 
-        return (
-          <Filter
-            key={type.get('id')}
-            onClick={toggleFilter.bind(null, typeId)}
-          >
-            <FilterTop>
-              <FilterTitle isActive={isActive}>
-                {type.getIn(['title', locale])}
-              </FilterTitle>
-              <Switcher typeId={type.get('id')} isActive={isActive} />
-            </FilterTop>
-            <Description isActive={isActive}>
-              {type.getIn(['description', locale])}
-            </Description>
-          </Filter>
-        );
-      })}
+          return (
+            <Filter
+              key={type.get('id')}
+              onClick={toggleFilter.bind(null, typeId)}
+            >
+              <FilterTop>
+                <FilterTitle isActive={isActive}>
+                  {type.getIn(['title', locale])}
+                </FilterTitle>
+                <Switcher typeId={type.get('id')} isActive={isActive} />
+              </FilterTop>
+              <Description isActive={isActive}>
+                {type.getIn(['description', locale])}
+              </Description>
+            </Filter>
+          );
+        })}
     </Container>
   );
 };

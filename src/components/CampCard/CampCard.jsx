@@ -54,6 +54,10 @@ class CampCard extends PureComponent {
     this.handleClickActive = this.handleClickActive.bind(this);
   }
 
+  componentDidMount() {
+    console.log('CampCard#componentDidMount', this.props);
+  }
+
   handleOpen(e) {
     const active = parseInt(e.target.getAttribute('count'), 10);
 
@@ -88,9 +92,6 @@ class CampCard extends PureComponent {
 
   render() {
     const { camp, lang, closeCard, activities } = this.props;
-    if (!camp) {
-      return null;
-    }
 
     document.title = camp.getIn(['title', lang]);
 

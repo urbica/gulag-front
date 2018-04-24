@@ -2,6 +2,7 @@ import { Map } from 'immutable';
 import { createSelector } from 'reselect';
 import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
+import { branch, compose, renderNothing } from 'recompose';
 
 // selectors
 import { langSelector, activitiesSelector } from '../App/selectors';
@@ -36,4 +37,8 @@ const mapDispatchToProps = dispatch => ({
   closeCard: () => dispatch(push('/'))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CampCard);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
+const withBranch = branch(({ camp }) => !camp, renderNothing);
+
+const enhance = compose(withConnect, withBranch);
+export default enhance(CampCard);

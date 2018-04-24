@@ -32,7 +32,7 @@ class Axis extends PureComponent {
       .tickSizeOuter(0)
       .tickSizeInner(4);
 
-    if (width < 833) {
+    if (width < 724) {
       axis.ticks(0, '');
     } else if (!isChartVisible) {
       axis

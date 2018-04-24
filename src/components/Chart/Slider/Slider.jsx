@@ -104,11 +104,11 @@ class Slider extends PureComponent {
     // handle year
     this.year = this.handle
       .append('text')
-      .attr('transform', 'translate(-11, -17)')
+      .attr('transform', 'translate(-11, 25)')
       .attr('class', 'currentYear')
       .text(this.props.currentYear);
 
-    if (this.props.width >= 833) {
+    if (this.props.width >= 724) {
       // handle shadow
       this.handleShadow.attr('width', barWidth);
 
@@ -121,7 +121,7 @@ class Slider extends PureComponent {
         `translate(${-18.3 + barWidth / 2}, -5.5)`
       );
 
-      this.year.attr('transform', 'translate(-7, 25)');
+      this.year.attr('transform', 'translate(-2, 25)');
     }
   }
 
@@ -142,7 +142,7 @@ class Slider extends PureComponent {
 
     this.year.text(currentYear);
 
-    if (width >= 833) {
+    if (width >= 724) {
       // handle shadow
       this.handleShadow.attr('width', barWidth);
 

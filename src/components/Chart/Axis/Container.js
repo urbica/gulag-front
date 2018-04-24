@@ -16,11 +16,4 @@ export default styled.g`
     fill: #e2f3e3;
     font-size: 12px;
   }
-
-  & line,
-  & text {
-    @media (max-width: 1023px) {
-      display: none;
-    }
-  }
 `;

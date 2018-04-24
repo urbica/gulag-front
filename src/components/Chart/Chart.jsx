@@ -18,7 +18,7 @@ class Chart extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      width: window.innerWidth - 200
+      width: window.innerWidth > 1500 ? 1300 : window.innerWidth - 300
     };
 
     this.onResize = this.onResize.bind(this);
@@ -33,12 +33,10 @@ class Chart extends PureComponent {
     let width;
     const { innerWidth } = window;
 
-    if (innerWidth < 1024) {
-      width = innerWidth - 40;
-    } else if (innerWidth < 1280) {
-      width = innerWidth - 150;
+    if (innerWidth > 1500) {
+      width = 1300;
     } else {
-      width = innerWidth - 200;
+      width = innerWidth - 300;
     }
 
     this.setState({ width });

@@ -41,6 +41,10 @@ const mapDispatchToProps = dispatch => ({
     dispatch(closeMenus());
     dispatch(changeViewport(newViewport));
     dispatch(push(`/camp${id}`));
+  },
+  closeCampCard: () => {
+    dispatch(closeMenus());
+    dispatch(push('/'));
   }
 });
 

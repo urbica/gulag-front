@@ -56,6 +56,7 @@ class Map extends PureComponent {
     this.mapGlRef = React.createRef();
 
     this.onZoomend = this.onZoomend.bind(this);
+    this.onMapClick = this.onMapClick.bind(this);
     this.onLayerHover = this.onLayerHover.bind(this);
     this.onLayerLeave = this.onLayerLeave.bind(this);
     this.openCampCardHandler = this.openCampCardHandler.bind(this);
@@ -65,6 +66,7 @@ class Map extends PureComponent {
   componentDidMount() {
     this.map = this.mapGlRef.current.getMap();
     this.map.on('zoomend', this.onZoomend);
+    this.map.on('click', this.onMapClick);
   }
 
   onZoomend() {
@@ -82,6 +84,16 @@ class Map extends PureComponent {
     };
 
     this.props.changeViewport(viewport);
+  }
+
+  onMapClick(e) {
+    const features = this.map.queryRenderedFeatures(e.point, {
+      layers: ['campsHalo']
+    });
+
+    if (features.length === 0) {
+      this.props.closeCampCard();
+    }
   }
 
   onLayerHover(e) {
@@ -198,7 +210,8 @@ Map.propTypes = {
   campsSource: PropTypes.object.isRequired,
   changeViewport: PropTypes.func.isRequired,
   openCampCard: PropTypes.func.isRequired,
-  lang: PropTypes.string.isRequired
+  lang: PropTypes.string.isRequired,
+  closeCampCard: PropTypes.func.isRequired
 };
 
 Map.defaultProps = {

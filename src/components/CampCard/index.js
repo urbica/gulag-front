@@ -8,6 +8,8 @@ import { branch, compose, renderNothing } from 'recompose';
 import { langSelector, activitiesSelector } from '../App/selectors';
 import prisonSelector from './selector';
 
+import { changeViewport } from '../App/reducers/uiReducer';
+
 import CampCard from './CampCard';
 
 const mapStateToProps = createSelector(
@@ -34,7 +36,8 @@ const mapStateToProps = createSelector(
   }
 );
 const mapDispatchToProps = dispatch => ({
-  closeCard: () => dispatch(push('/'))
+  closeCard: () => dispatch(push('/')),
+  changeViewport: newViewport => dispatch(changeViewport(newViewport))
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

@@ -55,7 +55,14 @@ class CampCard extends PureComponent {
   }
 
   componentDidMount() {
-    console.log('CampCard#componentDidMount', this.props);
+    const coordinates = this.props.camp
+      .getIn(['locations', 0, 'geometry', 'coordinates'])
+      .toJS();
+    const newViewport = {
+      latitude: coordinates[1],
+      longitude: coordinates[0]
+    };
+    this.props.changeViewport(newViewport);
   }
 
   handleOpen(e) {
@@ -152,15 +159,11 @@ class CampCard extends PureComponent {
 }
 
 CampCard.propTypes = {
-  camp: PropTypes.object,
+  camp: PropTypes.object.isRequired,
   lang: PropTypes.string.isRequired,
   closeCard: PropTypes.func.isRequired,
-  activities: PropTypes.object
-};
-
-CampCard.defaultProps = {
-  camp: null,
-  activities: null
+  activities: PropTypes.object.isRequired,
+  changeViewport: PropTypes.func.isRequired
 };
 
 export default CampCard;

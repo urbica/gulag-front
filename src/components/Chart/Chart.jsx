@@ -1,139 +1,154 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/require-default-props */
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { scaleTime, scaleLinear } from 'd3-scale';
-import { max } from 'd3-array';
 
-import data from '../../config/chartData';
-import PrisonersArea from './PrisonersArea';
-import Axis from './Axis';
+import { height, margin, calculateXScale } from './config';
+
+import PlayButton from './Buttons/PlayButton';
+import ChartStat from './ChartStat/ChartStat';
+import ShowAllButton from './Buttons/ShowAllButton';
+import PrisonersArea from './PrisonersArea/PrisonersArea';
+import Axis from './Axis/Axis';
 import Slider from './Slider';
-import Periods from './Periods/Periods';
 
 // styled
 import Container from './Container';
+import ChartWrap from './ChartWrap';
 
-const margin = {
-  top: 5,
-  right: 20,
-  bottom: 70,
-  left: 20
-};
-// const screenWidth = (window.innerWidth < 1500) ? window.innerWidth : 1500;
-const height = 300 - margin.top - margin.bottom;
+class Chart extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      width: window.innerWidth > 1500 ? 1300 : window.innerWidth - 300
+    };
 
-const Chart = (props) => {
-  const { periods, openPeriod, showAllYears } = props;
-  const { innerWidth } = window;
-  let width;
-  if (innerWidth < 1024) {
-    width = innerWidth - 40 - margin.left - margin.right;
-  } else if (innerWidth < 1280) {
-    width = innerWidth - 150 - margin.left - margin.right;
-  } else {
-    width = innerWidth - 200 - margin.left - margin.right;
+    this.onResize = this.onResize.bind(this);
+    this.demo = this.demo.bind(this);
   }
 
-  const xScale = scaleTime()
-    .domain([new Date(1918, 0, 1), new Date(1960, 11, 31)])
-    .range([0, width])
-    .clamp(true);
+  componentDidMount() {
+    window.onresize = this.onResize;
+  }
 
-  const yScale = scaleLinear()
-    .domain([0, max(data, d => d.prisoners)])
-    .range([height, 0]);
+  onResize() {
+    let width;
+    const { innerWidth } = window;
 
-  return (
-    <Container>
-      <svg
-        width={width + margin.left + margin.right}
-        height={height + margin.top + margin.bottom}
+    if (innerWidth > 1500) {
+      width = 1300;
+    } else {
+      width = innerWidth - 300;
+    }
+
+    this.setState({ width });
+  }
+
+  demo() {
+    this.props.toggleDemo();
+
+    if (this.props.isDemoPlay) {
+      clearInterval(this.playDemo);
+    } else {
+      this.playDemo = setInterval(() => {
+        if (this.props.currentYear < 1960 && this.props.isDemoPlay) {
+          this.props.changeCurrentYear(this.props.currentYear + 1);
+        } else if (this.props.currentYear === 1960) {
+          clearInterval(this.playDemo);
+          this.props.toggleDemo();
+        } else {
+          clearInterval(this.playDemo);
+        }
+      }, 1000);
+    }
+  }
+
+  render() {
+    const { width } = this.state;
+
+    return (
+      <Container
+        mountOnEnter
+        unmountOnExit
+        in={!this.props.isDataLoading}
+        timeout={800}
       >
-        <defs>
-          <linearGradient
-            id='Gradient'
-            x1='0%'
-            y1='31%'
-            x2='10%'
-            y2='0%'
-            spreadMethod='repeat'
-          >
-            <stop offset='0%' stopColor='rgb(225,225,225)' />
-            <stop offset='12%' stopColor='rgb(225,225,225)' />
-            <stop offset='13%' stopColor='rgb(0,0,0)' />
-            <stop offset='25%' stopColor='rgb(0,0,0)' />
-            <stop offset='26%' stopColor='rgb(225,225,225)' />
-            <stop offset='38%' stopColor='rgb(225,225,225)' />
-            <stop offset='39%' stopColor='rgb(0,0,0)' />
-            <stop offset='51%' stopColor='rgb(0,0,0)' />
-            <stop offset='52%' stopColor='rgb(225,225,225)' />
-            <stop offset='64%' stopColor='rgb(225,225,225)' />
-            <stop offset='65%' stopColor='rgb(0,0,0)' />
-            <stop offset='77%' stopColor='rgb(0,0,0)' />
-            <stop offset='78%' stopColor='rgb(225,225,225)' />
-            <stop offset='90%' stopColor='rgb(225,225,225)' />
-            <stop offset='91%' stopColor='rgb(0,0,0)' />
-            <stop offset='100%' stopColor='rgb(0,0,0)' />
-          </linearGradient>
-          <filter
-            id='gaussianBlur'
-            width='185.7%'
-            height='400%'
-            x='-42.9%'
-            y='-150%'
-            filterUnits='objectBoundingBox'
-          >
-            <feGaussianBlur stdDeviation='5' in='SourceGraphic' />
-          </filter>
-        </defs>
-        <PrisonersArea
-          width={width}
-          height={height}
-          margin={margin}
-          xScale={xScale}
-          yScale={yScale}
-          data={data}
-          showAllYears={showAllYears}
+        <PlayButton isDemoPlayed={this.props.isDemoPlay} onClick={this.demo} />
+        <ChartWrap>
+          <ChartStat currentYear={this.props.currentYear} />
+          <svg width={width} height={height + margin.top + margin.bottom}>
+            <defs>
+              <linearGradient
+                id='Gradient'
+                x1='0%'
+                y1='31%'
+                x2='10%'
+                y2='0%'
+                spreadMethod='repeat'
+              >
+                <stop offset='0%' stopColor='rgb(225,225,225)' />
+                <stop offset='12%' stopColor='rgb(225,225,225)' />
+                <stop offset='13%' stopColor='rgb(0,0,0)' />
+                <stop offset='25%' stopColor='rgb(0,0,0)' />
+                <stop offset='26%' stopColor='rgb(225,225,225)' />
+                <stop offset='38%' stopColor='rgb(225,225,225)' />
+                <stop offset='39%' stopColor='rgb(0,0,0)' />
+                <stop offset='51%' stopColor='rgb(0,0,0)' />
+                <stop offset='52%' stopColor='rgb(225,225,225)' />
+                <stop offset='64%' stopColor='rgb(225,225,225)' />
+                <stop offset='65%' stopColor='rgb(0,0,0)' />
+                <stop offset='77%' stopColor='rgb(0,0,0)' />
+                <stop offset='78%' stopColor='rgb(225,225,225)' />
+                <stop offset='90%' stopColor='rgb(225,225,225)' />
+                <stop offset='91%' stopColor='rgb(0,0,0)' />
+                <stop offset='100%' stopColor='rgb(0,0,0)' />
+              </linearGradient>
+              <filter
+                id='gaussianBlur'
+                width='185.7%'
+                height='400%'
+                x='-42.9%'
+                y='-150%'
+                filterUnits='objectBoundingBox'
+              >
+                <feGaussianBlur stdDeviation='5' in='SourceGraphic' />
+              </filter>
+              <filter id='textShadow'>
+                <feGaussianBlur in='SourceGraphic' stdDeviation='4' />
+              </filter>
+            </defs>
+            {this.props.isChartVisible && (
+              <PrisonersArea
+                width={width}
+                xScale={calculateXScale(width)}
+                isShowAll={this.props.isShowAll}
+                changeCurrentYear={this.props.changeCurrentYear}
+              />
+            )}
+            <Axis width={width} isChartVisible={this.props.isChartVisible} />
+            <Slider
+              width={width}
+              xScale={calculateXScale(width)}
+              isChartVisible={this.props.isChartVisible}
+            />
+          </svg>
+        </ChartWrap>
+        <ShowAllButton
+          isShowAll={this.props.isShowAll}
+          onClick={this.props.toggleAllPrisons}
         />
-        <Axis
-          width={width}
-          height={height}
-          margin={margin}
-          scale={xScale}
-        />
-        <Slider
-          width={width}
-          height={height}
-          margin={margin}
-          xScale={xScale}
-          yScale={yScale}
-          data={data}
-          isVisible={!props.isShowAllPrisons}
-        />
-      </svg>
-      {
-        periods &&
-        <Periods
-          width={width}
-          height={height}
-          margin={margin}
-          xScale={xScale}
-          periods={periods}
-          onClick={openPeriod}
-        />
-      }
-    </Container>
-  );
-};
+      </Container>
+    );
+  }
+}
 
 Chart.propTypes = {
-  periods: PropTypes.object,
-  openPeriod: PropTypes.func
+  currentYear: PropTypes.number.isRequired,
+  isDemoPlay: PropTypes.bool.isRequired,
+  isShowAll: PropTypes.bool.isRequired,
+  toggleAllPrisons: PropTypes.func.isRequired,
+  changeCurrentYear: PropTypes.func.isRequired,
+  toggleDemo: PropTypes.func.isRequired,
+  isDataLoading: PropTypes.bool.isRequired,
+  isChartVisible: PropTypes.bool.isRequired
 };
 
-export default connect(state => ({
-  periods: state.getIn(['data', 'periods']),
-  isShowAllPrisons: state.getIn(['ui', 'isShowAllPrisons'])
-}))(Chart);
+export default Chart;

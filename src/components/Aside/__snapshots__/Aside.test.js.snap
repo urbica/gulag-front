@@ -1,0 +1,125 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Aside renders correctly 1`] = `
+<div
+  className="sc-bdVaJa ffDkPe"
+  timeout={400}
+>
+  <button
+    className="sc-bwzfXH kSHzym"
+    onClick={[Function]}
+  >
+    <img
+      alt="close"
+      src="cross.svg"
+    />
+  </button>
+  <div>
+    <button
+      className="sc-htpNat gkmNkY"
+      onClick={[Function]}
+    >
+      Поиск
+    </button>
+    <button
+      className="sc-htpNat gkmNkY"
+      onClick={[Function]}
+    >
+      Типы лагерей на карте
+    </button>
+    <button
+      className="sc-htpNat gkmNkY"
+      onClick={[Function]}
+    >
+      Хронология ГУЛАГа
+    </button>
+  </div>
+  <div>
+    <button
+      className="sc-htpNat gkmNkY"
+      onClick={[Function]}
+    >
+      О проекте
+    </button>
+    <div>
+      <button
+        className="sc-bxivhb lkPidi"
+      >
+        Rus
+      </button>
+      <button
+        className="sc-bxivhb jpemKf"
+      >
+        Eng
+      </button>
+      <button
+        className="sc-bxivhb jpemKf"
+      >
+        Deu
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Aside renders correctly 2`] = `
+<div
+  className="sc-bdVaJa ffDkPe"
+  timeout={400}
+>
+  <button
+    className="sc-bwzfXH kSHzym"
+    onClick={[Function]}
+  >
+    <img
+      alt="close"
+      src="cross.svg"
+    />
+  </button>
+  <div>
+    <button
+      className="sc-htpNat gkmNkY"
+      onClick={[Function]}
+    >
+      Поиск
+    </button>
+    <button
+      className="sc-htpNat gkmNkY"
+      onClick={[Function]}
+    >
+      Типы лагерей на карте
+    </button>
+    <button
+      className="sc-htpNat gkmNkY"
+      onClick={[Function]}
+    >
+      Хронология ГУЛАГа
+    </button>
+  </div>
+  <div>
+    <button
+      className="sc-htpNat gkmNkY"
+      onClick={[Function]}
+    >
+      О проекте
+    </button>
+    <div>
+      <button
+        className="sc-bxivhb lkPidi"
+      >
+        Rus
+      </button>
+      <button
+        className="sc-bxivhb jpemKf"
+      >
+        Eng
+      </button>
+      <button
+        className="sc-bxivhb jpemKf"
+      >
+        Deu
+      </button>
+    </div>
+  </div>
+</div>
+`;

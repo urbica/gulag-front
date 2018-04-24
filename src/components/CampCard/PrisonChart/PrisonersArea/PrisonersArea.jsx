@@ -6,6 +6,8 @@ import { select } from 'd3-selection';
 
 import Container from './Container';
 
+import { mainFontColour } from '../../../../config/styles';
+
 import { splitDigits } from '../../../../utils/utils';
 
 class PrisonersArea extends PureComponent {
@@ -34,7 +36,7 @@ class PrisonersArea extends PureComponent {
         'stroke',
         d =>
           d.prisonersCount !== 0 && d.prisonersCount !== null
-            ? '#fff'
+            ? mainFontColour
             : 'transparent'
       )
       .attr('x1', d => xScale(d.prisonersCount))
@@ -115,7 +117,7 @@ class PrisonersArea extends PureComponent {
         'stroke',
         d =>
           d.prisonersCount !== 0 && d.prisonersCount !== null
-            ? '#fff'
+            ? mainFontColour
             : 'transparent'
       )
       .attr('x1', d => xScale(d.prisonersCount))

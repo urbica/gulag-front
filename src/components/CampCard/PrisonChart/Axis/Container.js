@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { margin } from '../config';
 
+import { mainFontColour } from '../../../../config/styles';
+
 export default styled.g`
   transform: translate(${margin.left}px, ${margin.top}px);
 
@@ -14,7 +16,8 @@ export default styled.g`
   & text {
     font-family: 'Formular';
     font-size: 12px;
-    fill: rgba(255, 255, 255, 0.5);
+    fill: ${mainFontColour};
+    fill-opacity: 0.5;
     transform: translateX(-10px);
   }
 `;

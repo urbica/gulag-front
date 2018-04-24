@@ -25,7 +25,7 @@ const ChartStat = ({ currentYear }) => {
       </Amount>
       <Title>{t('prisoners')}</Title>
       <Amount>{dead > 0 ? slitedDead : t('noData')}</Amount>
-      <Title>{t('deads')}</Title>
+      <Title>{t('dead')}</Title>
     </Container>
   );
 };

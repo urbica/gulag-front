@@ -14,7 +14,7 @@ export default {
     'aside.gulagChronology': 'Хронология ГУЛАГа',
     'campFilters.title': 'Отображение лагерей на карте',
     prisoners: 'заключённых',
-    deads: 'умерших',
+    dead: 'умерших',
     noData: 'нет данных'
   }
 };

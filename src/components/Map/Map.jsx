@@ -35,13 +35,24 @@ class Map extends PureComponent {
       nextProps.lang === 'ru' ? '' : '_en'
     }}`;
     const campsNames = `{${nextProps.lang}Name}`;
+    const activeCampHaloFilter = Immutable.List([
+      'all',
+      ['==', 'campId', parseInt(nextProps.campId, 10)]
+    ]);
+    const activeCampNameFilter = Immutable.List([
+      'all',
+      ['==', 'campId', parseInt(nextProps.campId, 10)]
+    ]);
 
     const updatedLayers = prevState.layers
       .setIn(['ussr', 'filter'], ussrFilter)
       .setIn(['cities', 'filter'], citiesFilter)
       .setIn(['citiesDots', 'filter'], citiesFilter)
       .setIn(['cities', 'layout', 'text-field'], citiesNames)
-      .setIn(['campsNames', 'layout', 'text-field'], campsNames);
+      .setIn(['campsNames', 'layout', 'text-field'], campsNames)
+      .setIn(['campHalo_active', 'filter'], activeCampHaloFilter)
+      .setIn(['campName_active', 'filter'], activeCampNameFilter)
+      .setIn(['campName_active', 'layout', 'text-field'], campsNames);
 
     return { layers: updatedLayers };
   }
@@ -180,6 +191,8 @@ class Map extends PureComponent {
           />
           <Layer layer={this.state.layers.get('campsHalo_hover')} />
           <Layer layer={this.state.layers.get('campsNames')} />
+          <Layer layer={this.state.layers.get('campHalo_active')} />
+          <Layer layer={this.state.layers.get('campName_active')} />
         </MapGL>
         {/* <Controls slideUp={isSlideUp}>
           <MapButton

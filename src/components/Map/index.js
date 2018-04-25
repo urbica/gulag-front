@@ -26,7 +26,8 @@ const mapStateToProps = createSelector(
     viewport,
     isShowAllPrisons,
     campsSource,
-    lang
+    lang,
+    campId: pathname.match(/\d+/) ? pathname.match(/\d+/)[0] : ''
   })
 );
 

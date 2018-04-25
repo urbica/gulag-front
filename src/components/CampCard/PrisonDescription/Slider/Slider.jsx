@@ -1,6 +1,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
+// icon
+import cross from '../../../cross.svg';
+
 // styled
 import {
   Container,
@@ -9,9 +12,9 @@ import {
   Img,
   Left,
   Right,
-  Close,
   Wrapper
 } from './Slider.styled';
+import CardButton from '../../CardButton';
 
 class Component extends PureComponent {
   render() {
@@ -48,7 +51,9 @@ class Component extends PureComponent {
         </Gallery>
         <Left onClick={handleClick.bind(null, true)} />
         <Right onClick={handleClick.bind(null, false)} />
-        <Close onClick={handleToggleVisible} />
+        <CardButton onClick={handleToggleVisible}>
+          <img src={cross} alt='cross' />
+        </CardButton>
       </Container>
     );
   }

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { t } from '../../intl/helper';
 
 // images
-import close from '../cross.svg';
+import cross from '../cross.svg';
 
 // components
 import YearsOfOperation from './YearsOfOperation/YearsOfOperation';
@@ -120,7 +120,7 @@ class CampCard extends PureComponent {
           <h1>{camp.getIn(['title', lang])}</h1>
           <Location>{camp.getIn(['subTitles', lang])}</Location>
           <CardButton onClick={closeCard}>
-            <img src={close} alt='cross' />
+            <img src={cross} alt='cross' />
           </CardButton>
         </Top>
         <Left>

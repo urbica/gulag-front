@@ -55,13 +55,22 @@ class CampCard extends PureComponent {
   }
 
   componentDidMount() {
-    const coordinates = this.props.camp
+    const { currentYear, camp, changeCurrentYear } = this.props;
+    const coordinates = camp
       .getIn(['locations', 0, 'geometry', 'coordinates'])
       .toJS();
     const newViewport = {
       latitude: coordinates[1],
       longitude: coordinates[0]
     };
+    const campYears = camp
+      .get('locations')
+      .flatMap(location => location.get('statistics'))
+      .map(statistics => statistics.get('year'));
+
+    if (!campYears.includes(currentYear)) {
+      changeCurrentYear(campYears.first());
+    }
     this.props.changeViewport(newViewport);
   }
 
@@ -163,7 +172,9 @@ CampCard.propTypes = {
   lang: PropTypes.string.isRequired,
   closeCard: PropTypes.func.isRequired,
   activities: PropTypes.object.isRequired,
-  changeViewport: PropTypes.func.isRequired
+  changeViewport: PropTypes.func.isRequired,
+  currentYear: PropTypes.number.isRequired,
+  changeCurrentYear: PropTypes.func.isRequired
 };
 
 export default CampCard;

@@ -5,10 +5,14 @@ import { connect } from 'react-redux';
 import { branch, compose, renderNothing } from 'recompose';
 
 // selectors
-import { langSelector, activitiesSelector } from '../App/selectors';
+import {
+  langSelector,
+  activitiesSelector,
+  currentYearSelector
+} from '../App/selectors';
 import prisonSelector from './selector';
 
-import { changeViewport } from '../App/reducers/uiReducer';
+import { changeViewport, changeCurrentYear } from '../App/reducers/uiReducer';
 
 import CampCard from './CampCard';
 
@@ -16,12 +20,14 @@ const mapStateToProps = createSelector(
   langSelector,
   prisonSelector,
   activitiesSelector,
-  (lang, camp, activities) => {
+  currentYearSelector,
+  (lang, camp, activities, currentYear) => {
     if (!activities) {
       return {
         lang,
         camp,
-        activities: null
+        activities: null,
+        currentYear
       };
     }
 
@@ -31,13 +37,15 @@ const mapStateToProps = createSelector(
       activities: activities.reduce(
         (acc, ativity) => acc.set(ativity.get('id'), ativity),
         Map()
-      )
+      ),
+      currentYear
     };
   }
 );
 const mapDispatchToProps = dispatch => ({
   closeCard: () => dispatch(push('/')),
-  changeViewport: newViewport => dispatch(changeViewport(newViewport))
+  changeViewport: newViewport => dispatch(changeViewport(newViewport)),
+  changeCurrentYear: newYear => dispatch(changeCurrentYear(newYear))
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

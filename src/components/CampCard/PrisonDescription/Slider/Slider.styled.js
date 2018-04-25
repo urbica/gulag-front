@@ -32,7 +32,7 @@ const Container = styled.div`
 const Main = styled.div`
   top: 10vh;
   height: 60vh;
-  //width: 100%;
+  width: 90vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -40,7 +40,7 @@ const Main = styled.div`
 
   img {
     max-height: 100%;
-    max-width: 90vw;
+    max-width: 100%;
     opacity: 0;
     animation: ${showAnimation} 0.5s ease-in-out;
     animation-fill-mode: forwards;
@@ -73,12 +73,15 @@ const Gallery = styled.div`
   align-items: center;
 
   div {
-    height: 100%;
-    max-width: 90vw;
-    overflow: hidden;
     display: flex;
+    max-width: 90vw;
+    height: 100%;
+
     justify-content: flex-start;
     align-items: center;
+
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
   }
 `;
 
@@ -106,6 +109,10 @@ const Left = styled.div`
   &:hover {
     opacity: 0.8;
   }
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
 `;
 
 const Right = styled.div`
@@ -122,6 +129,10 @@ const Right = styled.div`
 
   &:hover {
     opacity: 0.8;
+  }
+
+  @media (max-width: 1024px) {
+    display: none;
   }
 `;
 

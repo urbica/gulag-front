@@ -41,7 +41,7 @@ class Component extends PureComponent {
                 isActive={i === active}
                 src={item.src}
                 alt='Photo'
-                key={Math.round(Math.random() * 100000)}
+                key={item.count}
               />
             ))}
           </div>

@@ -14,11 +14,20 @@ import Slider from './Slider';
 import Container from './Container';
 import ChartWrap from './ChartWrap';
 
+const calculateChartWidth = () => {
+  if (window.innerWidth > 1500) {
+    return 1300;
+  } else if (window.innerWidth >= 1024) {
+    return window.innerWidth - 300;
+  }
+  return window.innerWidth - 40;
+};
+
 class Chart extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      width: window.innerWidth > 1500 ? 1300 : window.innerWidth - 300
+      width: calculateChartWidth()
     };
 
     this.onResize = this.onResize.bind(this);
@@ -30,16 +39,7 @@ class Chart extends PureComponent {
   }
 
   onResize() {
-    let width;
-    const { innerWidth } = window;
-
-    if (innerWidth > 1500) {
-      width = 1300;
-    } else {
-      width = innerWidth - 300;
-    }
-
-    this.setState({ width });
+    this.setState({ width: calculateChartWidth() });
   }
 
   demo() {

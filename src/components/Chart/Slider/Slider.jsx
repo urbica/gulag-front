@@ -14,17 +14,27 @@ class Slider extends PureComponent {
     super(props);
     this.gRef = React.createRef();
     this.setYear = this.setYear.bind(this);
+    this.createSlider = this.createSlider.bind(this);
   }
 
   componentDidMount() {
-    const translateX = this.props.xScale(
-      new Date(this.props.currentYear, 0, 1)
-    );
-    const barWidth = Math.round(this.props.width / 42) - 2;
+    this.createSlider();
+  }
 
-    const { prisoners } = chartData.find(
-      d => d.year === this.props.currentYear
-    );
+  componentDidUpdate() {
+    this.createSlider();
+  }
+
+  createSlider() {
+    select(this.gRef.current)
+      .selectAll('*')
+      .remove();
+
+    const { xScale, currentYear, width } = this.props;
+    const translateX = xScale(new Date(currentYear, 0, 1));
+    const barWidth = Math.round(width / 42) - 2;
+
+    const { prisoners } = chartData.find(({ year }) => year === currentYear);
 
     const slider = select(this.gRef.current);
     this.handle = slider
@@ -49,8 +59,8 @@ class Slider extends PureComponent {
       .attr('stroke-width', 30)
       .attr('stroke', 'transparent')
       .attr('pointer-events', 'auto')
-      .attr('x1', this.props.xScale.range()[0])
-      .attr('x2', this.props.xScale.range()[1])
+      .attr('x1', xScale.range()[0])
+      .attr('x2', xScale.range()[1])
       .call(drag().on('start drag', this.setYear));
 
     // handle circle
@@ -78,7 +88,7 @@ class Slider extends PureComponent {
       .attr('height', 27)
       .attr('fill', '#1c232a')
       .attr('filter', 'url(#textShadow)')
-      .attr('transform', 'translate(-20, 4)')
+      .attr('transform', 'translate(-15, 4)')
       .attr('class', 'textShadow');
 
     // handle rect
@@ -106,9 +116,9 @@ class Slider extends PureComponent {
       .append('text')
       .attr('transform', 'translate(-11, 25)')
       .attr('class', 'currentYear')
-      .text(this.props.currentYear);
+      .text(currentYear);
 
-    if (this.props.width >= 724) {
+    if (window.innerWidth >= 1024) {
       // handle shadow
       this.handleShadow.attr('width', barWidth);
 
@@ -121,39 +131,7 @@ class Slider extends PureComponent {
         `translate(${-18.3 + barWidth / 2}, -5.5)`
       );
 
-      this.year.attr('transform', 'translate(-2, 25)');
-    }
-  }
-
-  componentWillReceiveProps({ width, xScale, currentYear }) {
-    const translateX = xScale(new Date(currentYear, 0, 1));
-    const barWidth = Math.round(width / 42) - 2;
-
-    const { prisoners } = chartData.find(d => d.year === currentYear);
-
-    this.handle.attr('transform', `translate(${translateX}, 0)`);
-
-    this.currentYearRect
-      .attr('width', barWidth)
-      .attr('height', height - yScale(prisoners))
-      .attr('transform', `translate(1, -${height - yScale(prisoners)})`);
-
-    this.sliderLine.attr('x1', xScale.range()[0]).attr('x2', xScale.range()[1]);
-
-    this.year.text(currentYear);
-
-    if (width >= 724) {
-      // handle shadow
-      this.handleShadow.attr('width', barWidth);
-
-      // handle rect
-      this.handleRect.attr('width', barWidth);
-
-      // handle lines
-      this.handleLines.attr(
-        'transform',
-        `translate(${-18.3 + barWidth / 2}, -5.5)`
-      );
+      this.year.attr('transform', `translate(-${(36 - barWidth) / 2}, 25)`);
     }
   }
 

@@ -72,12 +72,38 @@ class Map extends PureComponent {
     this.onLayerLeave = this.onLayerLeave.bind(this);
     this.openCampCardHandler = this.openCampCardHandler.bind(this);
     this.onLayerClick = this.onLayerClick.bind(this);
+    this.translateLayers = this.translateLayers.bind(this);
   }
 
   componentDidMount() {
     this.map = this.mapGlRef.current.getMap();
     this.map.on('zoomend', this.onZoomend);
     this.map.on('click', this.onMapClick);
+    this.map.on('load', this.translateLayers);
+  }
+
+  componentDidUpdate() {
+    this.translateLayers();
+  }
+
+  translateLayers() {
+    const translatedLayers = [
+      'marine-label-others-line',
+      'marine-label-others',
+      'marine-sea-line',
+      'marine-sea',
+      'oceans',
+      'water-label',
+      'ussr-name'
+    ];
+
+    translatedLayers.forEach(layer => {
+      this.map.setLayoutProperty(
+        layer,
+        'text-field',
+        `{name_${this.props.lang}}`
+      );
+    });
   }
 
   onZoomend() {

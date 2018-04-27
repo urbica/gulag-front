@@ -30,8 +30,8 @@ export default styled.button`
     width: 10px;
     height: 10px;
     border-${({ position }) =>
-    (position === 'left' ? 'left' : 'right')}: 2px solid rgba(255,255,255,0.5);
+      position === 'left' ? 'left' : 'right'}: 2px solid rgba(255,255,255,0.5);
     border-${({ position }) =>
-    (position === 'left' ? 'bottom' : 'top')}: 2px solid rgba(255,255,255,0.5);
+      position === 'left' ? 'bottom' : 'top'}: 2px solid rgba(255,255,255,0.5);
   }
 `;

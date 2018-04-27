@@ -45,7 +45,8 @@ const mapStateToProps = createSelector(
 const mapDispatchToProps = dispatch => ({
   closeCard: () => dispatch(push('/')),
   changeViewport: newViewport => dispatch(changeViewport(newViewport)),
-  changeCurrentYear: newYear => dispatch(changeCurrentYear(newYear))
+  changeCurrentYear: newYear => dispatch(changeCurrentYear(newYear)),
+  openCard: url => dispatch(push(`/${url}`))
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

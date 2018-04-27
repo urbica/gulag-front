@@ -9,10 +9,10 @@ import cross from '../cross.svg';
 
 // components
 import YearsOfOperation from './YearsOfOperation/YearsOfOperation';
-import PrisonDescription from './PrisonDescription/PrisonDescription';
+import CampDescription from './CampDescription/CampDescription';
 import PrisonChart from './PrisonChart/PrisonChart';
 // import Gallery from './campDescription/Gallery/Gallery';
-import Slider from './PrisonDescription/Slider/Slider';
+import Slider from './CampDescription/Slider/Slider';
 
 // styled
 import Container from './Container';
@@ -24,7 +24,7 @@ import Subtitle from './Subtitle';
 import Right from './Right';
 import CardButton from './CardButton';
 import Bottom from './Bottom';
-import Gallery from './PrisonDescription/Gallery/Gallery.styled';
+import Gallery from './CampDescription/Gallery/Gallery.styled';
 
 const getList = arr =>
   arr.get('photos').map((item, i) => ({
@@ -52,6 +52,7 @@ class CampCard extends PureComponent {
     this.handleToggleVisible = this.handleToggleVisible.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleClickActive = this.handleClickActive.bind(this);
+    this.linkOnClick = this.linkOnClick.bind(this);
   }
 
   componentDidMount() {
@@ -68,10 +69,18 @@ class CampCard extends PureComponent {
       .flatMap(location => location.get('statistics'))
       .map(statistics => statistics.get('year'));
 
+    const links = document.querySelectorAll('#campDescription a');
+    links.forEach(link => link.addEventListener('click', this.linkOnClick));
+
     if (!campYears.includes(currentYear)) {
       changeCurrentYear(campYears.first());
     }
     this.props.changeViewport(newViewport);
+  }
+
+  linkOnClick(event) {
+    event.preventDefault();
+    this.props.openCard(event.target.href.match(/camp\d+/)[0]);
   }
 
   handleOpen(e) {
@@ -131,7 +140,7 @@ class CampCard extends PureComponent {
             </div>
           </HalfWidth>
           <YearsOfOperation locations={camp.get('locations')} lang={lang} />
-          <PrisonDescription markup={markup} />
+          <CampDescription markup={markup} />
         </Left>
         <Right>
           <Subtitle>{t('prisonCard.prisonersByYears')}</Subtitle>
@@ -171,6 +180,7 @@ CampCard.propTypes = {
   camp: PropTypes.object.isRequired,
   lang: PropTypes.string.isRequired,
   closeCard: PropTypes.func.isRequired,
+  openCard: PropTypes.func.isRequired,
   activities: PropTypes.object.isRequired,
   changeViewport: PropTypes.func.isRequired,
   currentYear: PropTypes.number.isRequired,

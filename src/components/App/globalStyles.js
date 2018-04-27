@@ -23,6 +23,21 @@ import blackTtf from '../../assets/formular-black/formular-black.ttf';
 injectGlobal`
   * {
     box-sizing: border-box;
+
+    &::-webkit-scrollbar {
+     width: 0;
+   }
+
+   &::-webkit-scrollbar-track {
+     -webkit-box-shadow: none;
+     border-radius: 0;
+   }
+
+   &::-webkit-scrollbar-thumb {
+       border: transparent 1px solid;
+       border: transparent;
+       background-color: transparent;
+   }
   }
 
   @font-face {

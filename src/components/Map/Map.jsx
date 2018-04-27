@@ -198,6 +198,8 @@ class Map extends PureComponent {
           accessToken={mapToken}
           mapStyle='mapbox://styles/gulagmap/cj8bt4qbw7kbo2rry4oft6e5g'
           onViewportChange={changeViewport}
+          maxZoom={8}
+          minZoom={1.5}
           {...viewport.toJS()}
         >
           <Source id='camps' source={campsSource} />

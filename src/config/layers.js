@@ -117,10 +117,10 @@ export default Immutable.fromJS({
     filter: ['==', 'campId', '']
   },
   ussr: {
-    id: 'USSR',
+    id: 'ussr',
     type: 'fill',
     source: 'composite',
-    'source-layer': 'USSR_new-8b73vi',
+    'source-layer': 'ussr-boundary-ddtyj9',
     paint: {
       'fill-color': '#1B2128',
       'fill-antialias': false
@@ -158,21 +158,15 @@ export default Immutable.fromJS({
         stops: [[0, [0, -0.1]], [6, [0, -0.3]]]
       },
       'text-anchor': 'bottom',
-      'text-field': '{historical_name}',
-      'icon-padding': 1,
-      'icon-ignore-placement': true
+      'text-field': '{historical_name}'
     },
     paint: {
-      'text-color': '#6A748C',
-      'icon-opacity': {
-        base: 1,
-        stops: [[1, 1], [7, 1], [7.5, 0]]
-      }
+      'text-color': '#6A748C'
     },
     filter: ['all', ['==', 'year', 1937]]
   },
   citiesDots: {
-    id: 'city all last copy',
+    id: 'citiesDots',
     type: 'circle',
     metadata: {
       'mapbox:group': 'c6ab0d812282617f74a5b31640cfe7a8'

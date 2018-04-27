@@ -9,11 +9,12 @@ export default styled.g`
   & line {
     stroke: #fff;
     stroke-width: 1;
-    opacity: 0.25;
+    opacity: 0.4;
   }
 
   & text {
     fill: #e2f3e3;
     font-size: 12px;
+    opacity: 0.5;
   }
 `;

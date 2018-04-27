@@ -81,16 +81,6 @@ class Slider extends PureComponent {
       .attr('transform', 'translate(1, -5)')
       .attr('class', 'handleShadow');
 
-    // text shadow
-    this.textShadow = this.handle
-      .append('rect')
-      .attr('width', 60)
-      .attr('height', 27)
-      .attr('fill', '#1c232a')
-      .attr('filter', 'url(#textShadow)')
-      .attr('transform', 'translate(-15, 4)')
-      .attr('class', 'textShadow');
-
     // handle rect
     this.handleRect = this.handle
       .append('rect')

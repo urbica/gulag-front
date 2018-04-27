@@ -46,11 +46,7 @@ export default styled.g`
 
   .currentYear {
     fill: ${mainFontColour};
-  }
-
-  .textShadow {
-    @media (max-width: 1023px) {
-      display: none;
-    }
+    font-weight: 600;
+    text-shadow: 0 0 10px #2c3542;
   }
 `;

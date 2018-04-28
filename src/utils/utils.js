@@ -9,14 +9,14 @@ export const getPeriods = locations => {
         return [...acc, `${location.getIn(['statistics', 0, 'year'])}; `];
       }
       if (location.get('statistics').size > 1) {
-        const firstYear = location
-          .get('statistics')
-          .first()
-          .get('year');
-        const lastYear = location
-          .get('statistics')
-          .last()
-          .get('year');
+        const sortedStatistics = location.get('statistics').sort((a, b) => {
+          if (a.get('year') > b.get('year')) return 1;
+          if (a.get('year') < b.get('year')) return -1;
+          return 0;
+        });
+
+        const firstYear = sortedStatistics.first().get('year');
+        const lastYear = sortedStatistics.last().get('year');
 
         return [...acc, `${firstYear}—${lastYear}; `];
       }

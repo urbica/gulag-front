@@ -63,17 +63,19 @@ class Chart extends PureComponent {
 
   render() {
     const { width } = this.state;
+    const {
+      isDataLoading,
+      isDemoPlay,
+      currentYear,
+      isShowAll,
+      toggleAllPrisons
+    } = this.props;
 
     return (
-      <Container
-        mountOnEnter
-        unmountOnExit
-        in={!this.props.isDataLoading}
-        timeout={800}
-      >
-        <PlayButton isDemoPlayed={this.props.isDemoPlay} onClick={this.demo} />
+      <Container mountOnEnter unmountOnExit in={!isDataLoading} timeout={800}>
+        <PlayButton isDemoPlayed={isDemoPlay} onClick={this.demo} />
         <ChartWrap>
-          <ChartStat currentYear={this.props.currentYear} />
+          <ChartStat currentYear={currentYear} isShowAll={isShowAll} />
           <svg width={width} height={height + margin.top + margin.bottom}>
             <defs>
               <linearGradient
@@ -131,10 +133,7 @@ class Chart extends PureComponent {
             />
           </svg>
         </ChartWrap>
-        <ShowAllButton
-          isShowAll={this.props.isShowAll}
-          onClick={this.props.toggleAllPrisons}
-        />
+        <ShowAllButton isShowAll={isShowAll} onClick={toggleAllPrisons} />
       </Container>
     );
   }

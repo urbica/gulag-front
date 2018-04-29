@@ -33,7 +33,6 @@ class Slider extends PureComponent {
     const { xScale, currentYear, width } = this.props;
     const translateX = xScale(new Date(currentYear, 0, 1));
     const barWidth = Math.round(width / 42) - 2;
-
     const { prisoners } = chartData.find(({ year }) => year === currentYear);
 
     const slider = select(this.gRef.current);
@@ -43,7 +42,7 @@ class Slider extends PureComponent {
       .attr('transform', `translate(${translateX}, 0)`);
 
     // current year rect
-    this.currentYearRect = this.handle
+    this.handle
       .append('rect')
       .attr('x', 0)
       .attr('y', 0)
@@ -54,7 +53,7 @@ class Slider extends PureComponent {
       .attr('height', height - yScale(prisoners))
       .attr('transform', `translate(1, -${height - yScale(prisoners)})`);
 
-    this.sliderLine = slider
+    slider
       .append('line')
       .attr('stroke-width', 30)
       .attr('stroke', 'transparent')
@@ -104,7 +103,7 @@ class Slider extends PureComponent {
     // handle year
     this.year = this.handle
       .append('text')
-      .attr('transform', 'translate(-11, 25)')
+      .attr('transform', 'translate(-11, -25)')
       .attr('class', 'currentYear')
       .text(currentYear);
 

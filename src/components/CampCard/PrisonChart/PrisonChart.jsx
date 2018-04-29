@@ -15,12 +15,8 @@ const PrisonChart = ({ locations, lang }) => {
       []
     )
     .sort((a, b) => {
-      if (a.year < b.year) {
-        return -1;
-      }
-      if (a.year > b.year) {
-        return 1;
-      }
+      if (a.year > b.year) return 1;
+      if (a.year < b.year) return -1;
       return 0;
     });
 
@@ -42,7 +38,7 @@ const PrisonChart = ({ locations, lang }) => {
       width={width + margin.left + margin.right}
       height={height + margin.top + margin.bottom}
     >
-      <Axis ticks={lastYear - firstYear + 1} scale={yScale} height={height} />
+      <Axis scale={yScale} />
       <PrisonersArea
         lang={lang}
         data={data}

@@ -2,12 +2,11 @@ import { createSelector } from 'reselect';
 import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 
+import { langSelector } from '../App/selectors';
+
 import About from './About';
 
-const mapStateToProps = createSelector(
-  state => state.getIn(['intl', 'locale']),
-  locale => ({ locale })
-);
+const mapStateToProps = createSelector(langSelector, locale => ({ locale }));
 const mapDispatchToProps = dispatch => ({
   pushToRoot: () => dispatch(push('/'))
 });

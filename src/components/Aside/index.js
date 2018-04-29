@@ -1,7 +1,6 @@
 import { push } from 'react-router-redux';
-// import { updateIntl } from 'react-intl-redux';
-import { connect } from 'react-redux';
 import { updateIntl } from 'react-intl-redux';
+import { connect } from 'react-redux';
 
 import Aside from './Aside';
 

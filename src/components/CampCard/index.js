@@ -5,11 +5,8 @@ import { connect } from 'react-redux';
 import { branch, compose, renderNothing } from 'recompose';
 
 // selectors
-import {
-  langSelector,
-  activitiesSelector,
-  currentYearSelector
-} from '../App/selectors';
+import { langSelector, activitiesSelector } from '../App/selectors';
+import { currentYearSelector } from '../App/reducers/uiSelectors';
 import prisonSelector from './selector';
 
 import { changeViewport, changeCurrentYear } from '../App/reducers/uiReducer';

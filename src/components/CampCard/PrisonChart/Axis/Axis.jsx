@@ -1,49 +1,45 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { select } from 'd3-selection';
 import { axisLeft } from 'd3-axis';
+import { timeYear } from 'd3-time';
+import { select } from 'd3-selection';
+import PropTypes from 'prop-types';
 
 import Container from './Container';
 
 class Axis extends PureComponent {
-  componentDidMount() {
-    const { scale, ticks } = this.props;
+  constructor(props) {
+    super(props);
 
-    const axis = axisLeft(scale)
-      .ticks(ticks)
-      .tickSize(0);
-
-    this.g
-      .call(axis)
-      .selectAll('text')
-      .attr('y', 14);
+    this.gRef = React.createRef();
+    this.createAxis = this.createAxis.bind(this);
   }
 
-  componentWillReceiveProps({ scale, ticks }) {
+  componentDidMount() {
+    this.createAxis();
+  }
+
+  createAxis() {
+    const { scale } = this.props;
+
     const axis = axisLeft(scale)
-      .ticks(ticks)
+      .ticks(timeYear)
       .tickSize(0);
 
-    this.g
+    const el = select(this.gRef.current);
+
+    el
       .call(axis)
       .selectAll('text')
       .attr('y', 14);
   }
 
   render() {
-    return (
-      <Container
-        innerRef={(ref) => {
-          this.g = select(ref);
-        }}
-      />
-    );
+    return <Container innerRef={this.gRef} />;
   }
 }
 
 Axis.propTypes = {
-  scale: PropTypes.func.isRequired,
-  ticks: PropTypes.number.isRequired
+  scale: PropTypes.func.isRequired
 };
 
 export default Axis;

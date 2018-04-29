@@ -1,7 +1,7 @@
-import Immutable, { Map, List } from 'immutable';
 import { createSelector } from 'reselect';
+import { List } from 'immutable';
 
-import findMaxPrisoners from '../../utils/findMaxPrisoners';
+import { campTypeFiltersSelector } from './reducers/uiSelectors';
 
 export const langSelector = state => state.getIn(['intl', 'locale']);
 export const campsSelector = state => state.getIn(['data', 'camps']);
@@ -9,31 +9,13 @@ export const typesSelector = state => state.getIn(['data', 'types']);
 export const periodsSelector = state => state.getIn(['data', 'periods']);
 export const activitiesSelector = state => state.getIn(['data', 'activities']);
 export const regionsSelector = state => state.getIn(['data', 'regions']);
-export const currentYearSelector = state => state.getIn(['ui', 'currentYear']);
-export const viewportSelector = state => state.getIn(['ui', 'viewport']);
-export const isShowAllPrisonsSelector = state =>
-  state.getIn(['ui', 'isShowAllPrisons']);
-export const isCampFiltersOpenSelector = state =>
-  state.getIn(['ui', 'isCampFiltersOpen']);
-export const campTypeFiltersSelector = state =>
-  state.getIn(['ui', 'campTypeFilters']);
 
-const emptyGeoJSONSource = Immutable.fromJS({
-  type: 'geojson',
-  data: {
-    type: 'FeatureCollection',
-    features: []
-  }
-});
-
-const filteredCampsSelector = createSelector(
+export const filteredCampsSelector = createSelector(
   campsSelector,
   langSelector,
   campTypeFiltersSelector,
   (camps, lang, campTypeFilters) => {
-    if (!camps) {
-      return List();
-    }
+    if (!camps) return List();
 
     return camps.filter(camp => {
       const campType = camp.get('typeId') && camp.get('typeId').toString();
@@ -46,97 +28,3 @@ const filteredCampsSelector = createSelector(
     });
   }
 );
-
-export const prisonSourceSelector = createSelector(
-  filteredCampsSelector,
-  langSelector,
-  campTypeFiltersSelector,
-  isShowAllPrisonsSelector,
-  currentYearSelector,
-  (camps, lang, campTypeFilters, isShowAllCamps, currentYear) => {
-    const features = camps.reduce((accCamps, camp) => {
-      const locations = camp
-        .get('locations')
-        .reduce((accLocations, location) => {
-          const statistics = location
-            .get('statistics')
-            .find(stat => stat.get('year') === currentYear);
-
-          if (isShowAllCamps) {
-            const properties = Map({
-              campId: camp.get('id'),
-              ruName: camp.getIn(['title', 'ru']),
-              enName: camp.getIn(['title', 'en']),
-              deName: camp.getIn(['title', 'de']),
-              typeId: camp.get('typeId'),
-              peoples: findMaxPrisoners(location.get('statistics'))
-            });
-
-            const feature = Map({
-              type: 'Feature',
-              geometry: location.get('geometry'),
-              properties
-            });
-
-            return accLocations.push(feature);
-          }
-
-          if (!statistics) {
-            return accLocations;
-          }
-
-          const properties = Map({
-            campId: camp.get('id'),
-            ruName: camp.getIn(['title', 'ru']),
-            enName: camp.getIn(['title', 'en']),
-            deName: camp.getIn(['title', 'de']),
-            typeId: camp.get('typeId'),
-            peoples: statistics.get('prisonersCount')
-          });
-
-          const feature = Map({
-            type: 'Feature',
-            geometry: location.get('geometry'),
-            properties
-          });
-
-          return accLocations.push(feature);
-        }, List());
-
-      return accCamps.merge(locations);
-    }, List());
-
-    return emptyGeoJSONSource.setIn(['data', 'features'], features);
-  }
-);
-
-// const ussrLayerId = mapStyle
-//   .get('layers')
-//   .findIndex(layer => layer.get('id') === 'USSR');
-//
-// const citiesLayerId = mapStyle
-//   .get('layers')
-//   .findIndex(layer => layer.get('id') === 'city all last');
-
-// const getUSSRBoundaryFilterByYear = () => {
-//   if (currentYear !== 1960) {
-//     return Immutable.fromJS([
-//       'all',
-//       ['<=', 'year_start', currentYear],
-//       ['>', 'year_end', currentYear]
-//     ]);
-//   }
-//
-//   return Immutable.fromJS(['all', ['==', 'year_end', currentYear]]);
-// };
-// const citiesFilterByYear = Immutable.fromJS([
-//   'all',
-//   ['==', 'year', currentYear]
-// ]);
-//
-// const citiesLang = `{historical_name${lang === 'ru' ? '' : '_en'}}`;
-
-// return mapStyle
-//  .setIn(['layers', ussrLayerId, 'filter'], getUSSRBoundaryFilterByYear())
-//   .setIn(['layers', citiesLayerId, 'filter'], citiesFilterByYear)
-//   .setIn(['layers', citiesLayerId, 'layout', 'text-field'], citiesLang);

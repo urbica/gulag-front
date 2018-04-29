@@ -96,16 +96,16 @@ class CampCard extends PureComponent {
 
   handleClick(bool) {
     const { camp } = this.props;
-    const { active } = this.state;
     const arr = getList(camp);
+
     if (bool) {
-      this.setState({
-        active: arr.get(active - 1) ? this.state.active - 1 : arr.size - 1
-      });
+      this.setState(({ active }) => ({
+        active: arr.get(active - 1) ? active - 1 : arr.size - 1
+      }));
     } else {
-      this.setState({
+      this.setState(({ active }) => ({
         active: arr.get(active + 1) ? active + 1 : 0
-      });
+      }));
     }
   }
 

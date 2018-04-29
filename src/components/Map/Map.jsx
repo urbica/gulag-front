@@ -34,7 +34,6 @@ class Map extends PureComponent {
     const citiesNames = `{historical_name${
       nextProps.lang === 'ru' ? '' : '_en'
     }}`;
-    const campsNames = `{${nextProps.lang}Name}`;
     const activeCampHaloFilter = Immutable.List([
       'all',
       ['==', 'campId', parseInt(nextProps.campId, 10)]
@@ -49,10 +48,8 @@ class Map extends PureComponent {
       .setIn(['cities', 'filter'], citiesFilter)
       .setIn(['citiesDots', 'filter'], citiesFilter)
       .setIn(['cities', 'layout', 'text-field'], citiesNames)
-      .setIn(['campsNames', 'layout', 'text-field'], campsNames)
       .setIn(['campHalo_active', 'filter'], activeCampHaloFilter)
-      .setIn(['campName_active', 'filter'], activeCampNameFilter)
-      .setIn(['campName_active', 'layout', 'text-field'], campsNames);
+      .setIn(['campName_active', 'filter'], activeCampNameFilter);
 
     return { layers: updatedLayers };
   }
@@ -163,11 +160,7 @@ class Map extends PureComponent {
     if (e.features.length > 1) {
       const div = document.createElement('div');
       ReactDom.render(
-        <Popup
-          features={e.features}
-          onClick={this.openCampCardHandler}
-          lang={this.props.lang}
-        />,
+        <Popup features={e.features} onClick={this.openCampCardHandler} />,
         div
       );
 
@@ -246,17 +239,13 @@ class Map extends PureComponent {
 }
 
 Map.propTypes = {
-  isSlideUp: PropTypes.bool,
+  isSlideUp: PropTypes.bool.isRequired,
   viewport: PropTypes.object.isRequired,
   campsSource: PropTypes.object.isRequired,
   changeViewport: PropTypes.func.isRequired,
   openCampCard: PropTypes.func.isRequired,
   lang: PropTypes.string.isRequired,
   closeCampCard: PropTypes.func.isRequired
-};
-
-Map.defaultProps = {
-  isSlideUp: false
 };
 
 export default Map;

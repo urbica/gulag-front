@@ -1,6 +1,6 @@
-import transition from 'styled-transition-group';
+import styled from 'styled-components';
 
-export default transition.div`
+export default styled.div`
   position: fixed;
 
   display: flex;
@@ -9,16 +9,7 @@ export default transition.div`
   justify-content: center;
   align-items: center;
 
-  background-color: #2C3542;
+  background-color: #2c3542;
 
   z-index: 1;
-
-  &:exit {
-    opacity: 1;
-  }
-
-  &:exit-active {
-    opacity: 0;
-    transition: opacity ${({ timeout }) => timeout}ms ease-in-out;
-  }
 `;

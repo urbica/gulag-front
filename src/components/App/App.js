@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import './globalStyles';
 
-import Preloader from '../Preloader/Preloader';
+import Preloader from '../Preloader';
 import Map from '../Map';
 import Menu from '../Menu/Menu';
 import Chart from '../Chart';

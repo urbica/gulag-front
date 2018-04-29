@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Container from './Container';
 import Button from './Button';
 
-const Popup = ({ features, onClick, lang }) => (
+const Popup = ({ features, onClick }) => (
   <Container>
     {features.map(f => (
       <Button
@@ -16,7 +16,7 @@ const Popup = ({ features, onClick, lang }) => (
           f.properties.campId
         )}
       >
-        {f.properties[`${lang}Name`]}
+        {f.properties.name}
       </Button>
     ))}
   </Container>
@@ -24,8 +24,7 @@ const Popup = ({ features, onClick, lang }) => (
 
 Popup.propTypes = {
   features: PropTypes.arrayOf(PropTypes.object).isRequired,
-  onClick: PropTypes.func.isRequired,
-  lang: PropTypes.string.isRequired
+  onClick: PropTypes.func.isRequired
 };
 
 export default Popup;

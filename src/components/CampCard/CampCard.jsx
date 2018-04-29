@@ -80,6 +80,7 @@ class CampCard extends PureComponent {
 
   linkOnClick(event) {
     event.preventDefault();
+    window.scrollTo(0, 0);
     this.props.openCard(event.target.href.match(/camp\d+/)[0]);
   }
 

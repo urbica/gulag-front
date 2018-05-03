@@ -32,9 +32,11 @@ class Component extends PureComponent {
         <Wrapper onClick={handleToggleVisible} />
         <Main isOpened={photo.isOpened}>
           <img src={list.getIn([active, 'src'])} alt='' />
-          <article>
-            <span>{list.getIn([active, 'description-ru'])}</span>
-          </article>
+          {list.getIn([active, 'description-ru']) !== '' && (
+            <article>
+              <span>{list.getIn([active, 'description-ru'])}</span>
+            </article>
+          )}
         </Main>
         <Gallery>
           <div>

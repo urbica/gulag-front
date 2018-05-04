@@ -21,7 +21,7 @@ test:
     paths:
       - build
 
-build:latest:
+build_latest:
   stage: build
   image: docker:git
   services:
@@ -37,7 +37,7 @@ build:latest:
     - master
     - dev
 
-build:release:
+build_release:
   stage: build
   image: docker:git
   services:
@@ -52,7 +52,7 @@ build:release:
   only:
     - tags
 
-deploy:
+deploy_staging:
   image: alpine
   stage: deploy
   before_script:
@@ -67,4 +67,21 @@ deploy:
     name: production
     url: http://gulag.urbica.co
   only:
-    - master
+    - dev
+
+# deploy_production:
+#   image: alpine
+#   stage: deploy
+#   before_script:
+#     - apk add --no-cache openssh
+#     - mkdir -p ~/.ssh
+#     - echo "$SSH_PRIVATE_KEY" >> ~/.ssh/id_rsa
+#     - chmod 600 ~/.ssh/id_rsa
+#     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+#   script:
+#     - ssh docker@gulagmap.ru 'bash -s' < deploy-production.sh
+#   environment:
+#     name: production
+#     url: http://gulagmap.ru
+#   only:
+#     - master

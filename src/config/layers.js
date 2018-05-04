@@ -144,7 +144,7 @@ export default Immutable.fromJS({
       'mapbox:group': 'c6ab0d812282617f74a5b31640cfe7a8'
     },
     source: 'composite',
-    'source-layer': 'allCities-difd7x',
+    'source-layer': 'cities-9p6fen',
     layout: {
       'text-size': {
         base: 1,

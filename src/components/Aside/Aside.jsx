@@ -9,7 +9,7 @@ import cross from '../cross.svg';
 import Container from './Container';
 import CloseButton from './CloseButton';
 import Button from './Button';
-import LangButton from './LangButton';
+// import LangButton from './LangButton';
 
 const Aside = props => {
   const {
@@ -18,9 +18,9 @@ const Aside = props => {
     pushToSearch,
     closeMenu,
     pushToChronology,
-    pushToAbout,
-    locale,
-    changeLang
+    pushToAbout
+    // locale,
+    // changeLang
   } = props;
 
   return (
@@ -35,7 +35,7 @@ const Aside = props => {
       </div>
       <div>
         <Button onClick={pushToAbout}>{t('aboutCard.heading')}</Button>
-        <div>
+        {/* <div>
           <LangButton
             isActive={locale === 'ru'}
             onClick={changeLang.bind(null, 'ru')}
@@ -48,13 +48,13 @@ const Aside = props => {
           >
             Eng
           </LangButton>
-          {/* <LangButton
+          <LangButton
             isActive={locale === 'de'}
             onClick={changeLang.bind(null, 'en')}
           >
             Deu
-          </LangButton> */}
-        </div>
+          </LangButton>
+        </div> */}
       </div>
     </Container>
   );
@@ -66,9 +66,9 @@ Aside.propTypes = {
   closeMenu: PropTypes.func.isRequired,
   openCampFilters: PropTypes.func.isRequired,
   pushToChronology: PropTypes.func.isRequired,
-  pushToAbout: PropTypes.func.isRequired,
-  locale: PropTypes.string.isRequired,
-  changeLang: PropTypes.func.isRequired
+  pushToAbout: PropTypes.func.isRequired // ,
+  // locale: PropTypes.string.isRequired,
+  // changeLang: PropTypes.func.isRequired
 };
 
 export default Aside;

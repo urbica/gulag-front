@@ -14,8 +14,8 @@ import Description from './Description';
 import Container from './Container';
 // import { CardButton } from '../StyledButtons';
 
-const PrisonDescription = ({ markup }) => (
-  <Container>
+const CampDescription = ({ markup }) => (
+  <Container id='campDescription'>
     {parseMarkup(markup).map((elem, i) => {
       switch (elem.type) {
         case 'description': {
@@ -52,8 +52,8 @@ const PrisonDescription = ({ markup }) => (
   </Container>
 );
 
-PrisonDescription.propTypes = {
+CampDescription.propTypes = {
   markup: PropTypes.string.isRequired
 };
 
-export default PrisonDescription;
+export default CampDescription;

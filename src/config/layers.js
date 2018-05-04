@@ -98,31 +98,12 @@ export default Immutable.fromJS({
     },
     filter: ['==', 'campId', '']
   },
-  // prisonsHalo_active: {
-  //   id: 'prisonsHalo_active',
-  //   type: 'circle',
-  //   source: 'camps',
-  //   paint: {
-  //     'circle-color': '#eb4200',
-  //     'circle-opacity': 0.7,
-  //     'circle-radius': {
-  //       property: 'peoples',
-  //       stops: [
-  //         [{ zoom: 1, value: 0 }, 4],
-  //         [{ zoom: 1, value: 200000 }, 20],
-  //         [{ zoom: 18, value: 0 }, 32],
-  //         [{ zoom: 18, value: 200000 }, 400]
-  //       ]
-  //     }
-  //   },
-  //   filter: ['==', 'id', '']
-  // },
   campsNames: {
     id: 'campsNames',
     type: 'symbol',
     source: 'camps',
     layout: {
-      'text-field': '{ruName}',
+      'text-field': '{name}',
       'text-size': {
         stops: [[0, 8], [4, 10], [6, 14], [12, 22], [22, 28]]
       },
@@ -136,10 +117,10 @@ export default Immutable.fromJS({
     filter: ['==', 'campId', '']
   },
   ussr: {
-    id: 'USSR',
+    id: 'ussr',
     type: 'fill',
     source: 'composite',
-    'source-layer': 'USSR_new-8b73vi',
+    'source-layer': 'ussr-boundary-ddtyj9',
     paint: {
       'fill-color': '#1B2128',
       'fill-antialias': false
@@ -177,21 +158,15 @@ export default Immutable.fromJS({
         stops: [[0, [0, -0.1]], [6, [0, -0.3]]]
       },
       'text-anchor': 'bottom',
-      'text-field': '{historical_name}',
-      'icon-padding': 1,
-      'icon-ignore-placement': true
+      'text-field': '{historical_name}'
     },
     paint: {
-      'text-color': '#6A748C',
-      'icon-opacity': {
-        base: 1,
-        stops: [[1, 1], [7, 1], [7.5, 0]]
-      }
+      'text-color': '#6A748C'
     },
     filter: ['all', ['==', 'year', 1937]]
   },
   citiesDots: {
-    id: 'city all last copy',
+    id: 'citiesDots',
     type: 'circle',
     metadata: {
       'mapbox:group': 'c6ab0d812282617f74a5b31640cfe7a8'
@@ -211,21 +186,58 @@ export default Immutable.fromJS({
       }
     },
     filter: ['all', ['==', 'year', 1937]]
+  },
+  campHalo_active: {
+    id: 'campHalo_hover',
+    type: 'circle',
+    source: 'camps',
+    paint: {
+      'circle-color': [
+        'match',
+        ['get', 'typeId'],
+        1,
+        `rgb(${campColors[1]})`,
+        2,
+        `rgb(${campColors[2]})`,
+        3,
+        `rgb(${campColors[3]})`,
+        4,
+        `rgb(${campColors[4]})`,
+        5,
+        `rgb(${campColors[5]})`,
+        6,
+        `rgb(${campColors[6]})`,
+        /* other */ '#ccc'
+      ],
+      'circle-opacity': 0.5,
+      'circle-radius': {
+        property: 'peoples',
+        stops: [
+          [{ zoom: 1, value: 0 }, 4],
+          [{ zoom: 1, value: 200000 }, 20],
+          [{ zoom: 18, value: 0 }, 32],
+          [{ zoom: 18, value: 200000 }, 400]
+        ]
+      }
+    },
+    filter: ['==', 'campId', '']
+  },
+  campName_active: {
+    id: 'campName_active',
+    type: 'symbol',
+    source: 'camps',
+    layout: {
+      'text-field': '{name}',
+      'text-size': {
+        stops: [[0, 8], [4, 10], [6, 14], [12, 22], [22, 28]]
+      },
+      'text-anchor': 'left',
+      'text-justify': 'left',
+      'text-offset': [1.5, 0]
+    },
+    paint: {
+      'text-color': '#fff'
+    },
+    filter: ['==', 'campId', '']
   }
-  // prisonsNames_active: {
-  //   id: 'prisonsNames_active',
-  //   type: 'symbol',
-  //   source: 'camps',
-  //   layout: {
-  //     'text-field': '{ruName}',
-  //     'text-size': 12,
-  //     'text-anchor': 'left',
-  //     'text-justify': 'left',
-  //     'text-offset': [1.5, 0]
-  //   },
-  //   paint: {
-  //     'text-color': '#fff'
-  //   },
-  //   filter: ['==', 'id', '']
-  // }
 });

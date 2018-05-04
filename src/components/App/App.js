@@ -1,9 +1,10 @@
+/* eslint-disable react/prop-types */
 import React, { Fragment } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import './globalStyles';
 
-import Preloader from '../Preloader/Preloader';
+import Preloader from '../Preloader';
 import Map from '../Map';
 import Menu from '../Menu/Menu';
 import Chart from '../Chart';
@@ -29,7 +30,10 @@ const App = () => {
         <Route path='/search' component={Search} />
         <Route path='/chronology' component={Chronology} />
         <Route path='/about' component={About} />
-        <Route path='/camp:id' component={CampCard} />
+        <Route
+          path='/camp:id'
+          render={props => <CampCard key={props.match.params.id} {...props} />}
+        />
       </Switch>
     </Fragment>
   );

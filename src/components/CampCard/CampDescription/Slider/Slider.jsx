@@ -1,6 +1,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
+// icon
+import cross from '../../../cross.svg';
+
 // styled
 import {
   Container,
@@ -9,9 +12,9 @@ import {
   Img,
   Left,
   Right,
-  Close,
   Wrapper
 } from './Slider.styled';
+import CardButton from '../../CardButton';
 
 class Component extends PureComponent {
   render() {
@@ -29,9 +32,11 @@ class Component extends PureComponent {
         <Wrapper onClick={handleToggleVisible} />
         <Main isOpened={photo.isOpened}>
           <img src={list.getIn([active, 'src'])} alt='' />
-          <article>
-            <span>{list.getIn([active, 'description-ru'])}</span>
-          </article>
+          {list.getIn([active, 'description-ru']) !== '' && (
+            <article>
+              <span>{list.getIn([active, 'description-ru'])}</span>
+            </article>
+          )}
         </Main>
         <Gallery>
           <div>
@@ -41,14 +46,16 @@ class Component extends PureComponent {
                 isActive={i === active}
                 src={item.src}
                 alt='Photo'
-                key={Math.round(Math.random() * 100000)}
+                key={item.count}
               />
             ))}
           </div>
         </Gallery>
         <Left onClick={handleClick.bind(null, true)} />
         <Right onClick={handleClick.bind(null, false)} />
-        <Close onClick={handleToggleVisible} />
+        <CardButton onClick={handleToggleVisible}>
+          <img src={cross} alt='cross' />
+        </CardButton>
       </Container>
     );
   }

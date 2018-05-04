@@ -1,44 +1,11 @@
-const campsSelector = state => state.getIn(['data', 'camps']);
-
-// const withFirstYear = (prison) => {
-//   const firstYear = prison
-//     .getIn(['features', 0, 'properties'])
-//     .keySeq()
-//     .first();
-//
-//   return prison.set('firstYear', firstYear);
-// };
-
-// const withActivityName = (activities, prison) => {
-//   const activityId = prison.get('activityId');
-//
-//   if (activityId === null) {
-//     return prison;
-//   }
-//
-//   const activityName = activities
-//     .find(activity => activity.get('id') === activityId)
-//     .getIn(['title', 'ru']);
-//
-//   return prison.set('activity', activityName);
-// };
+import { filteredCampsSelector } from '../App/selectors';
 
 export default (state, { match }) => {
-  const camps = campsSelector(state);
-
-  if (!camps) {
-    return null;
-  }
+  const camps = filteredCampsSelector(state);
 
   const curentCamp = camps
     .filter(camp => camp.get('id') === Number.parseInt(match.params.id, 10))
     .first();
-  // const activities = activitiesSelector(state);
 
   return curentCamp;
-  // return withActivityName(
-  //   activities,
-  //   withFirstYear(curentCamp)
-  //   curentCamp
-  // );
 };

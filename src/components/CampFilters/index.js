@@ -1,17 +1,26 @@
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import CampFilters from './CampFilters';
-import { isCampFiltersOpenSelector, typesSelector } from '../App/selectors';
+
+// selectors
+import { typesSelector, langSelector } from '../App/selectors';
+import {
+  isCampFiltersOpenSelector,
+  campTypeFiltersSelector
+} from '../App/reducers/uiSelectors';
+
+// actions
 import {
   toggleCampFilters,
   toggleCampTypeFilters
 } from '../App/reducers/uiReducer';
 
+import CampFilters from './CampFilters';
+
 const mapStateToProps = createSelector(
   typesSelector,
   isCampFiltersOpenSelector,
-  state => state.getIn(['ui', 'campTypeFilters']),
-  state => state.getIn(['intl', 'locale']),
+  campTypeFiltersSelector,
+  langSelector,
   (types, isCampFiltersOpen, campTypeFilters, locale) => ({
     types,
     isCampFiltersOpen,

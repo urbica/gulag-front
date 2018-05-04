@@ -5,14 +5,14 @@ import PropTypes from 'prop-types';
 import { t } from '../../intl/helper';
 
 // images
-import close from '../cross.svg';
+import cross from '../cross.svg';
 
 // components
 import YearsOfOperation from './YearsOfOperation/YearsOfOperation';
-import PrisonDescription from './PrisonDescription/PrisonDescription';
+import CampDescription from './CampDescription/CampDescription';
 import PrisonChart from './PrisonChart/PrisonChart';
 // import Gallery from './campDescription/Gallery/Gallery';
-import Slider from './PrisonDescription/Slider/Slider';
+import Slider from './CampDescription/Slider/Slider';
 
 // styled
 import Container from './Container';
@@ -24,7 +24,7 @@ import Subtitle from './Subtitle';
 import Right from './Right';
 import CardButton from './CardButton';
 import Bottom from './Bottom';
-import Gallery from './PrisonDescription/Gallery/Gallery.styled';
+import Gallery from './CampDescription/Gallery/Gallery.styled';
 
 const getList = arr =>
   arr.get('photos').map((item, i) => ({
@@ -52,6 +52,36 @@ class CampCard extends PureComponent {
     this.handleToggleVisible = this.handleToggleVisible.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleClickActive = this.handleClickActive.bind(this);
+    this.linkOnClick = this.linkOnClick.bind(this);
+  }
+
+  componentDidMount() {
+    const { currentYear, camp, changeCurrentYear } = this.props;
+    const coordinates = camp
+      .getIn(['locations', 0, 'geometry', 'coordinates'])
+      .toJS();
+    const newViewport = {
+      latitude: coordinates[1],
+      longitude: coordinates[0]
+    };
+    const campYears = camp
+      .get('locations')
+      .flatMap(location => location.get('statistics'))
+      .map(statistics => statistics.get('year'));
+
+    const links = document.querySelectorAll('#campDescription a');
+    links.forEach(link => link.addEventListener('click', this.linkOnClick));
+
+    if (!campYears.includes(currentYear)) {
+      changeCurrentYear(campYears.first());
+    }
+    this.props.changeViewport(newViewport);
+  }
+
+  linkOnClick(event) {
+    event.preventDefault();
+    window.scrollTo(0, 0);
+    this.props.openCard(event.target.href.match(/camp\d+/)[0]);
   }
 
   componentDidMount() {
@@ -71,16 +101,16 @@ class CampCard extends PureComponent {
 
   handleClick(bool) {
     const { camp } = this.props;
-    const { active } = this.state;
     const arr = getList(camp);
+
     if (bool) {
-      this.setState({
-        active: arr.get(active - 1) ? this.state.active - 1 : arr.size - 1
-      });
+      this.setState(({ active }) => ({
+        active: arr.get(active - 1) ? active - 1 : arr.size - 1
+      }));
     } else {
-      this.setState({
+      this.setState(({ active }) => ({
         active: arr.get(active + 1) ? active + 1 : 0
-      });
+      }));
     }
   }
 
@@ -104,7 +134,7 @@ class CampCard extends PureComponent {
           <h1>{camp.getIn(['title', lang])}</h1>
           <Location>{camp.getIn(['subTitles', lang])}</Location>
           <CardButton onClick={closeCard}>
-            <img src={close} alt='cross' />
+            <img src={cross} alt='cross' />
           </CardButton>
         </Top>
         <Left>
@@ -115,7 +145,7 @@ class CampCard extends PureComponent {
             </div>
           </HalfWidth>
           <YearsOfOperation locations={camp.get('locations')} lang={lang} />
-          <PrisonDescription markup={markup} />
+          <CampDescription markup={markup} />
         </Left>
         <Right>
           <Subtitle>{t('prisonCard.prisonersByYears')}</Subtitle>
@@ -152,15 +182,14 @@ class CampCard extends PureComponent {
 }
 
 CampCard.propTypes = {
-  camp: PropTypes.object,
+  camp: PropTypes.object.isRequired,
   lang: PropTypes.string.isRequired,
   closeCard: PropTypes.func.isRequired,
-  activities: PropTypes.object
-};
-
-CampCard.defaultProps = {
-  camp: null,
-  activities: null
+  openCard: PropTypes.func.isRequired,
+  activities: PropTypes.object.isRequired,
+  changeViewport: PropTypes.func.isRequired,
+  currentYear: PropTypes.number.isRequired,
+  changeCurrentYear: PropTypes.func.isRequired
 };
 
 export default CampCard;

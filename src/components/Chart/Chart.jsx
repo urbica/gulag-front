@@ -14,11 +14,20 @@ import Slider from './Slider';
 import Container from './Container';
 import ChartWrap from './ChartWrap';
 
+const calculateChartWidth = () => {
+  if (window.innerWidth > 1500) {
+    return 1300;
+  } else if (window.innerWidth >= 1024) {
+    return window.innerWidth - 300;
+  }
+  return window.innerWidth - 40;
+};
+
 class Chart extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      width: window.innerWidth > 1500 ? 1300 : window.innerWidth - 300
+      width: calculateChartWidth()
     };
 
     this.onResize = this.onResize.bind(this);
@@ -30,16 +39,7 @@ class Chart extends PureComponent {
   }
 
   onResize() {
-    let width;
-    const { innerWidth } = window;
-
-    if (innerWidth > 1500) {
-      width = 1300;
-    } else {
-      width = innerWidth - 300;
-    }
-
-    this.setState({ width });
+    this.setState({ width: calculateChartWidth() });
   }
 
   demo() {
@@ -63,17 +63,19 @@ class Chart extends PureComponent {
 
   render() {
     const { width } = this.state;
+    const {
+      isDataLoading,
+      isDemoPlay,
+      currentYear,
+      isShowAll,
+      toggleAllPrisons
+    } = this.props;
 
     return (
-      <Container
-        mountOnEnter
-        unmountOnExit
-        in={!this.props.isDataLoading}
-        timeout={800}
-      >
-        <PlayButton isDemoPlayed={this.props.isDemoPlay} onClick={this.demo} />
+      <Container mountOnEnter unmountOnExit in={!isDataLoading} timeout={800}>
+        <PlayButton isDemoPlayed={isDemoPlay} onClick={this.demo} />
         <ChartWrap>
-          <ChartStat currentYear={this.props.currentYear} />
+          <ChartStat currentYear={currentYear} isShowAll={isShowAll} />
           <svg width={width} height={height + margin.top + margin.bottom}>
             <defs>
               <linearGradient
@@ -131,10 +133,7 @@ class Chart extends PureComponent {
             />
           </svg>
         </ChartWrap>
-        <ShowAllButton
-          isShowAll={this.props.isShowAll}
-          onClick={this.props.toggleAllPrisons}
-        />
+        <ShowAllButton isShowAll={isShowAll} onClick={toggleAllPrisons} />
       </Container>
     );
   }

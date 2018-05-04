@@ -1,6 +1,5 @@
 import styled, { keyframes } from 'styled-components';
 
-import closeBtn from './group-9.svg';
 import arrow from './group-9-copy.svg';
 
 const showAnimation = keyframes`
@@ -12,7 +11,7 @@ const showAnimation = keyframes`
   }
 `;
 
-const Container = styled.div`
+export const Container = styled.div`
   width: 100%;
   height: 100vh;
   top: 0;
@@ -29,10 +28,10 @@ const Container = styled.div`
   z-index: 1000;
 `;
 
-const Main = styled.div`
+export const Main = styled.div`
   top: 10vh;
   height: 60vh;
-  //width: 100%;
+  width: 90vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -40,7 +39,7 @@ const Main = styled.div`
 
   img {
     max-height: 100%;
-    max-width: 90vw;
+    max-width: 100%;
     opacity: 0;
     animation: ${showAnimation} 0.5s ease-in-out;
     animation-fill-mode: forwards;
@@ -66,23 +65,26 @@ const Main = styled.div`
   }
 `;
 
-const Gallery = styled.div`
+export const Gallery = styled.div`
   height: 30vh;
   display: flex;
   justify-content: center;
   align-items: center;
 
   div {
-    height: 100%;
-    max-width: 90vw;
-    overflow: hidden;
     display: flex;
+    max-width: 90vw;
+    height: 100%;
+
     justify-content: flex-start;
     align-items: center;
+
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
   }
 `;
 
-const Img = styled.img`
+export const Img = styled.img`
   height: 50%;
   opacity: ${({ isActive }) => (isActive ? '1' : '0.6')};
   cursor: pointer;
@@ -90,7 +92,7 @@ const Img = styled.img`
   z-index: 10;
 `;
 
-const Left = styled.div`
+export const Left = styled.div`
   position: absolute;
   width: 5vw;
   height: 5vw;
@@ -106,9 +108,13 @@ const Left = styled.div`
   &:hover {
     opacity: 0.8;
   }
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
 `;
 
-const Right = styled.div`
+export const Right = styled.div`
   position: absolute;
   width: 5vw;
   height: 5vw;
@@ -123,31 +129,16 @@ const Right = styled.div`
   &:hover {
     opacity: 0.8;
   }
-`;
 
-const Close = styled.div`
-  position: absolute;
-  width: 5vw;
-  height: 5vw;
-  top: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 1) url(${closeBtn}) no-repeat 50% 50%;
-  background-size: cover;
-  cursor: pointer;
-  opacity: 1;
-  transition: 0.5s;
-
-  &:hover {
-    opacity: 0.8;
+  @media (max-width: 1024px) {
+    display: none;
   }
 `;
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   width: 100%;
   height: 100vh;
   position: absolute;
   top: 0;
   left: 0;
 `;
-
-export { Container, Main, Gallery, Img, Left, Right, Close, Wrapper };

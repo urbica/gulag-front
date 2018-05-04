@@ -7,7 +7,8 @@ export default styled.section`
   margin-top: 15px;
 
   img {
-    height: 250px;
+    max-width: 100%;
+    max-height: 250px;
     margin: 0 1rem 1rem 0;
   }
 `;

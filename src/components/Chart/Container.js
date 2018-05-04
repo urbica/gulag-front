@@ -10,8 +10,6 @@ export default transition.div`
   width: 100%;
   height: 200px;
 
-  background-image: linear-gradient(to bottom, rgba(27, 33, 40, 0), #1b2128);
-
   pointer-events: none;
 
   &:enter {

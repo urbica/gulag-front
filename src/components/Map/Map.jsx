@@ -34,14 +34,22 @@ class Map extends PureComponent {
     const citiesNames = `{historical_name${
       nextProps.lang === 'ru' ? '' : '_en'
     }}`;
-    const campsNames = `{${nextProps.lang}Name}`;
+    const activeCampHaloFilter = Immutable.List([
+      'all',
+      ['==', 'campId', parseInt(nextProps.campId, 10)]
+    ]);
+    const activeCampNameFilter = Immutable.List([
+      'all',
+      ['==', 'campId', parseInt(nextProps.campId, 10)]
+    ]);
 
     const updatedLayers = prevState.layers
       .setIn(['ussr', 'filter'], ussrFilter)
       .setIn(['cities', 'filter'], citiesFilter)
       .setIn(['citiesDots', 'filter'], citiesFilter)
       .setIn(['cities', 'layout', 'text-field'], citiesNames)
-      .setIn(['campsNames', 'layout', 'text-field'], campsNames);
+      .setIn(['campHalo_active', 'filter'], activeCampHaloFilter)
+      .setIn(['campName_active', 'filter'], activeCampNameFilter);
 
     return { layers: updatedLayers };
   }
@@ -61,12 +69,38 @@ class Map extends PureComponent {
     this.onLayerLeave = this.onLayerLeave.bind(this);
     this.openCampCardHandler = this.openCampCardHandler.bind(this);
     this.onLayerClick = this.onLayerClick.bind(this);
+    this.translateLayers = this.translateLayers.bind(this);
   }
 
   componentDidMount() {
     this.map = this.mapGlRef.current.getMap();
     this.map.on('zoomend', this.onZoomend);
     this.map.on('click', this.onMapClick);
+    this.map.on('load', this.translateLayers);
+  }
+
+  componentDidUpdate() {
+    this.translateLayers();
+  }
+
+  translateLayers() {
+    const translatedLayers = [
+      'marine-label-others-line',
+      'marine-label-others',
+      'marine-sea-line',
+      'marine-sea',
+      'oceans',
+      'water-label',
+      'ussr-name'
+    ];
+
+    translatedLayers.forEach(layer => {
+      this.map.setLayoutProperty(
+        layer,
+        'text-field',
+        `{name_${this.props.lang}}`
+      );
+    });
   }
 
   onZoomend() {
@@ -126,11 +160,7 @@ class Map extends PureComponent {
     if (e.features.length > 1) {
       const div = document.createElement('div');
       ReactDom.render(
-        <Popup
-          features={e.features}
-          onClick={this.openCampCardHandler}
-          lang={this.props.lang}
-        />,
+        <Popup features={e.features} onClick={this.openCampCardHandler} />,
         div
       );
 
@@ -161,6 +191,8 @@ class Map extends PureComponent {
           accessToken={mapToken}
           mapStyle='mapbox://styles/gulagmap/cj8bt4qbw7kbo2rry4oft6e5g'
           onViewportChange={changeViewport}
+          maxZoom={8}
+          minZoom={1.5}
           {...viewport.toJS()}
         >
           <Source id='camps' source={campsSource} />
@@ -180,6 +212,8 @@ class Map extends PureComponent {
           />
           <Layer layer={this.state.layers.get('campsHalo_hover')} />
           <Layer layer={this.state.layers.get('campsNames')} />
+          <Layer layer={this.state.layers.get('campHalo_active')} />
+          <Layer layer={this.state.layers.get('campName_active')} />
         </MapGL>
         {/* <Controls slideUp={isSlideUp}>
           <MapButton
@@ -205,17 +239,13 @@ class Map extends PureComponent {
 }
 
 Map.propTypes = {
-  isSlideUp: PropTypes.bool,
+  isSlideUp: PropTypes.bool.isRequired,
   viewport: PropTypes.object.isRequired,
   campsSource: PropTypes.object.isRequired,
   changeViewport: PropTypes.func.isRequired,
   openCampCard: PropTypes.func.isRequired,
   lang: PropTypes.string.isRequired,
   closeCampCard: PropTypes.func.isRequired
-};
-
-Map.defaultProps = {
-  isSlideUp: false
 };
 
 export default Map;

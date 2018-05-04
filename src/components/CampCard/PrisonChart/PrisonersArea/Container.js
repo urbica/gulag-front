@@ -22,6 +22,5 @@ export default styled.g`
     opacity: 0.2;
     fill: #e2f3e3;
     color: #e2f3e3;
-    transform: translate(10px, 18px);
   }
 `;

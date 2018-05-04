@@ -2,13 +2,16 @@ import { createSelector } from 'reselect';
 import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 
+// selectors
+import { langSelector } from '../App/selectors';
+import campsSourceSelector from './selectors';
 import {
-  currentYearSelector,
   viewportSelector,
-  isShowAllPrisonsSelector,
-  prisonSourceSelector,
-  langSelector
-} from '../App/selectors';
+  currentYearSelector,
+  isShowAllPrisonsSelector
+} from '../App/reducers/uiSelectors';
+
+// actions
 import { changeViewport, closeMenus } from '../App/reducers/uiReducer';
 
 import Map from './Map';
@@ -18,7 +21,7 @@ const mapStateToProps = createSelector(
   currentYearSelector,
   viewportSelector,
   isShowAllPrisonsSelector,
-  prisonSourceSelector,
+  campsSourceSelector,
   langSelector,
   (pathname, currentYear, viewport, isShowAllPrisons, campsSource, lang) => ({
     isSlideUp: /\/camp/.test(pathname),
@@ -26,20 +29,21 @@ const mapStateToProps = createSelector(
     viewport,
     isShowAllPrisons,
     campsSource,
-    lang
+    lang,
+    campId: pathname.match(/\d+/) ? pathname.match(/\d+/)[0] : ''
   })
 );
 
 const mapDispatchToProps = dispatch => ({
   changeViewport: newViewport => dispatch(changeViewport(newViewport)),
   openCampCard: (lngLat, id) => {
-    const newViewport = {
-      latitude: lngLat[1],
-      longitude: lngLat[0]
-    };
+    // const newViewport = {
+    //   latitude: lngLat[1],
+    //   longitude: lngLat[0]
+    // };
 
     dispatch(closeMenus());
-    dispatch(changeViewport(newViewport));
+    // dispatch(changeViewport(newViewport));
     dispatch(push(`/camp${id}`));
   },
   closeCampCard: () => {

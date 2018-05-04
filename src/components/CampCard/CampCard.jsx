@@ -84,10 +84,6 @@ class CampCard extends PureComponent {
     this.props.openCard(event.target.href.match(/camp\d+/)[0]);
   }
 
-  componentDidMount() {
-    console.log('CampCard#componentDidMount', this.props);
-  }
-
   handleOpen(e) {
     const active = parseInt(e.target.getAttribute('count'), 10);
 

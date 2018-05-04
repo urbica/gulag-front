@@ -46,6 +46,33 @@ services:
       - proxy
       - internal
 
+  gulag-admin:
+    image: gitlab.urbica.co:5001/gulag/admin:master
+    container_name: gulag-admin
+    restart: always
+    depends_on:
+      - gulag-api
+
+  gulag-api:
+    image: gitlab.urbica.co:5001/gulag/api:master
+    container_name: gulag-api
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - ./photos:/usr/src/app/photos
+    depends_on:
+      - gulag-db
+
+  gulag-db:
+    image: mdillon/postgis:9.6-alpine
+    container_name: gulag-db
+    restart: always
+    environment:
+      - POSTGRES_DB=db
+    volumes:
+      - ./db:/var/lib/postgresql/data
+
 networks:
   proxy:
     external: true

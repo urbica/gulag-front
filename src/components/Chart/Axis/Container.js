@@ -14,7 +14,10 @@ export default styled.g`
 
   & text {
     fill: #e2f3e3;
+
     font-size: 12px;
+    font-family: Formular;
+
     opacity: 0.5;
   }
 `;

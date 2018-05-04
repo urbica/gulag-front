@@ -16,6 +16,10 @@ export default styled.button`
 
   cursor: pointer;
 
+  &:last-child {
+    margin-bottom: 0;
+  }
+
   &:hover {
     opacity: 0.6;
   }

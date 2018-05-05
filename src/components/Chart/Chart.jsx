@@ -75,7 +75,9 @@ class Chart extends PureComponent {
       <Container mountOnEnter unmountOnExit in={!isDataLoading} timeout={800}>
         <PlayButton isDemoPlayed={isDemoPlay} onClick={this.demo} />
         <ChartWrap>
-          <ChartStat currentYear={currentYear} isShowAll={isShowAll} />
+          {this.props.isChartVisible && (
+            <ChartStat currentYear={currentYear} isShowAll={isShowAll} />
+          )}
           <svg width={width} height={height + margin.top + margin.bottom}>
             <defs>
               <linearGradient

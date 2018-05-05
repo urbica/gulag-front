@@ -193,6 +193,7 @@ class Map extends PureComponent {
           onViewportChange={changeViewport}
           maxZoom={8}
           minZoom={1.5}
+          pitchWithRotate={false}
           {...viewport.toJS()}
         >
           <Source id='camps' source={campsSource} />

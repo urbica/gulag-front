@@ -3,7 +3,7 @@ import { max } from 'd3-array';
 
 export const margin = {
   top: 5,
-  right: 15,
+  right: 25,
   bottom: 50,
   left: 15
 };

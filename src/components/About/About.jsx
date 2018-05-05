@@ -120,18 +120,18 @@ const About = ({ locale, pushToRoot }) => (
     </Description>
     <Link href='mailto:mail@gulagmap.ru'>mail@gulagmap.ru</Link>
     <Footer>
+      <a href='http://gmig.ru/' target='_blank' rel='noreferrer noopener'>
+        <img src={img.ru} alt='' />
+      </a>
+      <a href='http://urbica.co/' target='_blank' rel='noreferrer noopener'>
+        <img src={urbica} alt='URBICA' />
+      </a>
       <a
         href='https://президентскиегранты.рф/'
         target='_blank'
         rel='noreferrer noopener'
       >
         <img src={pgrants} alt='' />
-      </a>
-      <a href='http://gmig.ru/' target='_blank' rel='noreferrer noopener'>
-        <img src={img.ru} alt='' />
-      </a>
-      <a href='http://urbica.co/' target='_blank' rel='noreferrer noopener'>
-        <img src={urbica} alt='URBICA' />
       </a>
     </Footer>
   </FullScreenCard>

@@ -9,12 +9,13 @@ export const getPeriods = locations => {
       if (a.get('orderIndex') < b.get('orderIndex')) return -1;
       return 0;
     })
-    .reduce((acc, location) => {
+    .reduce((acc, location, key, iter) => {
       const statistics = location.get('statistics');
       if (!statistics || statistics.size === 0) return acc;
+      const comma = key !== iter.size - 1 ? ', ' : '';
 
       if (statistics.size === 1) {
-        return [...acc, `${statistics.getIn([0, 'year'])}; `];
+        return [...acc, `${statistics.getIn([0, 'year'])}${comma}`];
       }
 
       const sortedStatistics = statistics.sort((a, b) => {
@@ -26,6 +27,6 @@ export const getPeriods = locations => {
       const firstYear = sortedStatistics.first().get('year');
       const lastYear = sortedStatistics.last().get('year');
 
-      return [...acc, `${firstYear}—${lastYear}; `];
+      return [...acc, `${firstYear}—${lastYear}${comma}`];
     }, []);
 };

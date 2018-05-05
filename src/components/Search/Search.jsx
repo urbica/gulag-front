@@ -25,7 +25,13 @@ class Search extends PureComponent {
       searchQuery: ''
     };
 
+    this.inputRef = React.createRef();
+
     this.onSearchChange = this.onSearchChange.bind(this);
+  }
+
+  componentDidMount() {
+    this.inputRef.current.focus();
   }
 
   onSearchChange(e) {
@@ -56,7 +62,11 @@ class Search extends PureComponent {
 
     return (
       <FullScreenCard onClick={closeCard}>
-        <Input placeholder={placeholder[lang]} onChange={this.onSearchChange} />
+        <Input
+          innerRef={this.inputRef}
+          placeholder={placeholder[lang]}
+          onChange={this.onSearchChange}
+        />
         {campsFilteredBySearch.map(camp => (
           <Item
             key={camp.get('id')}

@@ -25,7 +25,7 @@ services:
       - gulag-api
 
   gulag-api:
-    image: gitlab.urbica.co:5001/gulag/api:master
+    image: gitlab.urbica.co:5001/gulag/api:dev
     container_name: gulag-api
     restart: always
     env_file:

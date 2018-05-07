@@ -6,44 +6,45 @@ import { branch, compose, renderNothing } from 'recompose';
 
 // selectors
 import { langSelector, activitiesSelector } from '../App/selectors';
-import { currentYearSelector } from '../App/reducers/uiSelectors';
-import prisonSelector from './selector';
+import {
+  currentYearSelector,
+  campTypeFiltersSelector
+} from '../App/reducers/uiSelectors';
+import campSelector from './selector';
 
-import { changeViewport, changeCurrentYear } from '../App/reducers/uiReducer';
+import {
+  changeViewport,
+  changeCurrentYear,
+  toggleCampTypeFilters
+} from '../App/reducers/uiReducer';
 
 import CampCard from './CampCard';
 
 const mapStateToProps = createSelector(
   langSelector,
-  prisonSelector,
+  campSelector,
   activitiesSelector,
   currentYearSelector,
-  (lang, camp, activities, currentYear) => {
-    if (!activities) {
-      return {
-        lang,
-        camp,
-        activities: null,
-        currentYear
-      };
-    }
-
-    return {
-      lang,
-      camp,
-      activities: activities.reduce(
-        (acc, ativity) => acc.set(ativity.get('id'), ativity),
-        Map()
-      ),
-      currentYear
-    };
-  }
+  campTypeFiltersSelector,
+  (lang, camp, activities, currentYear, campTypeFilters) => ({
+    lang,
+    camp,
+    activities: !activities
+      ? null
+      : activities.reduce(
+          (acc, ativity) => acc.set(ativity.get('id'), ativity),
+          Map()
+        ),
+    currentYear,
+    campTypeFilters
+  })
 );
 const mapDispatchToProps = dispatch => ({
   closeCard: () => dispatch(push('/')),
   changeViewport: newViewport => dispatch(changeViewport(newViewport)),
   changeCurrentYear: newYear => dispatch(changeCurrentYear(newYear)),
-  openCard: url => dispatch(push(`/${url}`))
+  openCard: url => dispatch(push(`/${url}`)),
+  toggleCampTypeFilters: id => dispatch(toggleCampTypeFilters(id))
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

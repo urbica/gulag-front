@@ -1,11 +1,19 @@
-import { filteredCampsSelector } from '../App/selectors';
+import { createSelector } from 'reselect';
 
-export default (state, { match }) => {
-  const camps = filteredCampsSelector(state);
+import { campsSelector, langSelector } from '../App/selectors';
 
-  const curentCamp = camps
-    .filter(camp => camp.get('id') === Number.parseInt(match.params.id, 10))
-    .first();
+export default createSelector(
+  campsSelector,
+  langSelector,
+  (state, { match }) => match,
+  (camps, lang, match) => {
+    if (!camps) return null;
 
-  return curentCamp;
-};
+    const curentCamp = camps
+      .filter(camp => camp.get('id') === Number.parseInt(match.params.id, 10))
+      .filter(camp => camp.getIn(['published', lang]))
+      .first();
+
+    return curentCamp;
+  }
+);

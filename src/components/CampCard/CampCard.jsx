@@ -56,7 +56,13 @@ class CampCard extends PureComponent {
   }
 
   componentDidMount() {
-    const { currentYear, camp, changeCurrentYear } = this.props;
+    const {
+      currentYear,
+      camp,
+      changeCurrentYear,
+      campTypeFilters,
+      toggleCampTypeFilters
+    } = this.props;
     const coordinates = camp
       .getIn(['locations', 0, 'geometry', 'coordinates'])
       .toJS();
@@ -71,6 +77,10 @@ class CampCard extends PureComponent {
 
     const links = document.querySelectorAll('#campDescription a');
     links.forEach(link => link.addEventListener('click', this.linkOnClick));
+
+    if (!campTypeFilters.get(camp.get('typeId').toString())) {
+      toggleCampTypeFilters(camp.get('typeId').toString());
+    }
 
     if (!campYears.includes(currentYear)) {
       changeCurrentYear(campYears.first());
@@ -185,7 +195,9 @@ CampCard.propTypes = {
   activities: PropTypes.object.isRequired,
   changeViewport: PropTypes.func.isRequired,
   currentYear: PropTypes.number.isRequired,
-  changeCurrentYear: PropTypes.func.isRequired
+  changeCurrentYear: PropTypes.func.isRequired,
+  campTypeFilters: PropTypes.object.isRequired,
+  toggleCampTypeFilters: PropTypes.func.isRequired
 };
 
 export default CampCard;

@@ -102,7 +102,15 @@ class CampCard extends PureComponent {
   }
 
   handleToggleVisible() {
-    this.setState({ isOpened: !this.state.isOpened });
+    if (this.state.isOpened) {
+      document.body.style.position = 'absolute';
+      document.body.style.height = '100vh';
+    } else {
+      document.body.style.position = 'fixed';
+      document.body.style.height = 'initial';
+    }
+
+    this.setState(({ isOpened }) => ({ isOpened: !isOpened }));
   }
 
   handleClick(bool) {

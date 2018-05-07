@@ -9,10 +9,7 @@ import {
 } from '../App/reducers/uiSelectors';
 
 // actions
-import {
-  toggleCampFilters,
-  toggleCampTypeFilters
-} from '../App/reducers/uiReducer';
+import { closeMenus, toggleCampTypeFilters } from '../App/reducers/uiReducer';
 
 import CampFilters from './CampFilters';
 
@@ -29,7 +26,7 @@ const mapStateToProps = createSelector(
   })
 );
 const mapDispatchToProps = dispatch => ({
-  closeCampFilters: () => dispatch(toggleCampFilters()),
+  closeCampFilters: () => dispatch(closeMenus()),
   toggleFilter: id => dispatch(toggleCampTypeFilters(id))
 });
 

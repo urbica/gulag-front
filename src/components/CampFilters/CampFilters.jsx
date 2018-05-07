@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import { t } from '../../intl/helper';
 
 // icon
-import arrow from './arrow.svg';
+import cross from '../cross.svg';
 
 // styled
 import Container from './Container';
 import Top from './Top';
 import Title from './Title';
-import BackButton from './BackButton';
+import CloseButton from '../Aside/CloseButton';
 import Filter from './Filter';
 import FilterTop from './FilterTop';
 import FilterTitle from './FilterTitle';
@@ -35,9 +35,9 @@ const CampFilters = props => {
     >
       <Top>
         <Title>{t('campFilters.title')}</Title>
-        <BackButton onClick={closeCampFilters}>
-          <img src={arrow} alt='close' />
-        </BackButton>
+        <CloseButton onClick={closeCampFilters}>
+          <img src={cross} alt='close' />
+        </CloseButton>
       </Top>
       {types
         .filter(

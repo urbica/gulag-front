@@ -28,7 +28,7 @@ export default styled(Button)`
 
   @media (max-width: 768px) {
     top: 10px;
-    left: calc(100vw - 55px);
+    left: calc(100vw - 60px);
 
     border-radius: 4px;
 

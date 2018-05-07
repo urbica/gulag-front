@@ -14,10 +14,13 @@ export default styled.div`
   top: 0;
   bottom: 0;
   left: -100vw;
+
   width: 100%;
-  animation: ${animation} 0.5s ease-in-out;
+
   background-color: #14171a;
-  animation-fill-mode: forwards;
+
   overflow: scroll;
-  -webkit-overflow-scrolling: touch;
+
+  animation: ${animation} 0.5s ease-in-out;
+  animation-fill-mode: forwards;
 `;

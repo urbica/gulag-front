@@ -1,37 +1,39 @@
 version: '3.6'
 
+# traefik left commented intentionally,
+# because there is already traefik instance set up on production
 services:
-  traefik:
-    image: traefik:1.5.4-alpine
-    container_name: traefik
-    restart: always
-    ports:
-      - 80:80
-      - 443:443
-      - 8080:8080
-    volumes:
-      - ./traefik:/etc/traefik:Z
-      - /var/run/docker.sock:/var/run/docker.sock
-    networks:
-      - proxy
-    command:
-      - --logLevel=DEBUG
-      - --entrypoints=Name:http Address::80 Redirect.EntryPoint:https
-      - --entrypoints=Name:https Address::443 TLS
-      - --defaultentrypoints=http,https
-      - --acme
-      - --acme.email=hello@urbica.co
-      - --acme.storage=/etc/traefik/acme.json
-      - --acme.entryPoint=https
-      - --acme.httpChallenge.entryPoint=http
-      - --acme.OnHostRule=true
-      - --acme.onDemand=false
-      - --acme.acmeLogging=true
-      - --web
-      - --docker
-      - --docker.watch
-      - --docker.exposedbydefault=false
-      - --docker.domain=gulagmap.ru
+  # traefik:
+  #   image: traefik:1.5.4-alpine
+  #   container_name: traefik
+  #   restart: always
+  #   ports:
+  #     - 80:80
+  #     - 443:443
+  #     - 8080:8080
+  #   volumes:
+  #     - ./traefik:/etc/traefik:Z
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #   networks:
+  #     - proxy
+  #   command:
+  #     - --logLevel=DEBUG
+  #     - --entrypoints=Name:http Address::80 Redirect.EntryPoint:https
+  #     - --entrypoints=Name:https Address::443 TLS
+  #     - --defaultentrypoints=http,https
+  #     - --acme
+  #     - --acme.email=hello@urbica.co
+  #     - --acme.storage=/etc/traefik/acme.json
+  #     - --acme.entryPoint=https
+  #     - --acme.httpChallenge.entryPoint=http
+  #     - --acme.OnHostRule=true
+  #     - --acme.onDemand=false
+  #     - --acme.acmeLogging=true
+  #     - --web
+  #     - --docker
+  #     - --docker.watch
+  #     - --docker.exposedbydefault=false
+  #     - --docker.domain=gulagmap.ru
 
   gulag-front:
     image: gitlab.urbica.co:5001/gulag/front:master
@@ -50,6 +52,8 @@ services:
     image: gitlab.urbica.co:5001/gulag/admin:master
     container_name: gulag-admin
     restart: always
+    networks:
+      - internal
     depends_on:
       - gulag-api
 
@@ -61,6 +65,8 @@ services:
       - .env
     volumes:
       - ./photos:/usr/src/app/photos
+    networks:
+      - internal
     depends_on:
       - gulag-db
 
@@ -72,6 +78,8 @@ services:
       - POSTGRES_DB=db
     volumes:
       - ./db:/var/lib/postgresql/data
+    networks:
+      - internal
 
 networks:
   proxy:

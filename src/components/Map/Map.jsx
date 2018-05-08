@@ -22,25 +22,24 @@ import Container from './Container';
 
 class Map extends PureComponent {
   static getDerivedStateFromProps(nextProps, prevState) {
+    const { currentYear, lang, campId, isShowAllPrisons } = nextProps;
     const ussrFilter = Immutable.List([
       'all',
-      ['<=', 'year_start', nextProps.currentYear],
-      ['>=', 'year_end', nextProps.currentYear]
+      ['<=', 'year_start', isShowAllPrisons ? 1960 : currentYear],
+      ['>=', 'year_end', isShowAllPrisons ? 1960 : currentYear]
     ]);
     const citiesFilter = Immutable.List([
       'all',
-      ['==', 'year', nextProps.currentYear]
+      ['==', 'year', isShowAllPrisons ? 1960 : currentYear]
     ]);
-    const citiesNames = `{historical_name${
-      nextProps.lang === 'ru' ? '' : '_en'
-    }}`;
+    const citiesNames = `{historical_name${lang === 'ru' ? '' : '_en'}}`;
     const activeCampHaloFilter = Immutable.List([
       'all',
-      ['==', 'campId', parseInt(nextProps.campId, 10)]
+      ['==', 'campId', parseInt(campId, 10)]
     ]);
     const activeCampNameFilter = Immutable.List([
       'all',
-      ['==', 'campId', parseInt(nextProps.campId, 10)]
+      ['==', 'campId', parseInt(campId, 10)]
     ]);
 
     const updatedLayers = prevState.layers
@@ -246,7 +245,8 @@ Map.propTypes = {
   changeViewport: PropTypes.func.isRequired,
   openCampCard: PropTypes.func.isRequired,
   lang: PropTypes.string.isRequired,
-  closeCampCard: PropTypes.func.isRequired
+  closeCampCard: PropTypes.func.isRequired,
+  isShowAllPrisons: PropTypes.bool.isRequired
 };
 
 export default Map;

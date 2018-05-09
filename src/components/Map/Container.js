@@ -6,6 +6,7 @@ export default styled.div`
   bottom: 0;
 
   width: 100%;
+  hight: 100vh;
 
   transform: translateY(${({ slideUp }) => (slideUp ? '-30%' : '0')});
   transition: 0.4s;

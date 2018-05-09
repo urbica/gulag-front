@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 
 import { periodsSelector, langSelector } from '../App/selectors';
 
+import { closeMenus } from '../App/reducers/uiReducer';
+
 import Chronology from './Chronology';
 
 const mapStateToProps = createSelector(
@@ -21,7 +23,10 @@ const mapStateToProps = createSelector(
   }
 );
 const mapDispatchToProps = dispatch => ({
-  pushToRoot: () => dispatch(push('/'))
+  pushToRoot: () => { 
+    dispatch(closeMenus());
+    dispatch(push('/'));
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Chronology);

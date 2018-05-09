@@ -33,7 +33,10 @@ const mapStateToProps = createSelector(
   }
 );
 const mapDispatchToProps = dispatch => ({
-  closeCard: () => dispatch(push('/')),
+  closeCard: () => {
+      dispatch(closeMenus());
+      dispatch(push('/'));
+  },
   openCampCard: id => {
     dispatch(closeMenus());
     dispatch(push(`/camp${id}`));

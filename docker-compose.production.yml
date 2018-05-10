@@ -44,6 +44,9 @@ services:
       - traefik.port=80
       - traefik.docker.network=proxy
       - traefik.frontend.rule=Host:gulagmap.ru
+    volumes:
+      - ./photos:/usr/share/nginx/photos
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
     networks:
       - proxy
       - internal

@@ -63,19 +63,19 @@ deploy_staging:
   only:
     - dev
 
-# deploy_production:
-#   image: alpine
-#   stage: deploy
-#   before_script:
-#     - apk add --no-cache openssh
-#     - mkdir -p ~/.ssh
-#     - echo "$SSH_PRIVATE_KEY" >> ~/.ssh/id_rsa
-#     - chmod 600 ~/.ssh/id_rsa
-#     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-#   script:
-#     - ssh docker@gulagmap.ru 'bash -s' < deploy-production.sh
-#   environment:
-#     name: production
-#     url: https://gulagmap.ru
-#   only:
-#     - master
+deploy_production:
+  image: alpine
+  stage: deploy
+  before_script:
+    - apk add --no-cache openssh
+    - mkdir -p ~/.ssh
+    - echo "$SSH_PRIVATE_KEY" >> ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+  script:
+    - ssh docker@gulagmap.ru 'bash -s' < deploy-production.sh
+  environment:
+    name: production
+    url: https://gulagmap.ru
+  only:
+    - master

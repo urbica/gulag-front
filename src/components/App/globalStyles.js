@@ -86,7 +86,7 @@ injectGlobal`
     width: 100%;
     height: 100vh;
 
-    overflow: scroll;
+    overflow: hide;
 
     font-family: 'Formular', sans-serif;
     font-size: ${fontSize};

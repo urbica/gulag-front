@@ -2,15 +2,18 @@ import styled from 'styled-components';
 import Button from '../../Button';
 
 export default styled(Button)`
+  width: 22px;
+  height: 22px;
+
   pointer-events: auto;
 
-  background-color: rgba(0,0,0,.5);
+  background-color: transparent;
 
-  &:hover {
-    background-color: rgba(0,0,0,.7);
+  &:hover img {
+    opacity: 0.5;
   }
 
-  &:active {
-    background-color: rgb(0,0,0);
+  &:active img {
+    opacity: 0.7;
   }
 `;

@@ -15,10 +15,10 @@ import Popup from './Popup/Popup';
 // styled
 import Container from './Container';
 
-// import Controls from './Controls/Controls';
-// import MapButton from './Controls/MapButton';
-// import plus from './btn-plus.svg';
-// import minus from './btn-minus.svg';
+import Controls from './Controls/Controls';
+import MapButton from './Controls/MapButton';
+import plus from './btn-plus.svg';
+import minus from './btn-minus.svg';
 
 class Map extends PureComponent {
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -215,24 +215,22 @@ class Map extends PureComponent {
           <Layer layer={this.state.layers.get('campHalo_active')} />
           <Layer layer={this.state.layers.get('campName_active')} />
         </MapGL>
-        {/* <Controls slideUp={isSlideUp}>
+        <Controls slideUp={isSlideUp}>
           <MapButton
-            onClick={dispatch.bind(
-              null,
-              changeViewport({ zoom: viewport.get('zoom') + 1 })
-            )}
+            onClick={changeViewport.bind(null, {
+              zoom: viewport.get('zoom') + 1
+            })}
           >
             <img src={plus} alt='plus' />
           </MapButton>
           <MapButton
-            onClick={dispatch.bind(
-              null,
-              changeViewport({ zoom: viewport.get('zoom') - 1 })
-            )}
+            onClick={changeViewport.bind(null, {
+              zoom: viewport.get('zoom') - 1
+            })}
           >
             <img src={minus} alt='minus' />
           </MapButton>
-        </Controls> */}
+        </Controls>
       </Container>
     );
   }

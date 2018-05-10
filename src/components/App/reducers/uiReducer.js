@@ -55,7 +55,9 @@ export default (state = initState, { type, payload }) => {
     case CURRENT_YEAR_CHANGED:
       return state
         .set('currentYear', parseInt(payload, 10))
-        .set('isShowAllPrisons', false);
+        .set('isShowAllPrisons', false)
+        .set('isMenuOpen', false)
+        .set('isCampFiltersOpen', false);
     case VIEWPORT_CHANGED:
       return state.update('viewport', previousViewport =>
         previousViewport.merge(payload));
@@ -66,7 +68,9 @@ export default (state = initState, { type, payload }) => {
     case TOGGLE_ALL_PRISONS:
       return state
         .set('isShowAllPrisons', !state.get('isShowAllPrisons'))
-        .set('isDemoPlay', false);
+        .set('isDemoPlay', false)
+        .set('isMenuOpen', false)
+        .set('isCampFiltersOpen', false);
     case MENU_TOGGLED:
       return state.set('isMenuOpen', !state.get('isMenuOpen'));
     case FETCH_REQUEST:

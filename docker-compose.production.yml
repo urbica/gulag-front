@@ -51,9 +51,8 @@ services:
       - proxy
       - internal
 
-  # TODO: @device25 switch to master tag after conflicts are resolved
   gulag-admin:
-    image: gitlab.urbica.co:5001/gulag/admin:dev
+    image: gitlab.urbica.co:5001/gulag/admin:master
     container_name: gulag-admin
     restart: always
     networks:

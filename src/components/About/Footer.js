@@ -11,6 +11,7 @@ export default styled.footer`
 
   & a {
     margin-right: 60px;
+    margin-bottom: 10px;
   }
 
   & a img {

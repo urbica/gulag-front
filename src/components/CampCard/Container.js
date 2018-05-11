@@ -15,7 +15,7 @@ export default styled.div`
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
-  width: 100%;
+  width: 100vw;
   min-height: 70%;
   padding: 40px 40px 80px 40px;
   background-color: #14171a;

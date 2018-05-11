@@ -6,7 +6,7 @@ export default styled.div`
     margin-top: 0;
     margin-bottom: 10px;
 
-    font-size: 20px;
+    font-size: 17px;
     font-weight: bold;
   }
 

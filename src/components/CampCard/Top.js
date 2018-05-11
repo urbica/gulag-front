@@ -11,6 +11,7 @@ export default styled.div`
     margin: 0 0 5px 0;
 
     @media (max-width: 425px) {
+      font-size: 20px;
       padding-right: 40px;
     }
   }

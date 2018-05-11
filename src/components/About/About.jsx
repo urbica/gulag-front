@@ -131,12 +131,12 @@ const About = ({ locale, pushToRoot }) => (
         президентских грантов
       </div>
     </Description>
-    <Link href='mailto:mail@gulagmap.ru'>mail@gulagmap.ru</Link>
+    <Link href='mailto:gulagmap@gmig.ru'>gulagmap@gmig.ru</Link>
     <Footer>
       <a href='http://gmig.ru/' target='_blank' rel='noreferrer noopener'>
         <img src={img.ru} alt='' />
       </a>
-      <a href='http://urbica.co/' target='_blank' rel='noreferrer noopener'>
+      <a href='https://urbica.co/' target='_blank' rel='noreferrer noopener'>
         <img src={urbica} alt='URBICA' />
       </a>
       <a

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 // selectors
 import {
-  filteredCampsSelector,
+  publishedCampsSelector,
   langSelector,
   regionsSelector
 } from '../App/selectors';
@@ -16,7 +16,7 @@ import { closeMenus } from '../App/reducers/uiReducer';
 import Search from './Search';
 
 const mapStateToProps = createSelector(
-  filteredCampsSelector,
+  publishedCampsSelector,
   langSelector,
   regionsSelector,
   (camps, lang, regions) => {
@@ -34,8 +34,8 @@ const mapStateToProps = createSelector(
 );
 const mapDispatchToProps = dispatch => ({
   closeCard: () => {
-      dispatch(closeMenus());
-      dispatch(push('/'));
+    dispatch(closeMenus());
+    dispatch(push('/'));
   },
   openCampCard: id => {
     dispatch(closeMenus());

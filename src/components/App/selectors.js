@@ -10,6 +10,18 @@ export const periodsSelector = state => state.getIn(['data', 'periods']);
 export const activitiesSelector = state => state.getIn(['data', 'activities']);
 export const regionsSelector = state => state.getIn(['data', 'regions']);
 
+export const publishedCampsSelector = createSelector(
+  campsSelector,
+  langSelector,
+  (camps, lang) => {
+    if (!camps) return List();
+
+    return camps.filter(
+      camp => camp.getIn(['published', lang]) && camp.get('locations')
+    );
+  }
+);
+
 export const filteredCampsSelector = createSelector(
   campsSelector,
   langSelector,

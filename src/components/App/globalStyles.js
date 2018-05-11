@@ -81,13 +81,6 @@ injectGlobal`
   }
 
   body {
-    position: absolute;
-
-    width: 100%;
-    height: 100vh;
-
-    overflow: hide;
-
     font-family: 'Formular', sans-serif;
     font-size: ${fontSize};
     color: ${mainFontColour};

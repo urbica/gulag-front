@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { splitDigits } from '../../../utils/utils';
-import { chartData } from '../config';
+import { chartData, PRISONERS_AMOUNT, DEAD_AMOUNT } from '../config';
 
 import { t } from '../../../intl/helper';
 
@@ -15,17 +15,10 @@ const ChartStat = ({ currentYear, isShowAll }) => {
   const { prisoners, dead } = chartData.find(
     ({ year }) => year === currentYear
   );
-  const { allPrisoners, allDead } = chartData.reduce(
-    (acc, val) => ({
-      allPrisoners: acc.allPrisoners + val.prisoners,
-      allDead: acc.allDead + val.dead
-    }),
-    { allPrisoners: 0, allDead: 0 }
-  );
   const slitedPrisoners = isShowAll
-    ? splitDigits(allPrisoners)
+    ? splitDigits(PRISONERS_AMOUNT)
     : splitDigits(prisoners);
-  const slitedDead = isShowAll ? splitDigits(allDead) : splitDigits(dead);
+  const slitedDead = isShowAll ? splitDigits(DEAD_AMOUNT) : splitDigits(dead);
 
   return (
     <Container>

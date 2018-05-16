@@ -17,7 +17,11 @@ const mapStateToProps = createSelector(
       return { periods: List(), lang };
     }
     return {
-      periods: periods.sort((a, b) => a.get('id') > b.get('id')),
+      periods: periods.sort((a, b) => {
+        if (a.get('year') > b.get('year')) return 1;
+        if (a.get('year') < b.get('year')) return -1;
+        return 0;
+      }),
       lang
     };
   }

@@ -190,8 +190,8 @@ class Map extends PureComponent {
           accessToken={mapToken}
           mapStyle='mapbox://styles/gulagmap/cj8bt4qbw7kbo2rry4oft6e5g'
           onViewportChange={changeViewport}
-          maxZoom={8}
-          minZoom={1.5}
+          maxZoom={9}
+          minZoom={2}
           pitchWithRotate={false}
           {...viewport.toJS()}
         >

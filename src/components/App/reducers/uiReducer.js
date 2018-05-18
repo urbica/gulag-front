@@ -1,13 +1,10 @@
 import Immutable from 'immutable';
+import viewport from '../../../config/initialViewport';
 import { FETCH_REQUEST, FETCH_SUCCESS } from './dataReducer';
 
 export const initState = Immutable.fromJS({
   currentYear: 1937,
-  viewport: {
-    latitude: 60,
-    longitude: 90,
-    zoom: 2.5
-  },
+  viewport,
   isDemoPlay: false,
   isShowAllPrisons: false,
   isMenuOpen: false,

@@ -188,7 +188,7 @@ class Map extends PureComponent {
           ref={this.mapGlRef}
           style={{ width: '100%', height: '100%' }}
           accessToken={mapToken}
-          mapStyle='mapbox://styles/gulagmap/cj8bt4qbw7kbo2rry4oft6e5g'
+          mapStyle='mapbox://styles/gulagmap/cjhc55vfl038e2rqr7f472ay1'
           onViewportChange={changeViewport}
           maxZoom={9}
           minZoom={2}

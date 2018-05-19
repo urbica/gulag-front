@@ -1,35 +1,17 @@
-import Immutable from 'immutable';
-import { dataToken } from '../config/tokens';
-
-const dataOptions = { headers: { Authorization: `Bearer ${dataToken}` } };
+import { fromJS } from 'immutable';
 
 export default () =>
-  new Promise((resolve, reject) =>
-    Promise.all([
-      fetch('/api/camps', dataOptions).then(
-        res => (res.status !== 200 ? reject(res) : res.json())
-      ),
-      fetch('/api/camp-activities', dataOptions).then(
-        res => (res.status !== 200 ? reject(res) : res.json())
-      ),
-      fetch('/api/camp-regions', dataOptions).then(
-        res => (res.status !== 200 ? reject(res) : res.json())
-      ),
-      fetch('/api/camp-types', dataOptions).then(
-        res => (res.status !== 200 ? reject(res) : res.json())
-      ),
-      fetch('/api/periods', dataOptions).then(
-        res => (res.status !== 200 ? reject(res) : res.json())
-      )
+  new Promise((resolve, reject) => {
+    const checkStatus = res => (res.status !== 200 ? reject(res) : res.json());
+
+    return Promise.all([
+      fetch('/api/camps').then(checkStatus),
+      fetch('/api/camp-activities').then(checkStatus),
+      fetch('/api/camp-regions').then(checkStatus),
+      fetch('/api/camp-types').then(checkStatus),
+      fetch('/api/periods').then(checkStatus)
     ])
       .then(([camps, activities, regions, types, periods]) =>
-        resolve(
-          Immutable.fromJS({
-            camps,
-            activities,
-            regions,
-            types,
-            periods
-          })
-        ))
-      .catch(err => reject(err)));
+        resolve(fromJS({ camps, activities, regions, types, periods })))
+      .catch(err => reject(err));
+  });

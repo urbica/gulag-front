@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react';
 import ReactDom from 'react-dom';
 import PropTypes from 'prop-types';
-import Immutable from 'immutable';
+import { List } from 'immutable';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import MapGL, { Source, Layer } from '@urbica/react-map-gl';
 
-import { mapToken } from '../../config/tokens';
+import mapConfig from '../../config/map';
 import layers from '../../config/layers';
 
 // component
@@ -23,21 +23,21 @@ import minus from './btn-minus.svg';
 class Map extends PureComponent {
   static getDerivedStateFromProps(nextProps, prevState) {
     const { currentYear, lang, campId, isShowAllPrisons } = nextProps;
-    const ussrFilter = Immutable.List([
+    const ussrFilter = List([
       'all',
       ['<=', 'year_start', isShowAllPrisons ? 1960 : currentYear],
       ['>=', 'year_end', isShowAllPrisons ? 1960 : currentYear]
     ]);
-    const citiesFilter = Immutable.List([
+    const citiesFilter = List([
       'all',
       ['==', 'year', isShowAllPrisons ? 1960 : currentYear]
     ]);
     const citiesNames = `{historical_name${lang === 'ru' ? '' : '_en'}}`;
-    const activeCampHaloFilter = Immutable.List([
+    const activeCampHaloFilter = List([
       'all',
       ['==', 'campId', parseInt(campId, 10)]
     ]);
-    const activeCampNameFilter = Immutable.List([
+    const activeCampNameFilter = List([
       'all',
       ['==', 'campId', parseInt(campId, 10)]
     ]);
@@ -187,12 +187,8 @@ class Map extends PureComponent {
         <MapGL
           ref={this.mapGlRef}
           style={{ width: '100%', height: '100%' }}
-          accessToken={mapToken}
-          mapStyle='mapbox://styles/gulagmap/cjhc55vfl038e2rqr7f472ay1'
           onViewportChange={changeViewport}
-          maxZoom={9}
-          minZoom={2}
-          pitchWithRotate={false}
+          {...mapConfig}
           {...viewport.toJS()}
         >
           <Source id='camps' source={campsSource} />

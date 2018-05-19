@@ -2,11 +2,10 @@ import Immutable from 'immutable';
 
 const initState = Immutable.fromJS({
   camps: null,
-  periods: null,
-  photos: null,
   activities: null,
-  places: null,
-  types: []
+  regions: null,
+  types: [],
+  periods: null
 });
 
 export const FETCH_REQUEST = 'FETCH_REQUEST';

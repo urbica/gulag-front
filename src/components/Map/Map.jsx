@@ -73,6 +73,7 @@ class Map extends PureComponent {
 
   componentDidMount() {
     this.map = this.mapGlRef.current.getMap();
+    this.map.touchZoomRotate.disableRotation();
     this.map.on('zoomend', this.onZoomend);
     this.map.on('click', this.onMapClick);
     this.map.on('load', this.translateLayers);

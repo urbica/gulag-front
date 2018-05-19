@@ -5,5 +5,6 @@ export default {
   mapStyle: 'mapbox://styles/gulagmap/cjhc55vfl038e2rqr7f472ay1',
   maxZoom: 9,
   minZoom: 2,
-  pitchWithRotate: false
+  pitchWithRotate: false,
+  dragRotate: false
 };

@@ -1,35 +1,24 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
-import PropTypes from 'prop-types';
 import { t } from '../../intl/helper';
 
-// ico
-import urbica from './urbica.svg';
-import museum from './museum.svg';
-import museumEn from './museum-en.svg';
-import pgrants from './pgrants.svg';
-
-import FullScreenCard from '../FullScreenCard/FullScreenCard';
-
-// styled
-import Title from './Title';
-import Description from './Description';
-import SubTitle from './SubTitle';
-import CompaniesContainer from './CompaniesContainer';
-import Company from './Company';
-import CompanyName from './CompanyName';
-import Position from './Position';
-import Name from './Name';
-import Link from './Link';
-import Footer from './Footer';
-
+// content
 import content from '../../config/aboutProject';
 
-const img = {
-  ru: museum,
-  en: museumEn,
-  de: museumEn
-};
+// components
+import FullScreenCard from '../FullScreenCard/FullScreenCard';
+import Footer from './Footer';
+
+// styled
+import Title from './styled/Title';
+import Description from './styled/Description';
+import SubTitle from './styled/SubTitle';
+import CompaniesContainer from './styled/CompaniesContainer';
+import Company from './styled/Company';
+import CompanyName from './styled/CompanyName';
+import Position from './styled/Position';
+import Name from './styled/Name';
+import Link from './styled/Link';
 
 const About = ({ locale, pushToRoot }) => (
   <FullScreenCard onClick={pushToRoot}>
@@ -132,27 +121,8 @@ const About = ({ locale, pushToRoot }) => (
       </div>
     </Description>
     <Link href='mailto:gulagmap@gmig.ru'>gulagmap@gmig.ru</Link>
-    <Footer>
-      <a href='http://gmig.ru/' target='_blank' rel='noreferrer noopener'>
-        <img src={img.ru} alt='' />
-      </a>
-      <a href='https://urbica.co/' target='_blank' rel='noreferrer noopener'>
-        <img src={urbica} alt='URBICA' />
-      </a>
-      <a
-        href='https://президентскиегранты.рф/'
-        target='_blank'
-        rel='noreferrer noopener'
-      >
-        <img src={pgrants} alt='' />
-      </a>
-    </Footer>
+    <Footer />
   </FullScreenCard>
 );
-
-About.propTypes = {
-  locale: PropTypes.string.isRequired,
-  pushToRoot: PropTypes.func.isRequired
-};
 
 export default About;

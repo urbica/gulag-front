@@ -53,12 +53,38 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <script>
+      //event listener: DOM ready
+      function addLoadEvent(func) {
+        var oldonload = window.onload;
+        if (typeof window.onload != "function") {
+          window.onload = func;
+        } else {
+          window.onload = function() {
+            if (oldonload) {
+              oldonload();
+            }
+            func();
+          };
+        }
+      }
+
+      //call plugin function after DOM ready
+      addLoadEvent(function() {
+        outdatedBrowser({
+          bgColor: "#f25648",
+          color: "#ffffff",
+          lowerThan: "transform",
+          languagePath: "%PUBLIC_URL%/outdatedbrowser/lang/ru.html"
+        });
+      });
+    </script>
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript">
       (function (d, w, c) {
         (w[c] = w[c] || []).push(function () {
           try {
-            w.yaCounter46326063 = new Ya.Metrika({
+            w.yaCounter46326063 = new Ya.Metrika2({
               id: 46326063,
               clickmap: true,
               trackLinks: true,
@@ -75,44 +101,19 @@
           };
         s.type = "text/javascript";
         s.async = true;
-        s.src = "https://mc.yandex.ru/metrika/watch.js";
-
+        s.src = "https://mc.yandex.ru/metrika/tag.js";
         if (w.opera == "[object Opera]") {
           d.addEventListener("DOMContentLoaded", f, false);
         } else {
           f();
         }
-      })(document, window, "yandex_metrika_callbacks");
-    </script>
-    <script>
-      //event listener: DOM ready
-      function addLoadEvent(func) {
-        var oldonload = window.onload;
-        if (typeof window.onload != 'function') {
-          window.onload = func;
-        } else {
-          window.onload = function () {
-            if (oldonload) {
-              oldonload();
-            }
-            func();
-          }
-        }
       }
-
-      //call plugin function after DOM ready
-      addLoadEvent(function () {
-        outdatedBrowser({
-          bgColor: '#f25648',
-          color: '#ffffff',
-          lowerThan: 'transform',
-          languagePath: '%PUBLIC_URL%/outdatedbrowser/lang/ru.html'
-        })
-      });
+      )(document, window, "yandex_metrika_callbacks2");
     </script>
     <noscript>
-      <div><img src="https://mc.yandex.ru/watch/46326063" style="position:absolute; left:-9999px;"
-                alt="" /></div>
+      <div>
+          <img src="https://mc.yandex.ru/watch/46326063" style="position:absolute; left:-9999px;" alt="" />
+      </div>
     </noscript>
     <!-- /Yandex.Metrika counter -->
     <!-- Google Analytics -->

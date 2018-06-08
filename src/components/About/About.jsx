@@ -5,13 +5,9 @@ import { t } from '../../intl/helper';
 // content
 import content from '../../config/aboutProject';
 
-// icons
-import urbica from './urbica.svg';
-import museum from './museum.svg';
-import museumEn from './museum-en.svg';
-import pgrants from './pgrants.svg';
-
+// components
 import FullScreenCard from '../FullScreenCard/FullScreenCard';
+import Footer from './Footer';
 
 // styled
 import Title from './styled/Title';
@@ -23,13 +19,6 @@ import CompanyName from './styled/CompanyName';
 import Position from './styled/Position';
 import Name from './styled/Name';
 import Link from './styled/Link';
-import Footer from './styled/Footer';
-
-const img = {
-  ru: museum,
-  en: museumEn,
-  de: museumEn
-};
 
 const About = ({ locale, pushToRoot }) => (
   <FullScreenCard onClick={pushToRoot}>
@@ -132,21 +121,7 @@ const About = ({ locale, pushToRoot }) => (
       </div>
     </Description>
     <Link href='mailto:gulagmap@gmig.ru'>gulagmap@gmig.ru</Link>
-    <Footer>
-      <a href='http://gmig.ru/' target='_blank' rel='noreferrer noopener'>
-        <img src={img.ru} alt='' />
-      </a>
-      <a href='https://urbica.co/' target='_blank' rel='noreferrer noopener'>
-        <img src={urbica} alt='URBICA' />
-      </a>
-      <a
-        href='https://президентскиегранты.рф/'
-        target='_blank'
-        rel='noreferrer noopener'
-      >
-        <img src={pgrants} alt='' />
-      </a>
-    </Footer>
+    <Footer />
   </FullScreenCard>
 );
 

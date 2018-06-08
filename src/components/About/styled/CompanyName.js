@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { mainFontColour } from '../../config/styles';
+import { mainFontColour } from '../../../config/styles';
 
 export default styled.div`
   padding-bottom: 10px;

@@ -7,3 +7,4 @@
 * immutable
 * redux
 * redux-saga
+* recompose

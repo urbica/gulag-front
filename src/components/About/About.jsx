@@ -1,9 +1,11 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
-import PropTypes from 'prop-types';
 import { t } from '../../intl/helper';
 
-// ico
+// content
+import content from '../../config/aboutProject';
+
+// icons
 import urbica from './urbica.svg';
 import museum from './museum.svg';
 import museumEn from './museum-en.svg';
@@ -12,18 +14,16 @@ import pgrants from './pgrants.svg';
 import FullScreenCard from '../FullScreenCard/FullScreenCard';
 
 // styled
-import Title from './Title';
-import Description from './Description';
-import SubTitle from './SubTitle';
-import CompaniesContainer from './CompaniesContainer';
-import Company from './Company';
-import CompanyName from './CompanyName';
-import Position from './Position';
-import Name from './Name';
-import Link from './Link';
-import Footer from './Footer';
-
-import content from '../../config/aboutProject';
+import Title from './styled/Title';
+import Description from './styled/Description';
+import SubTitle from './styled/SubTitle';
+import CompaniesContainer from './styled/CompaniesContainer';
+import Company from './styled/Company';
+import CompanyName from './styled/CompanyName';
+import Position from './styled/Position';
+import Name from './styled/Name';
+import Link from './styled/Link';
+import Footer from './styled/Footer';
 
 const img = {
   ru: museum,
@@ -149,10 +149,5 @@ const About = ({ locale, pushToRoot }) => (
     </Footer>
   </FullScreenCard>
 );
-
-About.propTypes = {
-  locale: PropTypes.string.isRequired,
-  pushToRoot: PropTypes.func.isRequired
-};
 
 export default About;

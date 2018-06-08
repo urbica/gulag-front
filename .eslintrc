@@ -14,6 +14,7 @@
     "no-return-assign": 0,
     "no-underscore-dangle": ["error", { "allowAfterThis": true }],
     "quotes": ["error", "single"],
+    "react/prop-types": [1, {"skipUndeclared": true}],
     "react/forbid-prop-types": [1, { "forbid": ["any", "array"] }],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/jsx-no-bind": [0],

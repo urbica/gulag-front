@@ -1,15 +1,16 @@
 {
   "name": "gulagmap",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
+    "start": "react-scripts start",
     "build": "react-scripts build",
-    "cz": "git-cz",
+    "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "eslint src --ext .js,.jsx",
     "precommit": "lint-staged",
-    "start": "react-scripts start",
-    "test": "react-scripts test --env=jsdom"
+    "cz": "git-cz",
+    "release": "standard-version"
   },
   "config": {
     "commitizen": {
@@ -38,7 +39,8 @@
     "prettier-eslint": "8.8.1",
     "prettier-eslint-cli": "4.7.1",
     "react-scripts": "1.1.4",
-    "react-test-renderer": "16.4.0"
+    "react-test-renderer": "16.4.0",
+    "standard-version": "4.4.0"
   },
   "dependencies": {
     "@urbica/react-map-gl": "0.6.0-beta.11",

@@ -3,16 +3,17 @@ import PropTypes from 'prop-types';
 
 import { height, margin, calculateXScale } from './config';
 
+// components
 import PlayButton from './Buttons/PlayButton';
 import ChartStat from './ChartStat/ChartStat';
-import ShowAllButton from './Buttons/ShowAllButton';
 import PrisonersArea from './PrisonersArea/PrisonersArea';
 import Axis from './Axis/Axis';
 import Slider from './Slider';
+import ShowAllButton from './Buttons/ShowAllButton';
 
 // styled
-import Container from './Container';
-import ChartWrap from './ChartWrap';
+import Container from './styled/Container';
+import ChartWrap from './styled/ChartWrap';
 
 const calculateChartWidth = () => {
   if (window.innerWidth > 1500) {
@@ -24,25 +25,30 @@ const calculateChartWidth = () => {
 };
 
 class Chart extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      width: calculateChartWidth()
-    };
+  static propTypes = {
+    currentYear: PropTypes.number.isRequired,
+    isDemoPlay: PropTypes.bool.isRequired,
+    isShowAll: PropTypes.bool.isRequired,
+    toggleAllPrisons: PropTypes.func.isRequired,
+    changeCurrentYear: PropTypes.func.isRequired,
+    toggleDemo: PropTypes.func.isRequired,
+    isDataLoading: PropTypes.bool.isRequired,
+    isChartVisible: PropTypes.bool.isRequired
+  };
 
-    this.onResize = this.onResize.bind(this);
-    this.demo = this.demo.bind(this);
-  }
+  state = {
+    width: calculateChartWidth()
+  };
 
   componentDidMount() {
     window.onresize = this.onResize;
   }
 
-  onResize() {
+  onResize = () => {
     this.setState({ width: calculateChartWidth() });
-  }
+  };
 
-  demo() {
+  demo = () => {
     this.props.toggleDemo();
 
     if (this.props.isDemoPlay) {
@@ -59,7 +65,7 @@ class Chart extends PureComponent {
         }
       }, 1000);
     }
-  }
+  };
 
   render() {
     const { width } = this.state;
@@ -68,14 +74,16 @@ class Chart extends PureComponent {
       isDemoPlay,
       currentYear,
       isShowAll,
+      isChartVisible,
+      changeCurrentYear,
       toggleAllPrisons
     } = this.props;
 
     return (
-      <Container mountOnEnter unmountOnExit in={!isDataLoading} timeout={800}>
+      <Container in={!isDataLoading} timeout={800}>
         <PlayButton isDemoPlayed={isDemoPlay} onClick={this.demo} />
         <ChartWrap>
-          {this.props.isChartVisible && (
+          {isChartVisible && (
             <ChartStat currentYear={currentYear} isShowAll={isShowAll} />
           )}
           <svg width={width} height={height + margin.top + margin.bottom}>
@@ -119,19 +127,19 @@ class Chart extends PureComponent {
                 <feGaussianBlur in='SourceGraphic' stdDeviation='4' />
               </filter>
             </defs>
-            {this.props.isChartVisible && (
+            {isChartVisible && (
               <PrisonersArea
                 width={width}
                 xScale={calculateXScale(width)}
-                isShowAll={this.props.isShowAll}
-                changeCurrentYear={this.props.changeCurrentYear}
+                isShowAll={isShowAll}
+                changeCurrentYear={changeCurrentYear}
               />
             )}
-            <Axis width={width} isChartVisible={this.props.isChartVisible} />
+            <Axis width={width} isChartVisible={isChartVisible} />
             <Slider
               width={width}
               xScale={calculateXScale(width)}
-              isChartVisible={this.props.isChartVisible}
+              isChartVisible={isChartVisible}
             />
           </svg>
         </ChartWrap>
@@ -140,16 +148,5 @@ class Chart extends PureComponent {
     );
   }
 }
-
-Chart.propTypes = {
-  currentYear: PropTypes.number.isRequired,
-  isDemoPlay: PropTypes.bool.isRequired,
-  isShowAll: PropTypes.bool.isRequired,
-  toggleAllPrisons: PropTypes.func.isRequired,
-  changeCurrentYear: PropTypes.func.isRequired,
-  toggleDemo: PropTypes.func.isRequired,
-  isDataLoading: PropTypes.bool.isRequired,
-  isChartVisible: PropTypes.bool.isRequired
-};
 
 export default Chart;

@@ -8,9 +8,14 @@ import {
 
 import Chart from './Chart';
 
+// TODO move selectors
 const mapStateToProps = state => {
   const campFilters = state.getIn(['ui', 'campTypeFilters']);
   const isDataLoading = state.getIn(['ui', 'isDataLoading']);
+  /**
+   *  chart is visible only when ITL filter is on,
+   *  rest filters is off and data is loaded
+   */
   const isChartVisible =
     campFilters.get('1') &&
     !campFilters.get('2') &&
@@ -32,4 +37,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = { toggleAllPrisons, changeCurrentYear, toggleDemo };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Chart);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Chart);

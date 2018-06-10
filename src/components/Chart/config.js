@@ -7,7 +7,7 @@ export const margin = {
   bottom: 50,
   left: 15
 };
-export const height = 300 - margin.top - margin.bottom;
+export const height = 210 - margin.top - margin.bottom;
 
 export const chartData = [
   {

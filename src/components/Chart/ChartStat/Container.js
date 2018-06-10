@@ -5,7 +5,7 @@ import { mainFontColour } from '../../../config/styles';
 
 export default styled.div`
   position: absolute;
-  top: 60px;
+  top: 25px;
   left: ${margin.left}px;
 
   color: ${mainFontColour};

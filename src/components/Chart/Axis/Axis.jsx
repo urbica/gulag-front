@@ -27,6 +27,7 @@ class Axis extends PureComponent {
 
   createAxis() {
     const { width, isChartVisible } = this.props;
+
     const xScale = calculateXScale(width);
     const axis = axisBottom(xScale)
       .tickSizeOuter(0)

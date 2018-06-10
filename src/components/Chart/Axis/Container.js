@@ -2,8 +2,10 @@ import styled from 'styled-components';
 
 import { height, margin } from '../config';
 
+const { left, top } = margin;
+
 export default styled.g`
-  transform: translate(${margin.left}px, ${height + margin.top}px);
+  transform: translate(${left}px, ${height + top}px);
 
   & path,
   & line {

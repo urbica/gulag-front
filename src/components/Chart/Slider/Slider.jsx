@@ -10,6 +10,15 @@ import { mainFontColour } from '../../../config/styles';
 import Container from './Container';
 
 class Slider extends PureComponent {
+  static propTypes = {
+    xScale: PropTypes.func.isRequired,
+    width: PropTypes.number.isRequired,
+    currentYear: PropTypes.number.isRequired,
+    isShowAllPrisons: PropTypes.bool.isRequired,
+    changeCurrentYear: PropTypes.func.isRequired,
+    isChartVisible: PropTypes.bool.isRequired
+  };
+
   constructor(props) {
     super(props);
     this.gRef = React.createRef();
@@ -125,11 +134,13 @@ class Slider extends PureComponent {
   }
 
   setYear() {
-    const { changeCurrentYear, xScale } = this.props;
+    const { xScale, currentYear, changeCurrentYear } = this.props;
 
     const newYear = xScale.invert(event.x).getFullYear();
 
-    changeCurrentYear(newYear);
+    if (currentYear !== newYear) {
+      changeCurrentYear(newYear);
+    }
   }
 
   render() {
@@ -142,14 +153,5 @@ class Slider extends PureComponent {
     );
   }
 }
-
-Slider.propTypes = {
-  xScale: PropTypes.func.isRequired,
-  width: PropTypes.number.isRequired,
-  currentYear: PropTypes.number.isRequired,
-  isShowAllPrisons: PropTypes.bool.isRequired,
-  changeCurrentYear: PropTypes.func.isRequired,
-  isChartVisible: PropTypes.bool.isRequired
-};
 
 export default Slider;

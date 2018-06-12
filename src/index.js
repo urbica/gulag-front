@@ -18,6 +18,7 @@ import ruLocaleData from 'react-intl/locale-data/ru';
 
 // reducers
 import dataReducer from './components/App/reducers/dataReducer';
+import mapReducer from './components/Map/mapReducer';
 import uiReducer from './components/App/reducers/uiReducer';
 import intlReducer from './components/App/reducers/intlReducer';
 
@@ -28,6 +29,7 @@ import App from './components/App/App';
 
 const reducer = combineReducers({
   data: dataReducer,
+  map: mapReducer,
   ui: uiReducer,
   intl: intlReducer,
   router: routerReducer

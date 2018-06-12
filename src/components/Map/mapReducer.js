@@ -1,23 +1,42 @@
-import { List, Map } from 'immutable';
-import { createSelector } from 'reselect';
+import { fromJS, List, Map } from 'immutable';
+import createImmutableSelector from 'create-immutable-selector';
 
-import { langSelector, filteredCampsSelector } from '../App/selectors';
-import {
-  campTypeFiltersSelector,
-  isShowAllPrisonsSelector,
-  currentYearSelector
-} from '../App/reducers/uiSelectors';
+import viewport from '../../config/initialViewport';
 
+// utils
 import findMaxPrisoners from '../../utils/findMaxPrisoners';
-import emptyGeoJSONSource from '../../config/emptyGeoJSONSource';
+import emptyGeoJSONSource from '../../utils/emptyGeoJSONSource';
 
-export default createSelector(
+// selectors
+import { filteredCampsSelector } from '../App/reducers/dataReducer';
+import {
+  currentYearSelector,
+  campTypeFiltersSelector,
+  isShowAllPrisonsSelector
+} from '../App/reducers/uiReducer';
+import { localeSelector } from '../App/reducers/intlReducer';
+
+// action
+import { VIEWPORT_CHANGED } from './mapActions';
+
+// initial state
+const initState = fromJS({ viewport });
+
+// selectors
+const mapSelector = createImmutableSelector(
+  state => state.get('map'),
+  map => map
+);
+export const viewportSelector = createImmutableSelector(mapSelector, map =>
+  map.get('viewport'));
+// TODO refactor campsSourceSelector
+export const campsSourceSelector = createImmutableSelector(
   filteredCampsSelector,
-  langSelector,
+  currentYearSelector,
+  localeSelector,
   campTypeFiltersSelector,
   isShowAllPrisonsSelector,
-  currentYearSelector,
-  (camps, lang, campTypeFilters, isShowAllCamps, currentYear) => {
+  (camps, currentYear, locale, campTypeFilters, isShowAllCamps) => {
     const features = camps.reduce((accCamps, camp) => {
       const locations = camp
         .get('locations')
@@ -31,7 +50,7 @@ export default createSelector(
             geometry: location.get('geometry'),
             properties: {
               campId: camp.get('id'),
-              name: camp.getIn(['title', lang]),
+              name: camp.getIn(['title', locale]),
               typeId: camp.get('typeId')
             }
           });
@@ -61,3 +80,14 @@ export default createSelector(
     return emptyGeoJSONSource.setIn(['data', 'features'], features);
   }
 );
+
+// reducer
+export default (state = initState, { type, payload }) => {
+  switch (type) {
+    case VIEWPORT_CHANGED:
+      return state.update('viewport', previousViewport =>
+        previousViewport.merge(payload));
+    default:
+      return state;
+  }
+};

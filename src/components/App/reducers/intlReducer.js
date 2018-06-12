@@ -1,4 +1,5 @@
-import Immutable from 'immutable';
+import { fromJS } from 'immutable';
+import createImmutableSelector from 'create-immutable-selector';
 import { UPDATE } from 'react-intl-redux';
 
 import ruLocale from '../../../intl/ru';
@@ -24,8 +25,17 @@ import ruLocale from '../../../intl/ru';
 // }
 
 // const initialState = Immutable.fromJS(defaultLocale);
-const initialState = Immutable.fromJS(ruLocale);
+const initialState = fromJS(ruLocale);
 
+// selectors
+const intlSelector = createImmutableSelector(
+  state => state.get('intl'),
+  intl => intl
+);
+export const localeSelector = createImmutableSelector(intlSelector, intl =>
+  intl.get('locale'));
+
+// reducer
 export default (state = initialState, action) => {
   if (action.type !== UPDATE) {
     return state;

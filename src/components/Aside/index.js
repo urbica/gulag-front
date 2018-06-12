@@ -1,21 +1,27 @@
+import createImmutableSelector from 'create-immutable-selector';
 import { push } from 'react-router-redux';
 import { updateIntl } from 'react-intl-redux';
 import { connect } from 'react-redux';
 
-import Aside from './Aside';
+// selectors
+import { isMenuOpenSelector } from '../App/reducers/uiReducer';
+import { localeSelector } from '../App/reducers/intlReducer';
 
-// action creators
-import { toggleCampFilters, toggleMenu } from '../App/reducers/uiReducer';
+// actions
+import { toggleMenu, toggleCampFilters } from '../App/reducers/uiActions';
 
 import en from '../../intl/en';
 import ru from '../../intl/ru';
 
+import Aside from './Aside';
+
 const locales = { en, ru };
 
-const mapStateToProps = state => ({
-  isMenuOpen: state.getIn(['ui', 'isMenuOpen']),
-  locale: state.getIn(['intl', 'locale'])
-});
+const mapStateToProps = createImmutableSelector(
+  isMenuOpenSelector,
+  localeSelector,
+  (isMenuOpen, locale) => ({ isMenuOpen, locale })
+);
 const mapDispatchToProps = dispatch => ({
   pushToSearch: () => dispatch(push('/search')),
   closeMenu: () => dispatch(toggleMenu()),
@@ -26,4 +32,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(updateIntl({ locale: lang, messages: locales[lang].messages }))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Aside);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Aside);

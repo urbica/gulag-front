@@ -1,27 +1,26 @@
-import { Map } from 'immutable';
-import { createSelector } from 'reselect';
+import createImmutableSelector from 'create-immutable-selector';
 import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 import { branch, compose, renderNothing } from 'recompose';
 
 // selectors
-import { langSelector, activitiesSelector } from '../App/selectors';
+import { localeSelector } from '../App/reducers/intlReducer';
+import { campSelector, activitiesSelector } from '../App/reducers/dataReducer';
 import {
   currentYearSelector,
   campTypeFiltersSelector
-} from '../App/reducers/uiSelectors';
-import campSelector from './selector';
-
-import {
-  changeViewport,
-  changeCurrentYear,
-  toggleCampTypeFilters
 } from '../App/reducers/uiReducer';
 
-import CampCard from './CampCard';
+import {
+  toggleCampTypeFilters,
+  changeCurrentYear
+} from '../App/reducers/uiActions';
 
-const mapStateToProps = createSelector(
-  langSelector,
+import CampCard from './CampCard';
+import { changeViewport } from '../Map/mapActions';
+
+const mapStateToProps = createImmutableSelector(
+  localeSelector,
   campSelector,
   activitiesSelector,
   currentYearSelector,
@@ -29,12 +28,7 @@ const mapStateToProps = createSelector(
   (lang, camp, activities, currentYear, campTypeFilters) => ({
     lang,
     camp,
-    activities: !activities
-      ? null
-      : activities.reduce(
-          (acc, ativity) => acc.set(ativity.get('id'), ativity),
-          Map()
-        ),
+    activities,
     currentYear,
     campTypeFilters
   })
@@ -47,8 +41,14 @@ const mapDispatchToProps = dispatch => ({
   toggleCampTypeFilters: id => dispatch(toggleCampTypeFilters(id))
 });
 
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+);
 const withBranch = branch(({ camp }) => !camp, renderNothing);
 
-const enhance = compose(withConnect, withBranch);
+const enhance = compose(
+  withConnect,
+  withBranch
+);
 export default enhance(CampCard);

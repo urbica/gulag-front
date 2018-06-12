@@ -21,6 +21,35 @@ import plus from './btn-plus.svg';
 import minus from './btn-minus.svg';
 
 class Map extends PureComponent {
+  static propTypes = {
+    isSlideUp: PropTypes.bool.isRequired,
+    viewport: PropTypes.object.isRequired,
+    campsSource: PropTypes.object.isRequired,
+    changeViewport: PropTypes.func.isRequired,
+    openCampCard: PropTypes.func.isRequired,
+    lang: PropTypes.string.isRequired,
+    closeCampCard: PropTypes.func.isRequired,
+    isShowAllPrisons: PropTypes.bool.isRequired
+  };
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      layers
+    };
+
+    this.mapGlRef = React.createRef();
+
+    this.onZoomend = this.onZoomend.bind(this);
+    this.onMapClick = this.onMapClick.bind(this);
+    this.onLayerHover = this.onLayerHover.bind(this);
+    this.onLayerLeave = this.onLayerLeave.bind(this);
+    this.openCampCardHandler = this.openCampCardHandler.bind(this);
+    this.onLayerClick = this.onLayerClick.bind(this);
+    this.translateLayers = this.translateLayers.bind(this);
+  }
+
   static getDerivedStateFromProps(nextProps, prevState) {
     const { currentYear, lang, campId, isShowAllPrisons } = nextProps;
     const ussrFilter = List([
@@ -51,24 +80,6 @@ class Map extends PureComponent {
       .setIn(['campName_active', 'filter'], activeCampNameFilter);
 
     return { layers: updatedLayers };
-  }
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      layers
-    };
-
-    this.mapGlRef = React.createRef();
-
-    this.onZoomend = this.onZoomend.bind(this);
-    this.onMapClick = this.onMapClick.bind(this);
-    this.onLayerHover = this.onLayerHover.bind(this);
-    this.onLayerLeave = this.onLayerLeave.bind(this);
-    this.openCampCardHandler = this.openCampCardHandler.bind(this);
-    this.onLayerClick = this.onLayerClick.bind(this);
-    this.translateLayers = this.translateLayers.bind(this);
   }
 
   componentDidMount() {
@@ -182,6 +193,10 @@ class Map extends PureComponent {
 
   render() {
     const { isSlideUp, viewport, changeViewport, campsSource } = this.props;
+    const zoom = viewport.get('zoom');
+
+    const zoomIn = () => changeViewport({ zoom: zoom + 1 });
+    const zoomOut = () => changeViewport({ zoom: zoom - 1 });
 
     return (
       <Container slideUp={isSlideUp}>
@@ -213,18 +228,10 @@ class Map extends PureComponent {
           <Layer layer={this.state.layers.get('campName_active')} />
         </MapGL>
         <Controls slideUp={isSlideUp}>
-          <MapButton
-            onClick={changeViewport.bind(null, {
-              zoom: viewport.get('zoom') + 1
-            })}
-          >
+          <MapButton onClick={zoomIn}>
             <img src={plus} alt='plus' />
           </MapButton>
-          <MapButton
-            onClick={changeViewport.bind(null, {
-              zoom: viewport.get('zoom') - 1
-            })}
-          >
+          <MapButton onClick={zoomOut}>
             <img src={minus} alt='minus' />
           </MapButton>
         </Controls>
@@ -232,16 +239,5 @@ class Map extends PureComponent {
     );
   }
 }
-
-Map.propTypes = {
-  isSlideUp: PropTypes.bool.isRequired,
-  viewport: PropTypes.object.isRequired,
-  campsSource: PropTypes.object.isRequired,
-  changeViewport: PropTypes.func.isRequired,
-  openCampCard: PropTypes.func.isRequired,
-  lang: PropTypes.string.isRequired,
-  closeCampCard: PropTypes.func.isRequired,
-  isShowAllPrisons: PropTypes.bool.isRequired
-};
 
 export default Map;

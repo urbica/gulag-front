@@ -1,23 +1,24 @@
+import createImmutableSelector from 'create-immutable-selector';
 import { connect } from 'react-redux';
-import { createSelector } from 'reselect';
 
 // selectors
-import { typesSelector, langSelector } from '../App/selectors';
+import { typesSelector } from '../App/reducers/dataReducer';
 import {
   isCampFiltersOpenSelector,
   campTypeFiltersSelector
-} from '../App/reducers/uiSelectors';
+} from '../App/reducers/uiReducer';
+import { localeSelector } from '../App/reducers/intlReducer';
 
 // actions
-import { closeMenus, toggleCampTypeFilters } from '../App/reducers/uiReducer';
+import { closeMenus, toggleCampTypeFilters } from '../App/reducers/uiActions';
 
 import CampFilters from './CampFilters';
 
-const mapStateToProps = createSelector(
+const mapStateToProps = createImmutableSelector(
   typesSelector,
   isCampFiltersOpenSelector,
   campTypeFiltersSelector,
-  langSelector,
+  localeSelector,
   (types, isCampFiltersOpen, campTypeFilters, locale) => ({
     types,
     isCampFiltersOpen,
@@ -30,4 +31,7 @@ const mapDispatchToProps = dispatch => ({
   toggleFilter: id => dispatch(toggleCampTypeFilters(id))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CampFilters);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CampFilters);

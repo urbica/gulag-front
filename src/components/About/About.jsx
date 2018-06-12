@@ -1,5 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { t } from '../../intl/helper';
 
 // content
@@ -124,5 +126,10 @@ const About = ({ locale, pushToRoot }) => (
     <Footer />
   </FullScreenCard>
 );
+
+About.propTypes = {
+  locale: PropTypes.PropTypes.oneOf(['ru', 'en', 'de']).isRequired,
+  pushToRoot: PropTypes.func.isRequired
+};
 
 export default About;

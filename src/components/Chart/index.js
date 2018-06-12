@@ -1,39 +1,64 @@
+import createImmutableSelector from 'create-immutable-selector';
 import { connect } from 'react-redux';
 
+// selectors
+import {
+  campTypeFiltersSelector,
+  currentYearSelector,
+  isDataLoadingSelector,
+  isDemoPlaySelector,
+  isShowAllPrisonsSelector
+} from '../App/reducers/uiReducer';
+import { localeSelector } from '../App/reducers/intlReducer';
+
+// actions
 import {
   toggleAllPrisons,
   changeCurrentYear,
   toggleDemo
-} from '../App/reducers/uiReducer';
+} from '../App/reducers/uiActions';
 
 import Chart from './Chart';
 
-// TODO move selectors
-const mapStateToProps = state => {
-  const campFilters = state.getIn(['ui', 'campTypeFilters']);
-  const isDataLoading = state.getIn(['ui', 'isDataLoading']);
-  /**
-   *  chart is visible only when ITL filter is on,
-   *  rest filters is off and data is loaded
-   */
-  const isChartVisible =
-    campFilters.get('1') &&
-    !campFilters.get('2') &&
-    !campFilters.get('3') &&
-    !campFilters.get('4') &&
-    !campFilters.get('5') &&
-    !campFilters.get('6') &&
-    !isDataLoading;
-
-  return {
-    currentYear: state.getIn(['ui', 'currentYear']),
-    isDemoPlay: state.getIn(['ui', 'isDemoPlay']),
-    isShowAll: state.getIn(['ui', 'isShowAllPrisons']),
+const mapStateToProps = createImmutableSelector(
+  campTypeFiltersSelector,
+  isDataLoadingSelector,
+  currentYearSelector,
+  isDemoPlaySelector,
+  isShowAllPrisonsSelector,
+  localeSelector,
+  (
+    campTypeFilters,
     isDataLoading,
-    isChartVisible,
-    lang: state.getIn(['intl', 'locale'])
-  };
-};
+    currentYear,
+    isDemoPlay,
+    isShowAllPrisons,
+    locale
+  ) => {
+    /**
+     *  chart is visible only when ITL filter is on,
+     *  rest filters is off and data is loaded
+     */
+    // TODO move isChartVisible to ui selectors
+    const isChartVisible =
+      campTypeFilters.get('1') &&
+      !campTypeFilters.get('2') &&
+      !campTypeFilters.get('3') &&
+      !campTypeFilters.get('4') &&
+      !campTypeFilters.get('5') &&
+      !campTypeFilters.get('6') &&
+      !isDataLoading;
+
+    return {
+      currentYear,
+      isDemoPlay,
+      isShowAll: isShowAllPrisons,
+      isDataLoading,
+      isChartVisible,
+      lang: locale
+    };
+  }
+);
 
 const mapDispatchToProps = { toggleAllPrisons, changeCurrentYear, toggleDemo };
 

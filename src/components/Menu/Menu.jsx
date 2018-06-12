@@ -6,7 +6,7 @@ import { push } from 'react-router-redux';
 import { t } from '../../intl/helper';
 
 // action
-import { toggleMenu } from '../App/reducers/uiReducer';
+import { toggleMenu } from '../App/reducers/uiActions';
 
 // icon
 import menu from '../menu.svg';

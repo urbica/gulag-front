@@ -1,36 +1,24 @@
-import { createSelector } from 'reselect';
-import { Map } from 'immutable';
+import createImmutableSelector from 'create-immutable-selector';
 import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 
 // selectors
 import {
   publishedCampsSelector,
-  langSelector,
   regionsSelector
-} from '../App/selectors';
+} from '../App/reducers/dataReducer';
+import { localeSelector } from '../App/reducers/intlReducer';
 
 // action
-import { closeMenus } from '../App/reducers/uiReducer';
+import { closeMenus } from '../App/reducers/uiActions';
 
 import Search from './Search';
 
-const mapStateToProps = createSelector(
+const mapStateToProps = createImmutableSelector(
   publishedCampsSelector,
-  langSelector,
+  localeSelector,
   regionsSelector,
-  (camps, lang, regions) => {
-    if (!regions) return { camps, lang };
-
-    return {
-      camps,
-      lang,
-      regions: regions.reduce(
-        (acc, region) => acc.set(region.get('id'), region),
-        Map()
-      )
-    };
-  }
+  (camps, lang, regions) => ({ camps, lang, regions })
 );
 const mapDispatchToProps = dispatch => ({
   closeCard: () => {
@@ -43,4 +31,7 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Search);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Search);

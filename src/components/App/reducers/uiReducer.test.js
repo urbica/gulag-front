@@ -1,14 +1,12 @@
-import { Map } from 'immutable';
-import reducer, {
-  initState,
+import reducer, { initState } from './uiReducer';
+import { FETCH_REQUEST, FETCH_SUCCESS } from './dataActions';
+import {
   changeCurrentYear,
-  changeViewport,
-  toggleDemo,
   toggleAllPrisons,
-  toggleMenu,
-  toggleCampFilters
-} from './uiReducer';
-import { FETCH_REQUEST, FETCH_SUCCESS } from './dataReducer';
+  toggleCampFilters,
+  toggleDemo,
+  toggleMenu
+} from './uiActions';
 
 describe('Ui Reducer', () => {
   it('returns a state object', () => {
@@ -22,16 +20,6 @@ describe('Ui Reducer', () => {
 
     expect(newState.get('currentYear')).toEqual(value);
     expect(newState.get('isShowAllPrisons')).toEqual(false);
-  });
-  it('change viewport', () => {
-    const viewport = Map({
-      latitude: 70,
-      longitude: 50,
-      zoom: 3
-    });
-
-    const newState = reducer(initState, changeViewport(viewport));
-    expect(newState.get('viewport')).toEqual(viewport);
   });
   it('toggle demo', () => {
     const newState = reducer(initState, toggleDemo());

@@ -1,19 +1,22 @@
-import { createSelector } from 'reselect';
+import createImmutableSelector from 'create-immutable-selector';
 import { connect } from 'react-redux';
-import { branch, compose, renderNothing } from 'recompose';
+import { branch, renderNothing, compose } from 'recompose';
 
 // selector
-import { isDataLoadingSelector } from '../App/reducers/uiSelectors';
+import { isDataLoadingSelector } from '../App/reducers/uiReducer';
 
 import Preloader from './Preloader';
 
-const mapStateToProps = createSelector(
+const mapStateToProps = createImmutableSelector(
   isDataLoadingSelector,
   isDataLoading => ({ isDataLoading })
 );
 
 const withConnect = connect(mapStateToProps);
 const withBranch = branch(({ isDataLoading }) => !isDataLoading, renderNothing);
-const enhance = compose(withConnect, withBranch);
 
+const enhance = compose(
+  withConnect,
+  withBranch
+);
 export default enhance(Preloader);

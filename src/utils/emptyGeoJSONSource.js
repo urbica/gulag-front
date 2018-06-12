@@ -1,6 +1,6 @@
-import Immutable from 'immutable';
+import { fromJS } from 'immutable';
 
-export default Immutable.fromJS({
+export default fromJS({
   type: 'geojson',
   data: {
     type: 'FeatureCollection',

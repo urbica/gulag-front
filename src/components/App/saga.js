@@ -1,7 +1,7 @@
 import { all, put, fork } from 'redux-saga/effects';
 import ApiSaga from './apiSaga';
 
-import { FETCH_REQUEST } from './reducers/dataReducer';
+import { FETCH_REQUEST } from './reducers/dataActions';
 
 const sagas = [ApiSaga];
 

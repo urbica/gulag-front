@@ -1,20 +1,21 @@
-import { createSelector } from 'reselect';
+import createImmutableSelector from 'create-immutable-selector';
 import { push } from 'react-router-redux';
-import { setPropTypes, compose } from 'recompose';
-import PropTypes from 'prop-types';
+import { compose } from 'recompose';
 import { connect } from 'react-redux';
 
 // selector
-import { langSelector } from '../App/selectors';
+import { localeSelector } from '../App/reducers/intlReducer';
 
 // action
-import { closeMenus } from '../App/reducers/uiReducer';
+import { closeMenus } from '../App/reducers/uiActions';
 
 // component
 import About from './About';
 
 // with connect
-const mapStateToProps = createSelector(langSelector, locale => ({ locale }));
+const mapStateToProps = createImmutableSelector(localeSelector, locale => ({
+  locale
+}));
 const mapDispatchToProps = dispatch => ({
   pushToRoot: () => {
     dispatch(closeMenus());
@@ -22,18 +23,10 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-const withPropTypes = setPropTypes({
-  locale: PropTypes.PropTypes.oneOf(['ru', 'en', 'de']).isRequired,
-  pushToRoot: PropTypes.func.isRequired
-});
-
 const withConnect = connect(
   mapStateToProps,
   mapDispatchToProps
 );
-const enhance = compose(
-  withConnect,
-  withPropTypes
-);
+const enhance = compose(withConnect);
 
 export default enhance(About);

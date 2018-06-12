@@ -1,28 +1,28 @@
-import { createSelector } from 'reselect';
+import createImmutableSelector from 'create-immutable-selector';
 import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 
 // selectors
-import { langSelector } from '../App/selectors';
-import campsSourceSelector from './selectors';
+import { viewportSelector, campsSourceSelector } from './mapReducer';
 import {
-  viewportSelector,
-  currentYearSelector,
-  isShowAllPrisonsSelector
-} from '../App/reducers/uiSelectors';
+  isShowAllPrisonsSelector,
+  currentYearSelector
+} from '../App/reducers/uiReducer';
+import { localeSelector } from '../App/reducers/intlReducer';
 
 // actions
-import { changeViewport, closeMenus } from '../App/reducers/uiReducer';
+import { changeViewport } from './mapActions';
+import { closeMenus } from '../App/reducers/uiActions';
 
 import Map from './Map';
 
-const mapStateToProps = createSelector(
+const mapStateToProps = createImmutableSelector(
   state => state.getIn(['router']).location.pathname,
   currentYearSelector,
   viewportSelector,
   isShowAllPrisonsSelector,
   campsSourceSelector,
-  langSelector,
+  localeSelector,
   (pathname, currentYear, viewport, isShowAllPrisons, campsSource, lang) => ({
     isSlideUp: /\/camp/.test(pathname),
     currentYear,
@@ -52,4 +52,7 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Map);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Map);

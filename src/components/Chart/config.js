@@ -37,37 +37,37 @@ export const chartData = [
   },
   {
     year: 1923,
-    prisoners: 0,
+    prisoners: 3049,
     dead: 0
   },
   {
     year: 1924,
-    prisoners: 0,
+    prisoners: 5044,
     dead: 0
   },
   {
     year: 1925,
-    prisoners: 0,
+    prisoners: 7727,
     dead: 0
   },
   {
     year: 1926,
-    prisoners: 0,
+    prisoners: 10682,
     dead: 0
   },
   {
     year: 1927,
-    prisoners: 0,
+    prisoners: 14810,
     dead: 0
   },
   {
     year: 1928,
-    prisoners: 0,
+    prisoners: 21900,
     dead: 0
   },
   {
     year: 1929,
-    prisoners: 0,
+    prisoners: 53963,
     dead: 0
   },
   {
@@ -192,37 +192,37 @@ export const chartData = [
   },
   {
     year: 1954,
-    prisoners: 0,
+    prisoners: 884040,
     dead: 0
   },
   {
     year: 1955,
-    prisoners: 0,
+    prisoners: 748489,
     dead: 0
   },
   {
     year: 1956,
-    prisoners: 0,
+    prisoners: 557877,
     dead: 0
   },
   {
     year: 1957,
-    prisoners: 0,
+    prisoners: 492092,
     dead: 0
   },
   {
     year: 1958,
-    prisoners: 0,
+    prisoners: 409567,
     dead: 0
   },
   {
     year: 1959,
-    prisoners: 0,
+    prisoners: 388114,
     dead: 0
   },
   {
     year: 1960,
-    prisoners: 0,
+    prisoners: 276279,
     dead: 0
   }
 ];

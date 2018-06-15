@@ -1,4 +1,3 @@
-/* eslint-disable react/no-array-index-key */
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -22,11 +21,11 @@ import Position from './styled/Position';
 import Name from './styled/Name';
 import Link from './styled/Link';
 
-const About = ({ locale, pushToRoot }) => (
-  <FullScreenCard onClick={pushToRoot}>
+const About = ({ locale, closeCard }) => (
+  <FullScreenCard onClick={closeCard}>
     <Title>{t('aboutCard.heading')}</Title>
     <Description>
-      {content[locale].map((p, i) => <p key={i}>{p}</p>)}
+      {content.map(({ id, paragraph }) => <p key={id}>{paragraph[locale]}</p>)}
     </Description>
     <SubTitle>Команда проекта</SubTitle>
     <CompaniesContainer>
@@ -123,13 +122,13 @@ const About = ({ locale, pushToRoot }) => (
       </div>
     </Description>
     <Link href='mailto:gulagmap@gmig.ru'>gulagmap@gmig.ru</Link>
-    <Footer />
+    <Footer locale={locale} />
   </FullScreenCard>
 );
 
 About.propTypes = {
   locale: PropTypes.PropTypes.oneOf(['ru', 'en', 'de']).isRequired,
-  pushToRoot: PropTypes.func.isRequired
+  closeCard: PropTypes.func.isRequired
 };
 
 export default About;

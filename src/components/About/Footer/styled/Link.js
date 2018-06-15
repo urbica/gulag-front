@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export default styled.a`
-  margin-bottom: 10px;
+  margin-bottom: 50px;
 
   & img {
     transition: 0.4s;

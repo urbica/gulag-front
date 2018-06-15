@@ -9,4 +9,10 @@ export default styled.footer`
   padding-top: 50px;
   border-top: 1px solid rgba(226, 243, 227, 0.2);
   margin-bottom: 70px;
+
+  @media (max-width: 414px) {
+    flex-direction: column;
+
+    padding-top: 80px;
+  }
 `;

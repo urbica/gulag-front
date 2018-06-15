@@ -17,7 +17,7 @@ const mapStateToProps = createImmutableSelector(localeSelector, locale => ({
   locale
 }));
 const mapDispatchToProps = dispatch => ({
-  pushToRoot: () => {
+  closeCard: () => {
     dispatch(closeMenus());
     dispatch(push('/'));
   }

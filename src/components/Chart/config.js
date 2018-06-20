@@ -97,98 +97,98 @@ export const chartData = [
   },
   {
     year: 1935,
-    prisoners: 965742,
-    dead: 32659
+    prisoners: 725483,
+    dead: 28328
   },
   {
     year: 1936,
-    prisoners: 1296494,
-    dead: 26479
+    prisoners: 839406,
+    dead: 20595
   },
   {
     year: 1937,
-    prisoners: 1196369,
-    dead: 33499
+    prisoners: 820881,
+    dead: 25376
   },
   {
     year: 1938,
-    prisoners: 1881570,
-    dead: 126585
+    prisoners: 996367,
+    dead: 90546
   },
   {
     year: 1939,
-    prisoners: 2024946,
-    dead: 65301
+    prisoners: 1317195,
+    dead: 50502
   },
   {
     year: 1940,
-    prisoners: 1846270,
-    dead: 56703
+    prisoners: 1344408,
+    dead: 46665
   },
   {
     year: 1941,
-    prisoners: 2400422,
-    dead: 120864
+    prisoners: 1500524,
+    dead: 100997
   },
   {
     year: 1942,
-    prisoners: 2045575,
-    dead: 382348
+    prisoners: 1415596,
+    dead: 248887
   },
   {
     year: 1943,
-    prisoners: 1721716,
-    dead: 288599
+    prisoners: 983974,
+    dead: 166967
   },
   {
     year: 1944,
-    prisoners: 1331115,
-    dead: 124725
+    prisoners: 663594,
+    dead: 60948
   },
   {
     year: 1945,
-    prisoners: 1736187,
-    dead: 87903
+    prisoners: 715506,
+    dead: 43848
   },
   {
     year: 1946,
-    prisoners: 1355739,
-    dead: 33066
+    prisoners: 600897,
+    dead: 18154
   },
   {
     year: 1947,
-    prisoners: 1996641,
-    dead: 62007
+    prisoners: 808839,
+    dead: 35668
   },
   {
     year: 1948,
-    prisoners: 2449626,
-    dead: 53102
+    prisoners: 1108057,
+    dead: 27605
   },
   {
     year: 1949,
-    prisoners: 2587732,
-    dead: 30688
+    prisoners: 1216361,
+    dead: 15739
   },
   {
     year: 1950,
-    prisoners: 2760095,
-    dead: 25354
+    prisoners: 1416300,
+    dead: 14703
   },
   {
     year: 1951,
-    prisoners: 2705439,
-    dead: 24090
+    prisoners: 1543382,
+    dead: 15587
   },
   {
     year: 1952,
-    prisoners: 2662402,
-    dead: 21221
+    prisoners: 1713614,
+    dead: 13806
   },
   {
     year: 1953,
-    prisoners: 2624537,
-    dead: 10369
+    prisoners: 1731693,
+    dead: 5825
   },
   {
     year: 1954,

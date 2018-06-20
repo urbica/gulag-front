@@ -16,15 +16,14 @@
 * styled-components
 
 ## Mapbox Styles & Source Layers
-mapStyle (v1.0.0): `mapbox://styles/gulagmap/cjhc55vfl038e2rqr7f472ay1`
+### Map Style
+* version: v1.0.1
+* url: `mapbox://styles/gulagmap/cjijz7rch0rs22spcklyu8srn`
 
-ussr-boundary: `ussr-boundary-ddtyj9`
-
-chukotka_patch: `chukotka_patch-4b7lx1`
-
-cities: `cities-9p6fen`
-
-allCities `allCities-difd7x`
+### Source Layers list
+* USSR_BOUNDARY: `ussr-boundary-v1-0-1-a8rc0m`
+* CITIES: `cities-v1-0-1-csnk57`
+* CITIES_DOTS: `cities-dots-v1-0-1-2jecbm`
 
 ## Commit
 ```

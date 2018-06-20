@@ -1,7 +1,8 @@
-import Immutable from 'immutable';
+import { fromJS } from 'immutable';
 import campColors from './campsColors';
+import { USSR_BOUNDARY, CITIES, CITIES_DOTS } from './sourceLayers';
 
-export default Immutable.fromJS({
+export default fromJS({
   camps: {
     id: 'camps',
     type: 'circle',
@@ -116,35 +117,22 @@ export default Immutable.fromJS({
     },
     filter: ['==', 'campId', '']
   },
-  ussr: {
-    id: 'ussr',
+  ussrBoundary: {
+    id: 'ussrBoundary',
     type: 'fill',
     source: 'composite',
-    'source-layer': 'ussr-boundary-ddtyj9',
+    'source-layer': USSR_BOUNDARY,
     paint: {
       'fill-color': '#1B2128',
       'fill-antialias': false
     },
     filter: ['all', ['<=', 'year_start', 1937], ['>=', 'year_end', 1937]]
   },
-  chukotka: {
-    id: 'chukotka',
-    type: 'fill',
-    source: 'composite',
-    'source-layer': 'chukotka_patch-4b7lx1',
-    paint: {
-      'fill-color': '#1b2128',
-      'fill-opacity': 1
-    }
-  },
   cities: {
     id: 'cities',
     type: 'symbol',
-    metadata: {
-      'mapbox:group': 'c6ab0d812282617f74a5b31640cfe7a8'
-    },
     source: 'composite',
-    'source-layer': 'cities-9p6fen',
+    'source-layer': CITIES,
     layout: {
       'text-size': {
         base: 1,
@@ -168,11 +156,8 @@ export default Immutable.fromJS({
   citiesDots: {
     id: 'citiesDots',
     type: 'circle',
-    metadata: {
-      'mapbox:group': 'c6ab0d812282617f74a5b31640cfe7a8'
-    },
     source: 'composite',
-    'source-layer': 'allCities-difd7x',
+    'source-layer': CITIES_DOTS,
     layout: {},
     paint: {
       'circle-color': '#6A748C',

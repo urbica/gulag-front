@@ -52,7 +52,7 @@ class Map extends PureComponent {
 
   static getDerivedStateFromProps(nextProps, prevState) {
     const { currentYear, lang, campId, isShowAllPrisons } = nextProps;
-    const ussrFilter = List([
+    const ussrBoundaryFilter = List([
       'all',
       ['<=', 'year_start', isShowAllPrisons ? 1960 : currentYear],
       ['>=', 'year_end', isShowAllPrisons ? 1960 : currentYear]
@@ -72,7 +72,7 @@ class Map extends PureComponent {
     ]);
 
     const updatedLayers = prevState.layers
-      .setIn(['ussr', 'filter'], ussrFilter)
+      .setIn(['ussrBoundary', 'filter'], ussrBoundaryFilter)
       .setIn(['cities', 'filter'], citiesFilter)
       .setIn(['citiesDots', 'filter'], citiesFilter)
       .setIn(['cities', 'layout', 'text-field'], citiesNames)
@@ -208,9 +208,8 @@ class Map extends PureComponent {
           {...viewport.toJS()}
         >
           <Source id='camps' source={campsSource} />
-          <Layer layer={this.state.layers.get('ussr')} before='waterway-z3' />
           <Layer
-            layer={this.state.layers.get('chukotka')}
+            layer={this.state.layers.get('ussrBoundary')}
             before='waterway-z3'
           />
           <Layer layer={this.state.layers.get('cities')} />

@@ -44,6 +44,13 @@ services:
     volumes:
       - ./db:/var/lib/postgresql/data
 
+  gulag-exposition:
+    image: gitlab.urbica.co:5001/gulag/exposition:dev
+    container_name: gulag-exposition
+    restart: always
+    depends_on:
+      - gulag-api
+
 networks:
   default:
     external:

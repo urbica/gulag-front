@@ -61,7 +61,8 @@ class CampCard extends PureComponent {
       camp,
       changeCurrentYear,
       campTypeFilters,
-      toggleCampTypeFilters
+      toggleCampTypeFilters,
+      changeViewport
     } = this.props;
     const coordinates = camp
       .getIn(['locations', 0, 'geometry', 'coordinates'])
@@ -85,13 +86,15 @@ class CampCard extends PureComponent {
     if (!campYears.includes(currentYear)) {
       changeCurrentYear(campYears.first());
     }
-    this.props.changeViewport(newViewport);
+    changeViewport(newViewport);
   }
 
   linkOnClick(event) {
+    const { openCard } = this.props;
+
     event.preventDefault();
     window.scrollTo(0, 0);
-    this.props.openCard(event.target.href.match(/camp\d+/)[0]);
+    openCard(event.target.href.match(/camp\d+/)[0]);
   }
 
   handleOpen(e) {
@@ -102,7 +105,9 @@ class CampCard extends PureComponent {
   }
 
   handleToggleVisible() {
-    if (this.state.isOpened) {
+    const { isOpened } = this.state;
+
+    if (isOpened) {
       document.body.style.position = 'absolute';
       document.body.style.height = '100vh';
     } else {
@@ -110,7 +115,7 @@ class CampCard extends PureComponent {
       document.body.style.height = 'initial';
     }
 
-    this.setState(({ isOpened }) => ({ isOpened: !isOpened }));
+    this.setState(state => ({ isOpened: !state.isOpened }));
   }
 
   handleClick(bool) {
@@ -135,6 +140,7 @@ class CampCard extends PureComponent {
   }
 
   render() {
+    const { active } = this.state;
     const { camp, lang, closeCard, activities } = this.props;
 
     document.title = camp.getIn(['title', lang]);
@@ -183,7 +189,7 @@ class CampCard extends PureComponent {
                 handleToggleVisible={this.handleToggleVisible}
                 photo={this.state}
                 list={getList(camp)}
-                active={this.state.active}
+                active={active}
                 handleClick={this.handleClick}
                 handleClickActive={this.handleClickActive}
               />

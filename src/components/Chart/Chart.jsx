@@ -1,3 +1,4 @@
+/* eslint-disable no-else-return */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
@@ -49,17 +50,23 @@ class Chart extends PureComponent {
   };
 
   demo = () => {
-    this.props.toggleDemo();
+    const {
+      toggleDemo,
+      isDemoPlay,
+      currentYear,
+      changeCurrentYear
+    } = this.props;
+    toggleDemo();
 
-    if (this.props.isDemoPlay) {
+    if (isDemoPlay) {
       clearInterval(this.playDemo);
     } else {
       this.playDemo = setInterval(() => {
-        if (this.props.currentYear < 1960 && this.props.isDemoPlay) {
-          this.props.changeCurrentYear(this.props.currentYear + 1);
-        } else if (this.props.currentYear === 1960) {
+        if (currentYear < 1960 && isDemoPlay) {
+          changeCurrentYear(currentYear + 1);
+        } else if (currentYear === 1960) {
           clearInterval(this.playDemo);
-          this.props.toggleDemo();
+          toggleDemo();
         } else {
           clearInterval(this.playDemo);
         }

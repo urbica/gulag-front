@@ -111,9 +111,9 @@ class PrisonersArea extends PureComponent {
   }
 
   render() {
-    return (
-      <Container innerRef={this.gRef} showAllYears={this.props.isShowAll} />
-    );
+    const { isShowAll } = this.props;
+
+    return <Container innerRef={this.gRef} showAllYears={isShowAll} />;
   }
 }
 

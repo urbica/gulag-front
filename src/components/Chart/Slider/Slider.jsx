@@ -144,11 +144,13 @@ class Slider extends PureComponent {
   }
 
   render() {
+    const { isShowAllPrisons, isChartVisible } = this.props;
+
     return (
       <Container
         innerRef={this.gRef}
-        isVisible={!this.props.isShowAllPrisons}
-        isChartVisible={this.props.isChartVisible}
+        isVisible={!isShowAllPrisons}
+        isChartVisible={isChartVisible}
       />
     );
   }

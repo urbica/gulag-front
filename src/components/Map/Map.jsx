@@ -1,3 +1,5 @@
+/* eslint-disable react/destructuring-assignment,
+react/no-access-state-in-setstate */
 import React, { PureComponent } from 'react';
 import ReactDom from 'react-dom';
 import PropTypes from 'prop-types';
@@ -95,6 +97,7 @@ class Map extends PureComponent {
   }
 
   translateLayers() {
+    const { lang } = this.props;
     const translatedLayers = [
       'marine-label-others-line',
       'marine-label-others',
@@ -106,15 +109,12 @@ class Map extends PureComponent {
     ];
 
     translatedLayers.forEach(layer => {
-      this.map.setLayoutProperty(
-        layer,
-        'text-field',
-        `{name_${this.props.lang}}`
-      );
+      this.map.setLayoutProperty(layer, 'text-field', `{name_${lang}}`);
     });
   }
 
   onZoomend() {
+    const { changeViewport } = this.props;
     const { lng, lat } = this.map.getCenter();
     const zoom = this.map.getZoom();
     const pitch = this.map.getPitch();
@@ -128,16 +128,17 @@ class Map extends PureComponent {
       bearing
     };
 
-    this.props.changeViewport(viewport);
+    changeViewport(viewport);
   }
 
   onMapClick(e) {
+    const { closeCampCard } = this.props;
     const features = this.map.queryRenderedFeatures(e.point, {
       layers: ['campsHalo']
     });
 
     if (features.length === 0) {
-      this.props.closeCampCard();
+      closeCampCard();
     }
   }
 

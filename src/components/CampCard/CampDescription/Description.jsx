@@ -48,9 +48,11 @@ class Description extends PureComponent {
   }
 
   render() {
-    const parsed = reader.parse(this.props.md);
+    const { imgUrl } = this.state;
+    const { md, isIncut } = this.props;
+    const parsed = reader.parse(md);
     const result = writer.render(parsed);
-    const className = this.props.isIncut ? 'incut' : '';
+    const className = isIncut ? 'incut' : '';
 
     return (
       <div>
@@ -59,13 +61,9 @@ class Description extends PureComponent {
           onClick={this.onClick}
           dangerouslySetInnerHTML={{ __html: result }}
         />
-        {this.state.imgUrl && (
+        {imgUrl && (
           <FullScreenContainer onClick={this.fullScreenOnClick}>
-            <img
-              src={this.state.imgUrl}
-              alt=''
-              onClick={e => e.stopPropagation()}
-            />
+            <img src={imgUrl} alt='' onClick={e => e.stopPropagation()} />
             {/* <CardButton onClick={this.toggleFullScreen}> */}
             {/* <img src={closeIcon} alt='' /> */}
             {/* </CardButton> */}

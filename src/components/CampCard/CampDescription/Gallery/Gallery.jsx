@@ -1,11 +1,9 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions,
+/* eslint-disable
+jsx-a11y/click-events-have-key-events,
 jsx-a11y/no-noninteractive-element-interactions,
-jsx-a11y/click-events-have-key-events */
+jsx-a11y/no-static-element-interactions */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-
-// ico
-// import closeIcon from '../icons/btn-close.svg';
 
 // styled
 import Top from './Top';
@@ -17,8 +15,6 @@ import FullScreenContainer from './FullScreenContainer';
 import FullScreenTop from './FullScreenTop';
 import FullScreenDescription from './FullScreenDescription';
 import NavButton from './NavButton';
-
-// import { CardButton } from '../StyledButtons';
 
 class Gallery extends PureComponent {
   constructor(props) {
@@ -34,11 +30,12 @@ class Gallery extends PureComponent {
   }
 
   onPreviewClick(i) {
+    const { isFullScreen } = this.state;
     const { left } = this[`preview${i}`].getBoundingClientRect();
     const containerWidth = this.previewContainer.getBoundingClientRect().width;
     const scrollBy = left - containerWidth / 2;
 
-    if (!this.state.isFullScreen) {
+    if (!isFullScreen) {
       this.previewContainer.scrollTo(scrollBy, 0);
       // this.previewContainer.scrollLeft =
       //   this.previewContainer.scrollLeft + scrollBy;
@@ -51,10 +48,10 @@ class Gallery extends PureComponent {
   }
 
   toggleFullScreen() {
-    this.setState(({ isFullScreen }) => ({ isFullScreen: !isFullScreen }));
+    const { isFullScreen } = this.state;
+    this.setState(state => ({ isFullScreen: !state.isFullScreen }));
 
-    // eslint-disable-next-line no-unused-expressions
-    if (!this.state.isFullScreen) {
+    if (!isFullScreen) {
       document.body.style.overflow = 'hidden';
       document.addEventListener('keydown', this.keydown);
     } else {
@@ -79,8 +76,10 @@ class Gallery extends PureComponent {
   }
 
   changeActivePhoto(val) {
-    const { length } = this.props.photos;
-    const newActivePhotoId = this.state.activePhotoId + val;
+    const { activePhotoId } = this.state;
+    const { photos } = this.props;
+    const { length } = photos;
+    const newActivePhotoId = activePhotoId + val;
 
     if (length > newActivePhotoId && newActivePhotoId > -1) {
       this.setState({ activePhotoId: newActivePhotoId });
@@ -92,9 +91,9 @@ class Gallery extends PureComponent {
   }
 
   render() {
-    const { src: activeSrc, desc: activeDesc } = this.props.photos[
-      this.state.activePhotoId
-    ];
+    const { activePhotoId, isFullScreen } = this.state;
+    const { photos } = this.props;
+    const { src: activeSrc, desc: activeDesc } = photos[activePhotoId];
 
     return (
       <div
@@ -133,21 +132,21 @@ class Gallery extends PureComponent {
             this.previewContainer = ref;
           }}
         >
-          {this.props.photos.map((img, i) => (
+          {photos.map((img, i) => (
             <ImgPreviewContainer
               // eslint-disable-next-line react/no-array-index-key
               key={i}
               innerRef={ref => {
                 this[`preview${i}`] = ref;
               }}
-              isActive={this.state.activePhotoId === i}
+              isActive={activePhotoId === i}
               onClick={this.onPreviewClick.bind(null, i)}
             >
               <img src={img.src} alt='' />
             </ImgPreviewContainer>
           ))}
         </PreviewsContainer>
-        {this.state.isFullScreen && (
+        {isFullScreen && (
           <FullScreenContainer>
             <div
               style={{ position: 'absolute', width: '100%', height: '100%' }}
@@ -175,11 +174,11 @@ class Gallery extends PureComponent {
                 this.previewFullScreenContainer = ref;
               }}
             >
-              {this.props.photos.map((img, i) => (
+              {photos.map((img, i) => (
                 <ImgPreviewContainer
                   // eslint-disable-next-line react/no-array-index-key
                   key={i}
-                  isActive={this.state.activePhotoId === i}
+                  isActive={activePhotoId === i}
                   onClick={e => {
                     e.stopPropagation();
                     this.onPreviewClick(i);

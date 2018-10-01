@@ -41,9 +41,10 @@ class Search extends PureComponent {
   }
 
   render() {
+    const { searchQuery } = this.state;
     const { closeCard, camps, openCampCard, lang, regions } = this.props;
 
-    const search = this.state.searchQuery.trim().toLowerCase();
+    const search = searchQuery.trim().toLowerCase();
     const campsFilteredBySearch = camps.filter(
       camp =>
         camp

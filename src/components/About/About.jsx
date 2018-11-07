@@ -20,6 +20,7 @@ import CompanyName from './styled/CompanyName';
 import Position from './styled/Position';
 import Name from './styled/Name';
 import Link from './styled/Link';
+import MailTo from './styled/MailTo';
 
 const About = ({ locale, closeCard }) => (
   <FullScreenCard onClick={closeCard}>
@@ -118,10 +119,18 @@ const About = ({ locale, closeCard }) => (
       <div>
         Проект реализован с использованием гранта Президента Российской
         Федерации на развитие гражданского общества, предоставленного Фондом
-        президентских грантов
+        президентских грантов. Воспоминания людей, прошедших лагеря, и тех, кого
+        коснулись репрессии, можно посмотреть на сайте проекта «Мой ГУЛАГ»:{' '}
+        <Link
+          href='https://mygulag.ru'
+          rel='noopener noreferrer'
+          target='_blank'
+        >
+          mygulag.ru
+        </Link>
       </div>
     </Description>
-    <Link href='mailto:gulagmap@gmig.ru'>gulagmap@gmig.ru</Link>
+    <MailTo href='mailto:gulagmap@gmig.ru'>gulagmap@gmig.ru</MailTo>
     <Footer locale={locale} />
   </FullScreenCard>
 );

@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.1.3"></a>
+## [1.1.3](http://gitlab.urbica.co:2222/gulag/front/compare/v1.1.2...v1.1.3) (2018-11-07)
+
+
+### Bug Fixes
+
+* change about ([fe7195e](http://gitlab.urbica.co:2222/gulag/front/commit/fe7195e))
+
+
+
 <a name="1.1.2"></a>
 ## [1.1.2](http://gitlab.urbica.co:2222/gulag/front/compare/v1.1.1...v1.1.2) (2018-06-20)
 

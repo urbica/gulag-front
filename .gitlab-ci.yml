@@ -5,15 +5,11 @@ stages:
 
 test:
   stage: test
-  image: node:8-alpine
+  image: node:10-alpine
   script:
-    - NODE_ENV=development yarn
-    - NODE_ENV=development yarn lint
-    - NODE_ENV=development yarn test
-    - NODE_ENV=production yarn build
-  artifacts:
-    paths:
-      - build
+    - npm i
+    - npm run lint
+    - npm test
 
 build_latest:
   stage: build

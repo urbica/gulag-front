@@ -1,5 +1,7 @@
 # Gulagmap front
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/urbica/gulag-front.svg)](https://greenkeeper.io/)
+
 ## Tools
 * npm
 * git-cz
